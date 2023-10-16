@@ -15,13 +15,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toLower/
  */
-readonly class ToLowerOperator implements ResolvesToString
+class ToLowerOperator implements ResolvesToString
 {
     public const NAME = '$toLower';
     public const ENCODE = Encode::Single;
 
-    /** @param ResolvesToString|non-empty-string $expression */
-    public ResolvesToString|string $expression;
+    /** @var ResolvesToString|non-empty-string $expression */
+    public readonly ResolvesToString|string $expression;
 
     /**
      * @param ResolvesToString|non-empty-string $expression

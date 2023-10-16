@@ -20,13 +20,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setEquals/
  */
-readonly class SetEqualsOperator implements ResolvesToBool
+class SetEqualsOperator implements ResolvesToBool
 {
     public const NAME = '$setEquals';
     public const ENCODE = Encode::Single;
 
-    /** @param list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
-    public array $expression;
+    /** @var list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array ...$expression

@@ -18,13 +18,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/lt/
  */
-readonly class LtOperator implements FieldQueryInterface
+class LtOperator implements FieldQueryInterface
 {
     public const NAME = '$lt';
     public const ENCODE = Encode::Single;
 
-    /** @param Type|array|bool|float|int|non-empty-string|null|stdClass $value */
-    public Type|stdClass|array|bool|float|int|null|string $value;
+    /** @var Type|array|bool|float|int|non-empty-string|null|stdClass $value */
+    public readonly Type|stdClass|array|bool|float|int|null|string $value;
 
     /**
      * @param Type|array|bool|float|int|non-empty-string|null|stdClass $value

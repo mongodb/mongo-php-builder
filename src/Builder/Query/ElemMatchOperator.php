@@ -24,13 +24,13 @@ use function is_object;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/
  */
-readonly class ElemMatchOperator implements FieldQueryInterface
+class ElemMatchOperator implements FieldQueryInterface
 {
     public const NAME = '$elemMatch';
     public const ENCODE = Encode::Object;
 
-    /** @param Document|QueryInterface|Serializable|array|stdClass $query */
-    public Document|Serializable|QueryInterface|stdClass|array $query;
+    /** @var Document|QueryInterface|Serializable|array|stdClass $query */
+    public readonly Document|Serializable|QueryInterface|stdClass|array $query;
 
     /**
      * @param Document|QueryInterface|Serializable|array|stdClass $query

@@ -20,22 +20,22 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateSubtract/
  */
-readonly class DateSubtractOperator implements ResolvesToDate
+class DateSubtractOperator implements ResolvesToDate
 {
     public const NAME = '$dateSubtract';
     public const ENCODE = Encode::Object;
 
-    /** @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The beginning date, in UTC, for the addition operation. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
-    public ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $startDate;
+    /** @var ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The beginning date, in UTC, for the addition operation. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
+    public readonly ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $startDate;
 
-    /** @param ResolvesToString|non-empty-string $unit The unit used to measure the amount of time added to the startDate. */
-    public ResolvesToString|string $unit;
+    /** @var ResolvesToString|non-empty-string $unit The unit used to measure the amount of time added to the startDate. */
+    public readonly ResolvesToString|string $unit;
 
-    /** @param Int64|ResolvesToInt|ResolvesToLong|int $amount */
-    public Int64|ResolvesToInt|ResolvesToLong|int $amount;
+    /** @var Int64|ResolvesToInt|ResolvesToLong|int $amount */
+    public readonly Int64|ResolvesToInt|ResolvesToLong|int $amount;
 
-    /** @param Optional|ResolvesToString|non-empty-string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC. */
-    public Optional|ResolvesToString|string $timezone;
+    /** @var Optional|ResolvesToString|non-empty-string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC. */
+    public readonly Optional|ResolvesToString|string $timezone;
 
     /**
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The beginning date, in UTC, for the addition operation. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID.

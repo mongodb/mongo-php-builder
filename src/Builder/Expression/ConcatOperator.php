@@ -18,13 +18,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/concat/
  */
-readonly class ConcatOperator implements ResolvesToString
+class ConcatOperator implements ResolvesToString
 {
     public const NAME = '$concat';
     public const ENCODE = Encode::Single;
 
-    /** @param list<ResolvesToString|non-empty-string> ...$expression */
-    public array $expression;
+    /** @var list<ResolvesToString|non-empty-string> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param ResolvesToString|non-empty-string ...$expression

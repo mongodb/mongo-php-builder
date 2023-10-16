@@ -15,6 +15,13 @@ use function range;
 
 class PipelineTest extends TestCase
 {
+    public function testEmptyPipeline(): void
+    {
+        $pipeline = new Pipeline();
+
+        $this->assertSame([], iterator_to_array($pipeline));
+    }
+
     public function testMergingPipeline(): void
     {
         $stages = array_map(
@@ -42,13 +49,5 @@ class PipelineTest extends TestCase
             $this->createMock(StageInterface::class),
             foo: $this->createMock(StageInterface::class),
         );
-    }
-
-    public function testRejectEmptyPipeline(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('At least one stage must be provided');
-
-        new Pipeline();
     }
 }

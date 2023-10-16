@@ -17,7 +17,7 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/denseRank/
  */
-readonly class DenseRankAccumulator implements WindowInterface
+class DenseRankAccumulator implements WindowInterface
 {
     public const NAME = '$denseRank';
     public const ENCODE = Encode::Object;

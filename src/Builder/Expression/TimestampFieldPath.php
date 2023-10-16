@@ -10,9 +10,9 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\FieldPathInterface;
 
-readonly class TimestampFieldPath implements FieldPathInterface, ResolvesToTimestamp
+class TimestampFieldPath implements FieldPathInterface, ResolvesToTimestamp
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

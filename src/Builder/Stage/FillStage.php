@@ -26,33 +26,33 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/fill/
  */
-readonly class FillStage implements StageInterface
+class FillStage implements StageInterface
 {
     public const NAME = '$fill';
     public const ENCODE = Encode::Object;
 
     /**
-     * @param Document|Serializable|array|stdClass $output Specifies an object containing each field for which to fill missing values. You can specify multiple fields in the output object.
+     * @var Document|Serializable|array|stdClass $output Specifies an object containing each field for which to fill missing values. You can specify multiple fields in the output object.
      * The object name is the name of the field to fill. The object value specifies how the field is filled.
      */
-    public Document|Serializable|stdClass|array $output;
+    public readonly Document|Serializable|stdClass|array $output;
 
     /**
-     * @param Optional|Document|Serializable|array|non-empty-string|stdClass $partitionBy Specifies an expression to group the documents. In the $fill stage, a group of documents is known as a partition.
+     * @var Optional|Document|Serializable|array|non-empty-string|stdClass $partitionBy Specifies an expression to group the documents. In the $fill stage, a group of documents is known as a partition.
      * If you omit partitionBy and partitionByFields, $fill uses one partition for the entire collection.
      * partitionBy and partitionByFields are mutually exclusive.
      */
-    public Optional|Document|Serializable|stdClass|array|string $partitionBy;
+    public readonly Optional|Document|Serializable|stdClass|array|string $partitionBy;
 
     /**
-     * @param Optional|BSONArray|PackedArray|array $partitionByFields Specifies an array of fields as the compound key to group the documents. In the $fill stage, each group of documents is known as a partition.
+     * @var Optional|BSONArray|PackedArray|array $partitionByFields Specifies an array of fields as the compound key to group the documents. In the $fill stage, each group of documents is known as a partition.
      * If you omit partitionBy and partitionByFields, $fill uses one partition for the entire collection.
      * partitionBy and partitionByFields are mutually exclusive.
      */
-    public Optional|PackedArray|BSONArray|array $partitionByFields;
+    public readonly Optional|PackedArray|BSONArray|array $partitionByFields;
 
-    /** @param Optional|Document|Serializable|array|stdClass $sortBy Specifies the field or fields to sort the documents within each partition. Uses the same syntax as the $sort stage. */
-    public Optional|Document|Serializable|stdClass|array $sortBy;
+    /** @var Optional|Document|Serializable|array|stdClass $sortBy Specifies the field or fields to sort the documents within each partition. Uses the same syntax as the $sort stage. */
+    public readonly Optional|Document|Serializable|stdClass|array $sortBy;
 
     /**
      * @param Document|Serializable|array|stdClass $output Specifies an object containing each field for which to fill missing values. You can specify multiple fields in the output object.

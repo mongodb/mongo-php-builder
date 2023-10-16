@@ -17,7 +17,7 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/shardedDataDistribution/
  */
-readonly class ShardedDataDistributionStage implements StageInterface
+class ShardedDataDistributionStage implements StageInterface
 {
     public const NAME = '$shardedDataDistribution';
     public const ENCODE = Encode::Object;

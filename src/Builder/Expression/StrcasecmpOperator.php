@@ -15,16 +15,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/strcasecmp/
  */
-readonly class StrcasecmpOperator implements ResolvesToInt
+class StrcasecmpOperator implements ResolvesToInt
 {
     public const NAME = '$strcasecmp';
     public const ENCODE = Encode::Array;
 
-    /** @param ResolvesToString|non-empty-string $expression1 */
-    public ResolvesToString|string $expression1;
+    /** @var ResolvesToString|non-empty-string $expression1 */
+    public readonly ResolvesToString|string $expression1;
 
-    /** @param ResolvesToString|non-empty-string $expression2 */
-    public ResolvesToString|string $expression2;
+    /** @var ResolvesToString|non-empty-string $expression2 */
+    public readonly ResolvesToString|string $expression2;
 
     /**
      * @param ResolvesToString|non-empty-string $expression1

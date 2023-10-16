@@ -21,13 +21,13 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/
  */
-readonly class SumAccumulator implements AccumulatorInterface, WindowInterface
+class SumAccumulator implements AccumulatorInterface, WindowInterface
 {
     public const NAME = '$sum';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $expression */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression

@@ -10,7 +10,7 @@ arguments:
     -
         name: array
         type:
-            - resolvesToString
+            - resolvesToArray
         description: |
             Can be any valid expression as long as it resolves to an array.
             If the array expression resolves to a value of null or refers to a field that is missing, $indexOfArray returns null.

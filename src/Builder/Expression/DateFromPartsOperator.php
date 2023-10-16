@@ -18,43 +18,43 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateFromParts/
  */
-readonly class DateFromPartsOperator implements ResolvesToDate
+class DateFromPartsOperator implements ResolvesToDate
 {
     public const NAME = '$dateFromParts';
     public const ENCODE = Encode::Object;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $year Calendar year. Can be any expression that evaluates to a number. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $year;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $year Calendar year. Can be any expression that evaluates to a number. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $year;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $isoWeekYear ISO Week Date Year. Can be any expression that evaluates to a number. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $isoWeekYear;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $isoWeekYear ISO Week Date Year. Can be any expression that evaluates to a number. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $isoWeekYear;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $month Month. Defaults to 1. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $month;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $month Month. Defaults to 1. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $month;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoWeek Week of year. Defaults to 1. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoWeek;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoWeek Week of year. Defaults to 1. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoWeek;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $day Day of month. Defaults to 1. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $day;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $day Day of month. Defaults to 1. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $day;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoDayOfWeek Day of week (Monday 1 - Sunday 7). Defaults to 1. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoDayOfWeek;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoDayOfWeek Day of week (Monday 1 - Sunday 7). Defaults to 1. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $isoDayOfWeek;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $hour Hour. Defaults to 0. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $hour;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $hour Hour. Defaults to 0. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $hour;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $minute Minute. Defaults to 0. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $minute;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $minute Minute. Defaults to 0. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $minute;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $second Second. Defaults to 0. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $second;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $second Second. Defaults to 0. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $second;
 
-    /** @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $millisecond Millisecond. Defaults to 0. */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $millisecond;
+    /** @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $millisecond Millisecond. Defaults to 0. */
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $millisecond;
 
-    /** @param Optional|ResolvesToString|non-empty-string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC. */
-    public Optional|ResolvesToString|string $timezone;
+    /** @var Optional|ResolvesToString|non-empty-string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC. */
+    public readonly Optional|ResolvesToString|string $timezone;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $year Calendar year. Can be any expression that evaluates to a number.

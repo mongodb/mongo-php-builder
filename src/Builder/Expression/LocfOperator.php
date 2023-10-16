@@ -20,13 +20,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/locf/
  */
-readonly class LocfOperator implements ResolvesToAny
+class LocfOperator implements ResolvesToAny
 {
     public const NAME = '$locf';
     public const ENCODE = Encode::Single;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression

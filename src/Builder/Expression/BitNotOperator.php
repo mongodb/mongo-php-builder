@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitNot/
  */
-readonly class BitNotOperator implements ResolvesToInt, ResolvesToLong
+class BitNotOperator implements ResolvesToInt, ResolvesToLong
 {
     public const NAME = '$bitNot';
     public const ENCODE = Encode::Single;
 
-    /** @param Int64|ResolvesToInt|ResolvesToLong|int $expression */
-    public Int64|ResolvesToInt|ResolvesToLong|int $expression;
+    /** @var Int64|ResolvesToInt|ResolvesToLong|int $expression */
+    public readonly Int64|ResolvesToInt|ResolvesToLong|int $expression;
 
     /**
      * @param Int64|ResolvesToInt|ResolvesToLong|int $expression

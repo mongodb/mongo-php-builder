@@ -19,22 +19,18 @@ use function array_merge;
  * @see https://www.mongodb.com/docs/manual/core/aggregation-pipeline/
  *
  * @psalm-immutable
- * @template-implements IteratorAggregate<StageInterface>
+ * @implements IteratorAggregate<StageInterface>
  */
-readonly class Pipeline implements IteratorAggregate
+class Pipeline implements IteratorAggregate
 {
     /** @var StageInterface[] */
-    private array $stages;
+    private readonly array $stages;
 
     /** @no-named-arguments */
     public function __construct(StageInterface|Pipeline ...$stagesOrPipelines)
     {
         if (! array_is_list($stagesOrPipelines)) {
             throw new InvalidArgumentException('Named arguments are not supported for pipelines');
-        }
-
-        if (empty($stagesOrPipelines)) {
-            throw new InvalidArgumentException('At least one stage must be provided');
         }
 
         $stages = [];
@@ -50,6 +46,7 @@ readonly class Pipeline implements IteratorAggregate
         $this->stages = $stages;
     }
 
+    /** @return Traversable<StageInterface> */
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->stages);

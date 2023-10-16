@@ -17,7 +17,7 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/changeStreamSplitLargeEvent/
  */
-readonly class ChangeStreamSplitLargeEventStage implements StageInterface
+class ChangeStreamSplitLargeEventStage implements StageInterface
 {
     public const NAME = '$changeStreamSplitLargeEvent';
     public const ENCODE = Encode::Object;

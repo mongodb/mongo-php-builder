@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/skip/
  */
-readonly class SkipStage implements StageInterface
+class SkipStage implements StageInterface
 {
     public const NAME = '$skip';
     public const ENCODE = Encode::Single;
 
-    /** @param int $skip */
-    public int $skip;
+    /** @var int $skip */
+    public readonly int $skip;
 
     /**
      * @param int $skip

@@ -27,25 +27,25 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/merge/
  */
-readonly class MergeStage implements StageInterface
+class MergeStage implements StageInterface
 {
     public const NAME = '$merge';
     public const ENCODE = Encode::Object;
 
-    /** @param non-empty-string $into The output collection. */
-    public string $into;
+    /** @var non-empty-string $into The output collection. */
+    public readonly string $into;
 
-    /** @param Optional|BSONArray|PackedArray|array|non-empty-string $on Field or fields that act as a unique identifier for a document. The identifier determines if a results document matches an existing document in the output collection. */
-    public Optional|PackedArray|BSONArray|array|string $on;
+    /** @var Optional|BSONArray|PackedArray|array|non-empty-string $on Field or fields that act as a unique identifier for a document. The identifier determines if a results document matches an existing document in the output collection. */
+    public readonly Optional|PackedArray|BSONArray|array|string $on;
 
-    /** @param Optional|Document|Serializable|array|stdClass $let Specifies variables for use in the whenMatched pipeline. */
-    public Optional|Document|Serializable|stdClass|array $let;
+    /** @var Optional|Document|Serializable|array|stdClass $let Specifies variables for use in the whenMatched pipeline. */
+    public readonly Optional|Document|Serializable|stdClass|array $let;
 
-    /** @param Optional|non-empty-string $whenMatched The behavior of $merge if a result document and an existing document in the collection have the same value for the specified on field(s). */
-    public Optional|string $whenMatched;
+    /** @var Optional|non-empty-string $whenMatched The behavior of $merge if a result document and an existing document in the collection have the same value for the specified on field(s). */
+    public readonly Optional|string $whenMatched;
 
-    /** @param Optional|non-empty-string $whenNotMatched The behavior of $merge if a result document does not match an existing document in the out collection. */
-    public Optional|string $whenNotMatched;
+    /** @var Optional|non-empty-string $whenNotMatched The behavior of $merge if a result document does not match an existing document in the out collection. */
+    public readonly Optional|string $whenNotMatched;
 
     /**
      * @param non-empty-string $into The output collection.

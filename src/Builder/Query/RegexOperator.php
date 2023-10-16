@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\FieldQueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/
  */
-readonly class RegexOperator implements FieldQueryInterface
+class RegexOperator implements FieldQueryInterface
 {
     public const NAME = '$regex';
     public const ENCODE = Encode::Single;
 
-    /** @param Regex $regex */
-    public Regex $regex;
+    /** @var Regex $regex */
+    public readonly Regex $regex;
 
     /**
      * @param Regex $regex

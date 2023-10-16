@@ -20,13 +20,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceRoot/
  */
-readonly class ReplaceRootStage implements StageInterface
+class ReplaceRootStage implements StageInterface
 {
     public const NAME = '$replaceRoot';
     public const ENCODE = Encode::Object;
 
-    /** @param Document|ResolvesToObject|Serializable|array|stdClass $newRoot */
-    public Document|Serializable|ResolvesToObject|stdClass|array $newRoot;
+    /** @var Document|ResolvesToObject|Serializable|array|stdClass $newRoot */
+    public readonly Document|Serializable|ResolvesToObject|stdClass|array $newRoot;
 
     /**
      * @param Document|ResolvesToObject|Serializable|array|stdClass $newRoot

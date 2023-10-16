@@ -16,7 +16,7 @@ use MongoDB\Builder\Type\ExpressionInterface;
  *
  * @see https://www.mongodb.com/docs/v7.0/reference/operator/meta/natural/
  */
-readonly class NaturalOperator implements ExpressionInterface
+class NaturalOperator implements ExpressionInterface
 {
     public const NAME = '$natural';
     public const ENCODE = Encode::Object;

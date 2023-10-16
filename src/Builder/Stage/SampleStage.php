@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sample/
  */
-readonly class SampleStage implements StageInterface
+class SampleStage implements StageInterface
 {
     public const NAME = '$sample';
     public const ENCODE = Encode::Object;
 
-    /** @param int $size The number of documents to randomly select. */
-    public int $size;
+    /** @var int $size The number of documents to randomly select. */
+    public readonly int $size;
 
     /**
      * @param int $size The number of documents to randomly select.

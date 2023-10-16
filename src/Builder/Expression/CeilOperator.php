@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/ceil/
  */
-readonly class CeilOperator implements ResolvesToInt
+class CeilOperator implements ResolvesToInt
 {
     public const NAME = '$ceil';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $expression If the argument resolves to a value of null or refers to a field that is missing, $ceil returns null. If the argument resolves to NaN, $ceil returns NaN. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression If the argument resolves to a value of null or refers to a field that is missing, $ceil returns null. If the argument resolves to NaN, $ceil returns NaN. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression If the argument resolves to a value of null or refers to a field that is missing, $ceil returns null. If the argument resolves to NaN, $ceil returns NaN.

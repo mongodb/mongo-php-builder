@@ -23,13 +23,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/bitsAllSet/
  */
-readonly class BitsAllSetOperator implements FieldQueryInterface
+class BitsAllSetOperator implements FieldQueryInterface
 {
     public const NAME = '$bitsAllSet';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask */
-    public Binary|PackedArray|BSONArray|array|int|string $bitmask;
+    /** @var BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask */
+    public readonly Binary|PackedArray|BSONArray|array|int|string $bitmask;
 
     /**
      * @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask

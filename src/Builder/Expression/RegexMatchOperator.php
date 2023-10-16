@@ -18,19 +18,19 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexMatch/
  */
-readonly class RegexMatchOperator implements ResolvesToBool
+class RegexMatchOperator implements ResolvesToBool
 {
     public const NAME = '$regexMatch';
     public const ENCODE = Encode::Object;
 
-    /** @param ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string. */
-    public ResolvesToString|string $input;
+    /** @var ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string. */
+    public readonly ResolvesToString|string $input;
 
-    /** @param Regex|ResolvesToString|non-empty-string $regex The regex pattern to apply. Can be any valid expression that resolves to either a string or regex pattern /<pattern>/. When using the regex /<pattern>/, you can also specify the regex options i and m (but not the s or x options) */
-    public Regex|ResolvesToString|string $regex;
+    /** @var Regex|ResolvesToString|non-empty-string $regex The regex pattern to apply. Can be any valid expression that resolves to either a string or regex pattern /<pattern>/. When using the regex /<pattern>/, you can also specify the regex options i and m (but not the s or x options) */
+    public readonly Regex|ResolvesToString|string $regex;
 
-    /** @param Optional|non-empty-string $options */
-    public Optional|string $options;
+    /** @var Optional|non-empty-string $options */
+    public readonly Optional|string $options;
 
     /**
      * @param ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string.

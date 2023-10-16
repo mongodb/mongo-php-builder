@@ -23,19 +23,19 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/derivative/
  */
-readonly class DerivativeAccumulator implements WindowInterface
+class DerivativeAccumulator implements WindowInterface
 {
     public const NAME = '$derivative';
     public const ENCODE = Encode::Object;
 
-    /** @param Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input */
-    public Decimal128|Int64|UTCDateTime|ResolvesToDate|ResolvesToNumber|float|int $input;
+    /** @var Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input */
+    public readonly Decimal128|Int64|UTCDateTime|ResolvesToDate|ResolvesToNumber|float|int $input;
 
     /**
-     * @param Optional|non-empty-string $unit A string that specifies the time unit. Use one of these strings: "week", "day","hour", "minute", "second", "millisecond".
+     * @var Optional|non-empty-string $unit A string that specifies the time unit. Use one of these strings: "week", "day","hour", "minute", "second", "millisecond".
      * If the sortBy field is not a date, you must omit a unit. If you specify a unit, you must specify a date in the sortBy field.
      */
-    public Optional|string $unit;
+    public readonly Optional|string $unit;
 
     /**
      * @param Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input

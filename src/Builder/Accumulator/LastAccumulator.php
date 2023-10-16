@@ -21,13 +21,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/last/
  */
-readonly class LastAccumulator implements AccumulatorInterface, WindowInterface
+class LastAccumulator implements AccumulatorInterface, WindowInterface
 {
     public const NAME = '$last';
     public const ENCODE = Encode::Single;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression

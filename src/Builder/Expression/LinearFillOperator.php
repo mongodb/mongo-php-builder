@@ -19,13 +19,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/linearFill/
  */
-readonly class LinearFillOperator implements ResolvesToNumber
+class LinearFillOperator implements ResolvesToNumber
 {
     public const NAME = '$linearFill';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $expression */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression

@@ -24,13 +24,13 @@ use function is_object;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/
  */
-readonly class MatchStage implements StageInterface
+class MatchStage implements StageInterface
 {
     public const NAME = '$match';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|QueryInterface|Serializable|array|stdClass $query */
-    public Document|Serializable|QueryInterface|stdClass|array $query;
+    /** @var Document|QueryInterface|Serializable|array|stdClass $query */
+    public readonly Document|Serializable|QueryInterface|stdClass|array $query;
 
     /**
      * @param Document|QueryInterface|Serializable|array|stdClass $query

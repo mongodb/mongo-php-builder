@@ -21,16 +21,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/arrayElemAt/
  */
-readonly class ArrayElemAtOperator implements ResolvesToAny
+class ArrayElemAtOperator implements ResolvesToAny
 {
     public const NAME = '$arrayElemAt';
     public const ENCODE = Encode::Array;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $array */
-    public PackedArray|ResolvesToArray|BSONArray|array $array;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $array */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $array;
 
-    /** @param ResolvesToInt|int $idx */
-    public ResolvesToInt|int $idx;
+    /** @var ResolvesToInt|int $idx */
+    public readonly ResolvesToInt|int $idx;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $array

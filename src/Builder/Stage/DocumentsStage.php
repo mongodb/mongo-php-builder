@@ -23,19 +23,19 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/documents/
  */
-readonly class DocumentsStage implements StageInterface
+class DocumentsStage implements StageInterface
 {
     public const NAME = '$documents';
     public const ENCODE = Encode::Single;
 
     /**
-     * @param BSONArray|PackedArray|ResolvesToArray|array $documents $documents accepts any valid expression that resolves to an array of objects. This includes:
+     * @var BSONArray|PackedArray|ResolvesToArray|array $documents $documents accepts any valid expression that resolves to an array of objects. This includes:
      * - system variables, such as $$NOW or $$SEARCH_META
      * - $let expressions
      * - variables in scope from $lookup expressions
      * Expressions that do not resolve to a current document, like $myField or $$ROOT, will result in an error.
      */
-    public PackedArray|ResolvesToArray|BSONArray|array $documents;
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $documents;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $documents $documents accepts any valid expression that resolves to an array of objects. This includes:

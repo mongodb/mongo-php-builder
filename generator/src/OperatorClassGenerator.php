@@ -47,7 +47,6 @@ class OperatorClassGenerator extends OperatorGenerator
         }
 
         $class = $namespace->addClass($this->getOperatorClassName($definition, $operator));
-        $class->setReadOnly();
         $class->setImplements($interfaces);
 
         // Expose operator metadata as constants
@@ -66,6 +65,7 @@ class OperatorClassGenerator extends OperatorGenerator
             }
 
             $property = $class->addProperty($argument->name);
+            $property->setReadOnly();
             $constuctorParam = $constuctor->addParameter($argument->name);
             $constuctorParam->setType($type->native);
 
@@ -83,7 +83,7 @@ class OperatorClassGenerator extends OperatorGenerator
 
                 if ($argument->variadic === VariadicType::Array) {
                     $property->setType('array');
-                    $property->addComment('@param list<' . $type->doc . '> ...$' . $argument->name . rtrim(' ' . $argument->description));
+                    $property->addComment('@var list<' . $type->doc . '> ...$' . $argument->name . rtrim(' ' . $argument->description));
                     // Warn that named arguments are not supported
                     // @see https://psalm.dev/docs/running_psalm/issues/NamedArgumentNotAllowed/
                     $constuctor->addComment('@no-named-arguments');
@@ -97,7 +97,7 @@ class OperatorClassGenerator extends OperatorGenerator
                 } elseif ($argument->variadic === VariadicType::Object) {
                     $namespace->addUse(stdClass::class);
                     $property->setType(stdClass::class);
-                    $property->addComment('@param stdClass<' . $type->doc . '> ...$' . $argument->name . rtrim(' ' . $argument->description));
+                    $property->addComment('@var stdClass<' . $type->doc . '> ...$' . $argument->name . rtrim(' ' . $argument->description));
                     $namespace->addUseFunction('is_string');
                     $namespace->addUse(InvalidArgumentException::class);
                     $constuctor->addBody(<<<PHP
@@ -111,7 +111,7 @@ class OperatorClassGenerator extends OperatorGenerator
                 }
             } else {
                 // Non-variadic arguments
-                $property->addComment('@param ' . $type->doc . ' $' . $argument->name . rtrim(' ' . $argument->description));
+                $property->addComment('@var ' . $type->doc . ' $' . $argument->name . rtrim(' ' . $argument->description));
                 $property->setType($type->native);
                 $constuctor->addComment('@param ' . $type->doc . ' $' . $argument->name . rtrim(' ' . $argument->description));
 

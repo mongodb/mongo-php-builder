@@ -18,19 +18,19 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/trunc/
  */
-readonly class TruncOperator implements ResolvesToString
+class TruncOperator implements ResolvesToString
 {
     public const NAME = '$trunc';
     public const ENCODE = Encode::Array;
 
     /**
-     * @param Decimal128|Int64|ResolvesToNumber|float|int $number Can be any valid expression that resolves to a number. Specifically, the expression must resolve to an integer, double, decimal, or long.
+     * @var Decimal128|Int64|ResolvesToNumber|float|int $number Can be any valid expression that resolves to a number. Specifically, the expression must resolve to an integer, double, decimal, or long.
      * $trunc returns an error if the expression resolves to a non-numeric data type.
      */
-    public Decimal128|Int64|ResolvesToNumber|float|int $number;
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $number;
 
-    /** @param Optional|ResolvesToInt|int $place Can be any valid expression that resolves to an integer between -20 and 100, exclusive. e.g. -20 < place < 100. Defaults to 0. */
-    public Optional|ResolvesToInt|int $place;
+    /** @var Optional|ResolvesToInt|int $place Can be any valid expression that resolves to an integer between -20 and 100, exclusive. e.g. -20 < place < 100. Defaults to 0. */
+    public readonly Optional|ResolvesToInt|int $place;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $number Can be any valid expression that resolves to a number. Specifically, the expression must resolve to an integer, double, decimal, or long.

@@ -16,7 +16,7 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/rank/
  */
-readonly class RankOperator implements ResolvesToInt
+class RankOperator implements ResolvesToInt
 {
     public const NAME = '$rank';
     public const ENCODE = Encode::Object;

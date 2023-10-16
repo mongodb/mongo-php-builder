@@ -20,13 +20,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/allElementsTrue/
  */
-readonly class AllElementsTrueOperator implements ResolvesToBool
+class AllElementsTrueOperator implements ResolvesToBool
 {
     public const NAME = '$allElementsTrue';
     public const ENCODE = Encode::Array;
 
-    /** @param list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
-    public array $expression;
+    /** @var list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array ...$expression

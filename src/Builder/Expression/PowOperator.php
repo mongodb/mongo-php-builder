@@ -17,16 +17,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/pow/
  */
-readonly class PowOperator implements ResolvesToNumber
+class PowOperator implements ResolvesToNumber
 {
     public const NAME = '$pow';
     public const ENCODE = Encode::Array;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $number */
-    public Decimal128|Int64|ResolvesToNumber|float|int $number;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $number */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $number;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $exponent */
-    public Decimal128|Int64|ResolvesToNumber|float|int $exponent;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $exponent */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $exponent;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $number

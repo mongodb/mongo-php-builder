@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\FieldQueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/exists/
  */
-readonly class ExistsOperator implements FieldQueryInterface
+class ExistsOperator implements FieldQueryInterface
 {
     public const NAME = '$exists';
     public const ENCODE = Encode::Single;
 
-    /** @param bool $exists */
-    public bool $exists;
+    /** @var bool $exists */
+    public readonly bool $exists;
 
     /**
      * @param bool $exists

@@ -23,25 +23,25 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setWindowFields/
  */
-readonly class SetWindowFieldsStage implements StageInterface
+class SetWindowFieldsStage implements StageInterface
 {
     public const NAME = '$setWindowFields';
     public const ENCODE = Encode::Object;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $partitionBy Specifies an expression to group the documents. In the $setWindowFields stage, the group of documents is known as a partition. Default is one partition for the entire collection. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $partitionBy;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $partitionBy Specifies an expression to group the documents. In the $setWindowFields stage, the group of documents is known as a partition. Default is one partition for the entire collection. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $partitionBy;
 
-    /** @param Document|Serializable|array|stdClass $sortBy Specifies the field(s) to sort the documents by in the partition. Uses the same syntax as the $sort stage. Default is no sorting. */
-    public Document|Serializable|stdClass|array $sortBy;
+    /** @var Document|Serializable|array|stdClass $sortBy Specifies the field(s) to sort the documents by in the partition. Uses the same syntax as the $sort stage. Default is no sorting. */
+    public readonly Document|Serializable|stdClass|array $sortBy;
 
     /**
-     * @param Document|Serializable|array|stdClass $output Specifies the field(s) to append to the documents in the output returned by the $setWindowFields stage. Each field is set to the result returned by the window operator.
+     * @var Document|Serializable|array|stdClass $output Specifies the field(s) to append to the documents in the output returned by the $setWindowFields stage. Each field is set to the result returned by the window operator.
      * A field can contain dots to specify embedded document fields and array fields. The semantics for the embedded document dotted notation in the $setWindowFields stage are the same as the $addFields and $set stages.
      */
-    public Document|Serializable|stdClass|array $output;
+    public readonly Document|Serializable|stdClass|array $output;
 
-    /** @param Optional|Document|Serializable|array|stdClass $window Specifies the window boundaries and parameters. Window boundaries are inclusive. Default is an unbounded window, which includes all documents in the partition. */
-    public Optional|Document|Serializable|stdClass|array $window;
+    /** @var Optional|Document|Serializable|array|stdClass $window Specifies the window boundaries and parameters. Window boundaries are inclusive. Default is an unbounded window, which includes all documents in the partition. */
+    public readonly Optional|Document|Serializable|stdClass|array $window;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $partitionBy Specifies an expression to group the documents. In the $setWindowFields stage, the group of documents is known as a partition. Default is one partition for the entire collection.

@@ -19,7 +19,7 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/count-accumulator/
  */
-readonly class CountAccumulator implements AccumulatorInterface, WindowInterface
+class CountAccumulator implements AccumulatorInterface, WindowInterface
 {
     public const NAME = '$count';
     public const ENCODE = Encode::Object;

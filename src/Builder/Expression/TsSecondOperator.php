@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/tsSecond/
  */
-readonly class TsSecondOperator implements ResolvesToLong
+class TsSecondOperator implements ResolvesToLong
 {
     public const NAME = '$tsSecond';
     public const ENCODE = Encode::Single;
 
-    /** @param ResolvesToTimestamp|Timestamp|int $expression */
-    public Timestamp|ResolvesToTimestamp|int $expression;
+    /** @var ResolvesToTimestamp|Timestamp|int $expression */
+    public readonly Timestamp|ResolvesToTimestamp|int $expression;
 
     /**
      * @param ResolvesToTimestamp|Timestamp|int $expression

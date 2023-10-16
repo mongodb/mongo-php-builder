@@ -21,13 +21,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/reverseArray/
  */
-readonly class ReverseArrayOperator implements ResolvesToArray
+class ReverseArrayOperator implements ResolvesToArray
 {
     public const NAME = '$reverseArray';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression The argument can be any valid expression as long as it resolves to an array. */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression The argument can be any valid expression as long as it resolves to an array. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $expression The argument can be any valid expression as long as it resolves to an array.

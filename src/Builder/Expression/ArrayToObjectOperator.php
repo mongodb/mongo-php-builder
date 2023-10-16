@@ -21,13 +21,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/arrayToObject/
  */
-readonly class ArrayToObjectOperator implements ResolvesToObject
+class ArrayToObjectOperator implements ResolvesToObject
 {
     public const NAME = '$arrayToObject';
     public const ENCODE = Encode::Array;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $array */
-    public PackedArray|ResolvesToArray|BSONArray|array $array;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $array */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $array;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $array

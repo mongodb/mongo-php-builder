@@ -18,13 +18,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bsonSize/
  */
-readonly class BsonSizeOperator implements ResolvesToInt
+class BsonSizeOperator implements ResolvesToInt
 {
     public const NAME = '$bsonSize';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|ResolvesToNull|ResolvesToObject|Serializable|array|null|stdClass $object */
-    public Document|Serializable|ResolvesToNull|ResolvesToObject|stdClass|array|null $object;
+    /** @var Document|ResolvesToNull|ResolvesToObject|Serializable|array|null|stdClass $object */
+    public readonly Document|Serializable|ResolvesToNull|ResolvesToObject|stdClass|array|null $object;
 
     /**
      * @param Document|ResolvesToNull|ResolvesToObject|Serializable|array|null|stdClass $object

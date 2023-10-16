@@ -19,13 +19,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/
  */
-readonly class SortStage implements StageInterface
+class SortStage implements StageInterface
 {
     public const NAME = '$sort';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|Serializable|array|stdClass $sort */
-    public Document|Serializable|stdClass|array $sort;
+    /** @var Document|Serializable|array|stdClass $sort */
+    public readonly Document|Serializable|stdClass|array $sort;
 
     /**
      * @param Document|Serializable|array|stdClass $sort

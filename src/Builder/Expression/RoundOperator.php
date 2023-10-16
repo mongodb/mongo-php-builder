@@ -18,19 +18,19 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/round/
  */
-readonly class RoundOperator implements ResolvesToInt, ResolvesToDouble, ResolvesToDecimal, ResolvesToLong
+class RoundOperator implements ResolvesToInt, ResolvesToDouble, ResolvesToDecimal, ResolvesToLong
 {
     public const NAME = '$round';
     public const ENCODE = Encode::Array;
 
     /**
-     * @param Decimal128|Int64|ResolvesToDecimal|ResolvesToDouble|ResolvesToInt|ResolvesToLong|float|int $number Can be any valid expression that resolves to a number. Specifically, the expression must resolve to an integer, double, decimal, or long.
+     * @var Decimal128|Int64|ResolvesToDecimal|ResolvesToDouble|ResolvesToInt|ResolvesToLong|float|int $number Can be any valid expression that resolves to a number. Specifically, the expression must resolve to an integer, double, decimal, or long.
      * $round returns an error if the expression resolves to a non-numeric data type.
      */
-    public Decimal128|Int64|ResolvesToDecimal|ResolvesToDouble|ResolvesToInt|ResolvesToLong|float|int $number;
+    public readonly Decimal128|Int64|ResolvesToDecimal|ResolvesToDouble|ResolvesToInt|ResolvesToLong|float|int $number;
 
-    /** @param Optional|ResolvesToInt|int $place Can be any valid expression that resolves to an integer between -20 and 100, exclusive. */
-    public Optional|ResolvesToInt|int $place;
+    /** @var Optional|ResolvesToInt|int $place Can be any valid expression that resolves to an integer between -20 and 100, exclusive. */
+    public readonly Optional|ResolvesToInt|int $place;
 
     /**
      * @param Decimal128|Int64|ResolvesToDecimal|ResolvesToDouble|ResolvesToInt|ResolvesToLong|float|int $number Can be any valid expression that resolves to a number. Specifically, the expression must resolve to an integer, double, decimal, or long.

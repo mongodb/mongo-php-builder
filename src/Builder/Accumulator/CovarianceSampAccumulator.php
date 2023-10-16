@@ -20,16 +20,16 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/covarianceSamp/
  */
-readonly class CovarianceSampAccumulator implements WindowInterface
+class CovarianceSampAccumulator implements WindowInterface
 {
     public const NAME = '$covarianceSamp';
     public const ENCODE = Encode::Array;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $expression1 */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression1;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression1 */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression1;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $expression2 */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression2;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression2 */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression2;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression1

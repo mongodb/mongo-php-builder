@@ -18,13 +18,13 @@ use MongoDB\Builder\Type\FieldQueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/maxDistance/
  */
-readonly class MaxDistanceOperator implements FieldQueryInterface
+class MaxDistanceOperator implements FieldQueryInterface
 {
     public const NAME = '$maxDistance';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|float|int $value */
-    public Decimal128|Int64|float|int $value;
+    /** @var Decimal128|Int64|float|int $value */
+    public readonly Decimal128|Int64|float|int $value;
 
     /**
      * @param Decimal128|Int64|float|int $value

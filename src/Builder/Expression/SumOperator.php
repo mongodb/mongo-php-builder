@@ -21,13 +21,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/
  */
-readonly class SumOperator implements ResolvesToNumber
+class SumOperator implements ResolvesToNumber
 {
     public const NAME = '$sum';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression */
-    public array $expression;
+    /** @var list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int ...$expression

@@ -17,13 +17,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/literal/
  */
-readonly class LiteralOperator implements ResolvesToAny
+class LiteralOperator implements ResolvesToAny
 {
     public const NAME = '$literal';
     public const ENCODE = Encode::Single;
 
-    /** @param Type|array|bool|float|int|non-empty-string|null|stdClass $value If the value is an expression, $literal does not evaluate the expression but instead returns the unparsed expression. */
-    public Type|stdClass|array|bool|float|int|null|string $value;
+    /** @var Type|array|bool|float|int|non-empty-string|null|stdClass $value If the value is an expression, $literal does not evaluate the expression but instead returns the unparsed expression. */
+    public readonly Type|stdClass|array|bool|float|int|null|string $value;
 
     /**
      * @param Type|array|bool|float|int|non-empty-string|null|stdClass $value If the value is an expression, $literal does not evaluate the expression but instead returns the unparsed expression.

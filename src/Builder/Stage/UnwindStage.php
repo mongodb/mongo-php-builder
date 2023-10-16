@@ -18,23 +18,23 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/
  */
-readonly class UnwindStage implements StageInterface
+class UnwindStage implements StageInterface
 {
     public const NAME = '$unwind';
     public const ENCODE = Encode::Object;
 
-    /** @param ArrayFieldPath|non-empty-string $path Field path to an array field. */
-    public ArrayFieldPath|string $path;
+    /** @var ArrayFieldPath|non-empty-string $path Field path to an array field. */
+    public readonly ArrayFieldPath|string $path;
 
-    /** @param Optional|non-empty-string $includeArrayIndex The name of a new field to hold the array index of the element. The name cannot start with a dollar sign $. */
-    public Optional|string $includeArrayIndex;
+    /** @var Optional|non-empty-string $includeArrayIndex The name of a new field to hold the array index of the element. The name cannot start with a dollar sign $. */
+    public readonly Optional|string $includeArrayIndex;
 
     /**
-     * @param Optional|bool $preserveNullAndEmptyArrays If true, if the path is null, missing, or an empty array, $unwind outputs the document.
+     * @var Optional|bool $preserveNullAndEmptyArrays If true, if the path is null, missing, or an empty array, $unwind outputs the document.
      * If false, if path is null, missing, or an empty array, $unwind does not output a document.
      * The default value is false.
      */
-    public Optional|bool $preserveNullAndEmptyArrays;
+    public readonly Optional|bool $preserveNullAndEmptyArrays;
 
     /**
      * @param ArrayFieldPath|non-empty-string $path Field path to an array field.

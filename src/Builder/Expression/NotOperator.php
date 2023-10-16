@@ -18,13 +18,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/not/
  */
-readonly class NotOperator implements ResolvesToBool
+class NotOperator implements ResolvesToBool
 {
     public const NAME = '$not';
     public const ENCODE = Encode::Single;
 
-    /** @param ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
-    public Type|ResolvesToBool|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
+    /** @var ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
+    public readonly Type|ResolvesToBool|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
 
     /**
      * @param ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass $expression

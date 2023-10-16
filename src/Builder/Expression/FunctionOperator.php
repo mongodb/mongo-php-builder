@@ -22,19 +22,19 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/function/
  */
-readonly class FunctionOperator implements ResolvesToAny
+class FunctionOperator implements ResolvesToAny
 {
     public const NAME = '$function';
     public const ENCODE = Encode::Object;
 
-    /** @param non-empty-string $body The function definition. You can specify the function definition as either BSON type Code or String. */
-    public string $body;
+    /** @var non-empty-string $body The function definition. You can specify the function definition as either BSON type Code or String. */
+    public readonly string $body;
 
-    /** @param BSONArray|PackedArray|array $args Arguments passed to the function body. If the body function does not take an argument, you can specify an empty array [ ]. */
-    public PackedArray|BSONArray|array $args;
+    /** @var BSONArray|PackedArray|array $args Arguments passed to the function body. If the body function does not take an argument, you can specify an empty array [ ]. */
+    public readonly PackedArray|BSONArray|array $args;
 
-    /** @param non-empty-string $lang */
-    public string $lang;
+    /** @var non-empty-string $lang */
+    public readonly string $lang;
 
     /**
      * @param non-empty-string $body The function definition. You can specify the function definition as either BSON type Code or String.

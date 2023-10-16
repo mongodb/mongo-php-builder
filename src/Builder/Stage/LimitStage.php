@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/limit/
  */
-readonly class LimitStage implements StageInterface
+class LimitStage implements StageInterface
 {
     public const NAME = '$limit';
     public const ENCODE = Encode::Single;
 
-    /** @param int $limit */
-    public int $limit;
+    /** @var int $limit */
+    public readonly int $limit;
 
     /**
      * @param int $limit

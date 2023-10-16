@@ -25,16 +25,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/minN/
  */
-readonly class MinNAccumulator implements AccumulatorInterface, WindowInterface
+class MinNAccumulator implements AccumulatorInterface, WindowInterface
 {
     public const NAME = '$minN';
     public const ENCODE = Encode::Object;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return the maximal n elements. */
-    public PackedArray|ResolvesToArray|BSONArray|array $input;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return the maximal n elements. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $input;
 
-    /** @param ResolvesToInt|int $n An expression that resolves to a positive integer. The integer specifies the number of array elements that $maxN returns. */
-    public ResolvesToInt|int $n;
+    /** @var ResolvesToInt|int $n An expression that resolves to a positive integer. The integer specifies the number of array elements that $maxN returns. */
+    public readonly ResolvesToInt|int $n;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return the maximal n elements.

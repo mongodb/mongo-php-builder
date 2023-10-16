@@ -17,16 +17,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/
  */
-readonly class DivideOperator implements ResolvesToDouble
+class DivideOperator implements ResolvesToDouble
 {
     public const NAME = '$divide';
     public const ENCODE = Encode::Array;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $dividend The first argument is the dividend, and the second argument is the divisor; i.e. the first argument is divided by the second argument. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $dividend;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $dividend The first argument is the dividend, and the second argument is the divisor; i.e. the first argument is divided by the second argument. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $dividend;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $divisor */
-    public Decimal128|Int64|ResolvesToNumber|float|int $divisor;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $divisor */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $divisor;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $dividend The first argument is the dividend, and the second argument is the divisor; i.e. the first argument is divided by the second argument.

@@ -17,16 +17,16 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/listSearchIndexes/
  */
-readonly class ListSearchIndexesStage implements StageInterface
+class ListSearchIndexesStage implements StageInterface
 {
     public const NAME = '$listSearchIndexes';
     public const ENCODE = Encode::Object;
 
-    /** @param Optional|non-empty-string $id The id of the index to return information about. */
-    public Optional|string $id;
+    /** @var Optional|non-empty-string $id The id of the index to return information about. */
+    public readonly Optional|string $id;
 
-    /** @param Optional|non-empty-string $name The name of the index to return information about. */
-    public Optional|string $name;
+    /** @var Optional|non-empty-string $name The name of the index to return information about. */
+    public readonly Optional|string $name;
 
     /**
      * @param Optional|non-empty-string $id The id of the index to return information about.

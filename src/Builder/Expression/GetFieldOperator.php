@@ -20,22 +20,22 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/getField/
  */
-readonly class GetFieldOperator implements ResolvesToAny
+class GetFieldOperator implements ResolvesToAny
 {
     public const NAME = '$getField';
     public const ENCODE = Encode::Object;
 
     /**
-     * @param non-empty-string $field Field in the input object for which you want to return a value. field can be any valid expression that resolves to a string constant.
+     * @var non-empty-string $field Field in the input object for which you want to return a value. field can be any valid expression that resolves to a string constant.
      * If field begins with a dollar sign ($), place the field name inside of a $literal expression to return its value.
      */
-    public string $field;
+    public readonly string $field;
 
     /**
-     * @param Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $input Default: $$CURRENT
+     * @var Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $input Default: $$CURRENT
      * A valid expression that contains the field for which you want to return a value. input must resolve to an object, missing, null, or undefined. If omitted, defaults to the document currently being processed in the pipeline ($$CURRENT).
      */
-    public Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $input;
+    public readonly Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $input;
 
     /**
      * @param non-empty-string $field Field in the input object for which you want to return a value. field can be any valid expression that resolves to a string constant.

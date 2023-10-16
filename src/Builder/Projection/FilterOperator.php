@@ -26,25 +26,25 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/filter/
  */
-readonly class FilterOperator implements ProjectionInterface
+class FilterOperator implements ProjectionInterface
 {
     public const NAME = '$filter';
     public const ENCODE = Encode::Object;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $input */
-    public PackedArray|ResolvesToArray|BSONArray|array $input;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $input */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $input;
 
-    /** @param ResolvesToBool|bool $cond An expression that resolves to a boolean value used to determine if an element should be included in the output array. The expression references each element of the input array individually with the variable name specified in as. */
-    public ResolvesToBool|bool $cond;
+    /** @var ResolvesToBool|bool $cond An expression that resolves to a boolean value used to determine if an element should be included in the output array. The expression references each element of the input array individually with the variable name specified in as. */
+    public readonly ResolvesToBool|bool $cond;
 
-    /** @param Optional|non-empty-string $as A name for the variable that represents each individual element of the input array. If no name is specified, the variable name defaults to this. */
-    public Optional|string $as;
+    /** @var Optional|non-empty-string $as A name for the variable that represents each individual element of the input array. If no name is specified, the variable name defaults to this. */
+    public readonly Optional|string $as;
 
     /**
-     * @param Optional|ResolvesToInt|int $limit A number expression that restricts the number of matching array elements that $filter returns. You cannot specify a limit less than 1. The matching array elements are returned in the order they appear in the input array.
+     * @var Optional|ResolvesToInt|int $limit A number expression that restricts the number of matching array elements that $filter returns. You cannot specify a limit less than 1. The matching array elements are returned in the order they appear in the input array.
      * If the specified limit is greater than the number of matching array elements, $filter returns all matching array elements. If the limit is null, $filter returns all matching array elements.
      */
-    public Optional|ResolvesToInt|int $limit;
+    public readonly Optional|ResolvesToInt|int $limit;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $input

@@ -25,24 +25,24 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/switch/
  */
-readonly class SwitchOperator implements ResolvesToAny
+class SwitchOperator implements ResolvesToAny
 {
     public const NAME = '$switch';
     public const ENCODE = Encode::Object;
 
     /**
-     * @param BSONArray|PackedArray|array $branches An array of control branch documents. Each branch is a document with the following fields:
+     * @var BSONArray|PackedArray|array $branches An array of control branch documents. Each branch is a document with the following fields:
      * - case Can be any valid expression that resolves to a boolean. If the result is not a boolean, it is coerced to a boolean value. More information about how MongoDB evaluates expressions as either true or false can be found here.
      * - then Can be any valid expression.
      * The branches array must contain at least one branch document.
      */
-    public PackedArray|BSONArray|array $branches;
+    public readonly PackedArray|BSONArray|array $branches;
 
     /**
-     * @param Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $default The path to take if no branch case expression evaluates to true.
+     * @var Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $default The path to take if no branch case expression evaluates to true.
      * Although optional, if default is unspecified and no branch case evaluates to true, $switch returns an error.
      */
-    public Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $default;
+    public readonly Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $default;
 
     /**
      * @param BSONArray|PackedArray|array $branches An array of control branch documents. Each branch is a document with the following fields:

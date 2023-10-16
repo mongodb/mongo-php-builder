@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\FieldQueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/minDistance/
  */
-readonly class MinDistanceOperator implements FieldQueryInterface
+class MinDistanceOperator implements FieldQueryInterface
 {
     public const NAME = '$minDistance';
     public const ENCODE = Encode::Single;
 
-    /** @param Int64|float|int $value */
-    public Int64|float|int $value;
+    /** @var Int64|float|int $value */
+    public readonly Int64|float|int $value;
 
     /**
      * @param Int64|float|int $value

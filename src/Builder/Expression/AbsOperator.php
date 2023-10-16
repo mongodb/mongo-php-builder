@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/abs/
  */
-readonly class AbsOperator implements ResolvesToNumber
+class AbsOperator implements ResolvesToNumber
 {
     public const NAME = '$abs';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $value */
-    public Decimal128|Int64|ResolvesToNumber|float|int $value;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $value */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $value;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $value

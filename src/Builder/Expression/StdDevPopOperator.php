@@ -22,13 +22,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevPop/
  */
-readonly class StdDevPopOperator implements ResolvesToDouble
+class StdDevPopOperator implements ResolvesToDouble
 {
     public const NAME = '$stdDevPop';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression */
-    public array $expression;
+    /** @var list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int ...$expression

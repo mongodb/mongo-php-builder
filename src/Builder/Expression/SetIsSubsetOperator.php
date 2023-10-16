@@ -21,16 +21,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setIsSubset/
  */
-readonly class SetIsSubsetOperator implements ResolvesToBool
+class SetIsSubsetOperator implements ResolvesToBool
 {
     public const NAME = '$setIsSubset';
     public const ENCODE = Encode::Array;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression1 */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression1;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression1 */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression1;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression2 */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression2;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression2 */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression2;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $expression1

@@ -21,13 +21,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/isArray/
  */
-readonly class IsArrayOperator implements ResolvesToBool
+class IsArrayOperator implements ResolvesToBool
 {
     public const NAME = '$isArray';
     public const ENCODE = Encode::Array;
 
-    /** @param list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression

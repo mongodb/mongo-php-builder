@@ -52,7 +52,6 @@ class ExpressionClassGenerator extends AbstractGenerator
 
         if ($definition->generate === PhpObject::PhpClass) {
             $class = $namespace->addClass($className);
-            $class->setReadOnly();
             $class->setImplements($definition->implements);
             $class->setExtends($definition->extends);
 
@@ -60,6 +59,7 @@ class ExpressionClassGenerator extends AbstractGenerator
             $propertyType = Type::union(...$types);
             $class->addProperty('name')
                 ->setType($propertyType)
+                ->setReadOnly()
                 ->setPublic();
 
             $constructor = $class->addMethod('__construct');

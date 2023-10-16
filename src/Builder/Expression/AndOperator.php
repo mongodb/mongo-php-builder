@@ -23,13 +23,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/and/
  */
-readonly class AndOperator implements ResolvesToBool
+class AndOperator implements ResolvesToBool
 {
     public const NAME = '$and';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Decimal128|ExpressionInterface|Int64|ResolvesToBool|ResolvesToNull|ResolvesToNumber|ResolvesToString|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<Decimal128|ExpressionInterface|Int64|ResolvesToBool|ResolvesToNull|ResolvesToNumber|ResolvesToString|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param Decimal128|ExpressionInterface|Int64|ResolvesToBool|ResolvesToNull|ResolvesToNumber|ResolvesToString|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression

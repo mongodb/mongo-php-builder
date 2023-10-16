@@ -24,16 +24,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/lastN/
  */
-readonly class LastNAccumulator implements WindowInterface
+class LastNAccumulator implements WindowInterface
 {
     public const NAME = '$lastN';
     public const ENCODE = Encode::Object;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return n elements. */
-    public PackedArray|ResolvesToArray|BSONArray|array $input;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return n elements. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $input;
 
-    /** @param ResolvesToInt|int $n An expression that resolves to a positive integer. The integer specifies the number of array elements that $firstN returns. */
-    public ResolvesToInt|int $n;
+    /** @var ResolvesToInt|int $n An expression that resolves to a positive integer. The integer specifies the number of array elements that $firstN returns. */
+    public readonly ResolvesToInt|int $n;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return n elements.

@@ -19,13 +19,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/
  */
-readonly class JsonSchemaOperator implements QueryInterface
+class JsonSchemaOperator implements QueryInterface
 {
     public const NAME = '$jsonSchema';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|Serializable|array|stdClass $schema */
-    public Document|Serializable|stdClass|array $schema;
+    /** @var Document|Serializable|array|stdClass $schema */
+    public readonly Document|Serializable|stdClass|array $schema;
 
     /**
      * @param Document|Serializable|array|stdClass $schema

@@ -19,16 +19,16 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unsetField/
  */
-readonly class UnsetFieldOperator implements ResolvesToObject
+class UnsetFieldOperator implements ResolvesToObject
 {
     public const NAME = '$unsetField';
     public const ENCODE = Encode::Object;
 
-    /** @param ResolvesToString|non-empty-string $field Field in the input object that you want to add, update, or remove. field can be any valid expression that resolves to a string constant. */
-    public ResolvesToString|string $field;
+    /** @var ResolvesToString|non-empty-string $field Field in the input object that you want to add, update, or remove. field can be any valid expression that resolves to a string constant. */
+    public readonly ResolvesToString|string $field;
 
-    /** @param Document|ResolvesToObject|Serializable|array|stdClass $input Document that contains the field that you want to add or update. input must resolve to an object, missing, null, or undefined. */
-    public Document|Serializable|ResolvesToObject|stdClass|array $input;
+    /** @var Document|ResolvesToObject|Serializable|array|stdClass $input Document that contains the field that you want to add or update. input must resolve to an object, missing, null, or undefined. */
+    public readonly Document|Serializable|ResolvesToObject|stdClass|array $input;
 
     /**
      * @param ResolvesToString|non-empty-string $field Field in the input object that you want to add, update, or remove. field can be any valid expression that resolves to a string constant.

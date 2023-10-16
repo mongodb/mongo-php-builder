@@ -23,16 +23,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/listSessions/
  */
-readonly class ListSessionsStage implements StageInterface
+class ListSessionsStage implements StageInterface
 {
     public const NAME = '$listSessions';
     public const ENCODE = Encode::Object;
 
-    /** @param Optional|BSONArray|PackedArray|array $users Returns all sessions for the specified users. If running with access control, the authenticated user must have privileges with listSessions action on the cluster to list sessions for other users. */
-    public Optional|PackedArray|BSONArray|array $users;
+    /** @var Optional|BSONArray|PackedArray|array $users Returns all sessions for the specified users. If running with access control, the authenticated user must have privileges with listSessions action on the cluster to list sessions for other users. */
+    public readonly Optional|PackedArray|BSONArray|array $users;
 
-    /** @param Optional|bool $allUsers Returns all sessions for all users. If running with access control, the authenticated user must have privileges with listSessions action on the cluster. */
-    public Optional|bool $allUsers;
+    /** @var Optional|bool $allUsers Returns all sessions for all users. If running with access control, the authenticated user must have privileges with listSessions action on the cluster. */
+    public readonly Optional|bool $allUsers;
 
     /**
      * @param Optional|BSONArray|PackedArray|array $users Returns all sessions for the specified users. If running with access control, the authenticated user must have privileges with listSessions action on the cluster to list sessions for other users.

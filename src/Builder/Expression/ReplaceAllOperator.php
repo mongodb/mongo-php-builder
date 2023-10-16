@@ -17,19 +17,19 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceAll/
  */
-readonly class ReplaceAllOperator implements ResolvesToString
+class ReplaceAllOperator implements ResolvesToString
 {
     public const NAME = '$replaceAll';
     public const ENCODE = Encode::Object;
 
-    /** @param ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null. */
-    public ResolvesToNull|ResolvesToString|null|string $input;
+    /** @var ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null. */
+    public readonly ResolvesToNull|ResolvesToString|null|string $input;
 
-    /** @param ResolvesToNull|ResolvesToString|non-empty-string|null $find The string to search for within the given input. Can be any valid expression that resolves to a string or a null. If find refers to a field that is missing, $replaceAll returns null. */
-    public ResolvesToNull|ResolvesToString|null|string $find;
+    /** @var ResolvesToNull|ResolvesToString|non-empty-string|null $find The string to search for within the given input. Can be any valid expression that resolves to a string or a null. If find refers to a field that is missing, $replaceAll returns null. */
+    public readonly ResolvesToNull|ResolvesToString|null|string $find;
 
-    /** @param ResolvesToNull|ResolvesToString|non-empty-string|null $replacement The string to use to replace all matched instances of find in input. Can be any valid expression that resolves to a string or a null. */
-    public ResolvesToNull|ResolvesToString|null|string $replacement;
+    /** @var ResolvesToNull|ResolvesToString|non-empty-string|null $replacement The string to use to replace all matched instances of find in input. Can be any valid expression that resolves to a string or a null. */
+    public readonly ResolvesToNull|ResolvesToString|null|string $replacement;
 
     /**
      * @param ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null.

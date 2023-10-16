@@ -25,13 +25,13 @@ use function is_object;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/not/
  */
-readonly class NotOperator implements FieldQueryInterface
+class NotOperator implements FieldQueryInterface
 {
     public const NAME = '$not';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|QueryInterface|Regex|Serializable|array|stdClass $expression */
-    public Document|Regex|Serializable|QueryInterface|stdClass|array $expression;
+    /** @var Document|QueryInterface|Regex|Serializable|array|stdClass $expression */
+    public readonly Document|Regex|Serializable|QueryInterface|stdClass|array $expression;
 
     /**
      * @param Document|QueryInterface|Regex|Serializable|array|stdClass $expression

@@ -20,13 +20,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/geoWithin/
  */
-readonly class GeoWithinOperator implements FieldQueryInterface
+class GeoWithinOperator implements FieldQueryInterface
 {
     public const NAME = '$geoWithin';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|GeometryInterface|Serializable|array|stdClass $geometry */
-    public Document|Serializable|GeometryInterface|stdClass|array $geometry;
+    /** @var Document|GeometryInterface|Serializable|array|stdClass $geometry */
+    public readonly Document|Serializable|GeometryInterface|stdClass|array $geometry;
 
     /**
      * @param Document|GeometryInterface|Serializable|array|stdClass $geometry

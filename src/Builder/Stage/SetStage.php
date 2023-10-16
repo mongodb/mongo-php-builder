@@ -23,13 +23,13 @@ use function is_string;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/set/
  */
-readonly class SetStage implements StageInterface
+class SetStage implements StageInterface
 {
     public const NAME = '$set';
     public const ENCODE = Encode::Single;
 
-    /** @param stdClass<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$field */
-    public stdClass $field;
+    /** @var stdClass<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$field */
+    public readonly stdClass $field;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$field

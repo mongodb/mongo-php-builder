@@ -15,16 +15,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/split/
  */
-readonly class SplitOperator implements ResolvesToArray
+class SplitOperator implements ResolvesToArray
 {
     public const NAME = '$split';
     public const ENCODE = Encode::Array;
 
-    /** @param ResolvesToString|non-empty-string $string The string to be split. string expression can be any valid expression as long as it resolves to a string. */
-    public ResolvesToString|string $string;
+    /** @var ResolvesToString|non-empty-string $string The string to be split. string expression can be any valid expression as long as it resolves to a string. */
+    public readonly ResolvesToString|string $string;
 
-    /** @param ResolvesToString|non-empty-string $delimiter The delimiter to use when splitting the string expression. delimiter can be any valid expression as long as it resolves to a string. */
-    public ResolvesToString|string $delimiter;
+    /** @var ResolvesToString|non-empty-string $delimiter The delimiter to use when splitting the string expression. delimiter can be any valid expression as long as it resolves to a string. */
+    public readonly ResolvesToString|string $delimiter;
 
     /**
      * @param ResolvesToString|non-empty-string $string The string to be split. string expression can be any valid expression as long as it resolves to a string.

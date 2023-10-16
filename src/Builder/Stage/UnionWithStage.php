@@ -25,19 +25,19 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unionWith/
  */
-readonly class UnionWithStage implements StageInterface
+class UnionWithStage implements StageInterface
 {
     public const NAME = '$unionWith';
     public const ENCODE = Encode::Object;
 
-    /** @param non-empty-string $coll The collection or view whose pipeline results you wish to include in the result set. */
-    public string $coll;
+    /** @var non-empty-string $coll The collection or view whose pipeline results you wish to include in the result set. */
+    public readonly string $coll;
 
     /**
-     * @param Optional|BSONArray|PackedArray|Pipeline|array $pipeline An aggregation pipeline to apply to the specified coll.
+     * @var Optional|BSONArray|PackedArray|Pipeline|array $pipeline An aggregation pipeline to apply to the specified coll.
      * The pipeline cannot include the $out and $merge stages. Starting in v6.0, the pipeline can contain the Atlas Search $search stage as the first stage inside the pipeline.
      */
-    public Optional|PackedArray|Pipeline|BSONArray|array $pipeline;
+    public readonly Optional|PackedArray|Pipeline|BSONArray|array $pipeline;
 
     /**
      * @param non-empty-string $coll The collection or view whose pipeline results you wish to include in the result set.

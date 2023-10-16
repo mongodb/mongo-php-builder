@@ -21,16 +21,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setDifference/
  */
-readonly class SetDifferenceOperator implements ResolvesToArray
+class SetDifferenceOperator implements ResolvesToArray
 {
     public const NAME = '$setDifference';
     public const ENCODE = Encode::Array;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression1 The arguments can be any valid expression as long as they each resolve to an array. */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression1;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression1 The arguments can be any valid expression as long as they each resolve to an array. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression1;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression2 The arguments can be any valid expression as long as they each resolve to an array. */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression2;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression2 The arguments can be any valid expression as long as they each resolve to an array. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression2;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $expression1 The arguments can be any valid expression as long as they each resolve to an array.

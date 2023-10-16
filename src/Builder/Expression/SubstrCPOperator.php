@@ -15,19 +15,19 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/substrCP/
  */
-readonly class SubstrCPOperator implements ResolvesToString
+class SubstrCPOperator implements ResolvesToString
 {
     public const NAME = '$substrCP';
     public const ENCODE = Encode::Array;
 
-    /** @param ResolvesToString|non-empty-string $string */
-    public ResolvesToString|string $string;
+    /** @var ResolvesToString|non-empty-string $string */
+    public readonly ResolvesToString|string $string;
 
-    /** @param ResolvesToInt|int $start If start is a negative number, $substr returns an empty string "". */
-    public ResolvesToInt|int $start;
+    /** @var ResolvesToInt|int $start If start is a negative number, $substr returns an empty string "". */
+    public readonly ResolvesToInt|int $start;
 
-    /** @param ResolvesToInt|int $length If length is a negative number, $substr returns a substring that starts at the specified index and includes the rest of the string. */
-    public ResolvesToInt|int $length;
+    /** @var ResolvesToInt|int $length If length is a negative number, $substr returns a substring that starts at the specified index and includes the rest of the string. */
+    public readonly ResolvesToInt|int $length;
 
     /**
      * @param ResolvesToString|non-empty-string $string

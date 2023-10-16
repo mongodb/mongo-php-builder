@@ -21,26 +21,26 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/expMovingAvg/
  */
-readonly class ExpMovingAvgAccumulator implements WindowInterface
+class ExpMovingAvgAccumulator implements WindowInterface
 {
     public const NAME = '$expMovingAvg';
     public const ENCODE = Encode::Object;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $input */
-    public Decimal128|Int64|ResolvesToNumber|float|int $input;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $input */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $input;
 
     /**
-     * @param Optional|int $N An integer that specifies the number of historical documents that have a significant mathematical weight in the exponential moving average calculation, with the most recent documents contributing the most weight.
+     * @var Optional|int $N An integer that specifies the number of historical documents that have a significant mathematical weight in the exponential moving average calculation, with the most recent documents contributing the most weight.
      * You must specify either N or alpha. You cannot specify both.
      * The N value is used in this formula to calculate the current result based on the expression value from the current document being read and the previous result of the calculation:
      */
-    public Optional|int $N;
+    public readonly Optional|int $N;
 
     /**
-     * @param Optional|Int64|float|int $alpha A double that specifies the exponential decay value to use in the exponential moving average calculation. A higher alpha value assigns a lower mathematical significance to previous results from the calculation.
+     * @var Optional|Int64|float|int $alpha A double that specifies the exponential decay value to use in the exponential moving average calculation. A higher alpha value assigns a lower mathematical significance to previous results from the calculation.
      * You must specify either N or alpha. You cannot specify both.
      */
-    public Optional|Int64|float|int $alpha;
+    public readonly Optional|Int64|float|int $alpha;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $input

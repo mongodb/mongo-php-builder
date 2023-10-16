@@ -21,13 +21,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unset/
  */
-readonly class UnsetStage implements StageInterface
+class UnsetStage implements StageInterface
 {
     public const NAME = '$unset';
     public const ENCODE = Encode::Single;
 
-    /** @param list<FieldPath|non-empty-string> ...$field */
-    public array $field;
+    /** @var list<FieldPath|non-empty-string> ...$field */
+    public readonly array $field;
 
     /**
      * @param FieldPath|non-empty-string ...$field

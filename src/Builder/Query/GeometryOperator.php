@@ -25,19 +25,19 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/geometry/
  */
-readonly class GeometryOperator implements GeometryInterface
+class GeometryOperator implements GeometryInterface
 {
     public const NAME = '$geometry';
     public const ENCODE = Encode::Object;
 
-    /** @param non-empty-string $type */
-    public string $type;
+    /** @var non-empty-string $type */
+    public readonly string $type;
 
-    /** @param BSONArray|PackedArray|array $coordinates */
-    public PackedArray|BSONArray|array $coordinates;
+    /** @var BSONArray|PackedArray|array $coordinates */
+    public readonly PackedArray|BSONArray|array $coordinates;
 
-    /** @param Document|Serializable|array|stdClass $crs */
-    public Document|Serializable|stdClass|array $crs;
+    /** @var Document|Serializable|array|stdClass $crs */
+    public readonly Document|Serializable|stdClass|array $crs;
 
     /**
      * @param non-empty-string $type

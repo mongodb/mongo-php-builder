@@ -17,16 +17,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/log/
  */
-readonly class LogOperator implements ResolvesToDouble
+class LogOperator implements ResolvesToDouble
 {
     public const NAME = '$log';
     public const ENCODE = Encode::Array;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $number Any valid expression as long as it resolves to a non-negative number. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $number;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $number Any valid expression as long as it resolves to a non-negative number. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $number;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $base Any valid expression as long as it resolves to a positive number greater than 1. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $base;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $base Any valid expression as long as it resolves to a positive number greater than 1. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $base;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $number Any valid expression as long as it resolves to a non-negative number.

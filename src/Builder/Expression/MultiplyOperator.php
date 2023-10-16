@@ -20,16 +20,16 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/multiply/
  */
-readonly class MultiplyOperator implements ResolvesToDecimal
+class MultiplyOperator implements ResolvesToDecimal
 {
     public const NAME = '$multiply';
     public const ENCODE = Encode::Single;
 
     /**
-     * @param list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression The arguments can be any valid expression as long as they resolve to numbers.
+     * @var list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression The arguments can be any valid expression as long as they resolve to numbers.
      * Starting in MongoDB 6.1 you can optimize the $multiply operation. To improve performance, group references at the end of the argument list.
      */
-    public array $expression;
+    public readonly array $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int ...$expression The arguments can be any valid expression as long as they resolve to numbers.

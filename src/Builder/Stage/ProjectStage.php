@@ -24,13 +24,13 @@ use function is_string;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/
  */
-readonly class ProjectStage implements StageInterface
+class ProjectStage implements StageInterface
 {
     public const NAME = '$project';
     public const ENCODE = Encode::Single;
 
-    /** @param stdClass<Document|ProjectionInterface|ResolvesToBool|Serializable|array|bool|int|stdClass> ...$specification */
-    public stdClass $specification;
+    /** @var stdClass<Document|ProjectionInterface|ResolvesToBool|Serializable|array|bool|int|stdClass> ...$specification */
+    public readonly stdClass $specification;
 
     /**
      * @param Document|ProjectionInterface|ResolvesToBool|Serializable|array|bool|int|stdClass ...$specification

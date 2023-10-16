@@ -10,9 +10,9 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\FieldPathInterface;
 
-readonly class IntFieldPath implements FieldPathInterface, ResolvesToInt
+class IntFieldPath implements FieldPathInterface, ResolvesToInt
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

@@ -21,13 +21,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/anyElementTrue/
  */
-readonly class AnyElementTrueOperator implements ResolvesToBool
+class AnyElementTrueOperator implements ResolvesToBool
 {
     public const NAME = '$anyElementTrue';
     public const ENCODE = Encode::Array;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $expression

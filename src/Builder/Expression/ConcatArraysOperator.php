@@ -20,13 +20,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/concatArrays/
  */
-readonly class ConcatArraysOperator implements ResolvesToArray
+class ConcatArraysOperator implements ResolvesToArray
 {
     public const NAME = '$concatArrays';
     public const ENCODE = Encode::Single;
 
-    /** @param list<BSONArray|PackedArray|ResolvesToArray|array> ...$array */
-    public array $array;
+    /** @var list<BSONArray|PackedArray|ResolvesToArray|array> ...$array */
+    public readonly array $array;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array ...$array

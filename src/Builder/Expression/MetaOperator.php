@@ -15,13 +15,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/meta/
  */
-readonly class MetaOperator implements ResolvesToAny
+class MetaOperator implements ResolvesToAny
 {
     public const NAME = '$meta';
     public const ENCODE = Encode::Single;
 
-    /** @param non-empty-string $keyword */
-    public string $keyword;
+    /** @var non-empty-string $keyword */
+    public readonly string $keyword;
 
     /**
      * @param non-empty-string $keyword

@@ -16,7 +16,7 @@ use MongoDB\Builder\Type\ExpressionInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/rand/
  */
-readonly class RandOperator implements ExpressionInterface
+class RandOperator implements ExpressionInterface
 {
     public const NAME = '$rand';
     public const ENCODE = Encode::Object;

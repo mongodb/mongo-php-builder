@@ -18,16 +18,16 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/
  */
-readonly class EqOperator implements ResolvesToBool
+class EqOperator implements ResolvesToBool
 {
     public const NAME = '$eq';
     public const ENCODE = Encode::Array;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression1 */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression1;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression1 */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression1;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression2 */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression2;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression2 */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression2;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression1

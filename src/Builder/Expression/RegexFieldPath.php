@@ -10,9 +10,9 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\FieldPathInterface;
 
-readonly class RegexFieldPath implements FieldPathInterface, ResolvesToRegex
+class RegexFieldPath implements FieldPathInterface, ResolvesToRegex
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

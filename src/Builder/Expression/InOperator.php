@@ -24,16 +24,16 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/in/
  */
-readonly class InOperator implements ResolvesToBool
+class InOperator implements ResolvesToBool
 {
     public const NAME = '$in';
     public const ENCODE = Encode::Array;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression Any valid expression expression. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression Any valid expression expression. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $array Any valid expression that resolves to an array. */
-    public PackedArray|ResolvesToArray|BSONArray|array $array;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $array Any valid expression that resolves to an array. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $array;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression Any valid expression expression.

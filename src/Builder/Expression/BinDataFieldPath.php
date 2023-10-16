@@ -10,9 +10,9 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\FieldPathInterface;
 
-readonly class BinDataFieldPath implements FieldPathInterface, ResolvesToBinData
+class BinDataFieldPath implements FieldPathInterface, ResolvesToBinData
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

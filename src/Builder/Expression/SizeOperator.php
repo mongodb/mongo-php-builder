@@ -21,13 +21,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/size/
  */
-readonly class SizeOperator implements ResolvesToInt
+class SizeOperator implements ResolvesToInt
 {
     public const NAME = '$size';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression The argument for $size can be any expression as long as it resolves to an array. */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression The argument for $size can be any expression as long as it resolves to an array. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $expression The argument for $size can be any expression as long as it resolves to an array.

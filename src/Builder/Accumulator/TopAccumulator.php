@@ -24,16 +24,16 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/top/
  */
-readonly class TopAccumulator implements AccumulatorInterface
+class TopAccumulator implements AccumulatorInterface
 {
     public const NAME = '$top';
     public const ENCODE = Encode::Object;
 
-    /** @param Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort. */
-    public Document|Serializable|stdClass|array $sortBy;
+    /** @var Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort. */
+    public readonly Document|Serializable|stdClass|array $sortBy;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Represents the output for each element in the group and can be any expression. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $output;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Represents the output for each element in the group and can be any expression. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $output;
 
     /**
      * @param Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort.

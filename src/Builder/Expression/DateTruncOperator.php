@@ -21,34 +21,34 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateTrunc/
  */
-readonly class DateTruncOperator implements ResolvesToDate
+class DateTruncOperator implements ResolvesToDate
 {
     public const NAME = '$dateTrunc';
     public const ENCODE = Encode::Object;
 
-    /** @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $date The date to truncate, specified in UTC. The date can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
-    public ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $date;
+    /** @var ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $date The date to truncate, specified in UTC. The date can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
+    public readonly ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $date;
 
     /**
-     * @param ResolvesToString|non-empty-string $unit The unit of time, specified as an expression that must resolve to one of these strings: year, quarter, week, month, day, hour, minute, second.
+     * @var ResolvesToString|non-empty-string $unit The unit of time, specified as an expression that must resolve to one of these strings: year, quarter, week, month, day, hour, minute, second.
      * Together, binSize and unit specify the time period used in the $dateTrunc calculation.
      */
-    public ResolvesToString|string $unit;
+    public readonly ResolvesToString|string $unit;
 
     /**
-     * @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $binSize The numeric time value, specified as an expression that must resolve to a positive non-zero number. Defaults to 1.
+     * @var Optional|Decimal128|Int64|ResolvesToNumber|float|int $binSize The numeric time value, specified as an expression that must resolve to a positive non-zero number. Defaults to 1.
      * Together, binSize and unit specify the time period used in the $dateTrunc calculation.
      */
-    public Optional|Decimal128|Int64|ResolvesToNumber|float|int $binSize;
+    public readonly Optional|Decimal128|Int64|ResolvesToNumber|float|int $binSize;
 
-    /** @param Optional|ResolvesToString|non-empty-string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC. */
-    public Optional|ResolvesToString|string $timezone;
+    /** @var Optional|ResolvesToString|non-empty-string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC. */
+    public readonly Optional|ResolvesToString|string $timezone;
 
     /**
-     * @param Optional|non-empty-string $startOfWeek The start of the week. Used when
+     * @var Optional|non-empty-string $startOfWeek The start of the week. Used when
      * unit is week. Defaults to Sunday.
      */
-    public Optional|string $startOfWeek;
+    public readonly Optional|string $startOfWeek;
 
     /**
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $date The date to truncate, specified in UTC. The date can be any expression that resolves to a Date, a Timestamp, or an ObjectID.

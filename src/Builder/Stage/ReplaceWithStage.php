@@ -21,13 +21,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceWith/
  */
-readonly class ReplaceWithStage implements StageInterface
+class ReplaceWithStage implements StageInterface
 {
     public const NAME = '$replaceWith';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|ResolvesToObject|Serializable|array|stdClass $expression */
-    public Document|Serializable|ResolvesToObject|stdClass|array $expression;
+    /** @var Document|ResolvesToObject|Serializable|array|stdClass $expression */
+    public readonly Document|Serializable|ResolvesToObject|stdClass|array $expression;
 
     /**
      * @param Document|ResolvesToObject|Serializable|array|stdClass $expression

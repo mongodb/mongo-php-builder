@@ -35,22 +35,22 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/percentile/
  */
-readonly class PercentileAccumulator implements AccumulatorInterface, WindowInterface
+class PercentileAccumulator implements AccumulatorInterface, WindowInterface
 {
     public const NAME = '$percentile';
     public const ENCODE = Encode::Object;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $input $percentile calculates the percentile values of this data. input must be a field name or an expression that evaluates to a numeric type. If the expression cannot be converted to a numeric type, the $percentile calculation ignores it. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $input;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $input $percentile calculates the percentile values of this data. input must be a field name or an expression that evaluates to a numeric type. If the expression cannot be converted to a numeric type, the $percentile calculation ignores it. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $input;
 
     /**
-     * @param BSONArray|PackedArray|ResolvesToArray|array $p $percentile calculates a percentile value for each element in p. The elements represent percentages and must evaluate to numeric values in the range 0.0 to 1.0, inclusive.
+     * @var BSONArray|PackedArray|ResolvesToArray|array $p $percentile calculates a percentile value for each element in p. The elements represent percentages and must evaluate to numeric values in the range 0.0 to 1.0, inclusive.
      * $percentile returns results in the same order as the elements in p.
      */
-    public PackedArray|ResolvesToArray|BSONArray|array $p;
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $p;
 
-    /** @param non-empty-string $method The method that mongod uses to calculate the percentile value. The method must be 'approximate'. */
-    public string $method;
+    /** @var non-empty-string $method The method that mongod uses to calculate the percentile value. The method must be 'approximate'. */
+    public readonly string $method;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $input $percentile calculates the percentile values of this data. input must be a field name or an expression that evaluates to a numeric type. If the expression cannot be converted to a numeric type, the $percentile calculation ignores it.

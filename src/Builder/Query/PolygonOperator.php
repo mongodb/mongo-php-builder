@@ -22,13 +22,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/polygon/
  */
-readonly class PolygonOperator implements GeometryInterface
+class PolygonOperator implements GeometryInterface
 {
     public const NAME = '$polygon';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|PackedArray|array $points */
-    public PackedArray|BSONArray|array $points;
+    /** @var BSONArray|PackedArray|array $points */
+    public readonly PackedArray|BSONArray|array $points;
 
     /**
      * @param BSONArray|PackedArray|array $points

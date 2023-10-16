@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/
  */
-readonly class CountStage implements StageInterface
+class CountStage implements StageInterface
 {
     public const NAME = '$count';
     public const ENCODE = Encode::Single;
 
-    /** @param non-empty-string $field Name of the output field which has the count as its value. It must be a non-empty string, must not start with $ and must not contain the . character. */
-    public string $field;
+    /** @var non-empty-string $field Name of the output field which has the count as its value. It must be a non-empty string, must not start with $ and must not contain the . character. */
+    public readonly string $field;
 
     /**
      * @param non-empty-string $field Name of the output field which has the count as its value. It must be a non-empty string, must not start with $ and must not contain the . character.

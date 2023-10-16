@@ -20,13 +20,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/search/
  */
-readonly class SearchStage implements StageInterface
+class SearchStage implements StageInterface
 {
     public const NAME = '$search';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|Serializable|array|stdClass $search */
-    public Document|Serializable|stdClass|array $search;
+    /** @var Document|Serializable|array|stdClass $search */
+    public readonly Document|Serializable|stdClass|array $search;
 
     /**
      * @param Document|Serializable|array|stdClass $search

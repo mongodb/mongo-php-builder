@@ -828,7 +828,7 @@ trait FactoryTrait
      * Searches an array for an occurrence of a specified value and returns the array index of the first occurrence. Array indexes start at zero.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/indexOfArray/
-     * @param ResolvesToString|non-empty-string $array Can be any valid expression as long as it resolves to an array.
+     * @param BSONArray|PackedArray|ResolvesToArray|array $array Can be any valid expression as long as it resolves to an array.
      * If the array expression resolves to a value of null or refers to a field that is missing, $indexOfArray returns null.
      * If the array expression does not resolve to an array or null nor refers to a missing field, $indexOfArray returns an error.
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $search
@@ -838,7 +838,7 @@ trait FactoryTrait
      * If unspecified, the ending index position for the search is the end of the string.
      */
     public static function indexOfArray(
-        ResolvesToString|string $array,
+        PackedArray|ResolvesToArray|BSONArray|array $array,
         Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $search,
         Optional|ResolvesToInt|int $start = Optional::Undefined,
         Optional|ResolvesToInt|int $end = Optional::Undefined,

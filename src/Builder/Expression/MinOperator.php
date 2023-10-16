@@ -22,13 +22,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/min/
  */
-readonly class MinOperator implements ResolvesToAny
+class MinOperator implements ResolvesToAny
 {
     public const NAME = '$min';
     public const ENCODE = Encode::Single;
 
-    /** @param list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression

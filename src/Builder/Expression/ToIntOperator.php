@@ -19,13 +19,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toInt/
  */
-readonly class ToIntOperator implements ResolvesToInt
+class ToIntOperator implements ResolvesToInt
 {
     public const NAME = '$toInt';
     public const ENCODE = Encode::Single;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression

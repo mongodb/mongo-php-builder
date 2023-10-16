@@ -18,13 +18,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/objectToArray/
  */
-readonly class ObjectToArrayOperator implements ResolvesToArray
+class ObjectToArrayOperator implements ResolvesToArray
 {
     public const NAME = '$objectToArray';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|ResolvesToObject|Serializable|array|stdClass $object Any valid expression as long as it resolves to a document object. $objectToArray applies to the top-level fields of its argument. If the argument is a document that itself contains embedded document fields, the $objectToArray does not recursively apply to the embedded document fields. */
-    public Document|Serializable|ResolvesToObject|stdClass|array $object;
+    /** @var Document|ResolvesToObject|Serializable|array|stdClass $object Any valid expression as long as it resolves to a document object. $objectToArray applies to the top-level fields of its argument. If the argument is a document that itself contains embedded document fields, the $objectToArray does not recursively apply to the embedded document fields. */
+    public readonly Document|Serializable|ResolvesToObject|stdClass|array $object;
 
     /**
      * @param Document|ResolvesToObject|Serializable|array|stdClass $object Any valid expression as long as it resolves to a document object. $objectToArray applies to the top-level fields of its argument. If the argument is a document that itself contains embedded document fields, the $objectToArray does not recursively apply to the embedded document fields.

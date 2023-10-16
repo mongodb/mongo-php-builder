@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\FieldQueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/size/
  */
-readonly class SizeOperator implements FieldQueryInterface
+class SizeOperator implements FieldQueryInterface
 {
     public const NAME = '$size';
     public const ENCODE = Encode::Single;
 
-    /** @param int $value */
-    public int $value;
+    /** @var int $value */
+    public readonly int $value;
 
     /**
      * @param int $value

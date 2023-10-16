@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Expression;
 
-readonly class Variable implements ResolvesToAny
+class Variable implements ResolvesToAny
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

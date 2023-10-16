@@ -10,9 +10,9 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\FieldPathInterface;
 
-readonly class ObjectIdFieldPath implements FieldPathInterface, ResolvesToObjectId
+class ObjectIdFieldPath implements FieldPathInterface, ResolvesToObjectId
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

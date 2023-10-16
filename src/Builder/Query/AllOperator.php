@@ -21,13 +21,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/all/
  */
-readonly class AllOperator implements FieldQueryInterface
+class AllOperator implements FieldQueryInterface
 {
     public const NAME = '$all';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Type|array|bool|float|int|non-empty-string|null|stdClass> ...$value */
-    public array $value;
+    /** @var list<Type|array|bool|float|int|non-empty-string|null|stdClass> ...$value */
+    public readonly array $value;
 
     /**
      * @param Type|array|bool|float|int|non-empty-string|null|stdClass ...$value

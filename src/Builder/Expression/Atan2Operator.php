@@ -17,20 +17,20 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/atan2/
  */
-readonly class Atan2Operator implements ResolvesToDouble, ResolvesToDecimal
+class Atan2Operator implements ResolvesToDouble, ResolvesToDecimal
 {
     public const NAME = '$atan2';
     public const ENCODE = Encode::Array;
 
     /**
-     * @param Decimal128|Int64|ResolvesToNumber|float|int $y $atan2 takes any valid expression that resolves to a number.
+     * @var Decimal128|Int64|ResolvesToNumber|float|int $y $atan2 takes any valid expression that resolves to a number.
      * $atan2 returns values in radians. Use $radiansToDegrees operator to convert the output value from radians to degrees.
      * By default $atan returns values as a double. $atan2 can also return values as a 128-bit decimal as long as the expression resolves to a 128-bit decimal value.
      */
-    public Decimal128|Int64|ResolvesToNumber|float|int $y;
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $y;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $x */
-    public Decimal128|Int64|ResolvesToNumber|float|int $x;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $x */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $x;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $y $atan2 takes any valid expression that resolves to a number.

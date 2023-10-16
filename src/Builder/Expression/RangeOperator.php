@@ -16,19 +16,19 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/range/
  */
-readonly class RangeOperator implements ResolvesToArray
+class RangeOperator implements ResolvesToArray
 {
     public const NAME = '$range';
     public const ENCODE = Encode::Array;
 
-    /** @param ResolvesToInt|int $start An integer that specifies the start of the sequence. Can be any valid expression that resolves to an integer. */
-    public ResolvesToInt|int $start;
+    /** @var ResolvesToInt|int $start An integer that specifies the start of the sequence. Can be any valid expression that resolves to an integer. */
+    public readonly ResolvesToInt|int $start;
 
-    /** @param ResolvesToInt|int $end An integer that specifies the exclusive upper limit of the sequence. Can be any valid expression that resolves to an integer. */
-    public ResolvesToInt|int $end;
+    /** @var ResolvesToInt|int $end An integer that specifies the exclusive upper limit of the sequence. Can be any valid expression that resolves to an integer. */
+    public readonly ResolvesToInt|int $end;
 
-    /** @param Optional|ResolvesToInt|int $step An integer that specifies the increment value. Can be any valid expression that resolves to a non-zero integer. Defaults to 1. */
-    public Optional|ResolvesToInt|int $step;
+    /** @var Optional|ResolvesToInt|int $step An integer that specifies the increment value. Can be any valid expression that resolves to a non-zero integer. Defaults to 1. */
+    public readonly Optional|ResolvesToInt|int $step;
 
     /**
      * @param ResolvesToInt|int $start An integer that specifies the start of the sequence. Can be any valid expression that resolves to an integer.

@@ -25,16 +25,16 @@ use function is_string;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/
  */
-readonly class GroupStage implements StageInterface
+class GroupStage implements StageInterface
 {
     public const NAME = '$group';
     public const ENCODE = Encode::Group;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $_id The _id expression specifies the group key. If you specify an _id value of null, or any other constant value, the $group stage returns a single document that aggregates values across all of the input documents. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $_id;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $_id The _id expression specifies the group key. If you specify an _id value of null, or any other constant value, the $group stage returns a single document that aggregates values across all of the input documents. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $_id;
 
-    /** @param stdClass<AccumulatorInterface|Document|Serializable|array|stdClass> ...$field Computed using the accumulator operators. */
-    public stdClass $field;
+    /** @var stdClass<AccumulatorInterface|Document|Serializable|array|stdClass> ...$field Computed using the accumulator operators. */
+    public readonly stdClass $field;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $_id The _id expression specifies the group key. If you specify an _id value of null, or any other constant value, the $group stage returns a single document that aggregates values across all of the input documents.

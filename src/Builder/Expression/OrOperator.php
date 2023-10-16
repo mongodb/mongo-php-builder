@@ -21,13 +21,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/or/
  */
-readonly class OrOperator implements ResolvesToBool
+class OrOperator implements ResolvesToBool
 {
     public const NAME = '$or';
     public const ENCODE = Encode::Single;
 
-    /** @param list<ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression

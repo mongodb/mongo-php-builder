@@ -21,13 +21,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevPop/
  */
-readonly class StdDevPopAccumulator implements AccumulatorInterface
+class StdDevPopAccumulator implements AccumulatorInterface
 {
     public const NAME = '$stdDevPop';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $expression */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression

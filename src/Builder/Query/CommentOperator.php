@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\QueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/comment/
  */
-readonly class CommentOperator implements QueryInterface
+class CommentOperator implements QueryInterface
 {
     public const NAME = '$comment';
     public const ENCODE = Encode::Single;
 
-    /** @param non-empty-string $comment */
-    public string $comment;
+    /** @var non-empty-string $comment */
+    public readonly string $comment;
 
     /**
      * @param non-empty-string $comment

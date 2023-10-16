@@ -10,9 +10,9 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\FieldPathInterface;
 
-readonly class DoubleFieldPath implements FieldPathInterface, ResolvesToDouble
+class DoubleFieldPath implements FieldPathInterface, ResolvesToDouble
 {
-    public string $name;
+    public readonly string $name;
 
     public function __construct(string $name)
     {

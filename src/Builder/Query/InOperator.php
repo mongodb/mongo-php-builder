@@ -22,13 +22,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/in/
  */
-readonly class InOperator implements FieldQueryInterface
+class InOperator implements FieldQueryInterface
 {
     public const NAME = '$in';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|PackedArray|array $value */
-    public PackedArray|BSONArray|array $value;
+    /** @var BSONArray|PackedArray|array $value */
+    public readonly PackedArray|BSONArray|array $value;
 
     /**
      * @param BSONArray|PackedArray|array $value

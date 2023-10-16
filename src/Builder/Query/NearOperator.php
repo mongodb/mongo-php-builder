@@ -21,19 +21,19 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/near/
  */
-readonly class NearOperator implements FieldQueryInterface
+class NearOperator implements FieldQueryInterface
 {
     public const NAME = '$near';
     public const ENCODE = Encode::Object;
 
-    /** @param Document|GeometryInterface|Serializable|array|stdClass $geometry */
-    public Document|Serializable|GeometryInterface|stdClass|array $geometry;
+    /** @var Document|GeometryInterface|Serializable|array|stdClass $geometry */
+    public readonly Document|Serializable|GeometryInterface|stdClass|array $geometry;
 
-    /** @param Optional|int $maxDistance Distance in meters. Limits the results to those documents that are at most the specified distance from the center point. */
-    public Optional|int $maxDistance;
+    /** @var Optional|int $maxDistance Distance in meters. Limits the results to those documents that are at most the specified distance from the center point. */
+    public readonly Optional|int $maxDistance;
 
-    /** @param Optional|int $minDistance Distance in meters. Limits the results to those documents that are at least the specified distance from the center point. */
-    public Optional|int $minDistance;
+    /** @var Optional|int $minDistance Distance in meters. Limits the results to those documents that are at least the specified distance from the center point. */
+    public readonly Optional|int $minDistance;
 
     /**
      * @param Document|GeometryInterface|Serializable|array|stdClass $geometry

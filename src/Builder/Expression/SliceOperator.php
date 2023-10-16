@@ -23,27 +23,27 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/slice/
  */
-readonly class SliceOperator implements ResolvesToArray, ProjectionInterface
+class SliceOperator implements ResolvesToArray, ProjectionInterface
 {
     public const NAME = '$slice';
     public const ENCODE = Encode::Array;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $expression Any valid expression as long as it resolves to an array. */
-    public PackedArray|ResolvesToArray|BSONArray|array $expression;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $expression Any valid expression as long as it resolves to an array. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $expression;
 
     /**
-     * @param ResolvesToInt|int $n Any valid expression as long as it resolves to an integer. If position is specified, n must resolve to a positive integer.
+     * @var ResolvesToInt|int $n Any valid expression as long as it resolves to an integer. If position is specified, n must resolve to a positive integer.
      * If positive, $slice returns up to the first n elements in the array. If the position is specified, $slice returns the first n elements starting from the position.
      * If negative, $slice returns up to the last n elements in the array. n cannot resolve to a negative number if <position> is specified.
      */
-    public ResolvesToInt|int $n;
+    public readonly ResolvesToInt|int $n;
 
     /**
-     * @param Optional|ResolvesToInt|int $position Any valid expression as long as it resolves to an integer.
+     * @var Optional|ResolvesToInt|int $position Any valid expression as long as it resolves to an integer.
      * If positive, $slice determines the starting position from the start of the array. If position is greater than the number of elements, the $slice returns an empty array.
      * If negative, $slice determines the starting position from the end of the array. If the absolute value of the <position> is greater than the number of elements, the starting position is the start of the array.
      */
-    public Optional|ResolvesToInt|int $position;
+    public readonly Optional|ResolvesToInt|int $position;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $expression Any valid expression as long as it resolves to an array.

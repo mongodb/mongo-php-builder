@@ -20,13 +20,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setUnion/
  */
-readonly class SetUnionOperator implements ResolvesToArray
+class SetUnionOperator implements ResolvesToArray
 {
     public const NAME = '$setUnion';
     public const ENCODE = Encode::Single;
 
-    /** @param list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
-    public array $expression;
+    /** @var list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array ...$expression

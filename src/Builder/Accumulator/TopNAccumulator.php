@@ -25,19 +25,19 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/topN/
  */
-readonly class TopNAccumulator implements AccumulatorInterface
+class TopNAccumulator implements AccumulatorInterface
 {
     public const NAME = '$topN';
     public const ENCODE = Encode::Object;
 
-    /** @param ResolvesToInt|int $n limits the number of results per group and has to be a positive integral expression that is either a constant or depends on the _id value for $group. */
-    public ResolvesToInt|int $n;
+    /** @var ResolvesToInt|int $n limits the number of results per group and has to be a positive integral expression that is either a constant or depends on the _id value for $group. */
+    public readonly ResolvesToInt|int $n;
 
-    /** @param Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort. */
-    public Document|Serializable|stdClass|array $sortBy;
+    /** @var Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort. */
+    public readonly Document|Serializable|stdClass|array $sortBy;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Represents the output for each element in the group and can be any expression. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $output;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Represents the output for each element in the group and can be any expression. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $output;
 
     /**
      * @param ResolvesToInt|int $n limits the number of results per group and has to be a positive integral expression that is either a constant or depends on the _id value for $group.

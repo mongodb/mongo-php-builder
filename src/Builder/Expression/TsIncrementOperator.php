@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/tsIncrement/
  */
-readonly class TsIncrementOperator implements ResolvesToLong
+class TsIncrementOperator implements ResolvesToLong
 {
     public const NAME = '$tsIncrement';
     public const ENCODE = Encode::Single;
 
-    /** @param ResolvesToTimestamp|Timestamp|int $expression */
-    public Timestamp|ResolvesToTimestamp|int $expression;
+    /** @var ResolvesToTimestamp|Timestamp|int $expression */
+    public readonly Timestamp|ResolvesToTimestamp|int $expression;
 
     /**
      * @param ResolvesToTimestamp|Timestamp|int $expression

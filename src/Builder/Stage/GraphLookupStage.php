@@ -31,37 +31,37 @@ use function is_object;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/graphLookup/
  */
-readonly class GraphLookupStage implements StageInterface
+class GraphLookupStage implements StageInterface
 {
     public const NAME = '$graphLookup';
     public const ENCODE = Encode::Object;
 
     /**
-     * @param non-empty-string $from Target collection for the $graphLookup operation to search, recursively matching the connectFromField to the connectToField. The from collection must be in the same database as any other collections used in the operation.
+     * @var non-empty-string $from Target collection for the $graphLookup operation to search, recursively matching the connectFromField to the connectToField. The from collection must be in the same database as any other collections used in the operation.
      * Starting in MongoDB 5.1, the collection specified in the from parameter can be sharded.
      */
-    public string $from;
+    public readonly string $from;
 
-    /** @param BSONArray|ExpressionInterface|PackedArray|Type|array|bool|float|int|non-empty-string|null|stdClass $startWith Expression that specifies the value of the connectFromField with which to start the recursive search. Optionally, startWith may be array of values, each of which is individually followed through the traversal process. */
-    public PackedArray|Type|ExpressionInterface|BSONArray|stdClass|array|bool|float|int|null|string $startWith;
+    /** @var BSONArray|ExpressionInterface|PackedArray|Type|array|bool|float|int|non-empty-string|null|stdClass $startWith Expression that specifies the value of the connectFromField with which to start the recursive search. Optionally, startWith may be array of values, each of which is individually followed through the traversal process. */
+    public readonly PackedArray|Type|ExpressionInterface|BSONArray|stdClass|array|bool|float|int|null|string $startWith;
 
-    /** @param non-empty-string $connectFromField Field name whose value $graphLookup uses to recursively match against the connectToField of other documents in the collection. If the value is an array, each element is individually followed through the traversal process. */
-    public string $connectFromField;
+    /** @var non-empty-string $connectFromField Field name whose value $graphLookup uses to recursively match against the connectToField of other documents in the collection. If the value is an array, each element is individually followed through the traversal process. */
+    public readonly string $connectFromField;
 
-    /** @param non-empty-string $connectToField Field name in other documents against which to match the value of the field specified by the connectFromField parameter. */
-    public string $connectToField;
+    /** @var non-empty-string $connectToField Field name in other documents against which to match the value of the field specified by the connectFromField parameter. */
+    public readonly string $connectToField;
 
-    /** @param non-empty-string $as Name of the array field added to each output document. Contains the documents traversed in the $graphLookup stage to reach the document. */
-    public string $as;
+    /** @var non-empty-string $as Name of the array field added to each output document. Contains the documents traversed in the $graphLookup stage to reach the document. */
+    public readonly string $as;
 
-    /** @param Optional|int $maxDepth Non-negative integral number specifying the maximum recursion depth. */
-    public Optional|int $maxDepth;
+    /** @var Optional|int $maxDepth Non-negative integral number specifying the maximum recursion depth. */
+    public readonly Optional|int $maxDepth;
 
-    /** @param Optional|non-empty-string $depthField Name of the field to add to each traversed document in the search path. The value of this field is the recursion depth for the document, represented as a NumberLong. Recursion depth value starts at zero, so the first lookup corresponds to zero depth. */
-    public Optional|string $depthField;
+    /** @var Optional|non-empty-string $depthField Name of the field to add to each traversed document in the search path. The value of this field is the recursion depth for the document, represented as a NumberLong. Recursion depth value starts at zero, so the first lookup corresponds to zero depth. */
+    public readonly Optional|string $depthField;
 
-    /** @param Optional|Document|QueryInterface|Serializable|array|stdClass $restrictSearchWithMatch A document specifying additional conditions for the recursive search. The syntax is identical to query filter syntax. */
-    public Optional|Document|Serializable|QueryInterface|stdClass|array $restrictSearchWithMatch;
+    /** @var Optional|Document|QueryInterface|Serializable|array|stdClass $restrictSearchWithMatch A document specifying additional conditions for the recursive search. The syntax is identical to query filter syntax. */
+    public readonly Optional|Document|Serializable|QueryInterface|stdClass|array $restrictSearchWithMatch;
 
     /**
      * @param non-empty-string $from Target collection for the $graphLookup operation to search, recursively matching the connectFromField to the connectToField. The from collection must be in the same database as any other collections used in the operation.

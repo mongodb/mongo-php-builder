@@ -22,13 +22,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/center/
  */
-readonly class CenterOperator implements GeometryInterface
+class CenterOperator implements GeometryInterface
 {
     public const NAME = '$center';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|PackedArray|array $value */
-    public PackedArray|BSONArray|array $value;
+    /** @var BSONArray|PackedArray|array $value */
+    public readonly PackedArray|BSONArray|array $value;
 
     /**
      * @param BSONArray|PackedArray|array $value

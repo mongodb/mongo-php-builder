@@ -15,7 +15,7 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/rand/
  */
-readonly class RandOperator implements ResolvesToDouble
+class RandOperator implements ResolvesToDouble
 {
     public const NAME = '$rand';
     public const ENCODE = Encode::Object;

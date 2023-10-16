@@ -16,16 +16,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sampleRate/
  */
-readonly class SampleRateOperator implements ResolvesToAny
+class SampleRateOperator implements ResolvesToAny
 {
     public const NAME = '$sampleRate';
     public const ENCODE = Encode::Single;
 
     /**
-     * @param Int64|ResolvesToDouble|float|int $rate The selection process uses a uniform random distribution. The sample rate is a floating point number between 0 and 1, inclusive, which represents the probability that a given document will be selected as it passes through the pipeline.
+     * @var Int64|ResolvesToDouble|float|int $rate The selection process uses a uniform random distribution. The sample rate is a floating point number between 0 and 1, inclusive, which represents the probability that a given document will be selected as it passes through the pipeline.
      * For example, a sample rate of 0.33 selects roughly one document in three.
      */
-    public Int64|ResolvesToDouble|float|int $rate;
+    public readonly Int64|ResolvesToDouble|float|int $rate;
 
     /**
      * @param Int64|ResolvesToDouble|float|int $rate The selection process uses a uniform random distribution. The sample rate is a floating point number between 0 and 1, inclusive, which represents the probability that a given document will be selected as it passes through the pipeline.

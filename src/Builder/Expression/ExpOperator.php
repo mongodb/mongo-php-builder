@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/exp/
  */
-readonly class ExpOperator implements ResolvesToDouble
+class ExpOperator implements ResolvesToDouble
 {
     public const NAME = '$exp';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $exponent */
-    public Decimal128|Int64|ResolvesToNumber|float|int $exponent;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $exponent */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $exponent;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $exponent

@@ -19,13 +19,13 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/collStats/
  */
-readonly class CollStatsStage implements StageInterface
+class CollStatsStage implements StageInterface
 {
     public const NAME = '$collStats';
     public const ENCODE = Encode::Single;
 
-    /** @param Document|Serializable|array|stdClass $config */
-    public Document|Serializable|stdClass|array $config;
+    /** @var Document|Serializable|array|stdClass $config */
+    public readonly Document|Serializable|stdClass|array $config;
 
     /**
      * @param Document|Serializable|array|stdClass $config

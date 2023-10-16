@@ -22,13 +22,13 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/type/
  */
-readonly class TypeOperator implements FieldQueryInterface
+class TypeOperator implements FieldQueryInterface
 {
     public const NAME = '$type';
     public const ENCODE = Encode::Single;
 
-    /** @param BSONArray|PackedArray|array|int|non-empty-string $type */
-    public PackedArray|BSONArray|array|int|string $type;
+    /** @var BSONArray|PackedArray|array|int|non-empty-string $type */
+    public readonly PackedArray|BSONArray|array|int|string $type;
 
     /**
      * @param BSONArray|PackedArray|array|int|non-empty-string $type

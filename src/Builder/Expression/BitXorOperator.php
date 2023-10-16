@@ -20,13 +20,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitXor/
  */
-readonly class BitXorOperator implements ResolvesToInt, ResolvesToLong
+class BitXorOperator implements ResolvesToInt, ResolvesToLong
 {
     public const NAME = '$bitXor';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Int64|ResolvesToInt|ResolvesToLong|int> ...$expression */
-    public array $expression;
+    /** @var list<Int64|ResolvesToInt|ResolvesToLong|int> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param Int64|ResolvesToInt|ResolvesToLong|int ...$expression

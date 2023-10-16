@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/listSampledQueries/
  */
-readonly class ListSampledQueriesStage implements StageInterface
+class ListSampledQueriesStage implements StageInterface
 {
     public const NAME = '$listSampledQueries';
     public const ENCODE = Encode::Object;
 
-    /** @param Optional|non-empty-string $namespace */
-    public Optional|string $namespace;
+    /** @var Optional|non-empty-string $namespace */
+    public readonly Optional|string $namespace;
 
     /**
      * @param Optional|non-empty-string $namespace

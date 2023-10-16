@@ -17,13 +17,13 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sqrt/
  */
-readonly class SqrtOperator implements ResolvesToDouble
+class SqrtOperator implements ResolvesToDouble
 {
     public const NAME = '$sqrt';
     public const ENCODE = Encode::Single;
 
-    /** @param Decimal128|Int64|ResolvesToNumber|float|int $number The argument can be any valid expression as long as it resolves to a non-negative number. */
-    public Decimal128|Int64|ResolvesToNumber|float|int $number;
+    /** @var Decimal128|Int64|ResolvesToNumber|float|int $number The argument can be any valid expression as long as it resolves to a non-negative number. */
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $number;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $number The argument can be any valid expression as long as it resolves to a non-negative number.

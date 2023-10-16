@@ -20,19 +20,19 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/out/
  */
-readonly class OutStage implements StageInterface
+class OutStage implements StageInterface
 {
     public const NAME = '$out';
     public const ENCODE = Encode::Object;
 
-    /** @param non-empty-string $db Target collection name to write documents from $out to. */
-    public string $db;
+    /** @var non-empty-string $db Target collection name to write documents from $out to. */
+    public readonly string $db;
 
-    /** @param non-empty-string $coll Target database name to write documents from $out to. */
-    public string $coll;
+    /** @var non-empty-string $coll Target database name to write documents from $out to. */
+    public readonly string $coll;
 
-    /** @param Optional|Document|Serializable|array|stdClass $timeseries If set, the aggregation stage will use these options to create or replace a time-series collection in the given namespace. */
-    public Optional|Document|Serializable|stdClass|array $timeseries;
+    /** @var Optional|Document|Serializable|array|stdClass $timeseries If set, the aggregation stage will use these options to create or replace a time-series collection in the given namespace. */
+    public readonly Optional|Document|Serializable|stdClass|array $timeseries;
 
     /**
      * @param non-empty-string $db Target collection name to write documents from $out to.

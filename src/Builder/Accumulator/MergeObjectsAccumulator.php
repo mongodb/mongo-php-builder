@@ -23,13 +23,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/mergeObjects/
  */
-readonly class MergeObjectsAccumulator implements AccumulatorInterface
+class MergeObjectsAccumulator implements AccumulatorInterface
 {
     public const NAME = '$mergeObjects';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Document|ResolvesToObject|Serializable|array|stdClass> ...$document Any valid expression that resolves to a document. */
-    public array $document;
+    /** @var list<Document|ResolvesToObject|Serializable|array|stdClass> ...$document Any valid expression that resolves to a document. */
+    public readonly array $document;
 
     /**
      * @param Document|ResolvesToObject|Serializable|array|stdClass ...$document Any valid expression that resolves to a document.

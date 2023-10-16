@@ -22,13 +22,13 @@ use function is_string;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/
  */
-readonly class AddFieldsStage implements StageInterface
+class AddFieldsStage implements StageInterface
 {
     public const NAME = '$addFields';
     public const ENCODE = Encode::Single;
 
-    /** @param stdClass<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression Specify the name of each field to add and set its value to an aggregation expression or an empty object. */
-    public stdClass $expression;
+    /** @var stdClass<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression Specify the name of each field to add and set its value to an aggregation expression or an empty object. */
+    public readonly stdClass $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression Specify the name of each field to add and set its value to an aggregation expression or an empty object.

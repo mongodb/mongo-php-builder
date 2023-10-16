@@ -17,16 +17,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/degreesToRadians/
  */
-readonly class DegreesToRadiansOperator implements ResolvesToDouble, ResolvesToDecimal
+class DegreesToRadiansOperator implements ResolvesToDouble, ResolvesToDecimal
 {
     public const NAME = '$degreesToRadians';
     public const ENCODE = Encode::Single;
 
     /**
-     * @param Decimal128|Int64|ResolvesToNumber|float|int $expression $degreesToRadians takes any valid expression that resolves to a number.
+     * @var Decimal128|Int64|ResolvesToNumber|float|int $expression $degreesToRadians takes any valid expression that resolves to a number.
      * By default $degreesToRadians returns values as a double. $degreesToRadians can also return values as a 128-bit decimal as long as the <expression> resolves to a 128-bit decimal value.
      */
-    public Decimal128|Int64|ResolvesToNumber|float|int $expression;
+    public readonly Decimal128|Int64|ResolvesToNumber|float|int $expression;
 
     /**
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression $degreesToRadians takes any valid expression that resolves to a number.

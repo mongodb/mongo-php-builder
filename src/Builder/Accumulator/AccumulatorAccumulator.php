@@ -25,31 +25,31 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/
  */
-readonly class AccumulatorAccumulator implements AccumulatorInterface
+class AccumulatorAccumulator implements AccumulatorInterface
 {
     public const NAME = '$accumulator';
     public const ENCODE = Encode::Object;
 
-    /** @param non-empty-string $init Function used to initialize the state. The init function receives its arguments from the initArgs array expression. You can specify the function definition as either BSON type Code or String. */
-    public string $init;
+    /** @var non-empty-string $init Function used to initialize the state. The init function receives its arguments from the initArgs array expression. You can specify the function definition as either BSON type Code or String. */
+    public readonly string $init;
 
-    /** @param non-empty-string $accumulate Function used to accumulate documents. The accumulate function receives its arguments from the current state and accumulateArgs array expression. The result of the accumulate function becomes the new state. You can specify the function definition as either BSON type Code or String. */
-    public string $accumulate;
+    /** @var non-empty-string $accumulate Function used to accumulate documents. The accumulate function receives its arguments from the current state and accumulateArgs array expression. The result of the accumulate function becomes the new state. You can specify the function definition as either BSON type Code or String. */
+    public readonly string $accumulate;
 
-    /** @param BSONArray|PackedArray|ResolvesToArray|array $accumulateArgs Arguments passed to the accumulate function. You can use accumulateArgs to specify what field value(s) to pass to the accumulate function. */
-    public PackedArray|ResolvesToArray|BSONArray|array $accumulateArgs;
+    /** @var BSONArray|PackedArray|ResolvesToArray|array $accumulateArgs Arguments passed to the accumulate function. You can use accumulateArgs to specify what field value(s) to pass to the accumulate function. */
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $accumulateArgs;
 
-    /** @param non-empty-string $merge Function used to merge two internal states. merge must be either a String or Code BSON type. merge returns the combined result of the two merged states. For information on when the merge function is called, see Merge Two States with $merge. */
-    public string $merge;
+    /** @var non-empty-string $merge Function used to merge two internal states. merge must be either a String or Code BSON type. merge returns the combined result of the two merged states. For information on when the merge function is called, see Merge Two States with $merge. */
+    public readonly string $merge;
 
-    /** @param non-empty-string $lang The language used in the $accumulator code. */
-    public string $lang;
+    /** @var non-empty-string $lang The language used in the $accumulator code. */
+    public readonly string $lang;
 
-    /** @param Optional|BSONArray|PackedArray|ResolvesToArray|array $initArgs Arguments passed to the init function. */
-    public Optional|PackedArray|ResolvesToArray|BSONArray|array $initArgs;
+    /** @var Optional|BSONArray|PackedArray|ResolvesToArray|array $initArgs Arguments passed to the init function. */
+    public readonly Optional|PackedArray|ResolvesToArray|BSONArray|array $initArgs;
 
-    /** @param Optional|non-empty-string $finalize Function used to update the result of the accumulation. */
-    public Optional|string $finalize;
+    /** @var Optional|non-empty-string $finalize Function used to update the result of the accumulation. */
+    public readonly Optional|string $finalize;
 
     /**
      * @param non-empty-string $init Function used to initialize the state. The init function receives its arguments from the initArgs array expression. You can specify the function definition as either BSON type Code or String.

@@ -20,29 +20,29 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/shift/
  */
-readonly class ShiftAccumulator implements WindowInterface
+class ShiftAccumulator implements WindowInterface
 {
     public const NAME = '$shift';
     public const ENCODE = Encode::Object;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Specifies an expression to evaluate and return in the output. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $output;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Specifies an expression to evaluate and return in the output. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $output;
 
     /**
-     * @param int $by Specifies an integer with a numeric document position relative to the current document in the output.
+     * @var int $by Specifies an integer with a numeric document position relative to the current document in the output.
      * For example:
      * 1 specifies the document position after the current document.
      * -1 specifies the document position before the current document.
      * -2 specifies the document position that is two positions before the current document.
      */
-    public int $by;
+    public readonly int $by;
 
     /**
-     * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $default Specifies an optional default expression to evaluate if the document position is outside of the implicit $setWindowFields stage window. The implicit window contains all the documents in the partition.
+     * @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $default Specifies an optional default expression to evaluate if the document position is outside of the implicit $setWindowFields stage window. The implicit window contains all the documents in the partition.
      * The default expression must evaluate to a constant value.
      * If you do not specify a default expression, $shift returns null for documents whose positions are outside of the implicit $setWindowFields stage window.
      */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $default;
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $default;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Specifies an expression to evaluate and return in the output.

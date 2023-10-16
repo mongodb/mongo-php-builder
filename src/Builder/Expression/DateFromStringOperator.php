@@ -19,34 +19,34 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateFromString/
  */
-readonly class DateFromStringOperator implements ResolvesToDate
+class DateFromStringOperator implements ResolvesToDate
 {
     public const NAME = '$dateFromString';
     public const ENCODE = Encode::Object;
 
-    /** @param ResolvesToString|non-empty-string $dateString The date/time string to convert to a date object. */
-    public ResolvesToString|string $dateString;
+    /** @var ResolvesToString|non-empty-string $dateString The date/time string to convert to a date object. */
+    public readonly ResolvesToString|string $dateString;
 
     /**
-     * @param Optional|ResolvesToString|non-empty-string $format The date format specification of the dateString. The format can be any expression that evaluates to a string literal, containing 0 or more format specifiers.
+     * @var Optional|ResolvesToString|non-empty-string $format The date format specification of the dateString. The format can be any expression that evaluates to a string literal, containing 0 or more format specifiers.
      * If unspecified, $dateFromString uses "%Y-%m-%dT%H:%M:%S.%LZ" as the default format but accepts a variety of formats and attempts to parse the dateString if possible.
      */
-    public Optional|ResolvesToString|string $format;
+    public readonly Optional|ResolvesToString|string $format;
 
-    /** @param Optional|ResolvesToString|non-empty-string $timezone The time zone to use to format the date. */
-    public Optional|ResolvesToString|string $timezone;
+    /** @var Optional|ResolvesToString|non-empty-string $timezone The time zone to use to format the date. */
+    public readonly Optional|ResolvesToString|string $timezone;
 
     /**
-     * @param Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $onError If $dateFromString encounters an error while parsing the given dateString, it outputs the result value of the provided onError expression. This result value can be of any type.
+     * @var Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $onError If $dateFromString encounters an error while parsing the given dateString, it outputs the result value of the provided onError expression. This result value can be of any type.
      * If you do not specify onError, $dateFromString throws an error if it cannot parse dateString.
      */
-    public Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $onError;
+    public readonly Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $onError;
 
     /**
-     * @param Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $onNull If the dateString provided to $dateFromString is null or missing, it outputs the result value of the provided onNull expression. This result value can be of any type.
+     * @var Optional|ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $onNull If the dateString provided to $dateFromString is null or missing, it outputs the result value of the provided onNull expression. This result value can be of any type.
      * If you do not specify onNull and dateString is null or missing, then $dateFromString outputs null.
      */
-    public Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $onNull;
+    public readonly Optional|Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $onNull;
 
     /**
      * @param ResolvesToString|non-empty-string $dateString The date/time string to convert to a date object.

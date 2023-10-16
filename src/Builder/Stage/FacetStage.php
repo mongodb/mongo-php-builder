@@ -23,13 +23,13 @@ use function is_string;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/facet/
  */
-readonly class FacetStage implements StageInterface
+class FacetStage implements StageInterface
 {
     public const NAME = '$facet';
     public const ENCODE = Encode::Single;
 
-    /** @param stdClass<BSONArray|PackedArray|Pipeline|array> ...$facet */
-    public stdClass $facet;
+    /** @var stdClass<BSONArray|PackedArray|Pipeline|array> ...$facet */
+    public readonly stdClass $facet;
 
     /**
      * @param BSONArray|PackedArray|Pipeline|array ...$facet

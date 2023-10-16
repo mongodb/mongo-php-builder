@@ -16,16 +16,16 @@ use MongoDB\Builder\Type\FieldQueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/mod/
  */
-readonly class ModOperator implements FieldQueryInterface
+class ModOperator implements FieldQueryInterface
 {
     public const NAME = '$mod';
     public const ENCODE = Encode::Array;
 
-    /** @param int $divisor */
-    public int $divisor;
+    /** @var int $divisor */
+    public readonly int $divisor;
 
-    /** @param int $remainder */
-    public int $remainder;
+    /** @var int $remainder */
+    public readonly int $remainder;
 
     /**
      * @param int $divisor

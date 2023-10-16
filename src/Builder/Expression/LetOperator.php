@@ -21,19 +21,19 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/let/
  */
-readonly class LetOperator implements ResolvesToAny
+class LetOperator implements ResolvesToAny
 {
     public const NAME = '$let';
     public const ENCODE = Encode::Object;
 
     /**
-     * @param Document|Serializable|array|stdClass $vars Assignment block for the variables accessible in the in expression. To assign a variable, specify a string for the variable name and assign a valid expression for the value.
+     * @var Document|Serializable|array|stdClass $vars Assignment block for the variables accessible in the in expression. To assign a variable, specify a string for the variable name and assign a valid expression for the value.
      * The variable assignments have no meaning outside the in expression, not even within the vars block itself.
      */
-    public Document|Serializable|stdClass|array $vars;
+    public readonly Document|Serializable|stdClass|array $vars;
 
-    /** @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $in The expression to evaluate. */
-    public Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $in;
+    /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $in The expression to evaluate. */
+    public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $in;
 
     /**
      * @param Document|Serializable|array|stdClass $vars Assignment block for the variables accessible in the in expression. To assign a variable, specify a string for the variable name and assign a valid expression for the value.

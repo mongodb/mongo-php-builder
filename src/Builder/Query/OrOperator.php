@@ -22,13 +22,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/or/
  */
-readonly class OrOperator implements QueryInterface
+class OrOperator implements QueryInterface
 {
     public const NAME = '$or';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Document|QueryInterface|Serializable|array|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<Document|QueryInterface|Serializable|array|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param Document|QueryInterface|Serializable|array|stdClass ...$expression

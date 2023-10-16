@@ -22,13 +22,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/max/
  */
-readonly class MaxOperator implements ResolvesToAny
+class MaxOperator implements ResolvesToAny
 {
     public const NAME = '$max';
     public const ENCODE = Encode::Single;
 
-    /** @param list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression

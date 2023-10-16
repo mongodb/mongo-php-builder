@@ -16,13 +16,13 @@ use MongoDB\Builder\Type\QueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/where/
  */
-readonly class WhereOperator implements QueryInterface
+class WhereOperator implements QueryInterface
 {
     public const NAME = '$where';
     public const ENCODE = Encode::Single;
 
-    /** @param non-empty-string $function */
-    public string $function;
+    /** @var non-empty-string $function */
+    public readonly string $function;
 
     /**
      * @param non-empty-string $function

@@ -20,13 +20,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setIntersection/
  */
-readonly class SetIntersectionOperator implements ResolvesToArray
+class SetIntersectionOperator implements ResolvesToArray
 {
     public const NAME = '$setIntersection';
     public const ENCODE = Encode::Single;
 
-    /** @param list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
-    public array $expression;
+    /** @var list<BSONArray|PackedArray|ResolvesToArray|array> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array ...$expression

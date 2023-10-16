@@ -16,16 +16,16 @@ use MongoDB\Builder\Type\ProjectionInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/projection/slice/
  */
-readonly class SliceOperator implements ProjectionInterface
+class SliceOperator implements ProjectionInterface
 {
     public const NAME = '$slice';
     public const ENCODE = Encode::Array;
 
-    /** @param int $limit */
-    public int $limit;
+    /** @var int $limit */
+    public readonly int $limit;
 
-    /** @param int $skip */
-    public int $skip;
+    /** @var int $skip */
+    public readonly int $skip;
 
     /**
      * @param int $limit

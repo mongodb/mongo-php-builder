@@ -22,13 +22,13 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/nor/
  */
-readonly class NorOperator implements QueryInterface
+class NorOperator implements QueryInterface
 {
     public const NAME = '$nor';
     public const ENCODE = Encode::Single;
 
-    /** @param list<Document|QueryInterface|Serializable|array|stdClass> ...$expression */
-    public array $expression;
+    /** @var list<Document|QueryInterface|Serializable|array|stdClass> ...$expression */
+    public readonly array $expression;
 
     /**
      * @param Document|QueryInterface|Serializable|array|stdClass ...$expression

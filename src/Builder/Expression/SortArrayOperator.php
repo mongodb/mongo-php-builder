@@ -24,20 +24,20 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sortArray/
  */
-readonly class SortArrayOperator implements ResolvesToArray
+class SortArrayOperator implements ResolvesToArray
 {
     public const NAME = '$sortArray';
     public const ENCODE = Encode::Object;
 
     /**
-     * @param BSONArray|PackedArray|ResolvesToArray|array $input The array to be sorted.
+     * @var BSONArray|PackedArray|ResolvesToArray|array $input The array to be sorted.
      * The result is null if the expression: is missing, evaluates to null, or evaluates to undefined
      * If the expression evaluates to any other non-array value, the document returns an error.
      */
-    public PackedArray|ResolvesToArray|BSONArray|array $input;
+    public readonly PackedArray|ResolvesToArray|BSONArray|array $input;
 
-    /** @param Document|Serializable|array|stdClass $sortBy The document specifies a sort ordering. */
-    public Document|Serializable|stdClass|array $sortBy;
+    /** @var Document|Serializable|array|stdClass $sortBy The document specifies a sort ordering. */
+    public readonly Document|Serializable|stdClass|array $sortBy;
 
     /**
      * @param BSONArray|PackedArray|ResolvesToArray|array $input The array to be sorted.
