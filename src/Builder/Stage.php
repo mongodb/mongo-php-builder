@@ -22,7 +22,7 @@ enum Stage
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/
      *
-     * @param Document|FieldQueryInterface|QueryInterface|Serializable|array|stdClass $queries
+     * @param Document|FieldQueryInterface|QueryInterface|Serializable|array|stdClass|null $queries
      */
     public static function match(FieldQueryInterface|QueryInterface|Serializable|array|bool|float|int|stdClass|string|null ...$queries): MatchStage
     {
