@@ -215,7 +215,7 @@ trait FactoryTrait
 
     /**
      * Returns an average of numerical values. Ignores non-numeric values.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/
      * @param Decimal128|Int64|ResolvesToNumber|float|int ...$expression
@@ -240,7 +240,7 @@ trait FactoryTrait
 
     /**
      * Returns the result of a bitwise and operation on an array of int or long values.
-     * New in version 6.3.
+     * New in MongoDB 6.3.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitAnd/
      * @param Int64|ResolvesToInt|ResolvesToLong|int ...$expression
@@ -252,7 +252,7 @@ trait FactoryTrait
 
     /**
      * Returns the result of a bitwise not operation on a single argument or an array that contains a single int or long value.
-     * New in version 6.3.
+     * New in MongoDB 6.3.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitNot/
      * @param Int64|ResolvesToInt|ResolvesToLong|int $expression
@@ -264,7 +264,7 @@ trait FactoryTrait
 
     /**
      * Returns the result of a bitwise or operation on an array of int or long values.
-     * New in version 6.3.
+     * New in MongoDB 6.3.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitOr/
      * @param Int64|ResolvesToInt|ResolvesToLong|int ...$expression
@@ -276,7 +276,7 @@ trait FactoryTrait
 
     /**
      * Returns the result of a bitwise xor (exclusive or) operation on an array of int and long values.
-     * New in version 6.3.
+     * New in MongoDB 6.3.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitXor/
      * @param Int64|ResolvesToInt|ResolvesToLong|int ...$expression
@@ -366,7 +366,7 @@ trait FactoryTrait
 
     /**
      * Converts a value to a specified type.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/convert/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $input
@@ -721,7 +721,7 @@ trait FactoryTrait
 
     /**
      * Defines a custom function.
-     * New in version 4.4.
+     * New in MongoDB 4.4.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/function/
      * @param non-empty-string $body The function definition. You can specify the function definition as either BSON type Code or String.
@@ -735,7 +735,7 @@ trait FactoryTrait
 
     /**
      * Returns the value of a specified field from a document. You can use $getField to retrieve the value of fields with names that contain periods (.) or start with dollar signs ($).
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/getField/
      * @param non-empty-string $field Field in the input object for which you want to return a value. field can be any valid expression that resolves to a string constant.
@@ -895,7 +895,7 @@ trait FactoryTrait
 
     /**
      * Returns the approximation of the area under a curve.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/integral/
      * @param Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input
@@ -926,7 +926,7 @@ trait FactoryTrait
     /**
      * Returns boolean true if the specified expression resolves to an integer, decimal, double, or long.
      * Returns boolean false if the expression resolves to any other BSON type, null, or a missing field.
-     * New in version 4.4.
+     * New in MongoDB 4.4.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/isNumber/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression
@@ -1003,7 +1003,7 @@ trait FactoryTrait
     /**
      * Fills null and missing fields in a window using linear interpolation based on surrounding field values.
      * Available in the $setWindowFields stage.
-     * New in version 5.3.
+     * New in MongoDB 5.3.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/linearFill/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression
@@ -1039,7 +1039,7 @@ trait FactoryTrait
     /**
      * Last observation carried forward. Sets values for null and missing fields in a window to the last non-null value for the field.
      * Available in the $setWindowFields stage.
-     * New in version 5.2.
+     * New in MongoDB 5.2.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/locf/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -1109,7 +1109,7 @@ trait FactoryTrait
 
     /**
      * Removes whitespace or the specified characters from the beginning of a string.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/ltrim/
      * @param ResolvesToString|non-empty-string $input The string to trim. The argument can be any valid expression that resolves to a string.
@@ -1144,7 +1144,7 @@ trait FactoryTrait
 
     /**
      * Returns the maximum value that results from applying an expression to each document.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/max/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression
@@ -1173,7 +1173,7 @@ trait FactoryTrait
 
     /**
      * Returns an approximation of the median, the 50th percentile, as a scalar value.
-     * New in version 7.0.
+     * New in MongoDB 7.0.
      * This operator is available as an accumulator in these stages:
      * $group
      * $setWindowFields
@@ -1216,7 +1216,7 @@ trait FactoryTrait
 
     /**
      * Returns the minimum value that results from applying an expression to each document.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/min/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass ...$expression
@@ -1356,7 +1356,7 @@ trait FactoryTrait
 
     /**
      * Returns an array of scalar values that correspond to specified percentile values.
-     * New in version 7.0.
+     * New in MongoDB 7.0.
      *
      * This operator is available as an accumulator in these stages:
      * $group
@@ -1437,7 +1437,7 @@ trait FactoryTrait
 
     /**
      * Returns the document position (known as the rank) relative to other documents in the $setWindowFields stage partition.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/rank/
      */
@@ -1470,7 +1470,7 @@ trait FactoryTrait
 
     /**
      * Applies a regular expression (regex) to a string and returns information on the first matched substring.
-     * New in version 4.2.
+     * New in MongoDB 4.2.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexFind/
      * @param ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string.
@@ -1488,7 +1488,7 @@ trait FactoryTrait
 
     /**
      * Applies a regular expression (regex) to a string and returns information on the all matched substrings.
-     * New in version 4.2.
+     * New in MongoDB 4.2.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexFindAll/
      * @param ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string.
@@ -1506,7 +1506,7 @@ trait FactoryTrait
 
     /**
      * Applies a regular expression (regex) to a string and returns a boolean that indicates if a match is found or not.
-     * New in version 4.2.
+     * New in MongoDB 4.2.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexMatch/
      * @param ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string.
@@ -1525,7 +1525,7 @@ trait FactoryTrait
     /**
      * Replaces all instances of a search string in an input string with a replacement string.
      * $replaceAll is both case-sensitive and diacritic-sensitive, and ignores any collation present on a collection.
-     * New in version 4.4.
+     * New in MongoDB 4.4.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceAll/
      * @param ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null.
@@ -1543,7 +1543,7 @@ trait FactoryTrait
 
     /**
      * Replaces the first instance of a matched string in a given input.
-     * New in version 4.4.
+     * New in MongoDB 4.4.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceOne/
      * @param ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null.
@@ -1658,7 +1658,7 @@ trait FactoryTrait
 
     /**
      * Adds, updates, or removes a specified field in a document. You can use $setField to add, update, or remove fields with names that contain periods (.) or start with dollar signs ($).
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setField/
      * @param ResolvesToString|non-empty-string $field Field in the input object that you want to add, update, or remove. field can be any valid expression that resolves to a string constant.
@@ -1813,7 +1813,7 @@ trait FactoryTrait
     /**
      * Calculates the population standard deviation of the input values. Use if the values encompass the entire population of data you want to represent and do not wish to generalize about a larger population. $stdDevPop ignores non-numeric values.
      * If the values represent only a sample of a population of data from which to generalize about the population, use $stdDevSamp instead.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevPop/
      * @param Decimal128|Int64|ResolvesToNumber|float|int ...$expression
@@ -1940,7 +1940,7 @@ trait FactoryTrait
 
     /**
      * Returns a sum of numerical values. Ignores non-numeric values.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/
      * @param Decimal128|Int64|ResolvesToNumber|float|int ...$expression
@@ -1995,7 +1995,7 @@ trait FactoryTrait
 
     /**
      * Converts value to a boolean.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toBool/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2009,7 +2009,7 @@ trait FactoryTrait
 
     /**
      * Converts value to a Date.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toDate/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2023,7 +2023,7 @@ trait FactoryTrait
 
     /**
      * Converts value to a Decimal128.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toDecimal/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2037,7 +2037,7 @@ trait FactoryTrait
 
     /**
      * Converts value to a double.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toDouble/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2051,7 +2051,7 @@ trait FactoryTrait
 
     /**
      * Converts value to an integer.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toInt/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2065,7 +2065,7 @@ trait FactoryTrait
 
     /**
      * Converts value to a long.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toLong/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2090,7 +2090,7 @@ trait FactoryTrait
 
     /**
      * Converts value to an ObjectId.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toObjectId/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2104,7 +2104,7 @@ trait FactoryTrait
 
     /**
      * Converts value to a string.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toString/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -2129,7 +2129,7 @@ trait FactoryTrait
 
     /**
      * Removes whitespace or the specified characters from the beginning and end of a string.
-     * New in version 4.0.
+     * New in MongoDB 4.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/trim/
      * @param ResolvesToString|non-empty-string $input The string to trim. The argument can be any valid expression that resolves to a string.
@@ -2163,7 +2163,7 @@ trait FactoryTrait
 
     /**
      * Returns the incrementing ordinal from a timestamp as a long.
-     * New in version 5.1.
+     * New in MongoDB 5.1.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/tsIncrement/
      * @param ResolvesToTimestamp|Timestamp|int $expression
@@ -2175,7 +2175,7 @@ trait FactoryTrait
 
     /**
      * Returns the seconds from a timestamp as a long.
-     * New in version 5.1.
+     * New in MongoDB 5.1.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/tsSecond/
      * @param ResolvesToTimestamp|Timestamp|int $expression

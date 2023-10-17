@@ -20,7 +20,7 @@ use stdClass;
 
 /**
  * Returns the bottom element within a group according to the specified sort order.
- * New in version 5.2: Available in the $group and $setWindowFields stages.
+ * New in MongoDB 5.2: Available in the $group and $setWindowFields stages.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bottom/
  */

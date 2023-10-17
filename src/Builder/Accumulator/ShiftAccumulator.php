@@ -17,7 +17,7 @@ use stdClass;
 
 /**
  * Returns the value from an expression applied to a document in a specified position relative to the current document in the $setWindowFields stage partition.
- * New in version 5.0.
+ * New in MongoDB 5.0.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/shift/
  */

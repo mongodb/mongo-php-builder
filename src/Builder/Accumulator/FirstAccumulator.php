@@ -18,7 +18,7 @@ use stdClass;
 
 /**
  * Returns the result of an expression for the first document in a group or window.
- * Changed in version 5.0: Available in the $setWindowFields stage.
+ * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/
  */

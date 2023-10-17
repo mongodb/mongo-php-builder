@@ -6,7 +6,7 @@ type:
 encode: object
 description: |
     Converts a value to a specified type.
-    New in version 4.0.
+    New in MongoDB 4.0.
 arguments:
     -
         name: input

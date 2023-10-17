@@ -6,7 +6,7 @@ type:
 encode: object
 description: |
     Removes whitespace or the specified characters from the beginning of a string.
-    New in version 4.0.
+    New in MongoDB 4.0.
 arguments:
     -
         name: input

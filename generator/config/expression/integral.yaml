@@ -7,7 +7,7 @@ type:
 encode: object
 description: |
     Returns the approximation of the area under a curve.
-    New in version 5.0.
+    New in MongoDB 5.0.
 arguments:
     -
         name: input

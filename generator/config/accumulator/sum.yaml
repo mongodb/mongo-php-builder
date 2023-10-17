@@ -7,7 +7,7 @@ type:
 encode: single
 description: |
     Returns a sum of numerical values. Ignores non-numeric values.
-    Changed in version 5.0: Available in the $setWindowFields stage.
+    Changed in MongoDB 5.0: Available in the $setWindowFields stage.
 arguments:
     -
         name: expression

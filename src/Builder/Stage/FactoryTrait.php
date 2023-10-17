@@ -103,7 +103,7 @@ trait FactoryTrait
      * @param Optional|non-empty-string $fullDocumentBeforeChange Valid values are "off", "whenAvailable", or "required". If set to "off", the "fullDocumentBeforeChange" field of the output document is always omitted. If set to "whenAvailable", the "fullDocumentBeforeChange" field will be populated with the pre-image of the document modified by the current change event if such a pre-image is available, and will be omitted otherwise. If set to "required", then the "fullDocumentBeforeChange" field is always populated and an exception is thrown if the pre-image is not              available.
      * @param Optional|int $resumeAfter Specifies a resume token as the logical starting point for the change stream. Cannot be used with startAfter or startAtOperationTime fields.
      * @param Optional|bool $showExpandedEvents Specifies whether to include additional change events, such as such as DDL and index operations.
-     * New in version 6.0.
+     * New in MongoDB 6.0.
      * @param Optional|Document|Serializable|array|stdClass $startAfter Specifies a resume token as the logical starting point for the change stream. Cannot be used with resumeAfter or startAtOperationTime fields.
      * @param Optional|Timestamp|int $startAtOperationTime Specifies a time as the logical starting point for the change stream. Cannot be used with resumeAfter or startAfter fields.
      */
@@ -430,7 +430,7 @@ trait FactoryTrait
 
     /**
      * Writes the resulting documents of the aggregation pipeline to a collection. The stage can incorporate (insert new documents, merge documents, replace documents, keep existing documents, fail the operation, process documents with a custom update pipeline) the results into an output collection. To use the $merge stage, it must be the last stage in the pipeline.
-     * New in version 4.2.
+     * New in MongoDB 4.2.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/merge/
      * @param non-empty-string $into The output collection.
@@ -579,7 +579,7 @@ trait FactoryTrait
 
     /**
      * Groups documents into windows and applies one or more operators to the documents in each window.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setWindowFields/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $partitionBy Specifies an expression to group the documents. In the $setWindowFields stage, the group of documents is known as a partition. Default is one partition for the entire collection.
@@ -600,7 +600,7 @@ trait FactoryTrait
 
     /**
      * Provides data and size distribution information on sharded collections.
-     * New in version 6.0.3.
+     * New in MongoDB 6.0.3.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/shardedDataDistribution/
      */
@@ -646,7 +646,7 @@ trait FactoryTrait
 
     /**
      * Performs a union of two collections; i.e. combines pipeline results from two collections into a single result set.
-     * New in version 4.4.
+     * New in MongoDB 4.4.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unionWith/
      * @param non-empty-string $coll The collection or view whose pipeline results you wish to include in the result set.

@@ -16,7 +16,7 @@ use MongoDB\Builder\Type\OperatorInterface;
 /**
  * Fills null and missing fields in a window using linear interpolation based on surrounding field values.
  * Available in the $setWindowFields stage.
- * New in version 5.3.
+ * New in MongoDB 5.3.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/linearFill/
  */

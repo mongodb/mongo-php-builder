@@ -14,7 +14,7 @@ use MongoDB\Builder\Type\OperatorInterface;
 /**
  * Replaces all instances of a search string in an input string with a replacement string.
  * $replaceAll is both case-sensitive and diacritic-sensitive, and ignores any collation present on a collection.
- * New in version 4.4.
+ * New in MongoDB 4.4.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceAll/
  */

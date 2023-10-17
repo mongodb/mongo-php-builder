@@ -22,7 +22,7 @@ use function is_array;
 
 /**
  * Defines a custom accumulator function.
- * New in version 4.4.
+ * New in MongoDB 4.4.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/
  */

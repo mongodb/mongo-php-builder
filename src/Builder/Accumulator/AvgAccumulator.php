@@ -18,7 +18,7 @@ use MongoDB\Builder\Type\WindowInterface;
 
 /**
  * Returns an average of numerical values. Ignores non-numeric values.
- * Changed in version 5.0: Available in the $setWindowFields stage.
+ * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/
  */

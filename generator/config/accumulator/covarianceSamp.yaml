@@ -6,7 +6,7 @@ type:
 encode: array
 description: |
     Returns the sample covariance of two numeric expressions.
-    New in version 5.0.
+    New in MongoDB 5.0.
 arguments:
     -
         name: expression1

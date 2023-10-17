@@ -13,7 +13,7 @@ use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Replaces the first instance of a matched string in a given input.
- * New in version 4.4.
+ * New in MongoDB 4.4.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceOne/
  */

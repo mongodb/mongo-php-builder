@@ -18,7 +18,7 @@ use stdClass;
 
 /**
  * Returns an array of values that result from applying an expression to each document.
- * Changed in version 5.0: Available in the $setWindowFields stage.
+ * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/push/
  */

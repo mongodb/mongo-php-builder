@@ -16,7 +16,7 @@ use stdClass;
 
 /**
  * Converts value to a long.
- * New in version 4.0.
+ * New in MongoDB 4.0.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/toLong/
  */

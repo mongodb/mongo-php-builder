@@ -17,7 +17,7 @@ use MongoDB\Builder\Type\WindowInterface;
 
 /**
  * Returns the sample covariance of two numeric expressions.
- * New in version 5.0.
+ * New in MongoDB 5.0.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/covarianceSamp/
  */

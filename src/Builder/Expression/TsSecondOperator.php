@@ -14,7 +14,7 @@ use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the seconds from a timestamp as a long.
- * New in version 5.1.
+ * New in MongoDB 5.1.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/tsSecond/
  */

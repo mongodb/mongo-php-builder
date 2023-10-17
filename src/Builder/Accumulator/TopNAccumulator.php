@@ -20,7 +20,7 @@ use stdClass;
 
 /**
  * Returns an aggregation of the top n fields within a group, according to the specified sort order.
- * New in version 5.2.
+ * New in MongoDB 5.2.
  *
  * Available in the $group and $setWindowFields stages.
  *

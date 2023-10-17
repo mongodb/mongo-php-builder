@@ -18,7 +18,7 @@ use MongoDB\Builder\Type\WindowInterface;
 
 /**
  * Returns an approximation of the median, the 50th percentile, as a scalar value.
- * New in version 7.0.
+ * New in MongoDB 7.0.
  * This operator is available as an accumulator in these stages:
  * $group
  * $setWindowFields

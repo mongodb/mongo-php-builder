@@ -21,7 +21,7 @@ use function is_array;
 
 /**
  * Returns an array of scalar values that correspond to specified percentile values.
- * New in version 7.0.
+ * New in MongoDB 7.0.
  *
  * This operator is available as an accumulator in these stages:
  * $group

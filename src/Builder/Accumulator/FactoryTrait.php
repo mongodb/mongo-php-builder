@@ -32,7 +32,7 @@ trait FactoryTrait
 {
     /**
      * Defines a custom accumulator function.
-     * New in version 4.4.
+     * New in MongoDB 4.4.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/
      * @param non-empty-string $init Function used to initialize the state. The init function receives its arguments from the initArgs array expression. You can specify the function definition as either BSON type Code or String.
@@ -58,7 +58,7 @@ trait FactoryTrait
 
     /**
      * Returns an array of unique expression values for each group. Order of the array elements is undefined.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -72,7 +72,7 @@ trait FactoryTrait
 
     /**
      * Returns an average of numerical values. Ignores non-numeric values.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression
@@ -84,7 +84,7 @@ trait FactoryTrait
 
     /**
      * Returns the bottom element within a group according to the specified sort order.
-     * New in version 5.2: Available in the $group and $setWindowFields stages.
+     * New in MongoDB 5.2: Available in the $group and $setWindowFields stages.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bottom/
      * @param Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort.
@@ -100,7 +100,7 @@ trait FactoryTrait
 
     /**
      * Returns an aggregation of the bottom n elements within a group, according to the specified sort order. If the group contains fewer than n elements, $bottomN returns all elements in the group.
-     * New in version 5.2.
+     * New in MongoDB 5.2.
      * Available in the $group and $setWindowFields stages.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bottomN/
@@ -120,7 +120,7 @@ trait FactoryTrait
     /**
      * Returns the number of documents in the group or window.
      * Distinct from the $count pipeline stage.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/count-accumulator/
      */
@@ -131,7 +131,7 @@ trait FactoryTrait
 
     /**
      * Returns the population covariance of two numeric expressions.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/covariancePop/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression1
@@ -147,7 +147,7 @@ trait FactoryTrait
 
     /**
      * Returns the sample covariance of two numeric expressions.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/covarianceSamp/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression1
@@ -163,7 +163,7 @@ trait FactoryTrait
 
     /**
      * Returns the document position (known as the rank) relative to other documents in the $setWindowFields stage partition. There are no gaps in the ranks. Ties receive the same rank.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/denseRank/
      */
@@ -174,7 +174,7 @@ trait FactoryTrait
 
     /**
      * Returns the average rate of change within the specified window.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/derivative/
      * @param Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input
@@ -191,7 +191,7 @@ trait FactoryTrait
 
     /**
      * Returns the position of a document (known as the document number) in the $setWindowFields stage partition. Ties result in different adjacent document numbers.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/documentNumber/
      */
@@ -202,7 +202,7 @@ trait FactoryTrait
 
     /**
      * Returns the exponential moving average for the numeric expression.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/expMovingAvg/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $input
@@ -223,7 +223,7 @@ trait FactoryTrait
 
     /**
      * Returns the result of an expression for the first document in a group or window.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -252,7 +252,7 @@ trait FactoryTrait
 
     /**
      * Returns the result of an expression for the last document in a group or window.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/last/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -281,7 +281,7 @@ trait FactoryTrait
 
     /**
      * Returns the maximum value that results from applying an expression to each document.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/max/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -310,7 +310,7 @@ trait FactoryTrait
 
     /**
      * Returns an approximation of the median, the 50th percentile, as a scalar value.
-     * New in version 7.0.
+     * New in MongoDB 7.0.
      * This operator is available as an accumulator in these stages:
      * $group
      * $setWindowFields
@@ -343,7 +343,7 @@ trait FactoryTrait
 
     /**
      * Returns the minimum value that results from applying an expression to each document.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/min/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -372,7 +372,7 @@ trait FactoryTrait
 
     /**
      * Returns an array of scalar values that correspond to specified percentile values.
-     * New in version 7.0.
+     * New in MongoDB 7.0.
      *
      * This operator is available as an accumulator in these stages:
      * $group
@@ -398,7 +398,7 @@ trait FactoryTrait
 
     /**
      * Returns an array of values that result from applying an expression to each document.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/push/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression
@@ -412,7 +412,7 @@ trait FactoryTrait
 
     /**
      * Returns the value from an expression applied to a document in a specified position relative to the current document in the $setWindowFields stage partition.
-     * New in version 5.0.
+     * New in MongoDB 5.0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/shift/
      * @param ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $output Specifies an expression to evaluate and return in the output.
@@ -437,7 +437,7 @@ trait FactoryTrait
     /**
      * Calculates the population standard deviation of the input values. Use if the values encompass the entire population of data you want to represent and do not wish to generalize about a larger population. $stdDevPop ignores non-numeric values.
      * If the values represent only a sample of a population of data from which to generalize about the population, use $stdDevSamp instead.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevPop/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression
@@ -450,7 +450,7 @@ trait FactoryTrait
     /**
      * Calculates the sample standard deviation of the input values. Use if the values encompass a sample of a population of data from which to generalize about the population. $stdDevSamp ignores non-numeric values.
      * If the values represent the entire population of data or you do not wish to generalize about a larger population, use $stdDevPop instead.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevSamp/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression
@@ -462,7 +462,7 @@ trait FactoryTrait
 
     /**
      * Returns a sum of numerical values. Ignores non-numeric values.
-     * Changed in version 5.0: Available in the $setWindowFields stage.
+     * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/
      * @param Decimal128|Int64|ResolvesToNumber|float|int $expression
@@ -474,7 +474,7 @@ trait FactoryTrait
 
     /**
      * Returns the top element within a group according to the specified sort order.
-     * New in version 5.2.
+     * New in MongoDB 5.2.
      *
      * Available in the $group and $setWindowFields stages.
      *
@@ -492,7 +492,7 @@ trait FactoryTrait
 
     /**
      * Returns an aggregation of the top n fields within a group, according to the specified sort order.
-     * New in version 5.2.
+     * New in MongoDB 5.2.
      *
      * Available in the $group and $setWindowFields stages.
      *

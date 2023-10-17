@@ -18,7 +18,7 @@ use MongoDB\Builder\Type\OperatorInterface;
 /**
  * Calculates the population standard deviation of the input values. Use if the values encompass the entire population of data you want to represent and do not wish to generalize about a larger population. $stdDevPop ignores non-numeric values.
  * If the values represent only a sample of a population of data from which to generalize about the population, use $stdDevSamp instead.
- * Changed in version 5.0: Available in the $setWindowFields stage.
+ * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevPop/
  */

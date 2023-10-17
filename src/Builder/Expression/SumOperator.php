@@ -18,7 +18,7 @@ use function array_is_list;
 
 /**
  * Returns a sum of numerical values. Ignores non-numeric values.
- * Changed in version 5.0: Available in the $setWindowFields stage.
+ * Changed in MongoDB 5.0: Available in the $setWindowFields stage.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/
  */

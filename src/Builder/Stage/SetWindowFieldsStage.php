@@ -20,7 +20,7 @@ use stdClass;
 
 /**
  * Groups documents into windows and applies one or more operators to the documents in each window.
- * New in version 5.0.
+ * New in MongoDB 5.0.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setWindowFields/
  */

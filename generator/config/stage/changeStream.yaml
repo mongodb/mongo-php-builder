@@ -42,7 +42,7 @@ arguments:
         optional: true
         description: |
             Specifies whether to include additional change events, such as such as DDL and index operations.
-            New in version 6.0.
+            New in MongoDB 6.0.
     -
         name: startAfter
         type:

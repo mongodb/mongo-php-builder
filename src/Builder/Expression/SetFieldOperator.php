@@ -18,7 +18,7 @@ use stdClass;
 
 /**
  * Adds, updates, or removes a specified field in a document. You can use $setField to add, update, or remove fields with names that contain periods (.) or start with dollar signs ($).
- * New in version 5.0.
+ * New in MongoDB 5.0.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setField/
  */

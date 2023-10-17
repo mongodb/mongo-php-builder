@@ -6,7 +6,7 @@ type:
 encode: single
 description: |
     Converts value to an ObjectId.
-    New in version 4.0.
+    New in MongoDB 4.0.
 arguments:
     -
         name: expression
