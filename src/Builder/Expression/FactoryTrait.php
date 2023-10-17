@@ -287,7 +287,7 @@ trait FactoryTrait
     }
 
     /**
-     * Returns the size in bytes of a given document (i.e. bsontype Object) when encoded as BSON.
+     * Returns the size in bytes of a given document (i.e. BSON type Object) when encoded as BSON.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bsonSize/
      * @param Document|ResolvesToNull|ResolvesToObject|Serializable|array|null|stdClass $object
