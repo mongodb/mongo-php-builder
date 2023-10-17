@@ -209,15 +209,12 @@ class BuilderEncoderTest extends TestCase
 
     public function testUnionWith(): void
     {
-        $unionWith = Stage::unionWith(...);
-        $match = Stage::match(...);
-        $project = Stage::project(...);
         $pipeline = new Pipeline(
-            $unionWith(
+            Stage::unionWith(
                 coll: 'orders',
                 pipeline: new Pipeline(
-                    $match(status: 'A'),
-                    $project(
+                    Stage::match(status: 'A'),
+                    Stage::project(
                         item: 1,
                         status: 1,
                     ),
@@ -255,8 +252,8 @@ class BuilderEncoderTest extends TestCase
             Stage::redact(
                 Expression::cond(
                     if: Expression::eq(Expression::fieldPath('level'), 5),
-                    then: '$$PRUNE',
-                    else: '$$DESCEND',
+                    then: Expression::variable('PRUNE'),
+                    else: Expression::variable('DESCEND'),
                 ),
             ),
         );
