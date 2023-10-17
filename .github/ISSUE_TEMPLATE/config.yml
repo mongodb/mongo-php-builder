@@ -1,9 +1,9 @@
 blank_issues_enabled: false
 
 contact_links:
-  - name: New issue on mongodb/mongo-php-builder
+  - name: MongoDB PHP library
     url: https://github.com/mongodb/mongo-php-library/issues/new/choose
-    about: Experiencing a problem with the MongoDB PHP extension? Please report it through the mongo-php-driver repository.
+    about: Experiencing a problem with mongo-php-builder? Please report it through the mongo-php-library repository.
   - name: MongoDB Developer Community Forums
     url: https://developer.mongodb.com/community/forums/
     about: For questions, discussions, or general technical support, visit the MongoDB Community Forums. The MongoDB Community Forums are a centralized place to connect with other MongoDB users, ask questions, and get answers.
