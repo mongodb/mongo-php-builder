@@ -18,7 +18,7 @@ final class ArgumentDefinition
 
     public function __construct(
         public string $name,
-        /** @psalm-assert list<string> $type */
+        /** @var list<string> */
         public array $type,
         public string|null $description = null,
         public bool $optional = false,

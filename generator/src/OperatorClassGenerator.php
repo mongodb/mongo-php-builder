@@ -164,6 +164,8 @@ class OperatorClassGenerator extends OperatorGenerator
 
     /**
      * Operator classes interfaces are defined by their return type as a MongoDB expression.
+     *
+     * @return list<class-string>
      */
     private function getInterfaces(OperatorDefinition $definition): array
     {

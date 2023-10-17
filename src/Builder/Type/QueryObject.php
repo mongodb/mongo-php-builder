@@ -34,6 +34,7 @@ final class QueryObject implements QueryInterface
         return new self($queries);
     }
 
+    /** @param array<object|array> $queriesOrArrayOfQueries */
     private function __construct(array $queriesOrArrayOfQueries)
     {
         $seenQueryOperators = [];

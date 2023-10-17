@@ -56,7 +56,11 @@ class OutputWindowTest extends TestCase
         $this->assertEquals((object) ['unit' => 'day'], $outputWindow->window);
     }
 
-    /** @dataProvider provideInvalidDocuments */
+    /**
+     * @param array<mixed> $documents
+     *
+     * @dataProvider provideInvalidDocuments
+     */
     public function testRejectInvalidDocuments(array $documents): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -77,7 +81,11 @@ class OutputWindowTest extends TestCase
         yield 'not a list' => [['foo' => 1, 'bar' => 2]];
     }
 
-    /** @dataProvider provideInvalidRange */
+    /**
+     * @param array<mixed> $range
+     *
+     * @dataProvider provideInvalidRange
+     */
     public function testRejectInvalidRange(array $range): void
     {
         $this->expectException(InvalidArgumentException::class);
