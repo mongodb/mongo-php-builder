@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -18,9 +19,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/not/
  */
-class NotOperator implements ResolvesToBool
+class NotOperator implements ResolvesToBool, OperatorInterface
 {
-    public const NAME = '$not';
     public const ENCODE = Encode::Single;
 
     /** @var ExpressionInterface|ResolvesToBool|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
@@ -33,5 +33,10 @@ class NotOperator implements ResolvesToBool
         Type|ResolvesToBool|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression,
     ) {
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$not';
     }
 }

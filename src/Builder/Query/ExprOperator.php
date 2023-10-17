@@ -12,6 +12,7 @@ use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -19,9 +20,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/expr/
  */
-class ExprOperator implements FieldQueryInterface
+class ExprOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$expr';
     public const ENCODE = Encode::Single;
 
     /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
@@ -33,5 +33,10 @@ class ExprOperator implements FieldQueryInterface
     public function __construct(Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression)
     {
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$expr';
     }
 }

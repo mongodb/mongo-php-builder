@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Stage;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -23,9 +24,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/listSessions/
  */
-class ListSessionsStage implements StageInterface
+class ListSessionsStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$listSessions';
     public const ENCODE = Encode::Object;
 
     /** @var Optional|BSONArray|PackedArray|array $users Returns all sessions for the specified users. If running with access control, the authenticated user must have privileges with listSessions action on the cluster to list sessions for other users. */
@@ -48,5 +48,10 @@ class ListSessionsStage implements StageInterface
 
         $this->users = $users;
         $this->allUsers = $allUsers;
+    }
+
+    public function getOperator(): string
+    {
+        return '$listSessions';
     }
 }

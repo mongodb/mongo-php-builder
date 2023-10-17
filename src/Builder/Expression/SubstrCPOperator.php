@@ -9,15 +9,15 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the substring of a string. Starts with the character at the specified UTF-8 code point (CP) index (zero-based) in the string and continues for the number of code points specified.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/substrCP/
  */
-class SubstrCPOperator implements ResolvesToString
+class SubstrCPOperator implements ResolvesToString, OperatorInterface
 {
-    public const NAME = '$substrCP';
     public const ENCODE = Encode::Array;
 
     /** @var ResolvesToString|non-empty-string $string */
@@ -39,5 +39,10 @@ class SubstrCPOperator implements ResolvesToString
         $this->string = $string;
         $this->start = $start;
         $this->length = $length;
+    }
+
+    public function getOperator(): string
+    {
+        return '$substrCP';
     }
 }

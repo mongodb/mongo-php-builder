@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Calculates the log of a number in the specified base.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/log/
  */
-class LogOperator implements ResolvesToDouble
+class LogOperator implements ResolvesToDouble, OperatorInterface
 {
-    public const NAME = '$log';
     public const ENCODE = Encode::Array;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $number Any valid expression as long as it resolves to a non-negative number. */
@@ -38,5 +38,10 @@ class LogOperator implements ResolvesToDouble
     ) {
         $this->number = $number;
         $this->base = $base;
+    }
+
+    public function getOperator(): string
+    {
+        return '$log';
     }
 }

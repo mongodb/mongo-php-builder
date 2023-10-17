@@ -10,15 +10,15 @@ namespace MongoDB\Builder\Query;
 
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Matches documents that have the specified field.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/exists/
  */
-class ExistsOperator implements FieldQueryInterface
+class ExistsOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$exists';
     public const ENCODE = Encode::Single;
 
     /** @var bool $exists */
@@ -30,5 +30,10 @@ class ExistsOperator implements FieldQueryInterface
     public function __construct(bool $exists)
     {
         $this->exists = $exists;
+    }
+
+    public function getOperator(): string
+    {
+        return '$exists';
     }
 }

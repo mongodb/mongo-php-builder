@@ -12,6 +12,7 @@ use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Timestamp;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -19,9 +20,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/isoDayOfWeek/
  */
-class IsoDayOfWeekOperator implements ResolvesToInt
+class IsoDayOfWeekOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$isoDayOfWeek';
     public const ENCODE = Encode::Object;
 
     /** @var ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $date The date to which the operator is applied. date must be a valid expression that resolves to a Date, a Timestamp, or an ObjectID. */
@@ -40,5 +40,10 @@ class IsoDayOfWeekOperator implements ResolvesToInt
     ) {
         $this->date = $date;
         $this->timezone = $timezone;
+    }
+
+    public function getOperator(): string
+    {
+        return '$isoDayOfWeek';
     }
 }

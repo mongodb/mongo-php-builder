@@ -13,6 +13,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Expression\ResolvesToObject;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
 
@@ -23,9 +24,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/mergeObjects/
  */
-class MergeObjectsAccumulator implements AccumulatorInterface
+class MergeObjectsAccumulator implements AccumulatorInterface, OperatorInterface
 {
-    public const NAME = '$mergeObjects';
     public const ENCODE = Encode::Single;
 
     /** @var list<Document|ResolvesToObject|Serializable|array|stdClass> ...$document Any valid expression that resolves to a document. */
@@ -44,5 +44,10 @@ class MergeObjectsAccumulator implements AccumulatorInterface
             throw new InvalidArgumentException('Expected $document arguments to be a list (array), named arguments are not supported');
         }
         $this->document = $document;
+    }
+
+    public function getOperator(): string
+    {
+        return '$mergeObjects';
     }
 }

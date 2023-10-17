@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Fills null and missing fields in a window using linear interpolation based on surrounding field values.
@@ -19,9 +20,8 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/linearFill/
  */
-class LinearFillOperator implements ResolvesToNumber
+class LinearFillOperator implements ResolvesToNumber, OperatorInterface
 {
-    public const NAME = '$linearFill';
     public const ENCODE = Encode::Single;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression */
@@ -33,5 +33,10 @@ class LinearFillOperator implements ResolvesToNumber
     public function __construct(Decimal128|Int64|ResolvesToNumber|float|int $expression)
     {
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$linearFill';
     }
 }

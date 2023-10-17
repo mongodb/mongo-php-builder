@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\Regex;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Selects documents where values match a specified regular expression.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/
  */
-class RegexOperator implements FieldQueryInterface
+class RegexOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$regex';
     public const ENCODE = Encode::Single;
 
     /** @var Regex $regex */
@@ -31,5 +31,10 @@ class RegexOperator implements FieldQueryInterface
     public function __construct(Regex $regex)
     {
         $this->regex = $regex;
+    }
+
+    public function getOperator(): string
+    {
+        return '$regex';
     }
 }

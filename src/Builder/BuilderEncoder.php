@@ -13,6 +13,7 @@ use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\FieldPathInterface;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\OutputWindow;
 use MongoDB\Builder\Type\ProjectionInterface;
@@ -46,7 +47,7 @@ class BuilderEncoder implements Encoder
     public function canEncode($value): bool
     {
         return $value instanceof Pipeline
-            || $value instanceof StageInterface
+            || $value instanceof OperatorInterface
             || $value instanceof ExpressionInterface
             || $value instanceof QueryInterface
             || $value instanceof FieldQueryInterface
@@ -95,6 +96,10 @@ class BuilderEncoder implements Encoder
             return $this->encodeOutputWindow($value);
         }
 
+        if (! $value instanceof OperatorInterface) {
+            throw new LogicException(sprintf('Class "%s" does not implement OperatorInterface.', $value::class));
+        }
+
         // The generic but incomplete encoding code
         switch ($value::ENCODE) {
             case Encode::Single:
@@ -118,7 +123,7 @@ class BuilderEncoder implements Encoder
     /**
      * Encode the value as an array of properties, in the order they are defined in the class.
      */
-    private function encodeAsArray(object $value): stdClass
+    private function encodeAsArray(OperatorInterface $value): stdClass
     {
         $result = [];
         /** @var mixed $val */
@@ -150,7 +155,7 @@ class BuilderEncoder implements Encoder
         return $this->wrap($value, $result);
     }
 
-    private function encodeAsObject(object $value): stdClass
+    private function encodeAsObject(OperatorInterface $value): stdClass
     {
         $result = new stdClass();
         foreach (get_object_vars($value) as $key => $val) {
@@ -168,7 +173,7 @@ class BuilderEncoder implements Encoder
     /**
      * Get the unique property of the operator as value
      */
-    private function encodeAsSingle(AccumulatorInterface|ExpressionInterface|StageInterface|QueryInterface|FieldQueryInterface|WindowInterface $value): stdClass
+    private function encodeAsSingle(OperatorInterface $value): stdClass
     {
         foreach (get_object_vars($value) as $val) {
             $result = $this->recursiveEncode($val);
@@ -182,7 +187,7 @@ class BuilderEncoder implements Encoder
     private function encodeCombinedFilter(CombinedFieldQuery $filter): stdClass
     {
         $result = new stdClass();
-        foreach ($filter->filters as $filter) {
+        foreach ($filter->fieldQueries as $filter) {
             $filter = $this->recursiveEncode($filter);
             if (is_object($filter)) {
                 $filter = get_object_vars($filter);
@@ -278,10 +283,10 @@ class BuilderEncoder implements Encoder
         return $this->encodeIfSupported($value);
     }
 
-    private function wrap(object $value, mixed $result): stdClass
+    private function wrap(OperatorInterface $value, mixed $result): stdClass
     {
         $object = new stdClass();
-        $object->{$value::NAME} = $result;
+        $object->{$value->getOperator()} = $result;
 
         return $object;
     }

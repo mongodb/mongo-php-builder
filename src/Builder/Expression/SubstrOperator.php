@@ -9,15 +9,15 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Deprecated. Use $substrBytes or $substrCP.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/substr/
  */
-class SubstrOperator implements ResolvesToString
+class SubstrOperator implements ResolvesToString, OperatorInterface
 {
-    public const NAME = '$substr';
     public const ENCODE = Encode::Array;
 
     /** @var ResolvesToString|non-empty-string $string */
@@ -39,5 +39,10 @@ class SubstrOperator implements ResolvesToString
         $this->string = $string;
         $this->start = $start;
         $this->length = $length;
+    }
+
+    public function getOperator(): string
+    {
+        return '$substr';
     }
 }

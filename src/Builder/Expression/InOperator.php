@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 use stdClass;
@@ -24,9 +25,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/in/
  */
-class InOperator implements ResolvesToBool
+class InOperator implements ResolvesToBool, OperatorInterface
 {
-    public const NAME = '$in';
     public const ENCODE = Encode::Array;
 
     /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression Any valid expression expression. */
@@ -49,5 +49,10 @@ class InOperator implements ResolvesToBool
         }
 
         $this->array = $array;
+    }
+
+    public function getOperator(): string
+    {
+        return '$in';
     }
 }

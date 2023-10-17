@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Accumulator;
 
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\WindowInterface;
 
 /**
@@ -19,12 +20,16 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/count-accumulator/
  */
-class CountAccumulator implements AccumulatorInterface, WindowInterface
+class CountAccumulator implements AccumulatorInterface, WindowInterface, OperatorInterface
 {
-    public const NAME = '$count';
     public const ENCODE = Encode::Object;
 
     public function __construct()
     {
+    }
+
+    public function getOperator(): string
+    {
+        return '$count';
     }
 }

@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -22,9 +23,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/function/
  */
-class FunctionOperator implements ResolvesToAny
+class FunctionOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$function';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $body The function definition. You can specify the function definition as either BSON type Code or String. */
@@ -50,5 +50,10 @@ class FunctionOperator implements ResolvesToAny
 
         $this->args = $args;
         $this->lang = $lang;
+    }
+
+    public function getOperator(): string
+    {
+        return '$function';
     }
 }

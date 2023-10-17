@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\Timestamp;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the seconds from a timestamp as a long.
@@ -17,9 +18,8 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/tsSecond/
  */
-class TsSecondOperator implements ResolvesToLong
+class TsSecondOperator implements ResolvesToLong, OperatorInterface
 {
-    public const NAME = '$tsSecond';
     public const ENCODE = Encode::Single;
 
     /** @var ResolvesToTimestamp|Timestamp|int $expression */
@@ -31,5 +31,10 @@ class TsSecondOperator implements ResolvesToLong
     public function __construct(Timestamp|ResolvesToTimestamp|int $expression)
     {
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$tsSecond';
     }
 }

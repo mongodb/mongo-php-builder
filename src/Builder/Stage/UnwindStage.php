@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Stage;
 
 use MongoDB\Builder\Expression\ArrayFieldPath;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 
@@ -18,9 +19,8 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/
  */
-class UnwindStage implements StageInterface
+class UnwindStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$unwind';
     public const ENCODE = Encode::Object;
 
     /** @var ArrayFieldPath|non-empty-string $path Field path to an array field. */
@@ -51,5 +51,10 @@ class UnwindStage implements StageInterface
         $this->path = $path;
         $this->includeArrayIndex = $includeArrayIndex;
         $this->preserveNullAndEmptyArrays = $preserveNullAndEmptyArrays;
+    }
+
+    public function getOperator(): string
+    {
+        return '$unwind';
     }
 }

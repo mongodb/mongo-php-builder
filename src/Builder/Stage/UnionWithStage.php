@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Stage;
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -25,9 +26,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unionWith/
  */
-class UnionWithStage implements StageInterface
+class UnionWithStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$unionWith';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $coll The collection or view whose pipeline results you wish to include in the result set. */
@@ -54,5 +54,10 @@ class UnionWithStage implements StageInterface
         }
 
         $this->pipeline = $pipeline;
+    }
+
+    public function getOperator(): string
+    {
+        return '$unionWith';
     }
 }

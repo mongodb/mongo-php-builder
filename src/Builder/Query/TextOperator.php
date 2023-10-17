@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Query;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\QueryInterface;
 
@@ -17,9 +18,8 @@ use MongoDB\Builder\Type\QueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/text/
  */
-class TextOperator implements QueryInterface
+class TextOperator implements QueryInterface, OperatorInterface
 {
-    public const NAME = '$text';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $search A string of terms that MongoDB parses and uses to query the text index. MongoDB performs a logical OR search of the terms unless specified as a phrase. */
@@ -58,5 +58,10 @@ class TextOperator implements QueryInterface
         $this->language = $language;
         $this->caseSensitive = $caseSensitive;
         $this->diacriticSensitive = $diacriticSensitive;
+    }
+
+    public function getOperator(): string
+    {
+        return '$text';
     }
 }

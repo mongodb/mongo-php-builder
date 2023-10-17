@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -21,9 +22,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/arrayElemAt/
  */
-class ArrayElemAtOperator implements ResolvesToAny
+class ArrayElemAtOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$arrayElemAt';
     public const ENCODE = Encode::Array;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $array */
@@ -44,5 +44,10 @@ class ArrayElemAtOperator implements ResolvesToAny
 
         $this->array = $array;
         $this->idx = $idx;
+    }
+
+    public function getOperator(): string
+    {
+        return '$arrayElemAt';
     }
 }

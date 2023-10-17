@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\GeometryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -22,9 +23,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/box/
  */
-class BoxOperator implements GeometryInterface
+class BoxOperator implements GeometryInterface, OperatorInterface
 {
-    public const NAME = '$box';
     public const ENCODE = Encode::Single;
 
     /** @var BSONArray|PackedArray|array $value */
@@ -40,5 +40,10 @@ class BoxOperator implements GeometryInterface
         }
 
         $this->value = $value;
+    }
+
+    public function getOperator(): string
+    {
+        return '$box';
     }
 }

@@ -14,6 +14,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\QueryInterface;
 use MongoDB\Builder\Type\QueryObject;
@@ -31,9 +32,8 @@ use function is_object;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/graphLookup/
  */
-class GraphLookupStage implements StageInterface
+class GraphLookupStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$graphLookup';
     public const ENCODE = Encode::Object;
 
     /**
@@ -96,9 +96,14 @@ class GraphLookupStage implements StageInterface
         $this->maxDepth = $maxDepth;
         $this->depthField = $depthField;
         if (is_array($restrictSearchWithMatch) || is_object($restrictSearchWithMatch)) {
-            $restrictSearchWithMatch = QueryObject::create($restrictSearchWithMatch);
+            $restrictSearchWithMatch = QueryObject::create(...$restrictSearchWithMatch);
         }
 
         $this->restrictSearchWithMatch = $restrictSearchWithMatch;
+    }
+
+    public function getOperator(): string
+    {
+        return '$graphLookup';
     }
 }

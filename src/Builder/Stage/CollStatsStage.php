@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Stage;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\StageInterface;
 use stdClass;
 
@@ -19,9 +20,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/collStats/
  */
-class CollStatsStage implements StageInterface
+class CollStatsStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$collStats';
     public const ENCODE = Encode::Single;
 
     /** @var Document|Serializable|array|stdClass $config */
@@ -33,5 +33,10 @@ class CollStatsStage implements StageInterface
     public function __construct(Document|Serializable|stdClass|array $config)
     {
         $this->config = $config;
+    }
+
+    public function getOperator(): string
+    {
+        return '$collStats';
     }
 }

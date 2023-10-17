@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the inverse hyperbolic tangent (hyperbolic arc tangent) of a value in radians.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/atanh/
  */
-class AtanhOperator implements ResolvesToDouble, ResolvesToDecimal
+class AtanhOperator implements ResolvesToDouble, ResolvesToDecimal, OperatorInterface
 {
-    public const NAME = '$atanh';
     public const ENCODE = Encode::Single;
 
     /**
@@ -37,5 +37,10 @@ class AtanhOperator implements ResolvesToDouble, ResolvesToDecimal
     public function __construct(Decimal128|Int64|ResolvesToNumber|float|int $expression)
     {
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$atanh';
     }
 }

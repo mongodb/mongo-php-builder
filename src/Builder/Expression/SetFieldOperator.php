@@ -13,6 +13,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -21,9 +22,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setField/
  */
-class SetFieldOperator implements ResolvesToObject
+class SetFieldOperator implements ResolvesToObject, OperatorInterface
 {
-    public const NAME = '$setField';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToString|non-empty-string $field Field in the input object that you want to add, update, or remove. field can be any valid expression that resolves to a string constant. */
@@ -52,5 +52,10 @@ class SetFieldOperator implements ResolvesToObject
         $this->field = $field;
         $this->input = $input;
         $this->value = $value;
+    }
+
+    public function getOperator(): string
+    {
+        return '$setField';
     }
 }

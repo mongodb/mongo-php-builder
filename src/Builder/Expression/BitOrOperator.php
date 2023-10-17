@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 
 use function array_is_list;
@@ -20,9 +21,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bitOr/
  */
-class BitOrOperator implements ResolvesToInt, ResolvesToLong
+class BitOrOperator implements ResolvesToInt, ResolvesToLong, OperatorInterface
 {
-    public const NAME = '$bitOr';
     public const ENCODE = Encode::Single;
 
     /** @var list<Int64|ResolvesToInt|ResolvesToLong|int> ...$expression */
@@ -41,5 +41,10 @@ class BitOrOperator implements ResolvesToInt, ResolvesToLong
             throw new InvalidArgumentException('Expected $expression arguments to be a list (array), named arguments are not supported');
         }
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$bitOr';
     }
 }

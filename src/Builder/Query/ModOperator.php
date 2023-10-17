@@ -10,15 +10,15 @@ namespace MongoDB\Builder\Query;
 
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Performs a modulo operation on the value of a field and selects documents with a specified result.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/mod/
  */
-class ModOperator implements FieldQueryInterface
+class ModOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$mod';
     public const ENCODE = Encode::Array;
 
     /** @var int $divisor */
@@ -35,5 +35,10 @@ class ModOperator implements FieldQueryInterface
     {
         $this->divisor = $divisor;
         $this->remainder = $remainder;
+    }
+
+    public function getOperator(): string
+    {
+        return '$mod';
     }
 }

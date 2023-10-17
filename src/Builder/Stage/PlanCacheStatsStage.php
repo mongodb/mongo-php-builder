@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Stage;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\StageInterface;
 
 /**
@@ -16,12 +17,16 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/planCacheStats/
  */
-class PlanCacheStatsStage implements StageInterface
+class PlanCacheStatsStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$planCacheStats';
     public const ENCODE = Encode::Object;
 
     public function __construct()
     {
+    }
+
+    public function getOperator(): string
+    {
+        return '$planCacheStats';
     }
 }

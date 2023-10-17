@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -18,9 +19,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/round/
  */
-class RoundOperator implements ResolvesToInt, ResolvesToDouble, ResolvesToDecimal, ResolvesToLong
+class RoundOperator implements ResolvesToInt, ResolvesToDouble, ResolvesToDecimal, ResolvesToLong, OperatorInterface
 {
-    public const NAME = '$round';
     public const ENCODE = Encode::Array;
 
     /**
@@ -43,5 +43,10 @@ class RoundOperator implements ResolvesToInt, ResolvesToDouble, ResolvesToDecima
     ) {
         $this->number = $number;
         $this->place = $place;
+    }
+
+    public function getOperator(): string
+    {
+        return '$round';
     }
 }

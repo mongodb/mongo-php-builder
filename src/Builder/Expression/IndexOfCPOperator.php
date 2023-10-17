@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/indexOfCP/
  */
-class IndexOfCPOperator implements ResolvesToInt
+class IndexOfCPOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$indexOfCP';
     public const ENCODE = Encode::Array;
 
     /**
@@ -63,5 +63,10 @@ class IndexOfCPOperator implements ResolvesToInt
         $this->substring = $substring;
         $this->start = $start;
         $this->end = $end;
+    }
+
+    public function getOperator(): string
+    {
+        return '$indexOfCP';
     }
 }

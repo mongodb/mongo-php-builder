@@ -13,6 +13,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\GeometryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -20,9 +21,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/geoIntersects/
  */
-class GeoIntersectsOperator implements FieldQueryInterface
+class GeoIntersectsOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$geoIntersects';
     public const ENCODE = Encode::Single;
 
     /** @var Document|GeometryInterface|Serializable|array|stdClass $geometry */
@@ -34,5 +34,10 @@ class GeoIntersectsOperator implements FieldQueryInterface
     public function __construct(Document|Serializable|GeometryInterface|stdClass|array $geometry)
     {
         $this->geometry = $geometry;
+    }
+
+    public function getOperator(): string
+    {
+        return '$geoIntersects';
     }
 }

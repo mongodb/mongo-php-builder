@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/rtrim/
  */
-class RtrimOperator implements ResolvesToString
+class RtrimOperator implements ResolvesToString, OperatorInterface
 {
-    public const NAME = '$rtrim';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToString|non-empty-string $input The string to trim. The argument can be any valid expression that resolves to a string. */
@@ -43,5 +43,10 @@ class RtrimOperator implements ResolvesToString
     ) {
         $this->input = $input;
         $this->chars = $chars;
+    }
+
+    public function getOperator(): string
+    {
+        return '$rtrim';
     }
 }

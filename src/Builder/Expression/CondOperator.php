@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -18,9 +19,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/cond/
  */
-class CondOperator implements ResolvesToAny
+class CondOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$cond';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToBool|bool $if */
@@ -45,5 +45,10 @@ class CondOperator implements ResolvesToAny
         $this->if = $if;
         $this->then = $then;
         $this->else = $else;
+    }
+
+    public function getOperator(): string
+    {
+        return '$cond';
     }
 }

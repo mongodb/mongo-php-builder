@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Expression\ResolvesToArray;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -25,9 +26,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/
  */
-class AccumulatorAccumulator implements AccumulatorInterface
+class AccumulatorAccumulator implements AccumulatorInterface, OperatorInterface
 {
-    public const NAME = '$accumulator';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $init Function used to initialize the state. The init function receives its arguments from the initArgs array expression. You can specify the function definition as either BSON type Code or String. */
@@ -84,5 +84,10 @@ class AccumulatorAccumulator implements AccumulatorInterface
 
         $this->initArgs = $initArgs;
         $this->finalize = $finalize;
+    }
+
+    public function getOperator(): string
+    {
+        return '$accumulator';
     }
 }

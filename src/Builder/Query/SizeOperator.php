@@ -10,15 +10,15 @@ namespace MongoDB\Builder\Query;
 
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Selects documents if the array field is a specified size.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/size/
  */
-class SizeOperator implements FieldQueryInterface
+class SizeOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$size';
     public const ENCODE = Encode::Single;
 
     /** @var int $value */
@@ -30,5 +30,10 @@ class SizeOperator implements FieldQueryInterface
     public function __construct(int $value)
     {
         $this->value = $value;
+    }
+
+    public function getOperator(): string
+    {
+        return '$size';
     }
 }

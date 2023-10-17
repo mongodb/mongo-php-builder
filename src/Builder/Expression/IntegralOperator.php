@@ -12,6 +12,7 @@ use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -20,9 +21,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/integral/
  */
-class IntegralOperator implements ResolvesToDouble, ResolvesToDecimal
+class IntegralOperator implements ResolvesToDouble, ResolvesToDecimal, OperatorInterface
 {
-    public const NAME = '$integral';
     public const ENCODE = Encode::Object;
 
     /** @var Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input */
@@ -45,5 +45,10 @@ class IntegralOperator implements ResolvesToDouble, ResolvesToDecimal
     ) {
         $this->input = $input;
         $this->unit = $unit;
+    }
+
+    public function getOperator(): string
+    {
+        return '$integral';
     }
 }

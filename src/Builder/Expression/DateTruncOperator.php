@@ -14,6 +14,7 @@ use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Timestamp;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -21,9 +22,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateTrunc/
  */
-class DateTruncOperator implements ResolvesToDate
+class DateTruncOperator implements ResolvesToDate, OperatorInterface
 {
-    public const NAME = '$dateTrunc';
     public const ENCODE = Encode::Object;
 
     /** @var ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $date The date to truncate, specified in UTC. The date can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
@@ -72,5 +72,10 @@ class DateTruncOperator implements ResolvesToDate
         $this->binSize = $binSize;
         $this->timezone = $timezone;
         $this->startOfWeek = $startOfWeek;
+    }
+
+    public function getOperator(): string
+    {
+        return '$dateTrunc';
     }
 }

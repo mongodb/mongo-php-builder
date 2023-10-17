@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Stage;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
@@ -22,9 +23,8 @@ use function is_string;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/
  */
-class AddFieldsStage implements StageInterface
+class AddFieldsStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$addFields';
     public const ENCODE = Encode::Single;
 
     /** @var stdClass<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression Specify the name of each field to add and set its value to an aggregation expression or an empty object. */
@@ -45,5 +45,10 @@ class AddFieldsStage implements StageInterface
         }
         $expression = (object) $expression;
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$addFields';
     }
 }

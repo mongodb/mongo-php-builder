@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -21,9 +22,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/setDifference/
  */
-class SetDifferenceOperator implements ResolvesToArray
+class SetDifferenceOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$setDifference';
     public const ENCODE = Encode::Array;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $expression1 The arguments can be any valid expression as long as they each resolve to an array. */
@@ -50,5 +50,10 @@ class SetDifferenceOperator implements ResolvesToArray
         }
 
         $this->expression2 = $expression2;
+    }
+
+    public function getOperator(): string
+    {
+        return '$setDifference';
     }
 }

@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -22,9 +23,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/nin/
  */
-class NinOperator implements FieldQueryInterface
+class NinOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$nin';
     public const ENCODE = Encode::Single;
 
     /** @var BSONArray|PackedArray|array $value */
@@ -40,5 +40,10 @@ class NinOperator implements FieldQueryInterface
         }
 
         $this->value = $value;
+    }
+
+    public function getOperator(): string
+    {
+        return '$nin';
     }
 }

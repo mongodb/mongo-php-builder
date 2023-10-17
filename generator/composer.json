@@ -18,9 +18,9 @@
         "mongodb/mongodb": "^1.17.0@dev",
         "mongodb/builder": "@dev",
         "nette/php-generator": "^4",
-        "symfony/console": "^6.3",
-        "symfony/finder": "^6.3",
-        "symfony/yaml": "^6.3"
+        "symfony/console": "^6.3|^7.0",
+        "symfony/finder": "^6.3|^7.0",
+        "symfony/yaml": "^6.3|^7.0"
     },
     "license": "Apache-2.0",
     "autoload": {

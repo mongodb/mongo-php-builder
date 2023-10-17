@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\ProjectionInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -23,9 +24,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/slice/
  */
-class SliceOperator implements ResolvesToArray, ProjectionInterface
+class SliceOperator implements ResolvesToArray, ProjectionInterface, OperatorInterface
 {
-    public const NAME = '$slice';
     public const ENCODE = Encode::Array;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $expression Any valid expression as long as it resolves to an array. */
@@ -66,5 +66,10 @@ class SliceOperator implements ResolvesToArray, ProjectionInterface
         $this->expression = $expression;
         $this->n = $n;
         $this->position = $position;
+    }
+
+    public function getOperator(): string
+    {
+        return '$slice';
     }
 }

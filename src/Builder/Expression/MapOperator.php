@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -25,9 +26,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/map/
  */
-class MapOperator implements ResolvesToArray
+class MapOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$map';
     public const ENCODE = Encode::Object;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to an array. */
@@ -56,5 +56,10 @@ class MapOperator implements ResolvesToArray
         $this->input = $input;
         $this->in = $in;
         $this->as = $as;
+    }
+
+    public function getOperator(): string
+    {
+        return '$map';
     }
 }

@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the inverse tangent (arc tangent) of y / x in radians, where y and x are the first and second values passed to the expression respectively.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/atan2/
  */
-class Atan2Operator implements ResolvesToDouble, ResolvesToDecimal
+class Atan2Operator implements ResolvesToDouble, ResolvesToDecimal, OperatorInterface
 {
-    public const NAME = '$atan2';
     public const ENCODE = Encode::Array;
 
     /**
@@ -44,5 +44,10 @@ class Atan2Operator implements ResolvesToDouble, ResolvesToDecimal
     ) {
         $this->y = $y;
         $this->x = $x;
+    }
+
+    public function getOperator(): string
+    {
+        return '$atan2';
     }
 }

@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\QueryInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
@@ -22,9 +23,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/nor/
  */
-class NorOperator implements QueryInterface
+class NorOperator implements QueryInterface, OperatorInterface
 {
-    public const NAME = '$nor';
     public const ENCODE = Encode::Single;
 
     /** @var list<Document|QueryInterface|Serializable|array|stdClass> ...$expression */
@@ -43,5 +43,10 @@ class NorOperator implements QueryInterface
             throw new InvalidArgumentException('Expected $expression arguments to be a list (array), named arguments are not supported');
         }
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$nor';
     }
 }

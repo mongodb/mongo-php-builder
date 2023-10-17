@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the result of dividing the first number by the second. Accepts two argument expressions.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/
  */
-class DivideOperator implements ResolvesToDouble
+class DivideOperator implements ResolvesToDouble, OperatorInterface
 {
-    public const NAME = '$divide';
     public const ENCODE = Encode::Array;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $dividend The first argument is the dividend, and the second argument is the divisor; i.e. the first argument is divided by the second argument. */
@@ -38,5 +38,10 @@ class DivideOperator implements ResolvesToDouble
     ) {
         $this->dividend = $dividend;
         $this->divisor = $divisor;
+    }
+
+    public function getOperator(): string
+    {
+        return '$divide';
     }
 }

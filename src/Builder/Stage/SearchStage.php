@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Stage;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\StageInterface;
 use stdClass;
 
@@ -20,9 +21,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/search/
  */
-class SearchStage implements StageInterface
+class SearchStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$search';
     public const ENCODE = Encode::Single;
 
     /** @var Document|Serializable|array|stdClass $search */
@@ -34,5 +34,10 @@ class SearchStage implements StageInterface
     public function __construct(Document|Serializable|stdClass|array $search)
     {
         $this->search = $search;
+    }
+
+    public function getOperator(): string
+    {
+        return '$search';
     }
 }

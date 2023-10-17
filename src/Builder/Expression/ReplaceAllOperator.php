@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Replaces all instances of a search string in an input string with a replacement string.
@@ -17,9 +18,8 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceAll/
  */
-class ReplaceAllOperator implements ResolvesToString
+class ReplaceAllOperator implements ResolvesToString, OperatorInterface
 {
-    public const NAME = '$replaceAll';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null. */
@@ -44,5 +44,10 @@ class ReplaceAllOperator implements ResolvesToString
         $this->input = $input;
         $this->find = $find;
         $this->replacement = $replacement;
+    }
+
+    public function getOperator(): string
+    {
+        return '$replaceAll';
     }
 }

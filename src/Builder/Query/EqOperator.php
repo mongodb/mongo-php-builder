@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -18,9 +19,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/eq/
  */
-class EqOperator implements FieldQueryInterface
+class EqOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$eq';
     public const ENCODE = Encode::Single;
 
     /** @var Type|array|bool|float|int|non-empty-string|null|stdClass $value */
@@ -32,5 +32,10 @@ class EqOperator implements FieldQueryInterface
     public function __construct(Type|stdClass|array|bool|float|int|null|string $value)
     {
         $this->value = $value;
+    }
+
+    public function getOperator(): string
+    {
+        return '$eq';
     }
 }

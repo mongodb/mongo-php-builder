@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -19,9 +20,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unsetField/
  */
-class UnsetFieldOperator implements ResolvesToObject
+class UnsetFieldOperator implements ResolvesToObject, OperatorInterface
 {
-    public const NAME = '$unsetField';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToString|non-empty-string $field Field in the input object that you want to add, update, or remove. field can be any valid expression that resolves to a string constant. */
@@ -40,5 +40,10 @@ class UnsetFieldOperator implements ResolvesToObject
     ) {
         $this->field = $field;
         $this->input = $input;
+    }
+
+    public function getOperator(): string
+    {
+        return '$unsetField';
     }
 }

@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -21,9 +22,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/anyElementTrue/
  */
-class AnyElementTrueOperator implements ResolvesToBool
+class AnyElementTrueOperator implements ResolvesToBool, OperatorInterface
 {
-    public const NAME = '$anyElementTrue';
     public const ENCODE = Encode::Array;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $expression */
@@ -39,5 +39,10 @@ class AnyElementTrueOperator implements ResolvesToBool
         }
 
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$anyElementTrue';
     }
 }

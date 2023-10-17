@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -21,9 +22,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/zip/
  */
-class ZipOperator implements ResolvesToArray
+class ZipOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$zip';
     public const ENCODE = Encode::Object;
 
     /**
@@ -72,5 +72,10 @@ class ZipOperator implements ResolvesToArray
         }
 
         $this->defaults = $defaults;
+    }
+
+    public function getOperator(): string
+    {
+        return '$zip';
     }
 }

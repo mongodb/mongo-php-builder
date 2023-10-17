@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 
 use function array_is_list;
@@ -22,9 +23,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/stdDevPop/
  */
-class StdDevPopOperator implements ResolvesToDouble
+class StdDevPopOperator implements ResolvesToDouble, OperatorInterface
 {
-    public const NAME = '$stdDevPop';
     public const ENCODE = Encode::Single;
 
     /** @var list<Decimal128|Int64|ResolvesToNumber|float|int> ...$expression */
@@ -43,5 +43,10 @@ class StdDevPopOperator implements ResolvesToDouble
             throw new InvalidArgumentException('Expected $expression arguments to be a list (array), named arguments are not supported');
         }
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$stdDevPop';
     }
 }

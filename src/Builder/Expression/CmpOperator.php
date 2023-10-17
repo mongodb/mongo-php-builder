@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -18,9 +19,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/cmp/
  */
-class CmpOperator implements ResolvesToInt
+class CmpOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$cmp';
     public const ENCODE = Encode::Array;
 
     /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression1 */
@@ -39,5 +39,10 @@ class CmpOperator implements ResolvesToInt
     ) {
         $this->expression1 = $expression1;
         $this->expression2 = $expression2;
+    }
+
+    public function getOperator(): string
+    {
+        return '$cmp';
     }
 }

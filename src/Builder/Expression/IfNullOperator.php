@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
 
@@ -21,9 +22,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/ifNull/
  */
-class IfNullOperator implements ResolvesToAny
+class IfNullOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$ifNull';
     public const ENCODE = Encode::Single;
 
     /** @var list<ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass> ...$expression */
@@ -42,5 +42,10 @@ class IfNullOperator implements ResolvesToAny
             throw new InvalidArgumentException('Expected $expression arguments to be a list (array), named arguments are not supported');
         }
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$ifNull';
     }
 }

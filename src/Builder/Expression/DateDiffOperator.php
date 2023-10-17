@@ -12,6 +12,7 @@ use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Timestamp;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -19,9 +20,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateDiff/
  */
-class DateDiffOperator implements ResolvesToInt
+class DateDiffOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$dateDiff';
     public const ENCODE = Encode::Object;
 
     /** @var ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The start of the time period. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
@@ -58,5 +58,10 @@ class DateDiffOperator implements ResolvesToInt
         $this->unit = $unit;
         $this->timezone = $timezone;
         $this->startOfWeek = $startOfWeek;
+    }
+
+    public function getOperator(): string
+    {
+        return '$dateDiff';
     }
 }

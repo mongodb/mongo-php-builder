@@ -12,6 +12,7 @@ use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Expression\ResolvesToNumber;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\WindowInterface;
 
 /**
@@ -20,9 +21,8 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/covariancePop/
  */
-class CovariancePopAccumulator implements WindowInterface
+class CovariancePopAccumulator implements WindowInterface, OperatorInterface
 {
-    public const NAME = '$covariancePop';
     public const ENCODE = Encode::Array;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression1 */
@@ -41,5 +41,10 @@ class CovariancePopAccumulator implements WindowInterface
     ) {
         $this->expression1 = $expression1;
         $this->expression2 = $expression2;
+    }
+
+    public function getOperator(): string
+    {
+        return '$covariancePop';
     }
 }

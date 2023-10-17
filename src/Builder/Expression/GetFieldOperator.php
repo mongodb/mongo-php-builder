@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use stdClass;
 
@@ -20,9 +21,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/getField/
  */
-class GetFieldOperator implements ResolvesToAny
+class GetFieldOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$getField';
     public const ENCODE = Encode::Object;
 
     /**
@@ -49,5 +49,10 @@ class GetFieldOperator implements ResolvesToAny
     ) {
         $this->field = $field;
         $this->input = $input;
+    }
+
+    public function getOperator(): string
+    {
+        return '$getField';
     }
 }

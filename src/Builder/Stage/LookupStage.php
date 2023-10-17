@@ -13,6 +13,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -27,9 +28,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/
  */
-class LookupStage implements StageInterface
+class LookupStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$lookup';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $as Specifies the name of the new array field to add to the input documents. The new array field contains the matching documents from the from collection. If the specified name already exists in the input document, the existing field is overwritten. */
@@ -88,5 +88,10 @@ class LookupStage implements StageInterface
         }
 
         $this->pipeline = $pipeline;
+    }
+
+    public function getOperator(): string
+    {
+        return '$lookup';
     }
 }

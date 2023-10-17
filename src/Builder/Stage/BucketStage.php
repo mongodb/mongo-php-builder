@@ -14,6 +14,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -28,9 +29,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bucket/
  */
-class BucketStage implements StageInterface
+class BucketStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$bucket';
     public const ENCODE = Encode::Object;
 
     /**
@@ -87,5 +87,10 @@ class BucketStage implements StageInterface
         $this->boundaries = $boundaries;
         $this->default = $default;
         $this->output = $output;
+    }
+
+    public function getOperator(): string
+    {
+        return '$bucket';
     }
 }

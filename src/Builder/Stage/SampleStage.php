@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Stage;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\StageInterface;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sample/
  */
-class SampleStage implements StageInterface
+class SampleStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$sample';
     public const ENCODE = Encode::Object;
 
     /** @var int $size The number of documents to randomly select. */
@@ -30,5 +30,10 @@ class SampleStage implements StageInterface
     public function __construct(int $size)
     {
         $this->size = $size;
+    }
+
+    public function getOperator(): string
+    {
+        return '$sample';
     }
 }

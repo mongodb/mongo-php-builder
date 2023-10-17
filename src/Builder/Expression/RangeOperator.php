@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/range/
  */
-class RangeOperator implements ResolvesToArray
+class RangeOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$range';
     public const ENCODE = Encode::Array;
 
     /** @var ResolvesToInt|int $start An integer that specifies the start of the sequence. Can be any valid expression that resolves to an integer. */
@@ -43,5 +43,10 @@ class RangeOperator implements ResolvesToArray
         $this->start = $start;
         $this->end = $end;
         $this->step = $step;
+    }
+
+    public function getOperator(): string
+    {
+        return '$range';
     }
 }

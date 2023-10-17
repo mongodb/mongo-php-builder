@@ -15,6 +15,7 @@ use MongoDB\Builder\Expression\ResolvesToArray;
 use MongoDB\Builder\Expression\ResolvesToNumber;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\WindowInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -35,9 +36,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/percentile/
  */
-class PercentileAccumulator implements AccumulatorInterface, WindowInterface
+class PercentileAccumulator implements AccumulatorInterface, WindowInterface, OperatorInterface
 {
-    public const NAME = '$percentile';
     public const ENCODE = Encode::Object;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $input $percentile calculates the percentile values of this data. input must be a field name or an expression that evaluates to a numeric type. If the expression cannot be converted to a numeric type, the $percentile calculation ignores it. */
@@ -70,5 +70,10 @@ class PercentileAccumulator implements AccumulatorInterface, WindowInterface
 
         $this->p = $p;
         $this->method = $method;
+    }
+
+    public function getOperator(): string
+    {
+        return '$percentile';
     }
 }

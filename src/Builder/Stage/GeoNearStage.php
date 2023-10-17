@@ -13,6 +13,7 @@ use MongoDB\BSON\Document;
 use MongoDB\BSON\Int64;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\QueryInterface;
 use MongoDB\Builder\Type\QueryObject;
@@ -27,9 +28,8 @@ use function is_object;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/geoNear/
  */
-class GeoNearStage implements StageInterface
+class GeoNearStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$geoNear';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $distanceField The output field that contains the calculated distance. To specify a field within an embedded document, use dot notation. */
@@ -109,10 +109,15 @@ class GeoNearStage implements StageInterface
         $this->maxDistance = $maxDistance;
         $this->minDistance = $minDistance;
         if (is_array($query) || is_object($query)) {
-            $query = QueryObject::create($query);
+            $query = QueryObject::create(...$query);
         }
 
         $this->query = $query;
         $this->spherical = $spherical;
+    }
+
+    public function getOperator(): string
+    {
+        return '$geoNear';
     }
 }

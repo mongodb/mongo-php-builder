@@ -12,6 +12,7 @@ use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 
 use function array_is_list;
@@ -21,9 +22,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/add/
  */
-class AddOperator implements ResolvesToNumber, ResolvesToDate
+class AddOperator implements ResolvesToNumber, ResolvesToDate, OperatorInterface
 {
-    public const NAME = '$add';
     public const ENCODE = Encode::Array;
 
     /** @var list<Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int> ...$expression The arguments can be any valid expression as long as they resolve to either all numbers or to numbers and a date. */
@@ -42,5 +42,10 @@ class AddOperator implements ResolvesToNumber, ResolvesToDate
             throw new InvalidArgumentException('Expected $expression arguments to be a list (array), named arguments are not supported');
         }
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$add';
     }
 }

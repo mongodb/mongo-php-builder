@@ -13,6 +13,7 @@ use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Timestamp;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -20,9 +21,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateSubtract/
  */
-class DateSubtractOperator implements ResolvesToDate
+class DateSubtractOperator implements ResolvesToDate, OperatorInterface
 {
-    public const NAME = '$dateSubtract';
     public const ENCODE = Encode::Object;
 
     /** @var ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The beginning date, in UTC, for the addition operation. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID. */
@@ -53,5 +53,10 @@ class DateSubtractOperator implements ResolvesToDate
         $this->unit = $unit;
         $this->amount = $amount;
         $this->timezone = $timezone;
+    }
+
+    public function getOperator(): string
+    {
+        return '$dateSubtract';
     }
 }

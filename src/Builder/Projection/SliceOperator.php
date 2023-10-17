@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Projection;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\ProjectionInterface;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\ProjectionInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/projection/slice/
  */
-class SliceOperator implements ProjectionInterface
+class SliceOperator implements ProjectionInterface, OperatorInterface
 {
-    public const NAME = '$slice';
     public const ENCODE = Encode::Array;
 
     /** @var int $limit */
@@ -35,5 +35,10 @@ class SliceOperator implements ProjectionInterface
     {
         $this->limit = $limit;
         $this->skip = $skip;
+    }
+
+    public function getOperator(): string
+    {
+        return '$slice';
     }
 }

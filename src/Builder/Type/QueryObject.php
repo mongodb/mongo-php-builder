@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
+use MongoDB\BSON\Document;
+use MongoDB\BSON\Regex;
 use MongoDB\BSON\Serializable;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
@@ -11,48 +13,43 @@ use stdClass;
 use function array_is_list;
 use function count;
 use function is_array;
-use function is_numeric;
 use function sprintf;
 
 /**
  * Helper class to validate query objects.
  *
- * Queries are a mix of query operator ($or, $and, $nor...) and field path to filter operators ($eq, $gt, $in...).
- *
- * @internal
+ * Queries are a mix of query operators ($or, $and, $nor...) and field query operators ($eq, $gt, $in...) associated to a field path.
  */
 final class QueryObject implements QueryInterface
 {
-    public array $queries = [];
+    public readonly array $queries;
 
-    public static function create(QueryInterface|Serializable|array|stdClass $queries): QueryInterface
+    public static function create(QueryInterface|FieldQueryInterface|array|stdClass|string|int|float|bool|Regex|Document|null ...$queries): QueryInterface
     {
-        if ($queries instanceof QueryInterface) {
-            return $queries;
+        // We don't wrap a single query in a QueryObject
+        if (count($queries) === 1 && isset($queries[0]) && $queries[0] instanceof QueryInterface) {
+            return $queries[0];
         }
 
         return new self($queries);
     }
 
     private function __construct(
-        Serializable|array|stdClass $queries,
+        Serializable|array|stdClass $queriesOrArrayOfQueries,
     ) {
         $seenQueryOperators = [];
-        foreach ($queries as $fieldPath => $query) {
+        $queries = [];
+        foreach ($queriesOrArrayOfQueries as $fieldPath => $query) {
             if ($query instanceof QueryInterface) {
-                if (! is_numeric($fieldPath)) {
-                    throw new InvalidArgumentException(sprintf('Query operator "%s" cannot be used with a field path. Got "%s".', $query::NAME, $fieldPath));
-                }
-
-                if (! $query instanceof self) {
-                    if (isset($seenQueryOperators[$query::NAME])) {
-                        throw new InvalidArgumentException(sprintf('Query operator "%s" cannot be used multiple times in the same query.', $query::NAME));
+                if ($query instanceof OperatorInterface) {
+                    if (isset($seenQueryOperators[$query->getOperator()])) {
+                        throw new InvalidArgumentException(sprintf('Query operator "%s" cannot be used multiple times in the same query.', $query->getOperator()));
                     }
 
-                    $seenQueryOperators[$query::NAME] = true;
+                    $seenQueryOperators[$query->getOperator()] = true;
                 }
 
-                $this->queries[] = $query;
+                $queries[] = $query;
                 continue;
             }
 
@@ -66,8 +63,10 @@ final class QueryObject implements QueryInterface
             }
 
             // Numbers are valid field paths, nothing to validate.
-            $this->queries[$fieldPath] = $query;
+            $queries[$fieldPath] = $query;
         }
+
+        $this->queries = $queries;
     }
 
     private static function isListOfFilters(mixed $values): bool

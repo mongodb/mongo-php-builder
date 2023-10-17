@@ -14,6 +14,7 @@ use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -24,9 +25,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/top/
  */
-class TopAccumulator implements AccumulatorInterface
+class TopAccumulator implements AccumulatorInterface, OperatorInterface
 {
-    public const NAME = '$top';
     public const ENCODE = Encode::Object;
 
     /** @var Document|Serializable|array|stdClass $sortBy Specifies the order of results, with syntax similar to $sort. */
@@ -45,5 +45,10 @@ class TopAccumulator implements AccumulatorInterface
     ) {
         $this->sortBy = $sortBy;
         $this->output = $output;
+    }
+
+    public function getOperator(): string
+    {
+        return '$top';
     }
 }

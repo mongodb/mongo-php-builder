@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -18,9 +19,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateFromParts/
  */
-class DateFromPartsOperator implements ResolvesToDate
+class DateFromPartsOperator implements ResolvesToDate, OperatorInterface
 {
-    public const NAME = '$dateFromParts';
     public const ENCODE = Encode::Object;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $year Calendar year. Can be any expression that evaluates to a number. */
@@ -93,5 +93,10 @@ class DateFromPartsOperator implements ResolvesToDate
         $this->second = $second;
         $this->millisecond = $millisecond;
         $this->timezone = $timezone;
+    }
+
+    public function getOperator(): string
+    {
+        return '$dateFromParts';
     }
 }

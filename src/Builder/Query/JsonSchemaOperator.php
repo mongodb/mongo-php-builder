@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\QueryInterface;
 use stdClass;
 
@@ -19,9 +20,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/jsonSchema/
  */
-class JsonSchemaOperator implements QueryInterface
+class JsonSchemaOperator implements QueryInterface, OperatorInterface
 {
-    public const NAME = '$jsonSchema';
     public const ENCODE = Encode::Single;
 
     /** @var Document|Serializable|array|stdClass $schema */
@@ -33,5 +33,10 @@ class JsonSchemaOperator implements QueryInterface
     public function __construct(Document|Serializable|stdClass|array $schema)
     {
         $this->schema = $schema;
+    }
+
+    public function getOperator(): string
+    {
+        return '$jsonSchema';
     }
 }

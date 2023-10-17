@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the document position (known as the rank) relative to other documents in the $setWindowFields stage partition.
@@ -16,12 +17,16 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/rank/
  */
-class RankOperator implements ResolvesToInt
+class RankOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$rank';
     public const ENCODE = Encode::Object;
 
     public function __construct()
     {
+    }
+
+    public function getOperator(): string
+    {
+        return '$rank';
     }
 }

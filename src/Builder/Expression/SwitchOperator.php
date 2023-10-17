@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -25,9 +26,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/switch/
  */
-class SwitchOperator implements ResolvesToAny
+class SwitchOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$switch';
     public const ENCODE = Encode::Object;
 
     /**
@@ -62,5 +62,10 @@ class SwitchOperator implements ResolvesToAny
 
         $this->branches = $branches;
         $this->default = $default;
+    }
+
+    public function getOperator(): string
+    {
+        return '$switch';
     }
 }

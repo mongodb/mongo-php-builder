@@ -13,6 +13,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\GeometryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 use stdClass;
@@ -25,9 +26,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/geometry/
  */
-class GeometryOperator implements GeometryInterface
+class GeometryOperator implements GeometryInterface, OperatorInterface
 {
-    public const NAME = '$geometry';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $type */
@@ -56,5 +56,10 @@ class GeometryOperator implements GeometryInterface
 
         $this->coordinates = $coordinates;
         $this->crs = $crs;
+    }
+
+    public function getOperator(): string
+    {
+        return '$geometry';
     }
 }

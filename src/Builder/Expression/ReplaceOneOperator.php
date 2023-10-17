@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Replaces the first instance of a matched string in a given input.
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceOne/
  */
-class ReplaceOneOperator implements ResolvesToString
+class ReplaceOneOperator implements ResolvesToString, OperatorInterface
 {
-    public const NAME = '$replaceOne';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToNull|ResolvesToString|non-empty-string|null $input The string on which you wish to apply the find. Can be any valid expression that resolves to a string or a null. If input refers to a field that is missing, $replaceAll returns null. */
@@ -43,5 +43,10 @@ class ReplaceOneOperator implements ResolvesToString
         $this->input = $input;
         $this->find = $find;
         $this->replacement = $replacement;
+    }
+
+    public function getOperator(): string
+    {
+        return '$replaceOne';
     }
 }

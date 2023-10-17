@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Calculates the natural log of a number.
@@ -18,9 +19,8 @@ use MongoDB\Builder\Type\Encode;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/ln/
  */
-class LnOperator implements ResolvesToDouble
+class LnOperator implements ResolvesToDouble, OperatorInterface
 {
-    public const NAME = '$ln';
     public const ENCODE = Encode::Single;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $number Any valid expression as long as it resolves to a non-negative number. For more information on expressions, see Expressions. */
@@ -32,5 +32,10 @@ class LnOperator implements ResolvesToDouble
     public function __construct(Decimal128|Int64|ResolvesToNumber|float|int $number)
     {
         $this->number = $number;
+    }
+
+    public function getOperator(): string
+    {
+        return '$ln';
     }
 }

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Query;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\QueryInterface;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\QueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/where/
  */
-class WhereOperator implements QueryInterface
+class WhereOperator implements QueryInterface, OperatorInterface
 {
-    public const NAME = '$where';
     public const ENCODE = Encode::Single;
 
     /** @var non-empty-string $function */
@@ -30,5 +30,10 @@ class WhereOperator implements QueryInterface
     public function __construct(string $function)
     {
         $this->function = $function;
+    }
+
+    public function getOperator(): string
+    {
+        return '$where';
     }
 }

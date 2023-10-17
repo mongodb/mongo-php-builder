@@ -13,6 +13,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\GeometryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use stdClass;
 
@@ -21,9 +22,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/near/
  */
-class NearOperator implements FieldQueryInterface
+class NearOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$near';
     public const ENCODE = Encode::Object;
 
     /** @var Document|GeometryInterface|Serializable|array|stdClass $geometry */
@@ -48,5 +48,10 @@ class NearOperator implements FieldQueryInterface
         $this->geometry = $geometry;
         $this->maxDistance = $maxDistance;
         $this->minDistance = $minDistance;
+    }
+
+    public function getOperator(): string
+    {
+        return '$near';
     }
 }

@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\Regex;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 
 /**
@@ -18,9 +19,8 @@ use MongoDB\Builder\Type\Optional;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexFindAll/
  */
-class RegexFindAllOperator implements ResolvesToArray
+class RegexFindAllOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$regexFindAll';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToString|non-empty-string $input The string on which you wish to apply the regex pattern. Can be a string or any valid expression that resolves to a string. */
@@ -45,5 +45,10 @@ class RegexFindAllOperator implements ResolvesToArray
         $this->input = $input;
         $this->regex = $regex;
         $this->options = $options;
+    }
+
+    public function getOperator(): string
+    {
+        return '$regexFindAll';
     }
 }

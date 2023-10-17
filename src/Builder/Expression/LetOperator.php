@@ -13,6 +13,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -21,9 +22,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/let/
  */
-class LetOperator implements ResolvesToAny
+class LetOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$let';
     public const ENCODE = Encode::Object;
 
     /**
@@ -46,5 +46,10 @@ class LetOperator implements ResolvesToAny
     ) {
         $this->vars = $vars;
         $this->in = $in;
+    }
+
+    public function getOperator(): string
+    {
+        return '$let';
     }
 }

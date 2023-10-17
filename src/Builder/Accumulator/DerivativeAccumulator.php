@@ -14,6 +14,7 @@ use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Expression\ResolvesToDate;
 use MongoDB\Builder\Expression\ResolvesToNumber;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\WindowInterface;
 
@@ -23,9 +24,8 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/derivative/
  */
-class DerivativeAccumulator implements WindowInterface
+class DerivativeAccumulator implements WindowInterface, OperatorInterface
 {
-    public const NAME = '$derivative';
     public const ENCODE = Encode::Object;
 
     /** @var Decimal128|Int64|ResolvesToDate|ResolvesToNumber|UTCDateTime|float|int $input */
@@ -48,5 +48,10 @@ class DerivativeAccumulator implements WindowInterface
     ) {
         $this->input = $input;
         $this->unit = $unit;
+    }
+
+    public function getOperator(): string
+    {
+        return '$derivative';
     }
 }

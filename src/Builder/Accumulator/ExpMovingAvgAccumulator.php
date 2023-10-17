@@ -12,6 +12,7 @@ use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Expression\ResolvesToNumber;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\WindowInterface;
 
@@ -21,9 +22,8 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/expMovingAvg/
  */
-class ExpMovingAvgAccumulator implements WindowInterface
+class ExpMovingAvgAccumulator implements WindowInterface, OperatorInterface
 {
-    public const NAME = '$expMovingAvg';
     public const ENCODE = Encode::Object;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $input */
@@ -58,5 +58,10 @@ class ExpMovingAvgAccumulator implements WindowInterface
         $this->input = $input;
         $this->N = $N;
         $this->alpha = $alpha;
+    }
+
+    public function getOperator(): string
+    {
+        return '$expMovingAvg';
     }
 }

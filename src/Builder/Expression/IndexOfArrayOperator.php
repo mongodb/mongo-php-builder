@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -25,9 +26,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/indexOfArray/
  */
-class IndexOfArrayOperator implements ResolvesToInt
+class IndexOfArrayOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$indexOfArray';
     public const ENCODE = Encode::Array;
 
     /**
@@ -76,5 +76,10 @@ class IndexOfArrayOperator implements ResolvesToInt
         $this->search = $search;
         $this->start = $start;
         $this->end = $end;
+    }
+
+    public function getOperator(): string
+    {
+        return '$indexOfArray';
     }
 }

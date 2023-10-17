@@ -12,6 +12,7 @@ use MongoDB\BSON\Document;
 use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -27,9 +28,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/merge/
  */
-class MergeStage implements StageInterface
+class MergeStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$merge';
     public const ENCODE = Encode::Object;
 
     /** @var non-empty-string $into The output collection. */
@@ -70,5 +70,10 @@ class MergeStage implements StageInterface
         $this->let = $let;
         $this->whenMatched = $whenMatched;
         $this->whenNotMatched = $whenNotMatched;
+    }
+
+    public function getOperator(): string
+    {
+        return '$merge';
     }
 }

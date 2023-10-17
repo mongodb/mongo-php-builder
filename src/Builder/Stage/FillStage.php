@@ -12,6 +12,7 @@ use MongoDB\BSON\Document;
 use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -26,9 +27,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/fill/
  */
-class FillStage implements StageInterface
+class FillStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$fill';
     public const ENCODE = Encode::Object;
 
     /**
@@ -79,5 +79,10 @@ class FillStage implements StageInterface
 
         $this->partitionByFields = $partitionByFields;
         $this->sortBy = $sortBy;
+    }
+
+    public function getOperator(): string
+    {
+        return '$fill';
     }
 }

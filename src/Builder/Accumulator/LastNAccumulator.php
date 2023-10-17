@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Expression\ResolvesToArray;
 use MongoDB\Builder\Expression\ResolvesToInt;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\WindowInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -24,9 +25,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/lastN/
  */
-class LastNAccumulator implements WindowInterface
+class LastNAccumulator implements WindowInterface, OperatorInterface
 {
-    public const NAME = '$lastN';
     public const ENCODE = Encode::Object;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $input An expression that resolves to the array from which to return n elements. */
@@ -47,5 +47,10 @@ class LastNAccumulator implements WindowInterface
 
         $this->input = $input;
         $this->n = $n;
+    }
+
+    public function getOperator(): string
+    {
+        return '$lastN';
     }
 }

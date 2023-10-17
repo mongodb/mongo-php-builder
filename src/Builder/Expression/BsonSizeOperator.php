@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -18,9 +19,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bsonSize/
  */
-class BsonSizeOperator implements ResolvesToInt
+class BsonSizeOperator implements ResolvesToInt, OperatorInterface
 {
-    public const NAME = '$bsonSize';
     public const ENCODE = Encode::Single;
 
     /** @var Document|ResolvesToNull|ResolvesToObject|Serializable|array|null|stdClass $object */
@@ -32,5 +32,10 @@ class BsonSizeOperator implements ResolvesToInt
     public function __construct(Document|Serializable|ResolvesToNull|ResolvesToObject|stdClass|array|null $object)
     {
         $this->object = $object;
+    }
+
+    public function getOperator(): string
+    {
+        return '$bsonSize';
     }
 }

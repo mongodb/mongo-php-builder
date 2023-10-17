@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use stdClass;
 
@@ -19,9 +20,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateFromString/
  */
-class DateFromStringOperator implements ResolvesToDate
+class DateFromStringOperator implements ResolvesToDate, OperatorInterface
 {
-    public const NAME = '$dateFromString';
     public const ENCODE = Encode::Object;
 
     /** @var ResolvesToString|non-empty-string $dateString The date/time string to convert to a date object. */
@@ -70,5 +70,10 @@ class DateFromStringOperator implements ResolvesToDate
         $this->timezone = $timezone;
         $this->onError = $onError;
         $this->onNull = $onNull;
+    }
+
+    public function getOperator(): string
+    {
+        return '$dateFromString';
     }
 }

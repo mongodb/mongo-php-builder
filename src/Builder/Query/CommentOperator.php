@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Query;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\QueryInterface;
 
 /**
@@ -16,9 +17,8 @@ use MongoDB\Builder\Type\QueryInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/comment/
  */
-class CommentOperator implements QueryInterface
+class CommentOperator implements QueryInterface, OperatorInterface
 {
-    public const NAME = '$comment';
     public const ENCODE = Encode::Single;
 
     /** @var non-empty-string $comment */
@@ -30,5 +30,10 @@ class CommentOperator implements QueryInterface
     public function __construct(string $comment)
     {
         $this->comment = $comment;
+    }
+
+    public function getOperator(): string
+    {
+        return '$comment';
     }
 }

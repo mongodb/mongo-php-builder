@@ -13,6 +13,7 @@ use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use stdClass;
@@ -22,9 +23,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/bucketAuto/
  */
-class BucketAutoStage implements StageInterface
+class BucketAutoStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$bucketAuto';
     public const ENCODE = Encode::Object;
 
     /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $groupBy An expression to group documents by. To specify a field path, prefix the field name with a dollar sign $ and enclose it in quotes. */
@@ -63,5 +63,10 @@ class BucketAutoStage implements StageInterface
         $this->buckets = $buckets;
         $this->output = $output;
         $this->granularity = $granularity;
+    }
+
+    public function getOperator(): string
+    {
+        return '$bucketAuto';
     }
 }

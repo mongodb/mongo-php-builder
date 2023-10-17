@@ -12,6 +12,7 @@ use MongoDB\BSON\Document;
 use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -26,9 +27,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/densify/
  */
-class DensifyStage implements StageInterface
+class DensifyStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$densify';
     public const ENCODE = Encode::Object;
 
     /**
@@ -63,5 +63,10 @@ class DensifyStage implements StageInterface
         }
 
         $this->partitionByFields = $partitionByFields;
+    }
+
+    public function getOperator(): string
+    {
+        return '$densify';
     }
 }

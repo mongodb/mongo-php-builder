@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 
 use function array_is_list;
@@ -20,9 +21,8 @@ use function array_is_list;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/multiply/
  */
-class MultiplyOperator implements ResolvesToDecimal
+class MultiplyOperator implements ResolvesToDecimal, OperatorInterface
 {
-    public const NAME = '$multiply';
     public const ENCODE = Encode::Single;
 
     /**
@@ -45,5 +45,10 @@ class MultiplyOperator implements ResolvesToDecimal
             throw new InvalidArgumentException('Expected $expression arguments to be a list (array), named arguments are not supported');
         }
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$multiply';
     }
 }

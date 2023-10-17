@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use stdClass;
 
 /**
@@ -17,9 +18,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/literal/
  */
-class LiteralOperator implements ResolvesToAny
+class LiteralOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$literal';
     public const ENCODE = Encode::Single;
 
     /** @var Type|array|bool|float|int|non-empty-string|null|stdClass $value If the value is an expression, $literal does not evaluate the expression but instead returns the unparsed expression. */
@@ -31,5 +31,10 @@ class LiteralOperator implements ResolvesToAny
     public function __construct(Type|stdClass|array|bool|float|int|null|string $value)
     {
         $this->value = $value;
+    }
+
+    public function getOperator(): string
+    {
+        return '$literal';
     }
 }

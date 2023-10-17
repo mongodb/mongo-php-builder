@@ -13,6 +13,7 @@ use MongoDB\BSON\Int64;
 use MongoDB\Builder\Expression\ResolvesToNumber;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\WindowInterface;
 
 /**
@@ -21,9 +22,8 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/
  */
-class AvgAccumulator implements AccumulatorInterface, WindowInterface
+class AvgAccumulator implements AccumulatorInterface, WindowInterface, OperatorInterface
 {
-    public const NAME = '$avg';
     public const ENCODE = Encode::Single;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $expression */
@@ -35,5 +35,10 @@ class AvgAccumulator implements AccumulatorInterface, WindowInterface
     public function __construct(Decimal128|Int64|ResolvesToNumber|float|int $expression)
     {
         $this->expression = $expression;
+    }
+
+    public function getOperator(): string
+    {
+        return '$avg';
     }
 }

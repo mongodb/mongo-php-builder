@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Raises a number to the specified exponent.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/pow/
  */
-class PowOperator implements ResolvesToNumber
+class PowOperator implements ResolvesToNumber, OperatorInterface
 {
-    public const NAME = '$pow';
     public const ENCODE = Encode::Array;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $number */
@@ -38,5 +38,10 @@ class PowOperator implements ResolvesToNumber
     ) {
         $this->number = $number;
         $this->exponent = $exponent;
+    }
+
+    public function getOperator(): string
+    {
+        return '$pow';
     }
 }

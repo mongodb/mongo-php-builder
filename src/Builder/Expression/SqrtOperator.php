@@ -11,15 +11,15 @@ namespace MongoDB\Builder\Expression;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Calculates the square root.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sqrt/
  */
-class SqrtOperator implements ResolvesToDouble
+class SqrtOperator implements ResolvesToDouble, OperatorInterface
 {
-    public const NAME = '$sqrt';
     public const ENCODE = Encode::Single;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $number The argument can be any valid expression as long as it resolves to a non-negative number. */
@@ -31,5 +31,10 @@ class SqrtOperator implements ResolvesToDouble
     public function __construct(Decimal128|Int64|ResolvesToNumber|float|int $number)
     {
         $this->number = $number;
+    }
+
+    public function getOperator(): string
+    {
+        return '$sqrt';
     }
 }

@@ -12,6 +12,7 @@ use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Int64;
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -31,9 +32,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/percentile/
  */
-class PercentileOperator implements ResolvesToArray
+class PercentileOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$percentile';
     public const ENCODE = Encode::Object;
 
     /** @var Decimal128|Int64|ResolvesToNumber|float|int $input $percentile calculates the percentile values of this data. input must be a field name or an expression that evaluates to a numeric type. If the expression cannot be converted to a numeric type, the $percentile calculation ignores it. */
@@ -66,5 +66,10 @@ class PercentileOperator implements ResolvesToArray
 
         $this->p = $p;
         $this->method = $method;
+    }
+
+    public function getOperator(): string
+    {
+        return '$percentile';
     }
 }

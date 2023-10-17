@@ -12,6 +12,7 @@ use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 use stdClass;
@@ -24,9 +25,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/
  */
-class ReduceOperator implements ResolvesToAny
+class ReduceOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$reduce';
     public const ENCODE = Encode::Object;
 
     /**
@@ -69,5 +69,10 @@ class ReduceOperator implements ResolvesToAny
         $this->input = $input;
         $this->initialValue = $initialValue;
         $this->in = $in;
+    }
+
+    public function getOperator(): string
+    {
+        return '$reduce';
     }
 }

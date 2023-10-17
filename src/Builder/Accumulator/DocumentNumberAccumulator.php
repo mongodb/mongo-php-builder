@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Accumulator;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\WindowInterface;
 
 /**
@@ -17,12 +18,16 @@ use MongoDB\Builder\Type\WindowInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/documentNumber/
  */
-class DocumentNumberAccumulator implements WindowInterface
+class DocumentNumberAccumulator implements WindowInterface, OperatorInterface
 {
-    public const NAME = '$documentNumber';
     public const ENCODE = Encode::Object;
 
     public function __construct()
     {
+    }
+
+    public function getOperator(): string
+    {
+        return '$documentNumber';
     }
 }

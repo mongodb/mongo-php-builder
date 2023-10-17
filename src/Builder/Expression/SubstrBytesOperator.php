@@ -9,15 +9,15 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Expression;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Returns the substring of a string. Starts with the character at the specified UTF-8 byte index (zero-based) in the string and continues for the specified number of bytes.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/substrBytes/
  */
-class SubstrBytesOperator implements ResolvesToString
+class SubstrBytesOperator implements ResolvesToString, OperatorInterface
 {
-    public const NAME = '$substrBytes';
     public const ENCODE = Encode::Array;
 
     /** @var ResolvesToString|non-empty-string $string */
@@ -39,5 +39,10 @@ class SubstrBytesOperator implements ResolvesToString
         $this->string = $string;
         $this->start = $start;
         $this->length = $length;
+    }
+
+    public function getOperator(): string
+    {
+        return '$substrBytes';
     }
 }

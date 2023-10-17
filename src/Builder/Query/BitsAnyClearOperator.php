@@ -12,6 +12,7 @@ use MongoDB\BSON\Binary;
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -23,9 +24,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/bitsAnyClear/
  */
-class BitsAnyClearOperator implements FieldQueryInterface
+class BitsAnyClearOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const NAME = '$bitsAnyClear';
     public const ENCODE = Encode::Single;
 
     /** @var BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask */
@@ -41,5 +41,10 @@ class BitsAnyClearOperator implements FieldQueryInterface
         }
 
         $this->bitmask = $bitmask;
+    }
+
+    public function getOperator(): string
+    {
+        return '$bitsAnyClear';
     }
 }

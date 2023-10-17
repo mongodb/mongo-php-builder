@@ -12,6 +12,7 @@ use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Timestamp;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 use stdClass;
@@ -21,9 +22,8 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/changeStream/
  */
-class ChangeStreamStage implements StageInterface
+class ChangeStreamStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$changeStream';
     public const ENCODE = Encode::Object;
 
     /** @var Optional|bool $allChangesForCluster A flag indicating whether the stream should report all changes that occur on the deployment, aside from those on internal databases or collections. */
@@ -76,5 +76,10 @@ class ChangeStreamStage implements StageInterface
         $this->showExpandedEvents = $showExpandedEvents;
         $this->startAfter = $startAfter;
         $this->startAtOperationTime = $startAtOperationTime;
+    }
+
+    public function getOperator(): string
+    {
+        return '$changeStream';
     }
 }

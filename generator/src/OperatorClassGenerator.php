@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MongoDB\CodeGenerator;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\QueryObject;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\CodeGenerator\Definition\OperatorDefinition;
@@ -20,6 +21,7 @@ use function assert;
 use function interface_exists;
 use function rtrim;
 use function sprintf;
+use function var_export;
 
 /**
  * Generates a value object class for stages and operators.
@@ -48,12 +50,13 @@ class OperatorClassGenerator extends OperatorGenerator
 
         $class = $namespace->addClass($this->getOperatorClassName($definition, $operator));
         $class->setImplements($interfaces);
+        $namespace->addUse(OperatorInterface::class);
+        $class->addImplement(OperatorInterface::class);
 
         // Expose operator metadata as constants
         // @todo move to encoder class
         $class->addComment($operator->description);
         $class->addComment('@see ' . $operator->link);
-        $class->addConstant('NAME', $operator->name);
         $namespace->addUse(Encode::class);
         $class->addConstant('ENCODE', new Literal('Encode::' . $operator->encode->name));
 
@@ -139,7 +142,7 @@ class OperatorClassGenerator extends OperatorGenerator
                     $namespace->addUse(QueryObject::class);
                     $constuctor->addBody(<<<PHP
                     if (is_array(\${$argument->name}) || is_object(\${$argument->name})) {
-                        \${$argument->name} = QueryObject::create(\${$argument->name});
+                        \${$argument->name} = QueryObject::create(...\${$argument->name});
                     }
 
                     PHP);
@@ -149,6 +152,10 @@ class OperatorClassGenerator extends OperatorGenerator
             // Set property from constructor argument
             $constuctor->addBody('$this->' . $argument->name . ' = $' . $argument->name . ';');
         }
+
+        $class->addMethod('getOperator')
+            ->setReturnType('string')
+            ->setBody('return ' . var_export($operator->name, true) . ';');
 
         return $namespace;
     }

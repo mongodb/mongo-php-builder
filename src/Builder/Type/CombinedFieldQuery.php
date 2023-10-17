@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
-use InvalidArgumentException;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Serializable;
+use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
 
 use function get_debug_type;
@@ -18,12 +18,13 @@ use function sprintf;
  */
 class CombinedFieldQuery implements FieldQueryInterface
 {
-    /** @param list<FieldQueryInterface|Serializable|array|stdClass> $filters */
-    public function __construct(public array $filters)
-    {
-        foreach ($filters as $filter) {
-            if (! $filter instanceof FieldQueryInterface && ! $filter instanceof Serializable && ! is_array($filter) && ! $filter instanceof stdClass) {
-                throw new InvalidArgumentException(sprintf('Expected filters to be a list of %s, %s, array or stdClass, %s given.', FieldQueryInterface::class, Document::class, get_debug_type($filter)));
+    public function __construct(
+        /** @var list<FieldQueryInterface|Serializable|array|stdClass> $fieldQueries */
+        public readonly array $fieldQueries,
+    ) {
+        foreach ($fieldQueries as $fieldQuery) {
+            if (! $fieldQuery instanceof FieldQueryInterface && ! $fieldQuery instanceof Serializable && ! is_array($fieldQuery) && ! $fieldQuery instanceof stdClass) {
+                throw new InvalidArgumentException(sprintf('Expected filters to be a list of %s, %s, array or stdClass, %s given.', FieldQueryInterface::class, Document::class, get_debug_type($fieldQuery)));
             }
         }
     }

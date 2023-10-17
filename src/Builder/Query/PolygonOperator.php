@@ -11,6 +11,7 @@ namespace MongoDB\Builder\Query;
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\GeometryInterface;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 
@@ -22,9 +23,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/query/polygon/
  */
-class PolygonOperator implements GeometryInterface
+class PolygonOperator implements GeometryInterface, OperatorInterface
 {
-    public const NAME = '$polygon';
     public const ENCODE = Encode::Single;
 
     /** @var BSONArray|PackedArray|array $points */
@@ -40,5 +40,10 @@ class PolygonOperator implements GeometryInterface
         }
 
         $this->points = $points;
+    }
+
+    public function getOperator(): string
+    {
+        return '$polygon';
     }
 }

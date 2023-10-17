@@ -12,6 +12,7 @@ use MongoDB\BSON\Document;
 use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
 use stdClass;
@@ -24,9 +25,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sortArray/
  */
-class SortArrayOperator implements ResolvesToArray
+class SortArrayOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$sortArray';
     public const ENCODE = Encode::Object;
 
     /**
@@ -55,5 +55,10 @@ class SortArrayOperator implements ResolvesToArray
 
         $this->input = $input;
         $this->sortBy = $sortBy;
+    }
+
+    public function getOperator(): string
+    {
+        return '$sortArray';
     }
 }

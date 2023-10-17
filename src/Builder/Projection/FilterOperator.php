@@ -13,6 +13,7 @@ use MongoDB\Builder\Expression\ResolvesToArray;
 use MongoDB\Builder\Expression\ResolvesToBool;
 use MongoDB\Builder\Expression\ResolvesToInt;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\ProjectionInterface;
 use MongoDB\Exception\InvalidArgumentException;
@@ -26,9 +27,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/filter/
  */
-class FilterOperator implements ProjectionInterface
+class FilterOperator implements ProjectionInterface, OperatorInterface
 {
-    public const NAME = '$filter';
     public const ENCODE = Encode::Object;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $input */
@@ -67,5 +67,10 @@ class FilterOperator implements ProjectionInterface
         $this->cond = $cond;
         $this->as = $as;
         $this->limit = $limit;
+    }
+
+    public function getOperator(): string
+    {
+        return '$filter';
     }
 }

@@ -10,15 +10,15 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\Int64;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 
 /**
  * Randomly select documents at a given rate. Although the exact number of documents selected varies on each run, the quantity chosen approximates the sample rate expressed as a percentage of the total number of documents.
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sampleRate/
  */
-class SampleRateOperator implements ResolvesToAny
+class SampleRateOperator implements ResolvesToAny, OperatorInterface
 {
-    public const NAME = '$sampleRate';
     public const ENCODE = Encode::Single;
 
     /**
@@ -34,5 +34,10 @@ class SampleRateOperator implements ResolvesToAny
     public function __construct(Int64|ResolvesToDouble|float|int $rate)
     {
         $this->rate = $rate;
+    }
+
+    public function getOperator(): string
+    {
+        return '$sampleRate';
     }
 }

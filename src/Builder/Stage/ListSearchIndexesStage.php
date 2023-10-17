@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Stage;
 
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\StageInterface;
 
@@ -17,9 +18,8 @@ use MongoDB\Builder\Type\StageInterface;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/listSearchIndexes/
  */
-class ListSearchIndexesStage implements StageInterface
+class ListSearchIndexesStage implements StageInterface, OperatorInterface
 {
-    public const NAME = '$listSearchIndexes';
     public const ENCODE = Encode::Object;
 
     /** @var Optional|non-empty-string $id The id of the index to return information about. */
@@ -38,5 +38,10 @@ class ListSearchIndexesStage implements StageInterface
     ) {
         $this->id = $id;
         $this->name = $name;
+    }
+
+    public function getOperator(): string
+    {
+        return '$listSearchIndexes';
     }
 }

@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Expression;
 
 use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
+use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Exception\InvalidArgumentException;
 use MongoDB\Model\BSONArray;
@@ -22,9 +23,8 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/filter/
  */
-class FilterOperator implements ResolvesToArray
+class FilterOperator implements ResolvesToArray, OperatorInterface
 {
-    public const NAME = '$filter';
     public const ENCODE = Encode::Object;
 
     /** @var BSONArray|PackedArray|ResolvesToArray|array $input */
@@ -63,5 +63,10 @@ class FilterOperator implements ResolvesToArray
         $this->cond = $cond;
         $this->as = $as;
         $this->limit = $limit;
+    }
+
+    public function getOperator(): string
+    {
+        return '$filter';
     }
 }
