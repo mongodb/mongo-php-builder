@@ -156,6 +156,10 @@
                     "$comment": "The minimum number of arguments for a variadic parameter.",
                     "type": "integer",
                     "minimum": 0
+                },
+                "default": {
+                    "$comment": "The default value for the argument.",
+                    "type": ["string", "number", "boolean"]
                 }
             },
             "required": [

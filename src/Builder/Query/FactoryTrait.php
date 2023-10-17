@@ -12,6 +12,7 @@ use MongoDB\BSON\Binary;
 use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Document;
 use MongoDB\BSON\Int64;
+use MongoDB\BSON\Javascript;
 use MongoDB\BSON\PackedArray;
 use MongoDB\BSON\Regex;
 use MongoDB\BSON\Serializable;
@@ -505,9 +506,9 @@ trait FactoryTrait
      * Matches documents that satisfy a JavaScript expression.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/where/
-     * @param non-empty-string $function
+     * @param Javascript|non-empty-string $function
      */
-    public static function where(string $function): WhereOperator
+    public static function where(Javascript|string $function): WhereOperator
     {
         return new WhereOperator($function);
     }
