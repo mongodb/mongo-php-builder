@@ -27,6 +27,7 @@ final class OperatorDefinition
         public array $type,
         public string|null $description = null,
         array $arguments = [],
+        public string|null $testsFile = null,
     ) {
         $this->encode = match ($encode) {
             'single' => Encode::Single,

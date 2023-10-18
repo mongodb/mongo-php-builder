@@ -11,7 +11,7 @@ arguments:
     -
         name: init
         type:
-            - string
+            - javascript
         description: |
             Function used to initialize the state. The init function receives its arguments from the initArgs array expression. You can specify the function definition as either BSON type Code or String.
     -
@@ -24,7 +24,7 @@ arguments:
     -
         name: accumulate
         type:
-            - string
+            - javascript
         description: |
             Function used to accumulate documents. The accumulate function receives its arguments from the current state and accumulateArgs array expression. The result of the accumulate function becomes the new state. You can specify the function definition as either BSON type Code or String.
     -
@@ -36,13 +36,13 @@ arguments:
     -
         name: merge
         type:
-            - string
+            - javascript
         description: |
             Function used to merge two internal states. merge must be either a String or Code BSON type. merge returns the combined result of the two merged states. For information on when the merge function is called, see Merge Two States with $merge.
     -
         name: finalize
         type:
-            - string
+            - javascript
         optional: true
         description: |
             Function used to update the result of the accumulation.
