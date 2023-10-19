@@ -15,9 +15,7 @@
                     "$comment": "The link to the operator's documentation on MongoDB's website.",
                     "type": "string",
                     "format": "uri",
-                    "qt-uri-protocols": [
-                        "https"
-                    ]
+                    "pattern": "^https://"
                 },
                 "type": {
                     "type": "array",
@@ -186,9 +184,7 @@
                 "link": {
                     "type": "string",
                     "format": "uri",
-                    "qt-uri-protocols": [
-                        "https"
-                    ]
+                    "pattern": "^https://"
                 },
                 "pipeline": {
                     "type": "array",

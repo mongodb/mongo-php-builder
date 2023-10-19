@@ -9,6 +9,7 @@ use UnexpectedValueException;
 
 use function array_map;
 use function array_merge;
+use function array_values;
 use function assert;
 use function count;
 use function sprintf;
@@ -61,6 +62,6 @@ final class OperatorDefinition
 
         $this->arguments = array_merge($requiredArgs, $optionalArgs);
 
-        $this->tests = array_map(static fn (array $test): TestDefinition => new TestDefinition(...$test), $tests);
+        $this->tests = array_map(static fn (array $test): TestDefinition => new TestDefinition(...$test), array_values($tests));
     }
 }
