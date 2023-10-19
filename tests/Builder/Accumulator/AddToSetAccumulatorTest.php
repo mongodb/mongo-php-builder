@@ -12,73 +12,11 @@ use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
 
+/**
+ * Test $addToSet accumulator
+ */
 class AddToSetAccumulatorTest extends PipelineTestCase
 {
-    /**
-     * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
-     *
-     * @see testUseInGroupStage
-     */
-    public function getExpectedUseInGroupStage(): string
-    {
-        return <<<'JSON'
-        [
-            {
-                "$group": {
-                    "_id": {
-                        "day": {
-                            "$dayOfYear": {
-                                "date": "$date"
-                            }
-                        },
-                        "year": {
-                            "$year": {
-                                "date": "$date"
-                            }
-                        }
-                    },
-                    "itemsSold": {
-                        "$addToSet": "$item"
-                    }
-                }
-            }
-        ]
-        JSON;
-    }
-
-    /**
-     * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
-     *
-     * @see testUseInSetWindowFieldsStage
-     */
-    public function getExpectedUseInSetWindowFieldsStage(): string
-    {
-        return <<<'JSON'
-        [
-            {
-                "$setWindowFields": {
-                    "partitionBy": "$state",
-                    "sortBy": {
-                        "orderDate": 1
-                    },
-                    "output": {
-                        "cakeTypesForState": {
-                            "$addToSet": "$type",
-                            "window": {
-                                "documents": [
-                                    "unbounded",
-                                    "current"
-                                ]
-                            }
-                        }
-                    }
-                }
-            }
-        ]
-        JSON;
-    }
-
-    /** @see getExpectedUseInGroupStage */
     public function testUseInGroupStage(): void
     {
         $pipeline = new Pipeline(
@@ -91,12 +29,9 @@ class AddToSetAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $expected = $this->getExpectedUseInGroupStage();
-
-        $this->assertSamePipeline($expected, $pipeline);
+        $this->assertSamePipeline(Pipelines::ADDTOSET_USE_IN_GROUP_STAGE, $pipeline);
     }
 
-    /** @see getExpectedUseInSetWindowFieldsStage */
     public function testUseInSetWindowFieldsStage(): void
     {
         $pipeline = new Pipeline(
@@ -117,8 +52,6 @@ class AddToSetAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $expected = $this->getExpectedUseInSetWindowFieldsStage();
-
-        $this->assertSamePipeline($expected, $pipeline);
+        $this->assertSamePipeline(Pipelines::ADDTOSET_USE_IN_SETWINDOWFIELDS_STAGE, $pipeline);
     }
 }

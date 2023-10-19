@@ -14,10 +14,10 @@ use function var_export;
 
 class PipelineTestCase extends TestCase
 {
-    final public static function assertSamePipeline(string $expected, Pipeline $pipeline): void
+    final public static function assertSamePipeline(string $expectedJson, Pipeline $pipeline): void
     {
         // BSON Documents doesn't support top-level arrays.
-        $expected = toPHP(fromJSON('{"root":' . $expected . '}'))->root;
+        $expected = toPHP(fromJSON('{"root":' . $expectedJson . '}'))->root;
 
         $codec = new BuilderEncoder();
         $actual = $codec->encode($pipeline);

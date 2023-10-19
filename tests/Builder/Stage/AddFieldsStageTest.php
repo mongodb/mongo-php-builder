@@ -9,61 +9,11 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
+/**
+ * Test $addFields stage
+ */
 class AddFieldsStageTest extends PipelineTestCase
 {
-    /**
-     * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
-     *
-     * @see testAddingFieldsToAnEmbeddedDocument
-     */
-    public function getExpectedAddingFieldsToAnEmbeddedDocument(): string
-    {
-        return <<<'JSON'
-        [
-            {
-                "$addFields": {
-                    "specs.fuel_type": "unleaded"
-                }
-            }
-        ]
-        JSON;
-    }
-
-    /**
-     * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
-     *
-     * @see testUsingTwoAddFieldsStages
-     */
-    public function getExpectedUsingTwoAddFieldsStages(): string
-    {
-        return <<<'JSON'
-        [
-            {
-                "$addFields": {
-                    "totalHomework": {
-                        "$sum": "$homework"
-                    },
-                    "totalQuiz": {
-                        "$sum": "$quiz"
-                    }
-                }
-            },
-            {
-                "$addFields": {
-                    "totalScore": {
-                        "$add": [
-                            "$totalHomework",
-                            "$totalQuiz",
-                            "$extraCredit"
-                        ]
-                    }
-                }
-            }
-        ]
-        JSON;
-    }
-
-    /** @see getExpectedAddingFieldsToAnEmbeddedDocument */
     public function testAddingFieldsToAnEmbeddedDocument(): void
     {
         $pipeline = new Pipeline(
@@ -72,12 +22,9 @@ class AddFieldsStageTest extends PipelineTestCase
             ),
         );
 
-        $expected = $this->getExpectedAddingFieldsToAnEmbeddedDocument();
-
-        $this->assertSamePipeline($expected, $pipeline);
+        $this->assertSamePipeline(Pipelines::ADDFIELDS_ADDING_FIELDS_TO_AN_EMBEDDED_DOCUMENT, $pipeline);
     }
 
-    /** @see getExpectedUsingTwoAddFieldsStages */
     public function testUsingTwoAddFieldsStages(): void
     {
         $this->markTestSkipped('$sum must accept arrayFieldPath and render it as a single value: https://jira.mongodb.org/browse/PHPLIB-1287');
@@ -96,8 +43,6 @@ class AddFieldsStageTest extends PipelineTestCase
             ),
         );
 
-        $expected = $this->getExpectedUsingTwoAaddFieldsStages();
-
-        $this->assertSamePipeline($expected, $pipeline);
+        $this->assertSamePipeline(Pipelines::ADDFIELDS_USING_TWO_ADDFIELDS_STAGES, $pipeline);
     }
 }

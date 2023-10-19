@@ -13,91 +13,11 @@ use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
 
+/**
+ * Test $accumulator accumulator
+ */
 class AccumulatorAccumulatorTest extends PipelineTestCase
 {
-    /**
-     * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
-     *
-     * @see testUseAccumulatorToImplementTheAvgOperator
-     */
-    public function getExpectedUseAccumulatorToImplementTheAvgOperator(): string
-    {
-        return <<<'JSON'
-        [
-            {
-                "$group": {
-                    "_id": "$author",
-                    "avgCopies": {
-                        "$accumulator": {
-                            "init": {
-                                "$code": "function () { return { count: 0, sum: 0 } }"
-                            },
-                            "accumulate": {
-                                "$code": "function (state, numCopies) { return { count: state.count + 1, sum: state.sum + numCopies } }"
-                            },
-                            "accumulateArgs": [
-                                "$copies"
-                            ],
-                            "merge": {
-                                "$code": "function (state1, state2) { return { count: state1.count + state2.count, sum: state1.sum + state2.sum } }"
-                            },
-                            "finalize": {
-                                "$code": "function (state) { return (state.sum \/ state.count) }"
-                            },
-                            "lang": "js"
-                        }
-                    }
-                }
-            }
-        ]
-        JSON;
-    }
-
-    /**
-     * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
-     *
-     * @see testUseInitArgsToVaryTheInitialStateByGroup
-     */
-    public function getExpectedUseInitArgsToVaryTheInitialStateByGroup(): string
-    {
-        return <<<'JSON'
-        [
-            {
-                "$group": {
-                    "_id": {
-                        "city": "$city"
-                    },
-                    "restaurants": {
-                        "$accumulator": {
-                            "init": {
-                                "$code": "function (city, userProfileCity) { return { max: city === userProfileCity ? 3 : 1, restaurants: [] } }"
-                            },
-                            "initArgs": [
-                                "$city",
-                                "Bettles"
-                            ],
-                            "accumulate": {
-                                "$code": "function (state, restaurantName) { if (state.restaurants.length < state.max) { state.restaurants.push(restaurantName); } return state; }"
-                            },
-                            "accumulateArgs": [
-                                "$name"
-                            ],
-                            "merge": {
-                                "$code": "function (state1, state2) { return { max: state1.max, restaurants: state1.restaurants.concat(state2.restaurants).slice(0, state1.max) } }"
-                            },
-                            "finalize": {
-                                "$code": "function (state) { return state.restaurants }"
-                            },
-                            "lang": "js"
-                        }
-                    }
-                }
-            }
-        ]
-        JSON;
-    }
-
-    /** @see getExpectedUseAccumulatorToImplementTheAvgOperator */
     public function testUseAccumulatorToImplementTheAvgOperator(): void
     {
         $pipeline = new Pipeline(
@@ -114,12 +34,9 @@ class AccumulatorAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $expected = $this->getExpectedUseAccumulatorToImplementTheAvgOperator();
-
-        $this->assertSamePipeline($expected, $pipeline);
+        $this->assertSamePipeline(Pipelines::ACCUMULATOR_USE_ACCUMULATOR_TO_IMPLEMENT_THE_AVG_OPERATOR, $pipeline);
     }
 
-    /** @see getExpectedUseInitArgsToVaryTheInitialStateByGroup */
     public function testUseInitArgsToVaryTheInitialStateByGroup(): void
     {
         $pipeline = new Pipeline(
@@ -140,8 +57,6 @@ class AccumulatorAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $expected = $this->getExpectedUseInitArgsToVaryTheInitialStateByGroup();
-
-        $this->assertSamePipeline($expected, $pipeline);
+        $this->assertSamePipeline(Pipelines::ACCUMULATOR_USE_INITARGS_TO_VARY_THE_INITIAL_STATE_BY_GROUP, $pipeline);
     }
 }
