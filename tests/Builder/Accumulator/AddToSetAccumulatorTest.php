@@ -29,7 +29,7 @@ class AddToSetAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $this->assertSamePipeline(Pipelines::ADDTOSET_USE_IN_GROUP_STAGE, $pipeline);
+        $this->assertSamePipeline(Pipelines::AddToSetUseInGroupStage, $pipeline);
     }
 
     public function testUseInSetWindowFieldsStage(): void
@@ -52,6 +52,6 @@ class AddToSetAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $this->assertSamePipeline(Pipelines::ADDTOSET_USE_IN_SETWINDOWFIELDS_STAGE, $pipeline);
+        $this->assertSamePipeline(Pipelines::AddToSetUseInSetWindowFieldsStage, $pipeline);
     }
 }

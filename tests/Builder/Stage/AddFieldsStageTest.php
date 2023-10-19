@@ -22,7 +22,7 @@ class AddFieldsStageTest extends PipelineTestCase
             ),
         );
 
-        $this->assertSamePipeline(Pipelines::ADDFIELDS_ADDING_FIELDS_TO_AN_EMBEDDED_DOCUMENT, $pipeline);
+        $this->assertSamePipeline(Pipelines::AddFieldsAddingFieldsToAnEmbeddedDocument, $pipeline);
     }
 
     public function testUsingTwoAddFieldsStages(): void
@@ -43,6 +43,6 @@ class AddFieldsStageTest extends PipelineTestCase
             ),
         );
 
-        $this->assertSamePipeline(Pipelines::ADDFIELDS_USING_TWO_ADDFIELDS_STAGES, $pipeline);
+        $this->assertSamePipeline(Pipelines::AddFieldsUsingTwoAddFieldsStages, $pipeline);
     }
 }

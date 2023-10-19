@@ -8,6 +8,6 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder\Expression;
 
-final class Pipelines
+enum Pipelines: string
 {
 }

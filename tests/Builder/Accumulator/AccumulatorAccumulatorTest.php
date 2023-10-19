@@ -34,7 +34,7 @@ class AccumulatorAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $this->assertSamePipeline(Pipelines::ACCUMULATOR_USE_ACCUMULATOR_TO_IMPLEMENT_THE_AVG_OPERATOR, $pipeline);
+        $this->assertSamePipeline(Pipelines::AccumulatorUseAccumulatorToImplementTheAvgOperator, $pipeline);
     }
 
     public function testUseInitArgsToVaryTheInitialStateByGroup(): void
@@ -57,6 +57,6 @@ class AccumulatorAccumulatorTest extends PipelineTestCase
             ),
         );
 
-        $this->assertSamePipeline(Pipelines::ACCUMULATOR_USE_INITARGS_TO_VARY_THE_INITIAL_STATE_BY_GROUP, $pipeline);
+        $this->assertSamePipeline(Pipelines::AccumulatorUseInitArgsToVaryTheInitialStateByGroup, $pipeline);
     }
 }

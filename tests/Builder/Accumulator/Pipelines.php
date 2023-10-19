@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder\Accumulator;
 
-final class Pipelines
+enum Pipelines: string
 {
     /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/#use--accumulator-to-implement-the--avg-operator */
-    public const ACCUMULATOR_USE_ACCUMULATOR_TO_IMPLEMENT_THE_AVG_OPERATOR = <<<'JSON'
+    case AccumulatorUseAccumulatorToImplementTheAvgOperator = <<<'JSON'
     [
         {
             "$group": {
@@ -42,7 +42,7 @@ final class Pipelines
     JSON;
 
     /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/#use-initargs-to-vary-the-initial-state-by-group */
-    public const ACCUMULATOR_USE_INITARGS_TO_VARY_THE_INITIAL_STATE_BY_GROUP = <<<'JSON'
+    case AccumulatorUseInitArgsToVaryTheInitialStateByGroup = <<<'JSON'
     [
         {
             "$group": {
@@ -79,7 +79,7 @@ final class Pipelines
     JSON;
 
     /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/#use-in--group-stage */
-    public const ADDTOSET_USE_IN_GROUP_STAGE = <<<'JSON'
+    case AddToSetUseInGroupStage = <<<'JSON'
     [
         {
             "$group": {
@@ -104,7 +104,7 @@ final class Pipelines
     JSON;
 
     /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/#use-in--setwindowfields-stage */
-    public const ADDTOSET_USE_IN_SETWINDOWFIELDS_STAGE = <<<'JSON'
+    case AddToSetUseInSetWindowFieldsStage = <<<'JSON'
     [
         {
             "$setWindowFields": {

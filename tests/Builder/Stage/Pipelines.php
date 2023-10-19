@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder\Stage;
 
-final class Pipelines
+enum Pipelines: string
 {
     /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#using-two--addfields-stages */
-    public const ADDFIELDS_USING_TWO_ADDFIELDS_STAGES = <<<'JSON'
+    case AddFieldsUsingTwoAddFieldsStages = <<<'JSON'
     [
         {
             "$addFields": {
@@ -38,7 +38,7 @@ final class Pipelines
     JSON;
 
     /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#adding-fields-to-an-embedded-document */
-    public const ADDFIELDS_ADDING_FIELDS_TO_AN_EMBEDDED_DOCUMENT = <<<'JSON'
+    case AddFieldsAddingFieldsToAnEmbeddedDocument = <<<'JSON'
     [
         {
             "$addFields": {

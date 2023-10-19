@@ -9,6 +9,7 @@ use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\CodeGenerator\Definition\OperatorDefinition;
 use MongoDB\Tests\Builder\PipelineTestCase;
 use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\EnumType;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\Type;
@@ -30,7 +31,7 @@ use const JSON_PRETTY_PRINT;
  */
 class OperatorTestGenerator extends OperatorGenerator
 {
-    private const DATA_CLASS = 'Pipelines';
+    private const DATA_ENUM = 'Pipelines';
 
     public function generate(GeneratorDefinition $definition): void
     {
@@ -43,7 +44,7 @@ class OperatorTestGenerator extends OperatorGenerator
             }
 
             try {
-                $this->writeFile($this->createClass($definition, $operator, $dataNamespace->getClasses()[self::DATA_CLASS]), false);
+                $this->writeFile($this->createClass($definition, $operator, $dataNamespace->getClasses()[self::DATA_ENUM]), false);
             } catch (Throwable $e) {
                 throw new RuntimeException(sprintf('Failed to generate class for operator "%s"', $operator->name), 0, $e);
             }
@@ -57,13 +58,13 @@ class OperatorTestGenerator extends OperatorGenerator
         $dataNamespace = str_replace('MongoDB', 'MongoDB\\Tests', $definition->namespace);
 
         $namespace = new PhpNamespace($dataNamespace);
-        $class = $namespace->addClass(self::DATA_CLASS);
-        $class->setFinal();
+        $enum = $namespace->addEnum(self::DATA_ENUM);
+        $enum->setType('string');
 
         return $namespace;
     }
 
-    public function createClass(GeneratorDefinition $definition, OperatorDefinition $operator, ClassType $dataClass): PhpNamespace
+    public function createClass(GeneratorDefinition $definition, OperatorDefinition $operator, EnumType $dataEnum): PhpNamespace
     {
         $testNamespace = str_replace('MongoDB', 'MongoDB\\Tests', $definition->namespace);
         $testClass = $this->getOperatorClassName($definition, $operator) . 'Test';
@@ -80,14 +81,14 @@ class OperatorTestGenerator extends OperatorGenerator
 
         foreach ($operator->tests as $test) {
             $testName = str_replace(' ', '', ucwords(str_replace('$', '', $test->name)));
-            $constName = str_replace(' ', '_', strtoupper(str_replace('$', '', $operator->name . ' ' . $test->name)));
+            $caseName = str_replace(' ', '', ucwords(str_replace('$', '', $operator->name . ' ' . $test->name)));
 
-            $constant = $dataClass->addConstant($constName, new Literal('<<<\'JSON\'' . "\n" . json_encode($test->pipeline, JSON_PRETTY_PRINT) . "\n" . 'JSON'));
+            $constant = $dataEnum->addCase($caseName, new Literal('<<<\'JSON\'' . "\n" . json_encode($test->pipeline, JSON_PRETTY_PRINT) . "\n" . 'JSON'));
             if ($test->link) {
                 $constant->setComment('@see ' . $test->link);
             }
 
-            $constName = self::DATA_CLASS . '::' . $constName;
+            $caseName = self::DATA_ENUM . '::' . $caseName;
 
             if ($class->hasMethod('test' . $testName)) {
                 $testMethod = $class->getMethod('test' . $testName);
@@ -96,7 +97,7 @@ class OperatorTestGenerator extends OperatorGenerator
                 $testMethod->setBody(<<<PHP
                 \$pipeline = new Pipeline();
 
-                \$this->assertSamePipeline({$constName}, \$pipeline);
+                \$this->assertSamePipeline({$caseName}, \$pipeline);
                 PHP);
             }
 
