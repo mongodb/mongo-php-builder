@@ -18,54 +18,64 @@ class AddToSetAccumulatorTest extends PipelineTestCase
      * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
      *
      * @see testUseInGroupStage
-     *
-     * @return list<array<string, mixed>>
      */
-    public function getExpectedUseInGroupStage(): array
+    public function getExpectedUseInGroupStage(): string
     {
-        return [(object) [
-            '$group' => (object) [
-                '_id' => (object) [
-                    'day' => (object) [
-                        '$dayOfYear' => (object) ['date' => '$date'],
-                    ],
-                    'year' => (object) [
-                        '$year' => (object) ['date' => '$date'],
-                    ],
-                ],
-                'itemsSold' => (object) ['$addToSet' => '$item'],
-            ],
-        ],
-        ];
+        return <<<'JSON'
+        [
+            {
+                "$group": {
+                    "_id": {
+                        "day": {
+                            "$dayOfYear": {
+                                "date": "$date"
+                            }
+                        },
+                        "year": {
+                            "$year": {
+                                "date": "$date"
+                            }
+                        }
+                    },
+                    "itemsSold": {
+                        "$addToSet": "$item"
+                    }
+                }
+            }
+        ]
+        JSON;
     }
 
     /**
      * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
      *
      * @see testUseInSetWindowFieldsStage
-     *
-     * @return list<array<string, mixed>>
      */
-    public function getExpectedUseInSetWindowFieldsStage(): array
+    public function getExpectedUseInSetWindowFieldsStage(): string
     {
-        return [(object) [
-            '$setWindowFields' => (object) [
-                'partitionBy' => '$state',
-                'sortBy' => (object) ['orderDate' => 1],
-                'output' => (object) [
-                    'cakeTypesForState' => (object) [
-                        '$addToSet' => '$type',
-                        'window' => (object) [
-                            'documents' => [
-                                'unbounded',
-                                'current',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ],
-        ];
+        return <<<'JSON'
+        [
+            {
+                "$setWindowFields": {
+                    "partitionBy": "$state",
+                    "sortBy": {
+                        "orderDate": 1
+                    },
+                    "output": {
+                        "cakeTypesForState": {
+                            "$addToSet": "$type",
+                            "window": {
+                                "documents": [
+                                    "unbounded",
+                                    "current"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+        JSON;
     }
 
     /** @see getExpectedUseInGroupStage */

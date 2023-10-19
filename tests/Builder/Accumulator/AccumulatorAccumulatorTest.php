@@ -19,58 +19,82 @@ class AccumulatorAccumulatorTest extends PipelineTestCase
      * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
      *
      * @see testUseAccumulatorToImplementTheAvgOperator
-     *
-     * @return list<array<string, mixed>>
      */
-    public function getExpectedUseAccumulatorToImplementTheAvgOperator(): array
+    public function getExpectedUseAccumulatorToImplementTheAvgOperator(): string
     {
-        return [(object) [
-            '$group' => (object) [
-                '_id' => '$author',
-                'avgCopies' => (object) [
-                    '$accumulator' => (object) [
-                        'init' => new Javascript('function () { return {count: 0, sum: 0} }'),
-                        'accumulate' => new Javascript('function (state, numCopies) { return { count: state.count + 1, sum: state.sum + numCopies } }'),
-                        'accumulateArgs' => ['$copies'],
-                        'merge' => new Javascript('function (state1, state2) { return { count: state1.count + state2.count, sum: state1.sum + state2.sum } }'),
-                        'finalize' => new Javascript('function (state) { return (state.sum / state.count) }'),
-                        'lang' => 'js',
-                    ],
-                ],
-            ],
-        ],
-        ];
+        return <<<'JSON'
+        [
+            {
+                "$group": {
+                    "_id": "$author",
+                    "avgCopies": {
+                        "$accumulator": {
+                            "init": {
+                                "$code": "function () { return { count: 0, sum: 0 } }"
+                            },
+                            "accumulate": {
+                                "$code": "function (state, numCopies) { return { count: state.count + 1, sum: state.sum + numCopies } }"
+                            },
+                            "accumulateArgs": [
+                                "$copies"
+                            ],
+                            "merge": {
+                                "$code": "function (state1, state2) { return { count: state1.count + state2.count, sum: state1.sum + state2.sum } }"
+                            },
+                            "finalize": {
+                                "$code": "function (state) { return (state.sum \/ state.count) }"
+                            },
+                            "lang": "js"
+                        }
+                    }
+                }
+            }
+        ]
+        JSON;
     }
 
     /**
      * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
      *
      * @see testUseInitArgsToVaryTheInitialStateByGroup
-     *
-     * @return list<array<string, mixed>>
      */
-    public function getExpectedUseInitArgsToVaryTheInitialStateByGroup(): array
+    public function getExpectedUseInitArgsToVaryTheInitialStateByGroup(): string
     {
-        return [(object) [
-            '$group' => (object) [
-                '_id' => (object) ['city' => '$city'],
-                'restaurants' => (object) [
-                    '$accumulator' => (object) [
-                        'init' => new Javascript('function (city, userProfileCity) { return { max: city === userProfileCity ? 3 : 1, restaurants: [] } }'),
-                        'initArgs' => [
-                            '$city',
-                            'Bettles',
-                        ],
-                        'accumulate' => new Javascript('function (state, restaurantName) { if (state.restaurants.length < state.max) { state.restaurants.push(restaurantName); } return state; }'),
-                        'accumulateArgs' => ['$name'],
-                        'merge' => new Javascript('function (state1, state2) { return { max: state1.max, restaurants: state1.restaurants.concat(state2.restaurants).slice(0, state1.max) } }'),
-                        'finalize' => new Javascript('function (state) { return state.restaurants }'),
-                        'lang' => 'js',
-                    ],
-                ],
-            ],
-        ],
-        ];
+        return <<<'JSON'
+        [
+            {
+                "$group": {
+                    "_id": {
+                        "city": "$city"
+                    },
+                    "restaurants": {
+                        "$accumulator": {
+                            "init": {
+                                "$code": "function (city, userProfileCity) { return { max: city === userProfileCity ? 3 : 1, restaurants: [] } }"
+                            },
+                            "initArgs": [
+                                "$city",
+                                "Bettles"
+                            ],
+                            "accumulate": {
+                                "$code": "function (state, restaurantName) { if (state.restaurants.length < state.max) { state.restaurants.push(restaurantName); } return state; }"
+                            },
+                            "accumulateArgs": [
+                                "$name"
+                            ],
+                            "merge": {
+                                "$code": "function (state1, state2) { return { max: state1.max, restaurants: state1.restaurants.concat(state2.restaurants).slice(0, state1.max) } }"
+                            },
+                            "finalize": {
+                                "$code": "function (state) { return state.restaurants }"
+                            },
+                            "lang": "js"
+                        }
+                    }
+                }
+            }
+        ]
+        JSON;
     }
 
     /** @see getExpectedUseAccumulatorToImplementTheAvgOperator */
@@ -80,7 +104,7 @@ class AccumulatorAccumulatorTest extends PipelineTestCase
             Stage::group(
                 _id: Expression::fieldPath('author'),
                 avgCopies: Accumulator::accumulator(
-                    init: new Javascript('function () { return {count: 0, sum: 0} }'),
+                    init: new Javascript('function () { return { count: 0, sum: 0 } }'),
                     accumulate: new Javascript('function (state, numCopies) { return { count: state.count + 1, sum: state.sum + numCopies } }'),
                     accumulateArgs: [Expression::fieldPath('copies')],
                     merge: new Javascript('function (state1, state2) { return { count: state1.count + state2.count, sum: state1.sum + state2.sum } }'),

@@ -15,45 +15,52 @@ class AddFieldsStageTest extends PipelineTestCase
      * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
      *
      * @see testAddingFieldsToAnEmbeddedDocument
-     *
-     * @return list<array<string, mixed>>
      */
-    public function getExpectedAddingFieldsToAnEmbeddedDocument(): array
+    public function getExpectedAddingFieldsToAnEmbeddedDocument(): string
     {
-        return [(object) [
-            '$addFields' => (object) ['specs.fuel_type' => 'unleaded'],
-        ],
-        ];
+        return <<<'JSON'
+        [
+            {
+                "$addFields": {
+                    "specs.fuel_type": "unleaded"
+                }
+            }
+        ]
+        JSON;
     }
 
     /**
      * THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!
      *
-     * @see testUsingTwoAaddFieldsStages
-     *
-     * @return list<array<string, mixed>>
+     * @see testUsingTwoAddFieldsStages
      */
-    public function getExpectedUsingTwoAaddFieldsStages(): array
+    public function getExpectedUsingTwoAddFieldsStages(): string
     {
-        return [
-            (object) [
-                '$addFields' => (object) [
-                    'totalHomework' => (object) ['$sum' => '$homework'],
-                    'totalQuiz' => (object) ['$sum' => '$quiz'],
-                ],
-            ],
-            (object) [
-                '$addFields' => (object) [
-                    'totalScore' => (object) [
-                        '$add' => [
-                            '$totalHomework',
-                            '$totalQuiz',
-                            '$extraCredit',
-                        ],
-                    ],
-                ],
-            ],
-        ];
+        return <<<'JSON'
+        [
+            {
+                "$addFields": {
+                    "totalHomework": {
+                        "$sum": "$homework"
+                    },
+                    "totalQuiz": {
+                        "$sum": "$quiz"
+                    }
+                }
+            },
+            {
+                "$addFields": {
+                    "totalScore": {
+                        "$add": [
+                            "$totalHomework",
+                            "$totalQuiz",
+                            "$extraCredit"
+                        ]
+                    }
+                }
+            }
+        ]
+        JSON;
     }
 
     /** @see getExpectedAddingFieldsToAnEmbeddedDocument */
@@ -70,8 +77,8 @@ class AddFieldsStageTest extends PipelineTestCase
         $this->assertSamePipeline($expected, $pipeline);
     }
 
-    /** @see getExpectedUsingTwoAaddFieldsStages */
-    public function testUsingTwoAaddFieldsStages(): void
+    /** @see getExpectedUsingTwoAddFieldsStages */
+    public function testUsingTwoAddFieldsStages(): void
     {
         $this->markTestSkipped('$sum must accept arrayFieldPath and render it as a single value: https://jira.mongodb.org/browse/PHPLIB-1287');
 

@@ -7,17 +7,19 @@ namespace MongoDB\CodeGenerator;
 use MongoDB\Builder\Pipeline;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\CodeGenerator\Definition\OperatorDefinition;
-use MongoDB\CodeGenerator\TestCase\PipelineConverter;
 use MongoDB\Tests\Builder\PipelineTestCase;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\Type;
 use RuntimeException;
 use Throwable;
 
+use function json_encode;
 use function ksort;
-use function preg_replace_callback;
 use function sprintf;
 use function str_replace;
+use function ucwords;
+
+use const JSON_PRETTY_PRINT;
 
 /**
  * Generates a tests for all operators.
@@ -28,7 +30,7 @@ class OperatorTestGenerator extends OperatorGenerator
     {
         foreach ($this->getOperators($definition) as $operator) {
             // Skip operators without tests
-            if ($operator->testsFile === null) {
+            if (! $operator->tests) {
                 continue;
             }
 
@@ -42,8 +44,6 @@ class OperatorTestGenerator extends OperatorGenerator
 
     public function createClass(GeneratorDefinition $definition, OperatorDefinition $operator): PhpNamespace
     {
-        $tests = (new PipelineConverter())->getTestsAsRawPhp($operator->testsFile);
-
         $testNamespace = str_replace('MongoDB', 'MongoDB\\Tests', $definition->namespace);
         $testClass = $this->getOperatorClassName($definition, $operator) . 'Test';
 
@@ -56,7 +56,9 @@ class OperatorTestGenerator extends OperatorGenerator
         $class->setExtends(PipelineTestCase::class);
         $namespace->addUse(Pipeline::class);
 
-        foreach ($tests as $testName => $expected) {
+        foreach ($operator->tests as $test) {
+            $testName = str_replace(' ', '', ucwords(str_replace('$', '', $test->name)));
+
             if ($class->hasMethod('test' . $testName)) {
                 $testMethod = $class->getMethod('test' . $testName);
             } else {
@@ -78,26 +80,19 @@ class OperatorTestGenerator extends OperatorGenerator
                 ? $class->getMethod('getExpected' . $testName)
                 : $class->addMethod('getExpected' . $testName);
             $expectedMethod->setPublic();
-            $expectedMethod->setReturnType(Type::Array);
+            $expectedMethod->setReturnType(Type::String);
             $expectedMethod->setComment('THIS METHOD IS AUTO-GENERATED. ANY CHANGES WILL BE LOST!');
             $expectedMethod->addComment('');
             $expectedMethod->addComment('@see test' . $testName);
             $expectedMethod->addComment('');
-            $expectedMethod->addComment('@return list<array<string, mixed>>');
 
             // Replace namespace BSON classes with use statements
-            $expected = preg_replace_callback(
-                '/\\\?MongoDB\\\BSON\\\([A-Z][a-zA-Z0-9]+)/',
-                function ($matches) use ($namespace): string {
-                    $namespace->addUse($matches[0]);
-
-                    return $matches[1];
-                },
-                $expected,
-            );
+            $expected = json_encode($test->pipeline, JSON_PRETTY_PRINT);
 
             $expectedMethod->setBody(<<<PHP
-            return {$expected};
+            return <<<'JSON'
+            {$expected}
+            JSON;
             PHP);
         }
 
