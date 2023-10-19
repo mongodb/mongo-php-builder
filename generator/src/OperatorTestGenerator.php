@@ -8,7 +8,6 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\CodeGenerator\Definition\OperatorDefinition;
 use MongoDB\Tests\Builder\PipelineTestCase;
-use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\EnumType;
 use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpNamespace;
@@ -21,7 +20,6 @@ use function json_encode;
 use function ksort;
 use function sprintf;
 use function str_replace;
-use function strtoupper;
 use function ucwords;
 
 use const JSON_PRETTY_PRINT;
@@ -80,20 +78,22 @@ class OperatorTestGenerator extends OperatorGenerator
         $class->setComment('Test ' . $operator->name . ' ' . basename($definition->configFiles));
 
         foreach ($operator->tests as $test) {
-            $testName = str_replace(' ', '', ucwords(str_replace('$', '', $test->name)));
-            $caseName = str_replace(' ', '', ucwords(str_replace('$', '', $operator->name . ' ' . $test->name)));
+            $testName = 'test' . str_replace([' ', '-'], '', ucwords(str_replace('$', '', $test->name)));
+            $caseName = str_replace([' ', '-'], '', ucwords(str_replace('$', '', $operator->name . ' ' . $test->name)));
 
-            $constant = $dataEnum->addCase($caseName, new Literal('<<<\'JSON\'' . "\n" . json_encode($test->pipeline, JSON_PRETTY_PRINT) . "\n" . 'JSON'));
+            $case = $dataEnum->addCase($caseName, new Literal('<<<\'JSON\'' . "\n" . json_encode($test->pipeline, JSON_PRETTY_PRINT) . "\n" . 'JSON'));
+            $case->setComment($test->name);
             if ($test->link) {
-                $constant->setComment('@see ' . $test->link);
+                $case->addComment('');
+                $case->addComment('@see ' . $test->link);
             }
 
             $caseName = self::DATA_ENUM . '::' . $caseName;
 
-            if ($class->hasMethod('test' . $testName)) {
-                $testMethod = $class->getMethod('test' . $testName);
+            if ($class->hasMethod($testName)) {
+                $testMethod = $class->getMethod($testName);
             } else {
-                $testMethod = $class->addMethod('test' . $testName);
+                $testMethod = $class->addMethod($testName);
                 $testMethod->setBody(<<<PHP
                 \$pipeline = new Pipeline();
 

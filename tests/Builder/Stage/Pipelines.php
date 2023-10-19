@@ -10,7 +10,11 @@ namespace MongoDB\Tests\Builder\Stage;
 
 enum Pipelines: string
 {
-    /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#using-two--addfields-stages */
+    /**
+     * Using Two $addFields Stages
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#using-two--addfields-stages
+     */
     case AddFieldsUsingTwoAddFieldsStages = <<<'JSON'
     [
         {
@@ -37,7 +41,11 @@ enum Pipelines: string
     ]
     JSON;
 
-    /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#adding-fields-to-an-embedded-document */
+    /**
+     * Adding Fields to an Embedded Document
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/#adding-fields-to-an-embedded-document
+     */
     case AddFieldsAddingFieldsToAnEmbeddedDocument = <<<'JSON'
     [
         {

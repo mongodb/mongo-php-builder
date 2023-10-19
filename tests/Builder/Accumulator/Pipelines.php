@@ -10,7 +10,11 @@ namespace MongoDB\Tests\Builder\Accumulator;
 
 enum Pipelines: string
 {
-    /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/#use--accumulator-to-implement-the--avg-operator */
+    /**
+     * Use $accumulator to Implement the $avg Operator
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/#use--accumulator-to-implement-the--avg-operator
+     */
     case AccumulatorUseAccumulatorToImplementTheAvgOperator = <<<'JSON'
     [
         {
@@ -41,7 +45,11 @@ enum Pipelines: string
     ]
     JSON;
 
-    /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/#use-initargs-to-vary-the-initial-state-by-group */
+    /**
+     * Use initArgs to Vary the Initial State by Group
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/accumulator/#use-initargs-to-vary-the-initial-state-by-group
+     */
     case AccumulatorUseInitArgsToVaryTheInitialStateByGroup = <<<'JSON'
     [
         {
@@ -78,7 +86,11 @@ enum Pipelines: string
     ]
     JSON;
 
-    /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/#use-in--group-stage */
+    /**
+     * Use in $group Stage
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/#use-in--group-stage
+     */
     case AddToSetUseInGroupStage = <<<'JSON'
     [
         {
@@ -103,7 +115,11 @@ enum Pipelines: string
     ]
     JSON;
 
-    /** @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/#use-in--setwindowfields-stage */
+    /**
+     * Use in $setWindowFields Stage
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/addToSet/#use-in--setwindowfields-stage
+     */
     case AddToSetUseInSetWindowFieldsStage = <<<'JSON'
     [
         {
