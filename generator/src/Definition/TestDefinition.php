@@ -12,6 +12,7 @@ final class TestDefinition
 {
     public function __construct(
         public string $name,
+        /** @var list<object> */
         public array $pipeline,
         public string|null $link = null,
     ) {
