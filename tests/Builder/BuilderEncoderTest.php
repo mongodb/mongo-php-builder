@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder;
 
-use App\Import\Value\Field\Fieldtype;
 use Generator;
 use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\BuilderEncoder;
