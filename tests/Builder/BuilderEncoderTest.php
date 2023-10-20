@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder;
 
+use App\Import\Value\Field\Fieldtype;
 use Generator;
 use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\BuilderEncoder;
@@ -274,6 +275,21 @@ class BuilderEncoderTest extends TestCase
                     ],
                 ],
             ],
+        ];
+
+        $this->assertSamePipeline($expected, $pipeline);
+    }
+
+    public function testUnwind(): void
+    {
+        $pipeline = new Pipeline(
+            Stage::unwind('$fieldgroups'),
+            Stage::unwind('$fieldgroups.fields'),
+        );
+
+        $expected = [
+            ['$unwind' => '$fielgroups'],
+            ['$unwind' => '$fielgroups.fields'],
         ];
 
         $this->assertSamePipeline($expected, $pipeline);
