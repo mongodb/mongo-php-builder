@@ -53,32 +53,29 @@ class CombinedFieldQuery implements FieldQueryInterface
                 $operator = $fieldQuery->getOperator();
             } elseif (is_array($fieldQuery)) {
                 if (count($fieldQuery) !== 1) {
-                    throw new InvalidArgumentException(sprintf('Operator array must contain exactly one key starting with $. %d given.', count($fieldQuery)));
+                    throw new InvalidArgumentException(sprintf('Operator array must contain exactly one key, %d given', count($fieldQuery)));
                 }
 
                 $operator = array_key_first($fieldQuery);
                 if (! str_starts_with($operator, '$')) {
-                    throw new InvalidArgumentException(sprintf('Operator array must contain exactly one key starting with $. "%s" given.', $operator));
+                    throw new InvalidArgumentException(sprintf('Operator array must contain exactly one key starting with $. "%s" given', $operator));
                 }
             } elseif ($fieldQuery instanceof stdClass) {
                 $fieldQuery = get_object_vars($fieldQuery);
                 if (count($fieldQuery) !== 1) {
-                    throw new InvalidArgumentException(sprintf('Operator object must contain exactly one key starting with $. %d given.', count($fieldQuery)));
+                    throw new InvalidArgumentException(sprintf('Operator object must contain exactly one key. %d given', count($fieldQuery)));
                 }
 
                 $operator = array_key_first($fieldQuery);
                 if (! str_starts_with($operator, '$')) {
-                    throw new InvalidArgumentException(sprintf('Operator object must contain exactly one key starting with $. "%s" given.', $operator));
+                    throw new InvalidArgumentException(sprintf('Operator object must contain exactly one key starting with $. "%s" given', $operator));
                 }
-            } elseif ($fieldQuery instanceof Serializable) {
-                // Unknown operator, let the server handle it
-                continue;
             } else {
-                throw new InvalidArgumentException(sprintf('Expected filters to be a list of field query operators, BSON documents, array or stdClass, %s given.', get_debug_type($fieldQuery)));
+                throw new InvalidArgumentException(sprintf('Expected filters to be a list of field query operators, array or stdClass, %s given', get_debug_type($fieldQuery)));
             }
 
             if (array_key_exists($operator, $seenOperators)) {
-                throw new InvalidArgumentException(sprintf('Duplicate operator "%s" detected.', $operator));
+                throw new InvalidArgumentException(sprintf('Duplicate operator "%s" detected', $operator));
             }
 
             $seenOperators[$operator] = true;

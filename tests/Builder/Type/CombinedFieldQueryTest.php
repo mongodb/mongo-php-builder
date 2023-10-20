@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MongoDB\Tests\Builder\Type;
 
 use Generator;
-use MongoDB\BSON\Serializable;
 use MongoDB\Builder\Query\EqOperator;
 use MongoDB\Builder\Query\GtOperator;
 use MongoDB\Builder\Type\CombinedFieldQuery;
@@ -14,28 +13,22 @@ use PHPUnit\Framework\TestCase;
 
 class CombinedFieldQueryTest extends TestCase
 {
-    public function testEmptyFieldQueries(): void
+    public function testEmpty(): void
     {
         $fieldQueries = new CombinedFieldQuery([]);
 
         $this->assertSame([], $fieldQueries->fieldQueries);
     }
 
-    public function testFieldQueries(): void
+    public function testSupportedTypes(): void
     {
         $fieldQueries = new CombinedFieldQuery([
             new EqOperator(1),
             ['$gt' => 1],
             (object) ['$lt' => 1],
-            new class implements Serializable {
-                public function bsonSerialize(): array
-                {
-                    return ['$gte' => 1];
-                }
-            },
         ]);
 
-        $this->assertCount(4, $fieldQueries->fieldQueries);
+        $this->assertCount(3, $fieldQueries->fieldQueries);
     }
 
     public function testFlattenCombinedFieldQueries(): void
@@ -55,24 +48,27 @@ class CombinedFieldQueryTest extends TestCase
     }
 
     /** @dataProvider provideInvalidFieldQuery */
-    public function testRejectInvalidFieldQueries($invalidQuery): void
+    public function testRejectInvalidFieldQueries(mixed $invalidQuery, string $message = '-'): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($message);
 
         new CombinedFieldQuery([$invalidQuery]);
     }
 
     public static function provideInvalidFieldQuery(): Generator
     {
-        yield 'int' => [1];
-        yield 'float' => [1.1];
-        yield 'string' => ['foo'];
-        yield 'bool' => [true];
-        yield 'null' => [null];
-        yield 'empy array' => [[]];
-        yield 'empy object' => [(object) []];
-        yield 'not operator array' => [['eq' => 1]];
-        yield 'not operator object' => [(object) ['eq' => 1]];
+        yield 'int' => [1, 'Expected filters to be a list of field query operators, array or stdClass, int given'];
+        yield 'float' => [1.1, 'Expected filters to be a list of field query operators, array or stdClass, float given'];
+        yield 'string' => ['foo', 'Expected filters to be a list of field query operators, array or stdClass, string given'];
+        yield 'bool' => [true, 'Expected filters to be a list of field query operators, array or stdClass, bool given'];
+        yield 'null' => [null, 'Expected filters to be a list of field query operators, array or stdClass, null given'];
+        yield 'empty array' => [[], 'Operator array must contain exactly one key, 0 given'];
+        yield 'array with two keys' => [['$eq' => 1, '$ne' => 2], 'Operator array must contain exactly one key, 2 given'];
+        yield 'array key without $' => [['eq' => 1], 'Operator array must contain exactly one key starting with $. "eq" given'];
+        yield 'empty object' => [(object) [], 'Operator object must contain exactly one key. 0 given'];
+        yield 'object with two keys' => [(object) ['$eq' => 1, '$ne' => 2], 'Operator object must contain exactly one key. 2 given'];
+        yield 'object key without $' => [(object) ['eq' => 1], 'Operator object must contain exactly one key starting with $. "eq" given'];
     }
 
     /**
@@ -83,7 +79,7 @@ class CombinedFieldQueryTest extends TestCase
     public function testRejectDuplicateOperator(array $fieldQueries): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Duplicate operator "$eq" detected.');
+        $this->expectExceptionMessage('Duplicate operator "$eq" detected');
 
         new CombinedFieldQuery([
             ['$eq' => 1],
