@@ -287,8 +287,45 @@ class BuilderEncoderTest extends TestCase
         );
 
         $expected = [
-            ['$unwind' => '$fielgroups'],
-            ['$unwind' => '$fielgroups.fields'],
+            ['$unwind' => '$fieldgroups'],
+            ['$unwind' => '$fieldgroups.fields'],
+        ];
+
+        $this->assertSamePipeline($expected, $pipeline);
+    }
+
+    public function testComplexGroupStage(): void
+    {
+        $pipeline = new Pipeline(
+            Stage::group(
+                _id: null,
+                results: Accumulator::push(
+                    Expression::arrayToObject([[
+                       'k' => Expression::toString(Expression::fieldPath('key')),
+                       'v' => Expression::fieldPath('value'),
+                    ]]),
+                ),
+            ),
+        );
+
+        $expected = [
+            [
+                '$group' => [
+                    '_id' => null,
+                    'results' => [
+                        '$push' => [
+                            '$arrayToObject' => [
+                                [
+                                    [
+                                        'k' => ['$toString' => '$key'],
+                                        'v' => '$value',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $this->assertSamePipeline($expected, $pipeline);
