@@ -282,13 +282,15 @@ class BuilderEncoderTest extends TestCase
     public function testUnwind(): void
     {
         $pipeline = new Pipeline(
-            Stage::unwind('$fieldgroups'),
-            Stage::unwind('$fieldgroups.fields'),
+            Stage::unwind('$foo'),
+            Stage::unwind('$foo.bar'),
+            Stage::unwind(Expression::arrayFieldPath('foo.bar.baz')),
         );
 
         $expected = [
-            ['$unwind' => '$fieldgroups'],
-            ['$unwind' => '$fieldgroups.fields'],
+            ['$unwind' => '$foo'],
+            ['$unwind' => '$foo.bar'],
+            ['$unwind' => '$foo.bar.baz'],
         ];
 
         $this->assertSamePipeline($expected, $pipeline);
