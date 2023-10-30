@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
-use MongoDB\BSON\Serializable;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
 
@@ -25,10 +24,10 @@ use function str_starts_with;
  */
 class CombinedFieldQuery implements FieldQueryInterface
 {
-    /** @var list<FieldQueryInterface|Serializable|array|stdClass> $fieldQueries */
+    /** @var list<FieldQueryInterface|array|stdClass> $fieldQueries */
     public readonly array $fieldQueries;
 
-    /** @param list<FieldQueryInterface|Serializable|array|stdClass> $fieldQueries */
+    /** @param list<FieldQueryInterface|array|stdClass> $fieldQueries */
     public function __construct(array $fieldQueries)
     {
         if (! array_is_list($fieldQueries)) {
