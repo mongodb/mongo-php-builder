@@ -667,6 +667,7 @@ trait FactoryTrait
      * Alias for $project stage that removes or excludes fields.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/unset/
+     * @no-named-arguments
      * @param FieldPath|non-empty-string ...$field
      */
     public static function unset(FieldPath|string ...$field): UnsetStage

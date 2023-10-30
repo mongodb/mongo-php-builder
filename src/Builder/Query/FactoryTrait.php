@@ -33,6 +33,7 @@ trait FactoryTrait
      * Matches arrays that contain all elements specified in the query.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/all/
+     * @no-named-arguments
      * @param Type|array|bool|float|int|non-empty-string|null|stdClass ...$value
      */
     public static function all(Type|stdClass|array|bool|float|int|null|string ...$value): AllOperator
@@ -44,6 +45,7 @@ trait FactoryTrait
      * Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/and/
+     * @no-named-arguments
      * @param Document|QueryInterface|Serializable|array|stdClass ...$expression
      */
     public static function and(Document|Serializable|QueryInterface|stdClass|array ...$expression): AndOperator
@@ -398,6 +400,7 @@ trait FactoryTrait
      * Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/nor/
+     * @no-named-arguments
      * @param Document|QueryInterface|Serializable|array|stdClass ...$expression
      */
     public static function nor(Document|Serializable|QueryInterface|stdClass|array ...$expression): NorOperator
@@ -420,6 +423,7 @@ trait FactoryTrait
      * Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/or/
+     * @no-named-arguments
      * @param Document|QueryInterface|Serializable|array|stdClass ...$expression
      */
     public static function or(Document|Serializable|QueryInterface|stdClass|array ...$expression): OrOperator
