@@ -83,11 +83,11 @@ return $expressions + [
     ],
     'fieldQuery' => [
         'returnType' => Type\FieldQueryInterface::class,
-        'acceptedTypes' => [Type\FieldQueryInterface::class, ...$bsonTypes['any']],
+        'acceptedTypes' => [Type\FieldQueryInterface::class, BSON\Regex::class, 'bool', 'int', 'float', 'string', 'array', 'null', stdClass::class],
     ],
     'query' => [
         'returnType' => Type\QueryInterface::class,
-        'acceptedTypes' => [Type\QueryInterface::class, ...$bsonTypes['object']],
+        'acceptedTypes' => [Type\QueryInterface::class, 'array'],
     ],
     'projection' => [
         'returnType' => Type\ProjectionInterface::class,

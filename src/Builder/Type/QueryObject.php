@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
-use MongoDB\BSON\Document;
-use MongoDB\BSON\Regex;
+use MongoDB\BSON\Type;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
 
 use function array_is_list;
+use function array_key_first;
 use function count;
 use function is_array;
 use function sprintf;
+use function str_starts_with;
 
 /**
  * Helper class to validate query objects.
@@ -24,7 +25,8 @@ final class QueryObject implements QueryInterface
 {
     public readonly array $queries;
 
-    public static function create(QueryInterface|FieldQueryInterface|array|stdClass|string|int|float|bool|Regex|Document|null ...$queries): QueryInterface
+    /** @param array<QueryInterface|FieldQueryInterface|Type|array|stdClass|int|float|string|bool> $queries */
+    public static function create(array $queries): QueryInterface
     {
         // We don't wrap a single query in a QueryObject
         if (count($queries) === 1 && isset($queries[0]) && $queries[0] instanceof QueryInterface) {
@@ -37,6 +39,17 @@ final class QueryObject implements QueryInterface
     /** @param array<object|array> $queriesOrArrayOfQueries */
     private function __construct(array $queriesOrArrayOfQueries)
     {
+        // If the first element is an array and not an operator, we assume variadic arguments were not used
+        if (
+            count($queriesOrArrayOfQueries) === 1 &&
+            isset($queriesOrArrayOfQueries[0]) &&
+            is_array($queriesOrArrayOfQueries[0]) &&
+            count($queriesOrArrayOfQueries[0]) > 0 &&
+            ! str_starts_with((string) array_key_first($queriesOrArrayOfQueries[0]), '$')
+        ) {
+            $queriesOrArrayOfQueries = $queriesOrArrayOfQueries[0];
+        }
+
         $seenQueryOperators = [];
         $queries = [];
 

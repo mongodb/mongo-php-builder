@@ -73,6 +73,7 @@ final class OperatorFactoryGenerator extends OperatorGenerator
                     // @see https://psalm.dev/docs/running_psalm/issues/NamedArgumentNotAllowed/
                     $method->addComment('@no-named-arguments');
                 }
+
                 $method->setVariadic();
                 $method->addComment('@param ' . $type->doc . ' ...$' . $argument->name . rtrim(' ' . $argument->description));
                 $args[] = '...$' . $argument->name;

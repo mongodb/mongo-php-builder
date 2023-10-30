@@ -76,7 +76,7 @@ class OperatorClassGenerator extends OperatorGenerator
                 $constuctor->setVariadic();
                 $constuctor->addComment('@param ' . $type->doc . ' ...$' . $argument->name . rtrim(' ' . $argument->description));
 
-                if ($argument->variadicMin !== null) {
+                if ($argument->variadicMin > 0) {
                     $constuctor->addBody(<<<PHP
                     if (\count(\${$argument->name}) < {$argument->variadicMin}) {
                         throw new \InvalidArgumentException(\sprintf('Expected at least %d values for \${$argument->name}, got %d.', {$argument->variadicMin}, \count(\${$argument->name})));
@@ -140,11 +140,10 @@ class OperatorClassGenerator extends OperatorGenerator
 
                 if ($type->query) {
                     $namespace->addUseFunction('is_array');
-                    $namespace->addUseFunction('is_object');
                     $namespace->addUse(QueryObject::class);
                     $constuctor->addBody(<<<PHP
-                    if (is_array(\${$argument->name}) || is_object(\${$argument->name})) {
-                        \${$argument->name} = QueryObject::create(...\${$argument->name});
+                    if (is_array(\${$argument->name})) {
+                        \${$argument->name} = QueryObject::create(\${$argument->name});
                     }
 
                     PHP);
