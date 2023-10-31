@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace MongoDB\Tests\Builder\Type;
 
 use Generator;
+use MongoDB\BSON\Decimal128;
+use MongoDB\BSON\Int64;
 use MongoDB\BSON\Regex;
 use MongoDB\Builder\Query\CommentOperator;
 use MongoDB\Builder\Query\EqOperator;
@@ -64,6 +66,8 @@ class QueryObjectTest extends TestCase
         yield 'string' => [['foo' => 'bar']];
         yield 'bool' => [['foo' => true]];
         yield 'null' => [['foo' => null]];
+        yield 'decimal128' => [['foo' => new Decimal128('1.1')]];
+        yield 'int64' => [[1 => new Int64(1)]];
         yield 'regex' => [['foo' => new Regex('foo')]];
         yield 'object' => [['foo' => (object) ['bar' => 'baz']]];
         yield 'list' => [['foo' => ['bar', 'baz']]];

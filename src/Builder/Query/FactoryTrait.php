@@ -413,10 +413,10 @@ trait FactoryTrait
      * Inverts the effect of a query expression and returns documents that do not match the query expression.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/not/
-     * @param FieldQueryInterface|Regex|array|bool|float|int|non-empty-string|null|stdClass $expression
+     * @param Decimal128|FieldQueryInterface|Int64|Regex|array|bool|float|int|non-empty-string|null|stdClass $expression
      */
     public static function not(
-        Regex|FieldQueryInterface|stdClass|array|bool|float|int|null|string $expression,
+        Decimal128|Int64|Regex|FieldQueryInterface|stdClass|array|bool|float|int|null|string $expression,
     ): NotOperator
     {
         return new NotOperator($expression);
