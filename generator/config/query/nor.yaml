@@ -12,4 +12,4 @@ arguments:
         type:
             - query
         variadic: array
-        variadicMin: 2
+        variadicMin: 1
