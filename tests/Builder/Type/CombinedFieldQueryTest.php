@@ -63,12 +63,12 @@ class CombinedFieldQueryTest extends TestCase
         yield 'string' => ['foo', 'Expected filters to be a list of field query operators, array or stdClass, string given'];
         yield 'bool' => [true, 'Expected filters to be a list of field query operators, array or stdClass, bool given'];
         yield 'null' => [null, 'Expected filters to be a list of field query operators, array or stdClass, null given'];
-        yield 'empty array' => [[], 'Operator array must contain exactly one key, 0 given'];
-        yield 'array with two keys' => [['$eq' => 1, '$ne' => 2], 'Operator array must contain exactly one key, 2 given'];
-        yield 'array key without $' => [['eq' => 1], 'Operator array must contain exactly one key starting with $. "eq" given'];
-        yield 'empty object' => [(object) [], 'Operator object must contain exactly one key. 0 given'];
-        yield 'object with two keys' => [(object) ['$eq' => 1, '$ne' => 2], 'Operator object must contain exactly one key. 2 given'];
-        yield 'object key without $' => [(object) ['eq' => 1], 'Operator object must contain exactly one key starting with $. "eq" given'];
+        yield 'empty array' => [[], 'Operator must contain exactly one key, 0 given'];
+        yield 'array with two keys' => [['$eq' => 1, '$ne' => 2], 'Operator must contain exactly one key, 2 given'];
+        yield 'array key without $' => [['eq' => 1], 'Operator must contain exactly one key starting with $, "eq" given'];
+        yield 'empty object' => [(object) [], 'Operator must contain exactly one key, 0 given'];
+        yield 'object with two keys' => [(object) ['$eq' => 1, '$ne' => 2], 'Operator must contain exactly one key, 2 given'];
+        yield 'object key without $' => [(object) ['eq' => 1], 'Operator must contain exactly one key starting with $, "eq" given'];
     }
 
     /**
