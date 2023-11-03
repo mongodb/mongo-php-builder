@@ -24,7 +24,7 @@ abstract class PipelineTestCase extends TestCase
         $codec = new BuilderEncoder();
         $actual = $codec->encode($pipeline);
         // Normalize with BSON round-trip
-        $actual = Document::fromPHP(['pipeline' => $actual])->toRelaxedExtendedJSON();
+        $actual = Document::fromPHP(['pipeline' => $actual])->toCanonicalExtendedJSON();
 
         self::assertJsonStringEqualsJsonString($expected, $actual);
     }

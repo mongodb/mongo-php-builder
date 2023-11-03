@@ -342,8 +342,8 @@ class BuilderEncoderTest extends TestCase
 
         // Normalize with BSON round-trip
         // BSON Documents doesn't support top-level arrays.
-        $actual = Document::fromPHP(['root' => $actual])->toRelaxedExtendedJSON();
-        $expected = Document::fromPHP(['root' => $expected])->toRelaxedExtendedJSON();
+        $actual = Document::fromPHP(['root' => $actual])->toCanonicalExtendedJSON();
+        $expected = Document::fromPHP(['root' => $expected])->toCanonicalExtendedJSON();
 
         self::assertJsonStringEqualsJsonString($expected, $actual, var_export($actual, true));
     }
