@@ -4,6 +4,7 @@ link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/
 type:
     - accumulator
     - window
+    - resolvesToAny
 encode: single
 description: |
     Returns the result of an expression for the first document in a group or window.

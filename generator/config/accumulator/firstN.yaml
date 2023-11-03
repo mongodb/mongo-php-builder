@@ -4,6 +4,7 @@ link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/firstN
 type:
     - accumulator
     - window
+    - resolvesToAny
 encode: object
 description: |
     Returns a specified number of elements from the beginning of an array. Distinct from the $firstN accumulator.

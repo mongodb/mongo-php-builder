@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Accumulator;
 
 use MongoDB\BSON\Type;
+use MongoDB\Builder\Expression\ResolvesToAny;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
@@ -22,7 +23,7 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/last/
  */
-class LastAccumulator implements AccumulatorInterface, WindowInterface, OperatorInterface
+class LastAccumulator implements AccumulatorInterface, WindowInterface, ResolvesToAny, OperatorInterface
 {
     public const ENCODE = Encode::Single;
 

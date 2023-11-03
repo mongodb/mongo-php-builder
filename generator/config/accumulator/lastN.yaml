@@ -3,6 +3,7 @@ name: $lastN
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/lastN/'
 type:
     - window
+    - resolvesToAny
 encode: object
 description: |
     Returns a specified number of elements from the end of an array. Distinct from the $lastN accumulator.

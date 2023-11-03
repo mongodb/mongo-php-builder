@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Accumulator;
 
 use MongoDB\BSON\PackedArray;
+use MongoDB\Builder\Expression\ResolvesToAny;
 use MongoDB\Builder\Expression\ResolvesToArray;
 use MongoDB\Builder\Expression\ResolvesToInt;
 use MongoDB\Builder\Type\AccumulatorInterface;
@@ -26,7 +27,7 @@ use function is_array;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/firstN/
  */
-class FirstNAccumulator implements AccumulatorInterface, WindowInterface, OperatorInterface
+class FirstNAccumulator implements AccumulatorInterface, WindowInterface, ResolvesToAny, OperatorInterface
 {
     public const ENCODE = Encode::Object;
 
