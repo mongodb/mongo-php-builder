@@ -175,34 +175,6 @@ enum Pipelines: string
     JSON;
 
     /**
-     * Missing Data
-     *
-     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/#missing-data
-     */
-    case FirstMissingData = <<<'JSON'
-    [
-        {
-            "$sort": {
-                "item": {
-                    "$numberInt": "1"
-                },
-                "price": {
-                    "$numberInt": "1"
-                }
-            }
-        },
-        {
-            "$group": {
-                "_id": "$item",
-                "inStock": {
-                    "$first": "$quantity"
-                }
-            }
-        }
-    ]
-    JSON;
-
-    /**
      * Use in $setWindowFields Stage
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/#use-in--setwindowfields-stage

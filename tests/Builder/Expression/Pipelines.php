@@ -10,6 +10,19 @@ namespace MongoDB\Tests\Builder\Expression;
 
 enum Pipelines: string
 {
+    /** Use in $addFields Stage */
+    case FirstUseInAddFieldsStage = <<<'JSON'
+    [
+        {
+            "$addFields": {
+                "firstItem": {
+                    "$first": "$items"
+                }
+            }
+        }
+    ]
+    JSON;
+
     /**
      * Example
      *
@@ -26,6 +39,19 @@ enum Pipelines: string
                         },
                         "input": "$score"
                     }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /** Use in $addFields Stage */
+    case LastUseInAddFieldsStage = <<<'JSON'
+    [
+        {
+            "$addFields": {
+                "lastItem": {
+                    "$last": "$items"
                 }
             }
         }

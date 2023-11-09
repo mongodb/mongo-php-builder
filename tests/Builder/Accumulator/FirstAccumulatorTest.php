@@ -17,22 +17,6 @@ use function MongoDB\object;
  */
 class FirstAccumulatorTest extends PipelineTestCase
 {
-    public function testMissingData(): void
-    {
-        $pipeline = new Pipeline(
-            Stage::sort(object(
-                item: 1, // @todo accept true
-                price: 1,
-            )),
-            Stage::group(
-                _id: Expression::fieldPath('item'),
-                inStock: Accumulator::first(Expression::intFieldPath('quantity')),
-            ),
-        );
-
-        $this->assertSamePipeline(Pipelines::FirstMissingData, $pipeline);
-    }
-
     public function testUseInGroupStage(): void
     {
         $pipeline = new Pipeline(

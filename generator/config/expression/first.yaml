@@ -11,3 +11,11 @@ arguments:
         name: expression
         type:
             - resolvesToArray
+tests:
+    -
+        name: 'Use in $addFields Stage'
+        pipeline:
+            -
+                $addFields:
+                    firstItem:
+                        $first: '$items'

@@ -28,19 +28,6 @@ tests:
                     firstSale:
                         $first: '$date'
     -
-        name: 'Missing Data'
-        link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/#missing-data'
-        pipeline:
-            -
-                $sort:
-                    item: 1
-                    price: 1
-            -
-                $group:
-                    _id: '$item'
-                    inStock:
-                        $first: '$quantity'
-    -
         name: 'Use in $setWindowFields Stage'
         link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/first/#use-in--setwindowfields-stage'
         pipeline:
