@@ -136,6 +136,36 @@ enum Pipelines: string
     ]
     JSON;
 
+    /** Using $or with $elemMatch */
+    case ElemMatchUsingOrWithElemMatch = <<<'JSON'
+    [
+        {
+            "$match": {
+                "game": {
+                    "$elemMatch": {
+                        "$or": [
+                            {
+                                "score": {
+                                    "$gt": {
+                                        "$numberInt": "10"
+                                    }
+                                }
+                            },
+                            {
+                                "score": {
+                                    "$lt": {
+                                        "$numberInt": "5"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
     /**
      * Perform a LIKE Match
      *

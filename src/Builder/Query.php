@@ -51,11 +51,12 @@ final class Query
      */
     public static function elemMatch(QueryInterface|FieldQueryInterface|Type|stdClass|array|bool|float|int|string|null ...$query): ElemMatchOperator
     {
-        // $elemMatch accept a query or a field query
-        if (array_is_list($query)) {
+        // $elemMatch accepts field query without field name ...
+        if (array_is_list($query) && isset($query[0]) && ! $query[0] instanceof QueryInterface) {
             return self::generatedElemMatch(new CombinedFieldQuery($query));
         }
 
+        // ... or a query
         return self::generatedElemMatch(QueryObject::create($query));
     }
 

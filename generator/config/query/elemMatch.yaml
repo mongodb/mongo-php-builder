@@ -44,3 +44,17 @@ tests:
                         $elemMatch:
                             product:
                                 $ne: 'xyz'
+    -
+        name: 'Using $or with $elemMatch'
+        pipeline:
+            -
+                $match:
+                    game:
+                        $elemMatch:
+                            $or:
+                                -
+                                    score:
+                                        $gt: 10
+                                -
+                                    score:
+                                        $lt: 5

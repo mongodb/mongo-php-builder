@@ -54,4 +54,20 @@ class ElemMatchOperatorTest extends PipelineTestCase
 
         $this->assertSamePipeline(Pipelines::ElemMatchSingleQueryCondition, $pipeline);
     }
+
+    public function testUsingOrWithElemMatch(): void
+    {
+        $pipeline = new Pipeline(
+            Stage::match(
+                game: Query::elemMatch(
+                    Query::or(
+                        Query::query(score: Query::gt(10)),
+                        Query::query(score: Query::lt(5)),
+                    ),
+                ),
+            ),
+        );
+
+        $this->assertSamePipeline(Pipelines::ElemMatchUsingOrWithElemMatch, $pipeline);
+    }
 }
