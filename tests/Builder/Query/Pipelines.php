@@ -11,6 +11,132 @@ namespace MongoDB\Tests\Builder\Query;
 enum Pipelines: string
 {
     /**
+     * Use $all to Match Values
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/all/#use--all-to-match-values
+     */
+    case AllUseAllToMatchValues = <<<'JSON'
+    [
+        {
+            "$match": {
+                "tags": {
+                    "$all": [
+                        "appliance",
+                        "school",
+                        "book"
+                    ]
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Use $all with $elemMatch
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/all/#use--all-with--elemmatch
+     */
+    case AllUseAllWithElemMatch = <<<'JSON'
+    [
+        {
+            "$match": {
+                "qty": {
+                    "$all": [
+                        {
+                            "$elemMatch": {
+                                "size": "M",
+                                "num": {
+                                    "$gt": {
+                                        "$numberInt": "50"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "$elemMatch": {
+                                "num": {
+                                    "$numberInt": "100"
+                                },
+                                "color": "green"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Element Match
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/#element-match
+     */
+    case ElemMatchElementMatch = <<<'JSON'
+    [
+        {
+            "$match": {
+                "results": {
+                    "$elemMatch": {
+                        "$gte": {
+                            "$numberInt": "80"
+                        },
+                        "$lt": {
+                            "$numberInt": "85"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Array of Embedded Documents
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/#array-of-embedded-documents
+     */
+    case ElemMatchArrayOfEmbeddedDocuments = <<<'JSON'
+    [
+        {
+            "$match": {
+                "results": {
+                    "$elemMatch": {
+                        "product": "xyz",
+                        "score": {
+                            "$gte": {
+                                "$numberInt": "8"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Single Query Condition
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/#single-query-condition
+     */
+    case ElemMatchSingleQueryCondition = <<<'JSON'
+    [
+        {
+            "$match": {
+                "results": {
+                    "$elemMatch": {
+                        "product": {
+                            "$ne": "xyz"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
      * Perform a LIKE Match
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/regex/#perform-a-like-match

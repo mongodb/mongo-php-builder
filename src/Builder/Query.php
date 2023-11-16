@@ -6,13 +6,16 @@ namespace MongoDB\Builder;
 
 use MongoDB\BSON\Regex;
 use MongoDB\BSON\Type;
+use MongoDB\Builder\Query\ElemMatchOperator;
 use MongoDB\Builder\Query\RegexOperator;
+use MongoDB\Builder\Type\CombinedFieldQuery;
 use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\QueryInterface;
 use MongoDB\Builder\Type\QueryObject;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
 
+use function array_is_list;
 use function is_string;
 
 /**
@@ -24,6 +27,7 @@ final class Query
 {
     use Query\FactoryTrait {
         regex as private generatedRegex;
+        elemMatch as private generatedElemMatch;
     }
 
     /**
@@ -38,6 +42,21 @@ final class Query
         }
 
         return self::generatedRegex($regex);
+    }
+
+    /**
+     * The $elemMatch operator matches documents that contain an array field with at least one element that matches all the specified query criteria.
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/
+     */
+    public static function elemMatch(QueryInterface|FieldQueryInterface|Type|stdClass|array|bool|float|int|string|null ...$query): ElemMatchOperator
+    {
+        // $elemMatch accept a query or a field query
+        if (array_is_list($query)) {
+            return self::generatedElemMatch(new CombinedFieldQuery($query));
+        }
+
+        return self::generatedElemMatch(QueryObject::create($query));
     }
 
     public static function query(QueryInterface|FieldQueryInterface|Type|stdClass|array|bool|float|int|string|null ...$query): QueryInterface
