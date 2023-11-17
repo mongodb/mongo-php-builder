@@ -19,8 +19,10 @@ class ElemMatchOperatorTest extends PipelineTestCase
         $pipeline = new Pipeline(
             Stage::match(
                 results: Query::elemMatch(
-                    product: 'xyz',
-                    score: Query::gte(8),
+                    Query::query(
+                        product: 'xyz',
+                        score: Query::gte(8),
+                    ),
                 ),
             ),
         );
@@ -33,8 +35,10 @@ class ElemMatchOperatorTest extends PipelineTestCase
         $pipeline = new Pipeline(
             Stage::match(
                 results: Query::elemMatch(
-                    Query::gte(80),
-                    Query::lt(85),
+                    Query::fieldQuery(
+                        Query::gte(80),
+                        Query::lt(85),
+                    ),
                 ),
             ),
         );
@@ -42,12 +46,27 @@ class ElemMatchOperatorTest extends PipelineTestCase
         $this->assertSamePipeline(Pipelines::ElemMatchElementMatch, $pipeline);
     }
 
+    public function testSingleFieldOperator(): void
+    {
+        $pipeline = new Pipeline(
+            Stage::match(
+                results: Query::elemMatch(
+                    Query::gt(10),
+                ),
+            ),
+        );
+
+        $this->assertSamePipeline(Pipelines::ElemMatchSingleFieldOperator, $pipeline);
+    }
+
     public function testSingleQueryCondition(): void
     {
         $pipeline = new Pipeline(
             Stage::match(
                 results: Query::elemMatch(
-                    product: Query::ne('xyz'),
+                    Query::query(
+                        product: Query::ne('xyz'),
+                    ),
                 ),
             ),
         );

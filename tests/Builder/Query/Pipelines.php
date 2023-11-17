@@ -166,6 +166,23 @@ enum Pipelines: string
     ]
     JSON;
 
+    /** Single field operator */
+    case ElemMatchSingleFieldOperator = <<<'JSON'
+    [
+        {
+            "$match": {
+                "results": {
+                    "$elemMatch": {
+                        "$gt": {
+                            "$numberInt": "10"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
     /**
      * Perform a LIKE Match
      *

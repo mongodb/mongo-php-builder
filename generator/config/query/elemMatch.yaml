@@ -58,3 +58,11 @@ tests:
                                 -
                                     score:
                                         $lt: 5
+    -
+        name: 'Single field operator'
+        pipeline:
+            -
+                $match:
+                    results:
+                        $elemMatch:
+                            $gt: 10

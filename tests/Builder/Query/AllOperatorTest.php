@@ -31,12 +31,16 @@ class AllOperatorTest extends PipelineTestCase
             Stage::match(
                 qty: Query::all(
                     Query::elemMatch(
-                        size: 'M',
-                        num: Query::gt(50),
+                        Query::query(
+                            size: 'M',
+                            num: Query::gt(50),
+                        ),
                     ),
                     Query::elemMatch(
-                        num: 100,
-                        color: 'green',
+                        Query::query(
+                            num: 100,
+                            color: 'green',
+                        ),
                     ),
                 ),
             ),
