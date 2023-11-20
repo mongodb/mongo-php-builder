@@ -121,4 +121,89 @@ enum Pipelines: string
         }
     ]
     JSON;
+
+    /**
+     * Example
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/switch/
+     */
+    case SwitchExample = <<<'JSON'
+    [
+        {
+            "$project": {
+                "name": {
+                    "$numberInt": "1"
+                },
+                "summary": {
+                    "$switch": {
+                        "branches": [
+                            {
+                                "case": {
+                                    "$gte": [
+                                        {
+                                            "$avg": [
+                                                "$scores"
+                                            ]
+                                        },
+                                        {
+                                            "$numberInt": "90"
+                                        }
+                                    ]
+                                },
+                                "then": "Doing great!"
+                            },
+                            {
+                                "case": {
+                                    "$and": [
+                                        {
+                                            "$gte": [
+                                                {
+                                                    "$avg": [
+                                                        "$scores"
+                                                    ]
+                                                },
+                                                {
+                                                    "$numberInt": "80"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "$lt": [
+                                                {
+                                                    "$avg": [
+                                                        "$scores"
+                                                    ]
+                                                },
+                                                {
+                                                    "$numberInt": "90"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "then": "Doing pretty well."
+                            },
+                            {
+                                "case": {
+                                    "$lt": [
+                                        {
+                                            "$avg": [
+                                                "$scores"
+                                            ]
+                                        },
+                                        {
+                                            "$numberInt": "80"
+                                        }
+                                    ]
+                                },
+                                "then": "Needs improvement."
+                            }
+                        ],
+                        "default": "No scores found."
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
 }
