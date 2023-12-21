@@ -2,7 +2,10 @@
 name: $subtract
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/subtract/'
 type:
-    - resolvesToNumber
+    - resolvesToInt
+    - resolvesToLong
+    - resolvesToDouble
+    - resolvesToDecimal
     - resolvesToDate
 encode: array
 description: |

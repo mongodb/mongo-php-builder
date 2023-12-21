@@ -2,7 +2,10 @@
 name: $add
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/add/'
 type:
-    - resolvesToNumber
+    - resolvesToInt
+    - resolvesToLong
+    - resolvesToDouble
+    - resolvesToDecimal
     - resolvesToDate
 encode: array
 description: |
