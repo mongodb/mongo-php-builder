@@ -7,7 +7,7 @@ type:
     - resolvesToDouble
     - resolvesToDecimal
     - resolvesToDate
-encode: array
+encode: single
 description: |
     Adds numbers to return the sum, or adds numbers and a date to return a new date. If adding numbers and a date, treats the numbers as milliseconds. Accepts any number of argument expressions, but at most, one expression can resolve to a date.
 arguments:
