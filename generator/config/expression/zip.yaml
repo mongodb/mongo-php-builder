@@ -19,6 +19,7 @@ arguments:
         name: useLongestLength
         type:
             - bool
+        optional: true
         description: |
             A boolean which specifies whether the length of the longest array determines the number of arrays in the output array.
             The default value is false: the shortest array length determines the number of arrays in the output array.
