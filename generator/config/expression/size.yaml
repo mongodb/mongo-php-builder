@@ -24,7 +24,11 @@ tests:
                     numberOfColors:
                         $cond:
                             if:
-                                $isArray: '$colors'
+                                # The example in the docs uses the short syntax for $isArray,
+                                # but the aggregation builder always uses the more verbose syntax.
+                                # $isArray: '$colors'
+                                $isArray:
+                                    - '$colors'
                             then:
                                 $size: '$colors'
                             else: 'NA'

@@ -21,7 +21,7 @@ use stdClass;
  */
 class IsArrayOperator implements ResolvesToBool, OperatorInterface
 {
-    public const ENCODE = Encode::Single;
+    public const ENCODE = Encode::Array;
 
     /** @var ExpressionInterface|Type|array|bool|float|int|non-empty-string|null|stdClass $expression */
     public readonly Type|ExpressionInterface|stdClass|array|bool|float|int|null|string $expression;

@@ -3,7 +3,7 @@ name: $isArray
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/isArray/'
 type:
     - resolvesToBool
-encode: single
+encode: array
 description: |
     Determines if the operand is an array. Returns a boolean.
 arguments:
@@ -22,10 +22,14 @@ tests:
                         $cond:
                             if:
                                 $and:
+                                    # The example in the docs uses the short syntax for $isArray,
+                                    # but the aggregation builder always uses the more verbose syntax.
                                     -
-                                        $isArray: '$instock'
+                                        $isArray:
+                                            - '$instock'
                                     -
-                                        $isArray: '$ordered'
+                                        $isArray:
+                                            - '$ordered'
                             then:
                                 $concatArrays:
                                     - '$instock'

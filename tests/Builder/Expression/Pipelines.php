@@ -391,10 +391,14 @@ enum Pipelines: string
                         "if": {
                             "$and": [
                                 {
-                                    "$isArray": "$instock"
+                                    "$isArray": [
+                                        "$instock"
+                                    ]
                                 },
                                 {
-                                    "$isArray": "$ordered"
+                                    "$isArray": [
+                                        "$ordered"
+                                    ]
                                 }
                             ]
                         },
@@ -967,7 +971,9 @@ enum Pipelines: string
                 "numberOfColors": {
                     "$cond": {
                         "if": {
-                            "$isArray": "$colors"
+                            "$isArray": [
+                                "$colors"
+                            ]
                         },
                         "then": {
                             "$size": "$colors"
