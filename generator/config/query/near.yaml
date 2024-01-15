@@ -14,14 +14,42 @@ arguments:
     -
         name: maxDistance
         type:
-            - int
+            - number
         optional: true
         description: |
             Distance in meters. Limits the results to those documents that are at most the specified distance from the center point.
     -
         name: minDistance
         type:
-            - int
+            - number
         optional: true
         description: |
             Distance in meters. Limits the results to those documents that are at least the specified distance from the center point.
+tests:
+    -
+        name: 'Query on GeoJSON Data'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/near/#query-on-geojson-data'
+        pipeline:
+            -
+                $match:
+                    location:
+                        $near:
+                            $geometry:
+                                type: 'Point'
+                                coordinates:
+                                    - -73.9667
+                                    - 40.78
+                            $minDistance: 1000
+                            $maxDistance: 5000
+
+    -
+        name: 'Query on Legacy Coordinates'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/near/#query-on-legacy-coordinates'
+        pipeline:
+            -
+                $match:
+                    location:
+                        $near:
+                            - -73.9667
+                            - 40.78
+                        $maxDistance: 0.1

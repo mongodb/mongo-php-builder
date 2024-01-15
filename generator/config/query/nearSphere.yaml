@@ -14,14 +14,41 @@ arguments:
     -
         name: maxDistance
         type:
-            - int
+            - number
         optional: true
         description: |
             Distance in meters.
     -
         name: minDistance
         type:
-            - int
+            - number
         optional: true
         description: |
             Distance in meters. Limits the results to those documents that are at least the specified distance from the center point.
+tests:
+    -
+        name: 'Specify Center Point Using GeoJSON'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/nearSphere/#specify-center-point-using-geojson'
+        pipeline:
+            -
+                $match:
+                    location:
+                        $nearSphere:
+                            $geometry:
+                                type: 'Point'
+                                coordinates:
+                                    - -73.9667
+                                    - 40.78
+                            $minDistance: 1000
+                            $maxDistance: 5000
+    -
+        name: 'Specify Center Point Using Legacy Coordinates'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/nearSphere/#specify-center-point-using-legacy-coordinates'
+        pipeline:
+            -
+                $match:
+                    location:
+                        $nearSphere:
+                            - -73.9667
+                            - 40.78
+                        $maxDistance: 0.1
