@@ -13,3 +13,60 @@ arguments:
             - int
             - string
             - array # of int or string
+tests:
+    -
+        name: 'Querying by Data Type'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/type/#querying-by-data-type'
+        pipeline:
+            -
+                $match:
+                    zipCode:
+                        $type: 2
+            -
+                $match:
+                    zipCode:
+                        $type: 'string'
+            -
+                $match:
+                    zipCode:
+                        $type: 1
+            -
+                $match:
+                    zipCode:
+                        $type: 'double'
+            -
+                $match:
+                    zipCode:
+                        $type: 'number'
+    -
+        name: 'Querying by Multiple Data Type'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/type/#querying-by-multiple-data-type'
+        pipeline:
+            -
+                $match:
+                    zipCode:
+                        $type: [2, 1]
+            -
+                $match:
+                    zipCode:
+                        $type: ['string', 'double']
+    -
+        name: 'Querying by MinKey and MaxKey'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/type/#querying-by-minkey-and-maxkey'
+        pipeline:
+            -
+                $match:
+                    zipCode:
+                        $type: 'minKey'
+            -
+                $match:
+                    zipCode:
+                        $type: 'maxKey'
+    -
+        name: 'Querying by Array Type'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/type/#querying-by-array-type'
+        pipeline:
+            -
+                $match:
+                    zipCode:
+                        $type: 'array'
