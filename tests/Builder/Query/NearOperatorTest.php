@@ -31,18 +31,4 @@ class NearOperatorTest extends PipelineTestCase
 
         $this->assertSamePipeline(Pipelines::NearQueryOnGeoJSONData, $pipeline);
     }
-
-    public function testQueryOnLegacyCoordinates(): void
-    {
-        $pipeline = new Pipeline(
-            Stage::match(
-                location: Query::near(
-                    [-73.9667, 40.78],
-                    maxDistance: 0.10,
-                ),
-            ),
-        );
-
-        $this->assertSamePipeline(Pipelines::NearQueryOnLegacyCoordinates, $pipeline);
-    }
 }

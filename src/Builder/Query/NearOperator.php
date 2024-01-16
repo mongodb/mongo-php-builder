@@ -26,7 +26,7 @@ use stdClass;
  */
 class NearOperator implements FieldQueryInterface, OperatorInterface
 {
-    public const ENCODE = Encode::Object;
+    public const ENCODE = Encode::DollarObject;
 
     /** @var Document|GeometryInterface|Serializable|array|stdClass $geometry */
     public readonly Document|Serializable|GeometryInterface|stdClass|array $geometry;
