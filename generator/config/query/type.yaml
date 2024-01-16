@@ -12,7 +12,7 @@ arguments:
         type:
             - int
             - string
-            - array # of int or string
+        variadic: array
 tests:
     -
         name: 'Querying by Data Type'
@@ -21,23 +21,33 @@ tests:
             -
                 $match:
                     zipCode:
-                        $type: 2
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 2
+                        $type: [2]
             -
                 $match:
                     zipCode:
-                        $type: 'string'
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 'string'
+                        $type: ['string']
             -
                 $match:
                     zipCode:
-                        $type: 1
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 1
+                        $type: [1]
             -
                 $match:
                     zipCode:
-                        $type: 'double'
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 'double'
+                        $type: ['double']
             -
                 $match:
                     zipCode:
-                        $type: 'number'
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 'number'
+                        $type: ['number']
     -
         name: 'Querying by Multiple Data Type'
         link: 'https://www.mongodb.com/docs/manual/reference/operator/query/type/#querying-by-multiple-data-type'
@@ -57,11 +67,15 @@ tests:
             -
                 $match:
                     zipCode:
-                        $type: 'minKey'
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 'minKey'
+                        $type: ['minKey']
             -
                 $match:
                     zipCode:
-                        $type: 'maxKey'
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 'maxKey'
+                        $type: ['maxKey']
     -
         name: 'Querying by Array Type'
         link: 'https://www.mongodb.com/docs/manual/reference/operator/query/type/#querying-by-array-type'
@@ -69,4 +83,6 @@ tests:
             -
                 $match:
                     zipCode:
-                        $type: 'array'
+                        # Example uses the short form, the builder always generated the verbose form
+                        # $type: 'array'
+                        $type: ['array']

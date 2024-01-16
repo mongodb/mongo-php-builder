@@ -1176,39 +1176,49 @@ enum Pipelines: string
         {
             "$match": {
                 "zipCode": {
-                    "$type": {
-                        "$numberInt": "2"
-                    }
+                    "$type": [
+                        {
+                            "$numberInt": "2"
+                        }
+                    ]
                 }
             }
         },
         {
             "$match": {
                 "zipCode": {
-                    "$type": "string"
+                    "$type": [
+                        "string"
+                    ]
                 }
             }
         },
         {
             "$match": {
                 "zipCode": {
-                    "$type": {
-                        "$numberInt": "1"
-                    }
+                    "$type": [
+                        {
+                            "$numberInt": "1"
+                        }
+                    ]
                 }
             }
         },
         {
             "$match": {
                 "zipCode": {
-                    "$type": "double"
+                    "$type": [
+                        "double"
+                    ]
                 }
             }
         },
         {
             "$match": {
                 "zipCode": {
-                    "$type": "number"
+                    "$type": [
+                        "number"
+                    ]
                 }
             }
         }
@@ -1259,14 +1269,18 @@ enum Pipelines: string
         {
             "$match": {
                 "zipCode": {
-                    "$type": "minKey"
+                    "$type": [
+                        "minKey"
+                    ]
                 }
             }
         },
         {
             "$match": {
                 "zipCode": {
-                    "$type": "maxKey"
+                    "$type": [
+                        "maxKey"
+                    ]
                 }
             }
         }
@@ -1283,7 +1297,9 @@ enum Pipelines: string
         {
             "$match": {
                 "zipCode": {
-                    "$type": "array"
+                    "$type": [
+                        "array"
+                    ]
                 }
             }
         }

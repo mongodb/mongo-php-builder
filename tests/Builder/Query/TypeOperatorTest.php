@@ -66,10 +66,10 @@ class TypeOperatorTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::match(
-                zipCode: Query::type([2, 1]),
+                zipCode: Query::type(2, 1),
             ),
             Stage::match(
-                zipCode: Query::type(['string', 'double']),
+                zipCode: Query::type('string', 'double'),
             ),
         );
 
