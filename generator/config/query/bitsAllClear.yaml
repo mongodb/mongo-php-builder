@@ -12,4 +12,29 @@ arguments:
         type:
             - int
             - binData
-            - array # of int
+        variadic: array
+tests:
+    -
+        name: 'Bit Position Array'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/bitsAllClear/#bit-position-array'
+        pipeline:
+            -
+                $match:
+                    a:
+                        $bitsAllClear: [1, 5]
+    -
+        name: 'Integer Bitmask'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/bitsAllClear/#integer-bitmask'
+        pipeline:
+            - $match:
+                    a:
+                        # $bitsAllClear: 35
+                        $bitsAllClear: [35]
+    -
+        name: 'BinData Bitmask'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/query/bitsAllClear/#bindata-bitmask'
+        pipeline:
+            - $match:
+                  a:
+                      $bitsAllClear:
+                          - { $binary: { base64: 'TUM9PQ==', subType: '00' } }

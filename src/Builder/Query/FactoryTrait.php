@@ -61,44 +61,48 @@ trait FactoryTrait
      * Matches numeric or binary values in which a set of bit positions all have a value of 0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/bitsAllClear/
-     * @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask
+     * @no-named-arguments
+     * @param Binary|int|non-empty-string ...$bitmask
      */
-    public static function bitsAllClear(Binary|PackedArray|BSONArray|array|int|string $bitmask): BitsAllClearOperator
+    public static function bitsAllClear(Binary|int|string ...$bitmask): BitsAllClearOperator
     {
-        return new BitsAllClearOperator($bitmask);
+        return new BitsAllClearOperator(...$bitmask);
     }
 
     /**
      * Matches numeric or binary values in which a set of bit positions all have a value of 1.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/bitsAllSet/
-     * @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask
+     * @no-named-arguments
+     * @param Binary|int|non-empty-string ...$bitmask
      */
-    public static function bitsAllSet(Binary|PackedArray|BSONArray|array|int|string $bitmask): BitsAllSetOperator
+    public static function bitsAllSet(Binary|int|string ...$bitmask): BitsAllSetOperator
     {
-        return new BitsAllSetOperator($bitmask);
+        return new BitsAllSetOperator(...$bitmask);
     }
 
     /**
      * Matches numeric or binary values in which any bit from a set of bit positions has a value of 0.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/bitsAnyClear/
-     * @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask
+     * @no-named-arguments
+     * @param Binary|int|non-empty-string ...$bitmask
      */
-    public static function bitsAnyClear(Binary|PackedArray|BSONArray|array|int|string $bitmask): BitsAnyClearOperator
+    public static function bitsAnyClear(Binary|int|string ...$bitmask): BitsAnyClearOperator
     {
-        return new BitsAnyClearOperator($bitmask);
+        return new BitsAnyClearOperator(...$bitmask);
     }
 
     /**
      * Matches numeric or binary values in which any bit from a set of bit positions has a value of 1.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/query/bitsAnySet/
-     * @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask
+     * @no-named-arguments
+     * @param Binary|int|non-empty-string ...$bitmask
      */
-    public static function bitsAnySet(Binary|PackedArray|BSONArray|array|int|string $bitmask): BitsAnySetOperator
+    public static function bitsAnySet(Binary|int|string ...$bitmask): BitsAnySetOperator
     {
-        return new BitsAnySetOperator($bitmask);
+        return new BitsAnySetOperator(...$bitmask);
     }
 
     /**
