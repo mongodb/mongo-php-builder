@@ -7,6 +7,7 @@ namespace MongoDB\Builder;
 use MongoDB\BSON\Regex;
 use MongoDB\BSON\Type;
 use MongoDB\Builder\Query\RegexOperator;
+use MongoDB\Builder\Query\TypeOperator;
 use MongoDB\Builder\Type\CombinedFieldQuery;
 use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\QueryInterface;
@@ -25,6 +26,27 @@ final class Query
 {
     use Query\FactoryTrait {
         regex as private generatedRegex;
+        type as private generatedType;
+    }
+
+    /**
+     * Selects documents if a field is of the specified type.
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/query/type/
+     *
+     * @param int|non-empty-string|QueryType ...$type
+     *
+     * @no-named-arguments
+     */
+    public static function type(string|int|QueryType ...$type): TypeOperator
+    {
+        foreach ($type as &$value) {
+            if ($value instanceof QueryType) {
+                $value = $value->value;
+            }
+        }
+
+        return self::generatedType(...$type);
     }
 
     /**

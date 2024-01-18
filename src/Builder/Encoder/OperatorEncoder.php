@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Encoder;
 
+use BackedEnum;
 use LogicException;
 use MongoDB\Builder\Stage\GroupStage;
 use MongoDB\Builder\Type\Encode;
@@ -65,6 +66,10 @@ class OperatorEncoder extends AbstractExpressionEncoder
      */
     private function encodeAsArray(OperatorInterface $value): stdClass
     {
+        if ($value instanceof BackedEnum) {
+            return $this->wrap($value, [$value->value]);
+        }
+
         $result = [];
         /** @var mixed $val */
         foreach (get_object_vars($value) as $val) {
@@ -142,6 +147,10 @@ class OperatorEncoder extends AbstractExpressionEncoder
      */
     private function encodeAsSingle(OperatorInterface $value): stdClass
     {
+        if ($value instanceof BackedEnum) {
+            return $this->wrap($value, $value->value);
+        }
+
         foreach (get_object_vars($value) as $val) {
             $result = $this->recursiveEncode($val);
 

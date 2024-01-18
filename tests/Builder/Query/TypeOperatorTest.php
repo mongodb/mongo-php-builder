@@ -6,6 +6,7 @@ namespace MongoDB\Tests\Builder\Query;
 
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
+use MongoDB\Builder\QueryType;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
@@ -32,16 +33,16 @@ class TypeOperatorTest extends PipelineTestCase
                 zipCode: Query::type(2),
             ),
             Stage::match(
-                zipCode: Query::type('string'),
+                zipCode: QueryType::String,
             ),
             Stage::match(
                 zipCode: Query::type(1),
             ),
             Stage::match(
-                zipCode: Query::type('double'),
+                zipCode: Query::type(QueryType::Double),
             ),
             Stage::match(
-                zipCode: Query::type('number'),
+                zipCode: QueryType::Number,
             ),
         );
 
@@ -69,7 +70,7 @@ class TypeOperatorTest extends PipelineTestCase
                 zipCode: Query::type(2, 1),
             ),
             Stage::match(
-                zipCode: Query::type('string', 'double'),
+                zipCode: Query::type(QueryType::String, 'double'),
             ),
         );
 
