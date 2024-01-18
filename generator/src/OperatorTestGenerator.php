@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace MongoDB\CodeGenerator;
 
+use DateTimeInterface;
 use MongoDB\BSON\Document;
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Pipeline;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\CodeGenerator\Definition\OperatorDefinition;
@@ -16,7 +18,11 @@ use Nette\PhpGenerator\Type;
 use RuntimeException;
 use Throwable;
 
+use function array_walk_recursive;
 use function basename;
+use function get_object_vars;
+use function is_array;
+use function is_object;
 use function json_decode;
 use function json_encode;
 use function ksort;
@@ -83,7 +89,15 @@ class OperatorTestGenerator extends OperatorGenerator
             $testName = 'test' . str_replace([' ', '-'], '', ucwords(str_replace('$', '', $test->name)));
             $caseName = str_replace([' ', '-'], '', ucwords(str_replace('$', '', $operator->name . ' ' . $test->name)));
 
-            $json = Document::fromPHP(['pipeline' => $test->pipeline])->toCanonicalExtendedJSON();
+            $pipeline = $this->convertTypeRecursively($test->pipeline);
+            $pipeline = $test->pipeline;
+            array_walk_recursive($pipeline, function (mixed &$value): void {
+                if ($value instanceof DateTimeInterface) {
+                    $value = new UTCDateTime($value);
+                }
+            });
+
+            $json = Document::fromPHP(['pipeline' => $pipeline])->toCanonicalExtendedJSON();
             $json = json_encode(json_decode($json)->pipeline, JSON_PRETTY_PRINT);
             $case = $dataEnum->addCase($caseName, new Literal('<<<\'JSON\'' . "\n" . $json . "\n" . 'JSON'));
             $case->setComment($test->name);
@@ -114,5 +128,30 @@ class OperatorTestGenerator extends OperatorGenerator
         $class->setMethods($methods);
 
         return $namespace;
+    }
+
+    private function convertTypeRecursively(mixed $object): mixed
+    {
+        if ($object instanceof DateTimeInterface) {
+            return new UTCDateTime($object);
+        }
+
+        if (is_array($object)) {
+            foreach ($object as $key => $value) {
+                $object[$key] = $this->convertTypeRecursively($value);
+            }
+
+            return $object;
+        }
+
+        if (is_object($object)) {
+            foreach (get_object_vars($object) as $key => $value) {
+                $object->{$key} = $this->convertTypeRecursively($value);
+            }
+
+            return $object;
+        }
+
+        return $object;
     }
 }
