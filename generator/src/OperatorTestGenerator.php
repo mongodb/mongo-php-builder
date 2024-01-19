@@ -18,7 +18,6 @@ use Nette\PhpGenerator\Type;
 use RuntimeException;
 use Throwable;
 
-use function array_walk_recursive;
 use function basename;
 use function get_object_vars;
 use function is_array;
@@ -31,6 +30,7 @@ use function str_replace;
 use function ucwords;
 
 use const JSON_PRETTY_PRINT;
+use const JSON_UNESCAPED_SLASHES;
 
 /**
  * Generates a tests for all operators.
@@ -90,15 +90,11 @@ class OperatorTestGenerator extends OperatorGenerator
             $caseName = str_replace([' ', '-'], '', ucwords(str_replace('$', '', $operator->name . ' ' . $test->name)));
 
             $pipeline = $this->convertTypeRecursively($test->pipeline);
-            $pipeline = $test->pipeline;
-            array_walk_recursive($pipeline, function (mixed &$value): void {
-                if ($value instanceof DateTimeInterface) {
-                    $value = new UTCDateTime($value);
-                }
-            });
 
+            // Wrap the pipeline array into a document
             $json = Document::fromPHP(['pipeline' => $pipeline])->toCanonicalExtendedJSON();
-            $json = json_encode(json_decode($json)->pipeline, JSON_PRETTY_PRINT);
+            // Unwrap the pipeline array and reformat for prettier JSON
+            $json = json_encode(json_decode($json)->pipeline, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             $case = $dataEnum->addCase($caseName, new Literal('<<<\'JSON\'' . "\n" . $json . "\n" . 'JSON'));
             $case->setComment($test->name);
             if ($test->link) {

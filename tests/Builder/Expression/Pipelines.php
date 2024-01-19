@@ -926,7 +926,7 @@ enum Pipelines: string
                         "second": {
                             "$numberInt": "12"
                         },
-                        "timezone": "America\/New_York"
+                        "timezone": "America/New_York"
                     }
                 }
             }
@@ -946,7 +946,7 @@ enum Pipelines: string
                 "date": {
                     "$dateFromString": {
                         "dateString": "$date",
-                        "timezone": "America\/New_York"
+                        "timezone": "America/New_York"
                     }
                 }
             }
@@ -1206,7 +1206,7 @@ enum Pipelines: string
                 "date_timezone": {
                     "$dateToParts": {
                         "date": "$date",
-                        "timezone": "America\/New_York"
+                        "timezone": "America/New_York"
                     }
                 }
             }
@@ -1233,7 +1233,7 @@ enum Pipelines: string
                     "$dateToString": {
                         "format": "%H:%M:%S:%L%z",
                         "date": "$date",
-                        "timezone": "America\/New_York"
+                        "timezone": "America/New_York"
                     }
                 },
                 "timewithOffset430": {
@@ -1247,7 +1247,7 @@ enum Pipelines: string
                     "$dateToString": {
                         "format": "%Z",
                         "date": "$date",
-                        "timezone": "America\/New_York"
+                        "timezone": "America/New_York"
                     }
                 },
                 "minutesOffset430": {
@@ -1298,7 +1298,7 @@ enum Pipelines: string
                         "binSize": {
                             "$numberInt": "2"
                         },
-                        "timezone": "America\/Los_Angeles",
+                        "timezone": "America/Los_Angeles",
                         "startOfWeek": "Monday"
                     }
                 }
