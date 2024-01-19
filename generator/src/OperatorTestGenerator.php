@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace MongoDB\CodeGenerator;
 
 use DateTimeInterface;
+use InvalidArgumentException;
+use MongoDB\BSON\Binary;
+use MongoDB\BSON\Decimal128;
 use MongoDB\BSON\Document;
+use MongoDB\BSON\Int64;
+use MongoDB\BSON\Regex;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Pipeline;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
@@ -16,6 +21,7 @@ use Nette\PhpGenerator\Literal;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\Type;
 use RuntimeException;
+use Symfony\Component\Yaml\Tag\TaggedValue;
 use Throwable;
 
 use function basename;
@@ -89,7 +95,7 @@ class OperatorTestGenerator extends OperatorGenerator
             $testName = 'test' . str_replace([' ', '-'], '', ucwords(str_replace('$', '', $test->name)));
             $caseName = str_replace([' ', '-'], '', ucwords(str_replace('$', '', $operator->name . ' ' . $test->name)));
 
-            $pipeline = $this->convertTypeRecursively($test->pipeline);
+            $pipeline = $this->convertYamlTaggedValues($test->pipeline);
 
             // Wrap the pipeline array into a document
             $json = Document::fromPHP(['pipeline' => $pipeline])->toCanonicalExtendedJSON();
@@ -126,15 +132,24 @@ class OperatorTestGenerator extends OperatorGenerator
         return $namespace;
     }
 
-    private function convertTypeRecursively(mixed $object): mixed
+    private function convertYamlTaggedValues(mixed $object): mixed
     {
-        if ($object instanceof DateTimeInterface) {
-            return new UTCDateTime($object);
+        if ($object instanceof TaggedValue) {
+            $value = $object->getValue();
+
+            return match ($object->getTag()) {
+                'regex' => new Regex(...(array) $value),
+                'long' => new Int64($value),
+                'double' => new Decimal128($value),
+                'date' => new UTCDateTime($value),
+                'binary' => new Binary($value),
+                default => throw new InvalidArgumentException(sprintf('Yaml tag "%s" is not supported.', $object->getTag())),
+            };
         }
 
         if (is_array($object)) {
             foreach ($object as $key => $value) {
-                $object[$key] = $this->convertTypeRecursively($value);
+                $object[$key] = $this->convertYamlTaggedValues($value);
             }
 
             return $object;
@@ -142,7 +157,7 @@ class OperatorTestGenerator extends OperatorGenerator
 
         if (is_object($object)) {
             foreach (get_object_vars($object) as $key => $value) {
-                $object->{$key} = $this->convertTypeRecursively($value);
+                $object->{$key} = $this->convertYamlTaggedValues($value);
             }
 
             return $object;

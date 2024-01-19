@@ -21,7 +21,7 @@ final class YamlReader
         foreach ($finder as $file) {
             $operator = Yaml::parseFile(
                 $file->getPathname(),
-                Yaml::PARSE_OBJECT | Yaml::PARSE_OBJECT_FOR_MAP | Yaml::PARSE_DATETIME,
+                Yaml::PARSE_OBJECT | Yaml::PARSE_OBJECT_FOR_MAP | Yaml::PARSE_CUSTOM_TAGS,
             );
             $definitions[] = new OperatorDefinition(...get_object_vars($operator));
         }

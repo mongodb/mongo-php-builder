@@ -77,5 +77,5 @@ tests:
                             dateString: '$date'
                             timezone: '$timezone'
                             # onNull: new Date(0)
-                            onNull: 1970-01-01T00:00:00+00:00
+                            onNull: !date 0
 
