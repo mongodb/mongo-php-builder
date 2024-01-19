@@ -20,7 +20,7 @@ class BitsAnyClearOperatorTest extends PipelineTestCase
         $pipeline = new Pipeline(
             Stage::match(
                 a: Query::bitsAnyClear(
-                    new Binary('MC=='),
+                    new Binary(base64_decode('IA==')),
                 ),
             ),
         );

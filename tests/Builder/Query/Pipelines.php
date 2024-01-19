@@ -201,7 +201,7 @@ enum Pipelines: string
                     "$bitsAllClear": [
                         {
                             "$binary": {
-                                "base64": "TUM9PQ==",
+                                "base64": "IA==",
                                 "subType": "00"
                             }
                         }
@@ -270,7 +270,7 @@ enum Pipelines: string
                     "$bitsAllSet": [
                         {
                             "$binary": {
-                                "base64": "TUM9PQ==",
+                                "base64": "IA==",
                                 "subType": "00"
                             }
                         }
@@ -339,7 +339,7 @@ enum Pipelines: string
                     "$bitsAnyClear": [
                         {
                             "$binary": {
-                                "base64": "TUM9PQ==",
+                                "base64": "IA==",
                                 "subType": "00"
                             }
                         }
@@ -408,7 +408,7 @@ enum Pipelines: string
                     "$bitsAnySet": [
                         {
                             "$binary": {
-                                "base64": "TUM9PQ==",
+                                "base64": "IA==",
                                 "subType": "00"
                             }
                         }

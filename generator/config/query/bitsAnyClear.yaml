@@ -37,4 +37,4 @@ tests:
             - $match:
                   a:
                       $bitsAnyClear:
-                          - { $binary: { base64: 'TUM9PQ==', subType: '00' } }
+                          - !binary 'IA=='

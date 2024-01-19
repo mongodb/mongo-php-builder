@@ -20,7 +20,7 @@ class BitsAllSetOperatorTest extends PipelineTestCase
         $pipeline = new Pipeline(
             Stage::match(
                 a: Query::bitsAllSet(
-                    new Binary('MC=='),
+                    new Binary(base64_decode('IA==')),
                 ),
             ),
         );

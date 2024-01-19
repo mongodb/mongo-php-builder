@@ -10,6 +10,8 @@ use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
+use function base64_decode;
+
 /**
  * Test $bitsAnySet query
  */
@@ -20,7 +22,7 @@ class BitsAnySetOperatorTest extends PipelineTestCase
         $pipeline = new Pipeline(
             Stage::match(
                 a: Query::bitsAnySet(
-                    new Binary('MC=='),
+                    new Binary(base64_decode('IA==')),
                 ),
             ),
         );
