@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MongoDB\CodeGenerator;
 
-use DateTimeInterface;
 use InvalidArgumentException;
 use MongoDB\BSON\Binary;
 use MongoDB\BSON\Decimal128;
@@ -24,6 +23,7 @@ use RuntimeException;
 use Symfony\Component\Yaml\Tag\TaggedValue;
 use Throwable;
 
+use function base64_decode;
 use function basename;
 use function get_object_vars;
 use function is_array;
@@ -142,7 +142,7 @@ class OperatorTestGenerator extends OperatorGenerator
                 'long' => new Int64($value),
                 'double' => new Decimal128($value),
                 'date' => new UTCDateTime($value),
-                'binary' => new Binary($value),
+                'binary' => new Binary(base64_decode($value)),
                 default => throw new InvalidArgumentException(sprintf('Yaml tag "%s" is not supported.', $object->getTag())),
             };
         }
