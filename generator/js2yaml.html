@@ -19,6 +19,14 @@
 	<label for="input">Input JS code:</label>
 	<textarea id="input">
 [
+  // Tests
+  {
+    $project: {
+      date: new Date(36),
+	  regex: /^123/,
+	  regex_with_flags: /^123/i,
+    }
+  },
   // First Stage
   {
     $bucket: {
@@ -78,6 +86,13 @@
             case 'number':
                 return ' ' + object.toString();
             case 'object':
+                if (object instanceof RegExp) {
+                    return ' !regex ' + (object.flags ? "['"+object.source+"', '"+object.flags+"']" : "'"+object.source+"'");
+                }
+                if (object instanceof Date) {
+                  return ' !date ' + object.getTime();
+                }
+
                 var dump = [];
                 for (var key in object) {
                     dump.push(key + ':' + toYaml(object[key], indent + 1));
