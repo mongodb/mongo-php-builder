@@ -26,6 +26,8 @@
 	  regex: /^123/,
 	  regex_with_flags: /^123/i,
 	  binary: BinData(0, "ID=="),
+	  empty_object: {},
+	  empty_array: [],
     }
   },
   // First Stage
@@ -87,6 +89,10 @@
         }
 
         if (Array.isArray(object)) {
+            if (object.length === 0) {
+                return ' []';
+			}
+
             return newline + '-' + object.map((item) => toYaml(item, indent + 1)).join(newline + '-');
         }
 
@@ -114,6 +120,10 @@
                 for (var key in object) {
                     dump.push(key + ':' + toYaml(object[key], indent + 1));
                 }
+                if (dump.length === 0) {
+                    return ' {}';
+				}
+
                 return newline + dump.join(newline);
             case 'function':
                 return toYaml({
