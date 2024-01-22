@@ -43,12 +43,17 @@ final class Query
 
     /**
      * Combine multiple field query operators that apply to a same field.
+     *
+     * @no-named-arguments
      */
     public static function fieldQuery(FieldQueryInterface|Type|stdClass|array|bool|float|int|string|null ...$query): FieldQueryInterface
     {
         return new CombinedFieldQuery($query);
     }
 
+    /**
+     * Create a query object
+     */
     public static function query(QueryInterface|FieldQueryInterface|Type|stdClass|array|bool|float|int|string|null ...$query): QueryInterface
     {
         return QueryObject::create($query);
