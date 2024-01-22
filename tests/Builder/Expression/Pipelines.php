@@ -3094,6 +3094,58 @@ enum Pipelines: string
     JSON;
 
     /**
+     * i Option
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexFind/#i-option
+     */
+    case RegexFindIOption = <<<'JSON'
+    [
+        {
+            "$addFields": {
+                "returnObject": {
+                    "$regexFind": {
+                        "input": "$description",
+                        "regex": {
+                            "$regularExpression": {
+                                "pattern": "line",
+                                "options": "i"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "$addFields": {
+                "returnObject": {
+                    "$regexFind": {
+                        "input": "$description",
+                        "regex": "line",
+                        "options": "i"
+                    }
+                }
+            }
+        },
+        {
+            "$addFields": {
+                "returnObject": {
+                    "$regexFind": {
+                        "input": "$description",
+                        "regex": {
+                            "$regularExpression": {
+                                "pattern": "line",
+                                "options": ""
+                            }
+                        },
+                        "options": "i"
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
      * $regexFindAll and Its Options
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/regexFindAll/#-regexfindall-and-its-options
@@ -4233,6 +4285,34 @@ enum Pipelines: string
                                     "$numberInt": "2"
                                 }
                             ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Single-Byte and Multibyte Character Set
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/substrBytes/#single-byte-and-multibyte-character-set
+     */
+    case SubstrBytesSingleByteAndMultibyteCharacterSet = <<<'JSON'
+    [
+        {
+            "$project": {
+                "name": {
+                    "$numberInt": "1"
+                },
+                "menuCode": {
+                    "$substrBytes": [
+                        "$name",
+                        {
+                            "$numberInt": "0"
+                        },
+                        {
+                            "$numberInt": "3"
                         }
                     ]
                 }

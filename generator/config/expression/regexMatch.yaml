@@ -44,7 +44,7 @@ tests:
             -
                 $addFields:
                     result:
-                        # Specify i as part of the regex field
+                        # Specify i as part of the Regex type
                         $regexMatch:
                             input: '$description'
                             regex: !regex ['line', 'i']
@@ -59,7 +59,7 @@ tests:
             -
                 $addFields:
                     result:
-                        # Specify i in the options field
+                        # Mix Regex type with options field
                         $regexMatch:
                             input: '$description'
                             regex: !regex 'line'

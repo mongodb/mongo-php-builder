@@ -45,3 +45,15 @@ tests:
                                     -
                                         $strLenBytes: '$quarter'
                                     - 2
+    -
+        name: 'Single-Byte and Multibyte Character Set'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/substrBytes/#single-byte-and-multibyte-character-set'
+        pipeline:
+            -
+                $project:
+                    name: 1
+                    menuCode:
+                        $substrBytes:
+                            - '$name'
+                            - 0
+                            - 3

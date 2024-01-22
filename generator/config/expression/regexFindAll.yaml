@@ -44,7 +44,7 @@ tests:
             -
                 $addFields:
                     returnObject:
-                        # Specify i as part of the regex field
+                        # Specify i as part of the regex type
                         $regexFindAll:
                             input: '$description'
                             regex: !regex ['line', 'i']
@@ -59,7 +59,7 @@ tests:
             -
                 $addFields:
                     returnObject:
-                        # Specify i in the options field
+                        # Mix Regex type with options field
                         $regexFindAll:
                             input: '$description'
                             regex: !regex 'line'
