@@ -139,9 +139,9 @@ class OperatorTestGenerator extends OperatorGenerator
 
             return match ($object->getTag()) {
                 'bson_regex' => new Regex(...(array) $value),
-                'bson_long' => new Int64($value),
-                'bson_double' => new Decimal128($value),
-                'bson_date' => new UTCDateTime($value),
+                'bson_int128' => new Int64($value),
+                'bson_decimal128' => new Decimal128($value),
+                'bson_utcdatetime' => new UTCDateTime($value),
                 'bson_binary' => new Binary(base64_decode($value)),
                 default => throw new InvalidArgumentException(sprintf('Yaml tag "%s" is not supported.', $object->getTag())),
             };
