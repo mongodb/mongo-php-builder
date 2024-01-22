@@ -28,6 +28,7 @@ tests:
         pipeline:
             - $match:
                   a:
+                      # Example uses the short form, the builder always generates the array form
                       # $bitsAnyClear: 35
                       $bitsAnyClear: [35]
     -
