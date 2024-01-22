@@ -12,7 +12,7 @@ arguments:
         type:
             - int
             - binData
-        variadic: array
+            - array # of int
 tests:
     -
         name: 'Bit Position Array'
@@ -28,14 +28,11 @@ tests:
         pipeline:
             - $match:
                   a:
-                      # Example uses the short form, the builder always generates the array form
-                      # $bitsAnyClear: 35
-                      $bitsAnyClear: [35]
+                      $bitsAnyClear: 35
     -
         name: 'BinData Bitmask'
         link: 'https://www.mongodb.com/docs/manual/reference/operator/query/bitsAnyClear/#bindata-bitmask'
         pipeline:
             - $match:
                   a:
-                      $bitsAnyClear:
-                          - !binary 'MA=='
+                      $bitsAnyClear: !binary 'MA=='

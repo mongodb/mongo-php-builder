@@ -9,12 +9,15 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Query;
 
 use MongoDB\BSON\Binary;
+use MongoDB\BSON\PackedArray;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\OperatorInterface;
 use MongoDB\Exception\InvalidArgumentException;
+use MongoDB\Model\BSONArray;
 
 use function array_is_list;
+use function is_array;
 
 /**
  * Matches numeric or binary values in which a set of bit positions all have a value of 1.
@@ -25,21 +28,16 @@ class BitsAllSetOperator implements FieldQueryInterface, OperatorInterface
 {
     public const ENCODE = Encode::Single;
 
-    /** @var list<Binary|int|non-empty-string> $bitmask */
-    public readonly array $bitmask;
+    /** @var BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask */
+    public readonly Binary|PackedArray|BSONArray|array|int|string $bitmask;
 
     /**
-     * @param Binary|int|non-empty-string ...$bitmask
-     * @no-named-arguments
+     * @param BSONArray|Binary|PackedArray|array|int|non-empty-string $bitmask
      */
-    public function __construct(Binary|int|string ...$bitmask)
+    public function __construct(Binary|PackedArray|BSONArray|array|int|string $bitmask)
     {
-        if (\count($bitmask) < 1) {
-            throw new \InvalidArgumentException(\sprintf('Expected at least %d values for $bitmask, got %d.', 1, \count($bitmask)));
-        }
-
-        if (! array_is_list($bitmask)) {
-            throw new InvalidArgumentException('Expected $bitmask arguments to be a list (array), named arguments are not supported');
+        if (is_array($bitmask) && ! array_is_list($bitmask)) {
+            throw new InvalidArgumentException('Expected $bitmask argument to be a list, got an associative array.');
         }
 
         $this->bitmask = $bitmask;

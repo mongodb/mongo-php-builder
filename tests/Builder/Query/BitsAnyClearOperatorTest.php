@@ -34,7 +34,7 @@ class BitsAnyClearOperatorTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::match(
-                a: Query::bitsAnyClear(1, 5),
+                a: Query::bitsAnyClear([1, 5]),
             ),
         );
 

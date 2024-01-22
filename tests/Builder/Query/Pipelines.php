@@ -177,11 +177,9 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAllClear": [
-                        {
-                            "$numberInt": "35"
-                        }
-                    ]
+                    "$bitsAllClear": {
+                        "$numberInt": "35"
+                    }
                 }
             }
         }
@@ -198,14 +196,12 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAllClear": [
-                        {
-                            "$binary": {
-                                "base64": "IA==",
-                                "subType": "00"
-                            }
+                    "$bitsAllClear": {
+                        "$binary": {
+                            "base64": "IA==",
+                            "subType": "00"
                         }
-                    ]
+                    }
                 }
             }
         }
@@ -246,11 +242,9 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAllSet": [
-                        {
-                            "$numberInt": "50"
-                        }
-                    ]
+                    "$bitsAllSet": {
+                        "$numberInt": "50"
+                    }
                 }
             }
         }
@@ -267,14 +261,12 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAllSet": [
-                        {
-                            "$binary": {
-                                "base64": "MA==",
-                                "subType": "00"
-                            }
+                    "$bitsAllSet": {
+                        "$binary": {
+                            "base64": "MA==",
+                            "subType": "00"
                         }
-                    ]
+                    }
                 }
             }
         }
@@ -315,11 +307,9 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAnyClear": [
-                        {
-                            "$numberInt": "35"
-                        }
-                    ]
+                    "$bitsAnyClear": {
+                        "$numberInt": "35"
+                    }
                 }
             }
         }
@@ -336,14 +326,12 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAnyClear": [
-                        {
-                            "$binary": {
-                                "base64": "MA==",
-                                "subType": "00"
-                            }
+                    "$bitsAnyClear": {
+                        "$binary": {
+                            "base64": "MA==",
+                            "subType": "00"
                         }
-                    ]
+                    }
                 }
             }
         }
@@ -384,11 +372,9 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAnySet": [
-                        {
-                            "$numberInt": "35"
-                        }
-                    ]
+                    "$bitsAnySet": {
+                        "$numberInt": "35"
+                    }
                 }
             }
         }
@@ -405,14 +391,12 @@ enum Pipelines: string
         {
             "$match": {
                 "a": {
-                    "$bitsAnySet": [
-                        {
-                            "$binary": {
-                                "base64": "MA==",
-                                "subType": "00"
-                            }
+                    "$bitsAnySet": {
+                        "$binary": {
+                            "base64": "MA==",
+                            "subType": "00"
                         }
-                    ]
+                    }
                 }
             }
         }

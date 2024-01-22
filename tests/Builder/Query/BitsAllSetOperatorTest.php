@@ -34,7 +34,7 @@ class BitsAllSetOperatorTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::match(
-                a: Query::bitsAllSet(1, 5),
+                a: Query::bitsAllSet([1, 5]),
             ),
         );
 
