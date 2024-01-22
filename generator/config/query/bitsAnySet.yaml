@@ -38,4 +38,4 @@ tests:
             - $match:
                   a:
                       $bitsAnySet:
-                          - !binary 'IA=='
+                          - !binary 'MA=='

@@ -10,6 +10,8 @@ use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
+use function base64_decode;
+
 /**
  * Test $bitsAllClear query
  */
