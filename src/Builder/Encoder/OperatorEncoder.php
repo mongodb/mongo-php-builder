@@ -32,11 +32,6 @@ class OperatorEncoder implements ExpressionEncoder
     {
     }
 
-    public static function createForEncoder(BuilderEncoder $encoder): static
-    {
-        return new self($encoder);
-    }
-
     /** @psalm-assert-if-true OperatorInterface $value */
     public function canEncode(mixed $value): bool
     {

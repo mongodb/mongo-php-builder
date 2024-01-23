@@ -9,5 +9,5 @@ use MongoDB\Codec\Encoder;
 
 interface ExpressionEncoder extends Encoder
 {
-    public static function createForEncoder(BuilderEncoder $encoder): static;
+    public function __construct(BuilderEncoder $encoder);
 }

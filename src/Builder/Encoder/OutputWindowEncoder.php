@@ -31,11 +31,6 @@ class OutputWindowEncoder implements ExpressionEncoder
     {
     }
 
-    public static function createForEncoder(BuilderEncoder $encoder): static
-    {
-        return new self($encoder);
-    }
-
     /** @psalm-assert-if-true OutputWindow $value */
     public function canEncode(mixed $value): bool
     {

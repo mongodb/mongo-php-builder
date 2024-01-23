@@ -44,7 +44,7 @@ class BuilderEncoder implements Encoder
         OperatorInterface::class => OperatorEncoder::class,
     ];
 
-    /** @var array<class-string, class-string<ExpressionEncoder>> */
+    /** @var array<class-string, ExpressionEncoder> */
     private array $cachedEncoders = [];
 
     /** @param array<class-string, class-string<ExpressionEncoder>> $customEncoders */
@@ -92,14 +92,14 @@ class BuilderEncoder implements Encoder
         // First attempt: match class name exactly
         foreach ($encoderList as $className => $encoderClass) {
             if ($className == $valueClass) {
-                return $this->cachedEncoders[$valueClass] = $encoderClass::createForEncoder($this);
+                return $this->cachedEncoders[$valueClass] = new $encoderClass($this);
             }
         }
 
         // Second attempt: catch child classes
         foreach ($encoderList as $className => $encoderClass) {
             if ($value instanceof $className) {
-                return $this->cachedEncoders[$valueClass] = $encoderClass::createForEncoder($this);
+                return $this->cachedEncoders[$valueClass] = new $encoderClass($this);
             }
         }
 

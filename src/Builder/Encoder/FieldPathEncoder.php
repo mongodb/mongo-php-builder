@@ -9,7 +9,7 @@ use MongoDB\Builder\Type\FieldPathInterface;
 use MongoDB\Codec\EncodeIfSupported;
 use MongoDB\Exception\UnsupportedValueException;
 
-/** @template-implements Encoder<FieldPathInterface, string> */
+/** @template-implements ExpressionEncoder<FieldPathInterface, string> */
 class FieldPathEncoder implements ExpressionEncoder
 {
     /** @template-use EncodeIfSupported<FieldPathInterface, string> */
@@ -17,11 +17,6 @@ class FieldPathEncoder implements ExpressionEncoder
 
     public function __construct(private readonly BuilderEncoder $encoder)
     {
-    }
-
-    public static function createForEncoder(BuilderEncoder $encoder): static
-    {
-        return new self($encoder);
     }
 
     /** @psalm-assert-if-true FieldPathInterface $value */
