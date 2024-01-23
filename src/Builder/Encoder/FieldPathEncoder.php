@@ -4,31 +4,22 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Encoder;
 
-use MongoDB\Builder\BuilderEncoder;
 use MongoDB\Builder\Type\FieldPathInterface;
 use MongoDB\Codec\EncodeIfSupported;
 use MongoDB\Exception\UnsupportedValueException;
 
-/** @template-implements ExpressionEncoder<FieldPathInterface, string> */
-class FieldPathEncoder implements ExpressionEncoder
+/** @template-extends AbstractExpressionEncoder<string, FieldPathInterface> */
+class FieldPathEncoder extends AbstractExpressionEncoder
 {
-    /** @template-use EncodeIfSupported<FieldPathInterface, string> */
+    /** @template-use EncodeIfSupported<string, FieldPathInterface> */
     use EncodeIfSupported;
 
-    public function __construct(private readonly BuilderEncoder $encoder)
-    {
-    }
-
-    /** @psalm-assert-if-true FieldPathInterface $value */
     public function canEncode(mixed $value): bool
     {
         return $value instanceof FieldPathInterface;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function encode($value): string
+    public function encode(mixed $value): string
     {
         if (! $this->canEncode($value)) {
             throw UnsupportedValueException::invalidEncodableValue($value);

@@ -4,32 +4,23 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Encoder;
 
-use MongoDB\Builder\BuilderEncoder;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Codec\EncodeIfSupported;
 use MongoDB\Exception\UnsupportedValueException;
 use stdClass;
 
-/** @template-implements ExpressionEncoder<Pipeline, array> */
-class PipelineEncoder implements ExpressionEncoder
+/** @template-extends AbstractExpressionEncoder<array, Pipeline> */
+class PipelineEncoder extends AbstractExpressionEncoder
 {
-    /** @template-use EncodeIfSupported<Pipeline, array> */
+    /** @template-use EncodeIfSupported<array, Pipeline> */
     use EncodeIfSupported;
 
-    public function __construct(protected readonly BuilderEncoder $encoder)
-    {
-    }
-
-    /** @psalm-assert-if-true Pipeline $value */
     public function canEncode(mixed $value): bool
     {
         return $value instanceof Pipeline;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function encode($value): stdClass|array|string
+    public function encode(mixed $value): stdClass|array|string
     {
         if (! $this->canEncode($value)) {
             throw UnsupportedValueException::invalidEncodableValue($value);
@@ -37,7 +28,6 @@ class PipelineEncoder implements ExpressionEncoder
 
         $encoded = [];
         foreach ($value->getIterator() as $stage) {
-            // Todo: Needs StageEncoder
             $encoded[] = $this->encoder->encodeIfSupported($stage);
         }
 

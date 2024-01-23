@@ -28,9 +28,10 @@ use stdClass;
 
 use function is_object;
 
-/** @template-implements Encoder<Pipeline|StageInterface|ExpressionInterface|QueryInterface, stdClass|array|string> */
+/** @template-implements Encoder<stdClass|array|string, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
 class BuilderEncoder implements Encoder
 {
+    /** @template-use EncodeIfSupported<stdClass|array|string, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
     use EncodeIfSupported;
 
     /** @var array<class-string, class-string<ExpressionEncoder>> */
@@ -52,10 +53,8 @@ class BuilderEncoder implements Encoder
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function canEncode($value): bool
+    /** @psalm-assert-if-true object $value */
+    public function canEncode(mixed $value): bool
     {
         if (! is_object($value)) {
             return false;
@@ -66,10 +65,7 @@ class BuilderEncoder implements Encoder
         return $encoder !== null && $encoder->canEncode($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function encode($value): stdClass|array|string
+    public function encode(mixed $value): stdClass|array|string
     {
         $encoder = $this->getEncoderFor($value);
 

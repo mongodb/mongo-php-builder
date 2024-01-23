@@ -6,10 +6,11 @@ namespace MongoDB\Builder\Encoder;
 
 use MongoDB\Builder\BuilderEncoder;
 use MongoDB\Codec\Encoder;
+use stdClass;
 
 /**
- * @psalm-template BSONType
- * @psalm-template NativeType
+ * @template BSONType of stdClass|array|string
+ * @template NativeType
  * @template-extends Encoder<BSONType, NativeType>
  */
 interface ExpressionEncoder extends Encoder

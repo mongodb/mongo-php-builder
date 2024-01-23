@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace MongoDB\Builder\Encoder;
 
 use LogicException;
-use MongoDB\Builder\BuilderEncoder;
 use MongoDB\Builder\Stage\GroupStage;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\OperatorInterface;
@@ -22,26 +21,18 @@ use function is_object;
 use function property_exists;
 use function sprintf;
 
-/** @template-implements ExpressionEncoder<OperatorInterface, object> */
-class OperatorEncoder implements ExpressionEncoder
+/** @template-extends AbstractExpressionEncoder<stdClass, OperatorInterface> */
+class OperatorEncoder extends AbstractExpressionEncoder
 {
-    /** @template-use EncodeIfSupported<OperatorInterface, object> */
+    /** @template-use EncodeIfSupported<stdClass, OperatorInterface> */
     use EncodeIfSupported;
 
-    public function __construct(protected readonly BuilderEncoder $encoder)
-    {
-    }
-
-    /** @psalm-assert-if-true OperatorInterface $value */
     public function canEncode(mixed $value): bool
     {
         return $value instanceof OperatorInterface;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function encode($value): stdClass|array|string
+    public function encode(mixed $value): stdClass
     {
         if (! $this->canEncode($value)) {
             throw UnsupportedValueException::invalidEncodableValue($value);
@@ -134,7 +125,7 @@ class OperatorEncoder implements ExpressionEncoder
                 if (is_object($val) && property_exists($val, '$geometry')) {
                     $result->{'$geometry'} = $val->{'$geometry'};
                 } elseif (is_array($val) && array_key_exists('$geometry', $val)) {
-                    $result->{'$geometry'} = $val->{'$geometry'};
+                    $result->{'$geometry'} = $val['$geometry'];
                 } else {
                     $result->{'$geometry'} = $val;
                 }
@@ -158,30 +149,6 @@ class OperatorEncoder implements ExpressionEncoder
         }
 
         throw new LogicException(sprintf('Class "%s" does not have a single property.', $value::class));
-    }
-
-    /**
-     * Nested arrays and objects must be encoded recursively.
-     */
-    private function recursiveEncode(mixed $value): mixed
-    {
-        if (is_array($value)) {
-            foreach ($value as $key => $val) {
-                $value[$key] = $this->recursiveEncode($val);
-            }
-
-            return $value;
-        }
-
-        if ($value instanceof stdClass) {
-            foreach (get_object_vars($value) as $key => $val) {
-                $value->{$key} = $this->recursiveEncode($val);
-            }
-
-            return $value;
-        }
-
-        return $this->encoder->encodeIfSupported($value);
     }
 
     private function wrap(OperatorInterface $value, mixed $result): stdClass
