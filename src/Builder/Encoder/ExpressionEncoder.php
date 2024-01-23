@@ -7,6 +7,11 @@ namespace MongoDB\Builder\Encoder;
 use MongoDB\Builder\BuilderEncoder;
 use MongoDB\Codec\Encoder;
 
+/**
+ * @psalm-template BSONType
+ * @psalm-template NativeType
+ * @template-extends Encoder<BSONType, NativeType>
+ */
 interface ExpressionEncoder extends Encoder
 {
     public function __construct(BuilderEncoder $encoder);
