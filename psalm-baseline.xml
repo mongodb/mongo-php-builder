@@ -1,3 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+<files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
+  <file src="src/Builder/BuilderEncoder.php">
+    <MixedArgument>
+      <code>$value</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Builder/Encoder/CombinedFieldQueryEncoder.php">
+    <MixedAssignment>
+      <code>$filter</code>
+      <code>$filterValue</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value[$key]</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Builder/Encoder/OperatorEncoder.php">
+    <MixedAssignment>
+      <code>$result</code>
+      <code>$result[]</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value[$key]</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Builder/Encoder/OutputWindowEncoder.php">
+    <MixedAssignment>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value[$key]</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Builder/Encoder/PipelineEncoder.php">
+    <MixedAssignment>
+      <code>$encoded[]</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Builder/Encoder/QueryEncoder.php">
+    <MixedArgument>
+      <code>$key</code>
+      <code><![CDATA[$this->recursiveEncode($value)]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$key</code>
+      <code>$subValue</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value</code>
+      <code>$value[$key]</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Builder/Type/CombinedFieldQuery.php">
+    <MixedAssignment>
+      <code>$fieldQuery</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Builder/Type/QueryObject.php">
+    <MixedAssignment>
+      <code>$queries[$fieldPath]</code>
+      <code>$query</code>
+    </MixedAssignment>
+  </file>
 </files>
