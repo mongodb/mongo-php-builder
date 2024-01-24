@@ -11,3 +11,30 @@ arguments:
         name: query
         type:
             - query
+tests:
+    -
+        name: 'Zipcode Search'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/projection/elemMatch/#zipcode-search'
+        pipeline:
+            -
+                $match:
+                    zipcode: '63109'
+            -
+                $project:
+                    students:
+                        $elemMatch:
+                            school: 102
+    -
+        name: 'with Multiple Fields'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/projection/elemMatch/#with-multiple-fields'
+        pipeline:
+            -
+                $match:
+                    zipcode: '63109'
+            -
+                $project:
+                    students:
+                        $elemMatch:
+                            school: 102
+                            age:
+                                $gt: 10

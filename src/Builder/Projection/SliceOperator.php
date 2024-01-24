@@ -10,6 +10,7 @@ namespace MongoDB\Builder\Projection;
 
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\OperatorInterface;
+use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\ProjectionInterface;
 
 /**
@@ -24,14 +25,14 @@ class SliceOperator implements ProjectionInterface, OperatorInterface
     /** @var int $limit */
     public readonly int $limit;
 
-    /** @var int $skip */
-    public readonly int $skip;
+    /** @var Optional|int $skip */
+    public readonly Optional|int $skip;
 
     /**
      * @param int $limit
-     * @param int $skip
+     * @param Optional|int $skip
      */
-    public function __construct(int $limit, int $skip)
+    public function __construct(int $limit, Optional|int $skip = Optional::Undefined)
     {
         $this->limit = $limit;
         $this->skip = $skip;
