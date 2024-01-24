@@ -12,6 +12,7 @@ arguments:
         name: expression
         type:
             - resolvesToNumber
+            - resolvesToArray
         variadic: array
 tests:
     -

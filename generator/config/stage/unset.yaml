@@ -13,3 +13,29 @@ arguments:
         type:
             - fieldPath
         variadic: array
+tests:
+    -
+        name: 'Remove a Single Field'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/unset/#remove-a-single-field'
+        pipeline:
+            -
+                # The aggregation builder always generate the array form
+                # $unset: 'copies'
+                $unset: ['copies']
+    -
+        name: 'Remove Top-Level Fields'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/unset/#remove-top-level-fields'
+        pipeline:
+            -
+                $unset:
+                    - 'isbn'
+                    - 'copies'
+    -
+        name: 'Remove Embedded Fields'
+        link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/unset/#remove-embedded-fields'
+        pipeline:
+            -
+                $unset:
+                    - 'isbn'
+                    - 'author.first'
+                    - 'copies.warehouse'
