@@ -45,6 +45,7 @@ class DenseRankAccumulatorTest extends PipelineTestCase
                     quantity: -1,
                 ),
                 output: object(
+                    // The outputWindow is optional when no window property is set.
                     denseRankQuantityForState: Accumulator::denseRank(),
                 ),
             ),

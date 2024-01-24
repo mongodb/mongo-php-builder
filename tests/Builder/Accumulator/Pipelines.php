@@ -1517,6 +1517,104 @@ enum Pipelines: string
     JSON;
 
     /**
+     * Find the Minimum Three Scores for a Single Game
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/minN/#find-the-minimum-three-scores-for-a-single-game
+     */
+    case MinNFindTheMinimumThreeScoresForASingleGame = <<<'JSON'
+    [
+        {
+            "$match": {
+                "gameId": "G1"
+            }
+        },
+        {
+            "$group": {
+                "_id": "$gameId",
+                "minScores": {
+                    "$minN": {
+                        "input": [
+                            "$score",
+                            "$playerId"
+                        ],
+                        "n": {
+                            "$numberInt": "3"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Finding the Minimum Three Documents Across Multiple Games
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/minN/#finding-the-minimum-three-documents-across-multiple-games
+     */
+    case MinNFindingTheMinimumThreeDocumentsAcrossMultipleGames = <<<'JSON'
+    [
+        {
+            "$group": {
+                "_id": "$gameId",
+                "minScores": {
+                    "$minN": {
+                        "input": [
+                            "$score",
+                            "$playerId"
+                        ],
+                        "n": {
+                            "$numberInt": "3"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
+     * Computing n Based on the Group Key for $group
+     *
+     * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/minN/#computing-n-based-on-the-group-key-for--group
+     */
+    case MinNComputingNBasedOnTheGroupKeyForGroup = <<<'JSON'
+    [
+        {
+            "$group": {
+                "_id": {
+                    "gameId": "$gameId"
+                },
+                "gamescores": {
+                    "$minN": {
+                        "input": [
+                            "$score",
+                            "$playerId"
+                        ],
+                        "n": {
+                            "$cond": {
+                                "if": {
+                                    "$eq": [
+                                        "$gameId",
+                                        "G2"
+                                    ]
+                                },
+                                "then": {
+                                    "$numberInt": "1"
+                                },
+                                "else": {
+                                    "$numberInt": "3"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+    JSON;
+
+    /**
      * Calculate a Single Value as an Accumulator
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/percentile/#calculate-a-single-value-as-an-accumulator
