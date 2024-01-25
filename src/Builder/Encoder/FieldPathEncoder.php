@@ -25,7 +25,7 @@ class FieldPathEncoder extends AbstractExpressionEncoder
             throw UnsupportedValueException::invalidEncodableValue($value);
         }
 
-        // TODO: needs method because of interface
+        // TODO: needs method because interfaces can't have properties
         return '$' . $value->name;
     }
 }

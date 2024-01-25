@@ -25,6 +25,7 @@ class VariableEncoder extends AbstractExpressionEncoder
             throw UnsupportedValueException::invalidEncodableValue($value);
         }
 
+        // TODO: needs method because interfaces can't have properties
         return '$$' . $value->name;
     }
 }
