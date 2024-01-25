@@ -26,7 +26,7 @@ abstract class AbstractExpressionEncoder implements ExpressionEncoder
      *
      * @psalm-param T $value
      *
-     * @psalm-return (T is object ? object : (T is array ? array : mixed))
+     * @psalm-return (T is stdClass ? stdClass : (T is array ? array : mixed))
      *
      * @template T
      */

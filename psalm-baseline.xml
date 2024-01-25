@@ -29,7 +29,15 @@
       <code>$val</code>
     </MixedAssignment>
   </file>
+  <file src="src/Builder/Encoder/OutputWindowEncoder.php">
+    <MixedArgument>
+      <code>$result</code>
+    </MixedArgument>
+  </file>
   <file src="src/Builder/Encoder/QueryEncoder.php">
+    <MixedArgument>
+      <code><![CDATA[$this->recursiveEncode($value)]]></code>
+    </MixedArgument>
     <MixedAssignment>
       <code>$subValue</code>
       <code>$value</code>
