@@ -60,16 +60,14 @@ class BuilderEncoder implements Encoder
             return false;
         }
 
-        $encoder = $this->getEncoderFor($value);
-
-        return $encoder !== null && $encoder->canEncode($value);
+        return (bool) $this->getEncoderFor($value)?->canEncode($value);
     }
 
     public function encode(mixed $value): stdClass|array|string
     {
         $encoder = $this->getEncoderFor($value);
 
-        if (! $encoder || ! $encoder->canEncode($value)) {
+        if (! $encoder?->canEncode($value)) {
             throw UnsupportedValueException::invalidEncodableValue($value);
         }
 
