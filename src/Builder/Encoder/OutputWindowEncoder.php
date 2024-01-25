@@ -14,8 +14,6 @@ use stdClass;
 
 use function array_key_first;
 use function get_debug_type;
-use function is_array;
-use function is_object;
 use function MongoDB\is_first_key_operator;
 use function sprintf;
 
@@ -42,6 +40,7 @@ class OutputWindowEncoder extends AbstractExpressionEncoder
         if (! $value->operator instanceof WindowInterface) {
             if (! is_first_key_operator($result)) {
                 $firstKey = array_key_first((array) $result);
+
                 throw new LogicException(sprintf('Expected OutputWindow::$operator to be an operator. Got "%s"', $firstKey ?? 'null'));
             }
 
