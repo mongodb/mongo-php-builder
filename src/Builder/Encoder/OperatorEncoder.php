@@ -68,8 +68,8 @@ class OperatorEncoder extends AbstractExpressionEncoder
         $result = [];
         /** @var mixed $val */
         foreach (get_object_vars($value) as $val) {
-            // Skip optional arguments.
-            // $slice operator has the optional <position> argument in the middle of the array
+            // Skip optional arguments. For example, the $slice expression operator has an optional <position> argument
+            // in the middle of the array.
             if ($val === Optional::Undefined) {
                 continue;
             }
