@@ -85,7 +85,7 @@ class BuilderEncoder implements Encoder
 
         // First attempt: match class name exactly
         foreach ($encoderList as $className => $encoderClass) {
-            if ($className == $valueClass) {
+            if ($className === $valueClass) {
                 return $this->cachedEncoders[$valueClass] = new $encoderClass($this);
             }
         }
