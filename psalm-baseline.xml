@@ -28,9 +28,6 @@
       <code>$val</code>
       <code>$val</code>
     </MixedAssignment>
-    <UndefinedConstant>
-      <code>$value::ENCODE</code>
-    </UndefinedConstant>
   </file>
   <file src="src/Builder/Encoder/QueryEncoder.php">
     <MixedAssignment>
