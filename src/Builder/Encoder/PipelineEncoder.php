@@ -7,20 +7,21 @@ namespace MongoDB\Builder\Encoder;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Codec\EncodeIfSupported;
 use MongoDB\Exception\UnsupportedValueException;
-use stdClass;
 
-/** @template-extends AbstractExpressionEncoder<array, Pipeline> */
+/** @template-extends AbstractExpressionEncoder<list<mixed>, Pipeline> */
 class PipelineEncoder extends AbstractExpressionEncoder
 {
-    /** @template-use EncodeIfSupported<array, Pipeline> */
+    /** @template-use EncodeIfSupported<list<mixed>, Pipeline> */
     use EncodeIfSupported;
 
+    /** @psalm-assert-if-true Pipeline $value */
     public function canEncode(mixed $value): bool
     {
         return $value instanceof Pipeline;
     }
 
-    public function encode(mixed $value): stdClass|array|string
+    /** @return list<mixed> */
+    public function encode(mixed $value): array
     {
         if (! $this->canEncode($value)) {
             throw UnsupportedValueException::invalidEncodableValue($value);
