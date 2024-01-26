@@ -10,10 +10,7 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
-use function array_map;
-use function array_merge;
 use function MongoDB\object;
-use function range;
 
 /**
  * Test $unionWith stage
@@ -22,33 +19,42 @@ class UnionWithStageTest extends PipelineTestCase
 {
     public function testReport1AllSalesByYearAndStoresAndItems(): void
     {
-        $pipeline = new Pipeline(...array_merge(
-            [
-                Stage::set(
-                    _id: '2017',
-                ),
-            ],
-            array_map(
-                fn ($year) => Stage::unionWith(
-                    coll: 'sales_' . $year,
-                    pipeline: new Pipeline(
-                        Stage::set(
-                            _id: (string) $year,
-                        ),
-                    ),
-                ),
-                range(2018, 2020),
+        $pipeline = new Pipeline(
+            Stage::set(
+                _id: '2017',
             ),
-            [
-                Stage::sort(
-                    object(
-                        _id: 1,
-                        store: 1,
-                        item: 1,
+            Stage::unionWith(
+                coll: 'sales_2018',
+                pipeline: new Pipeline(
+                    Stage::set(
+                        _id: '2018',
                     ),
                 ),
-            ],
-        ));
+            ),
+            Stage::unionWith(
+                coll: 'sales_2019',
+                pipeline: new Pipeline(
+                    Stage::set(
+                        _id: '2019',
+                    ),
+                ),
+            ),
+            Stage::unionWith(
+                coll: 'sales_2020',
+                pipeline: new Pipeline(
+                    Stage::set(
+                        _id: '2020',
+                    ),
+                ),
+            ),
+            Stage::sort(
+                object(
+                    _id: 1,
+                    store: 1,
+                    item: 1,
+                ),
+            ),
+        );
 
         $this->assertSamePipeline(Pipelines::UnionWithReport1AllSalesByYearAndStoresAndItems, $pipeline);
     }

@@ -75,11 +75,31 @@ class ProjectStageTest extends PipelineTestCase
             Stage::project(
                 title: 1,
                 isbn: object(
-                    prefix: Expression::substr(Expression::stringFieldPath('isbn'), 0, 3),
-                    group: Expression::substr(Expression::stringFieldPath('isbn'), 3, 2),
-                    publisher: Expression::substr(Expression::stringFieldPath('isbn'), 5, 4),
-                    title: Expression::substr(Expression::stringFieldPath('isbn'), 9, 3),
-                    checkDigit: Expression::substr(Expression::stringFieldPath('isbn'), 12, 1),
+                    prefix: Expression::substr(
+                        Expression::stringFieldPath('isbn'),
+                        0,
+                        3,
+                    ),
+                    group: Expression::substr(
+                        Expression::stringFieldPath('isbn'),
+                        3,
+                        2,
+                    ),
+                    publisher: Expression::substr(
+                        Expression::stringFieldPath('isbn'),
+                        5,
+                        4,
+                    ),
+                    title: Expression::substr(
+                        Expression::stringFieldPath('isbn'),
+                        9,
+                        3,
+                    ),
+                    checkDigit: Expression::substr(
+                        Expression::stringFieldPath('isbn'),
+                        12,
+                        1,
+                    ),
                 ),
                 lastName: Expression::stringFieldPath('author.last'),
                 copiesSold: Expression::intFieldPath('copies'),
@@ -119,7 +139,10 @@ class ProjectStageTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::project(
-                myArray: [Expression::fieldPath('x'), Expression::fieldPath('y')],
+                myArray: [
+                    Expression::fieldPath('x'),
+                    Expression::fieldPath('y'),
+                ],
             ),
         );
 
