@@ -8,10 +8,10 @@ use ArrayIterator;
 use IteratorAggregate;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
-use Traversable;
 
 use function array_is_list;
 use function array_merge;
+use function is_array;
 
 /**
  * An aggregation pipeline consists of one or more stages that process documents.
@@ -19,15 +19,18 @@ use function array_merge;
  * @see https://www.mongodb.com/docs/manual/core/aggregation-pipeline/
  *
  * @psalm-immutable
- * @implements IteratorAggregate<StageInterface>
+ * @implements IteratorAggregate<StageInterface|array<string,mixed>|object>
  */
-class Pipeline implements IteratorAggregate
+final class Pipeline implements IteratorAggregate
 {
-    /** @var StageInterface[] */
     private readonly array $stages;
 
-    /** @no-named-arguments */
-    public function __construct(StageInterface|Pipeline ...$stagesOrPipelines)
+    /**
+     * @param StageInterface|Pipeline|list<StageInterface> ...$stagesOrPipelines
+     *
+     * @no-named-arguments
+     */
+    public function __construct(StageInterface|Pipeline|array ...$stagesOrPipelines)
     {
         if (! array_is_list($stagesOrPipelines)) {
             throw new InvalidArgumentException('Named arguments are not supported for pipelines');
@@ -36,7 +39,9 @@ class Pipeline implements IteratorAggregate
         $stages = [];
 
         foreach ($stagesOrPipelines as $stageOrPipeline) {
-            if ($stageOrPipeline instanceof Pipeline) {
+            if (is_array($stageOrPipeline) && array_is_list($stageOrPipeline)) {
+                $stages = array_merge($stages, $stageOrPipeline);
+            } elseif ($stageOrPipeline instanceof Pipeline) {
                 $stages = array_merge($stages, $stageOrPipeline->stages);
             } else {
                 $stages[] = $stageOrPipeline;
@@ -46,8 +51,7 @@ class Pipeline implements IteratorAggregate
         $this->stages = $stages;
     }
 
-    /** @return Traversable<StageInterface> */
-    public function getIterator(): Traversable
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->stages);
     }

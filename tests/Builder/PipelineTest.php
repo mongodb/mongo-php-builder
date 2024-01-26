@@ -26,15 +26,16 @@ class PipelineTest extends TestCase
     {
         $stages = array_map(
             fn (int $i) => $this->createMock(StageInterface::class),
-            range(0, 5),
+            range(0, 7),
         );
 
         $pipeline = new Pipeline(
             $stages[0],
             $stages[1],
             new Pipeline($stages[2], $stages[3]),
-            $stages[4],
-            new Pipeline($stages[5]),
+            [$stages[4], $stages[5]],
+            new Pipeline($stages[6]),
+            [$stages[7]],
         );
 
         $this->assertSame($stages, iterator_to_array($pipeline));
