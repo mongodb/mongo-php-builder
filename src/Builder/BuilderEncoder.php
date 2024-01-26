@@ -26,6 +26,7 @@ use MongoDB\Codec\Encoder;
 use MongoDB\Exception\UnsupportedValueException;
 use stdClass;
 
+use function array_key_exists;
 use function is_object;
 
 /** @template-implements Encoder<stdClass|array|string, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
@@ -45,7 +46,7 @@ class BuilderEncoder implements Encoder
         OperatorInterface::class => OperatorEncoder::class,
     ];
 
-    /** @var array<class-string, ExpressionEncoder> */
+    /** @var array<class-string, ExpressionEncoder|null> */
     private array $cachedEncoders = [];
 
     /** @param array<class-string, class-string<ExpressionEncoder>> $customEncoders */
@@ -77,17 +78,15 @@ class BuilderEncoder implements Encoder
     private function getEncoderFor(object $value): ExpressionEncoder|null
     {
         $valueClass = $value::class;
-        if (isset($this->cachedEncoders[$valueClass])) {
+        if (array_key_exists($valueClass, $this->cachedEncoders)) {
             return $this->cachedEncoders[$valueClass];
         }
 
         $encoderList = $this->customEncoders + $this->defaultEncoders;
 
         // First attempt: match class name exactly
-        foreach ($encoderList as $className => $encoderClass) {
-            if ($className === $valueClass) {
-                return $this->cachedEncoders[$valueClass] = new $encoderClass($this);
-            }
+        if (isset($encoderList[$valueClass])) {
+            return $this->cachedEncoders[$valueClass] = new $encoderList[$valueClass]($this);
         }
 
         // Second attempt: catch child classes
@@ -97,6 +96,6 @@ class BuilderEncoder implements Encoder
             }
         }
 
-        return null;
+        return $this->cachedEncoders[$valueClass] = null;
     }
 }
