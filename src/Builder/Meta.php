@@ -31,6 +31,11 @@ enum Meta: string implements OperatorInterface, ExpressionInterface
      */
     case IndexKey = 'indexKey';
 
+    /**
+     * Display search terms in their original context.
+     */
+    case SearchHighlights = 'searchHighlights';
+
     public function getOperator(): string
     {
         return '$meta';
