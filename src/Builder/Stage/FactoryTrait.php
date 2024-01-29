@@ -545,11 +545,33 @@ trait FactoryTrait
      * NOTE: $search is only available for MongoDB Atlas clusters, and is not available for self-managed deployments.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/search/
-     * @param Document|Serializable|array|stdClass $search
+     * @param Document|Serializable|array|stdClass ...$operatorOrCollection
+     * @param Optional|string $index
+     * @param Optional|Document|Serializable|array|stdClass $highlight
+     * @param Optional|bool $concurrent
+     * @param Optional|Document|Serializable|array|stdClass $count
+     * @param Optional|string $searchAfter
+     * @param Optional|string $searchBefore
+     * @param Optional|bool $scoreDetails
+     * @param Optional|Document|Serializable|array|stdClass $sort
+     * @param Optional|bool $returnStoredSource
+     * @param Optional|Document|Serializable|array|stdClass $tracking
      */
-    public static function search(Document|Serializable|stdClass|array $search): SearchStage
+    public static function search(
+        Document|Serializable|stdClass|array $operatorOrCollection,
+        Optional|string $index = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array $highlight = Optional::Undefined,
+        Optional|bool $concurrent = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array $count = Optional::Undefined,
+        Optional|string $searchAfter = Optional::Undefined,
+        Optional|string $searchBefore = Optional::Undefined,
+        Optional|bool $scoreDetails = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array $sort = Optional::Undefined,
+        Optional|bool $returnStoredSource = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array ...$tracking,
+    ): SearchStage
     {
-        return new SearchStage($search);
+        return new SearchStage(...$operatorOrCollection, $index, $highlight, $concurrent, $count, $searchAfter, $searchBefore, $scoreDetails, $sort, $returnStoredSource, $tracking);
     }
 
     /**
