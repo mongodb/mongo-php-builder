@@ -10,7 +10,7 @@ namespace MongoDB\Builder\Type;
 interface OperatorInterface
 {
     /** To be overridden by implementing classes */
-    public const ENCODE = Encode::Single;
+    public const ENCODE = Encode::Undefined;
 
     public function getOperator(): string;
 }
