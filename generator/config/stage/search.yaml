@@ -3,12 +3,187 @@ name: $search
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/search/'
 type:
     - stage
-encode: single
+encode: object
 description: |
     Performs a full-text search of the field or fields in an Atlas collection.
     NOTE: $search is only available for MongoDB Atlas clusters, and is not available for self-managed deployments.
 arguments:
     -
-        name: search
+        name: index
+        type:
+            - string
+        optional: true
+    -
+        name: highlight
         type:
             - object
+        optional: true
+    -
+        name: concurrent
+        type:
+            - bool
+        optional: true
+    -
+        name: count
+        type:
+            - object
+        optional: true
+    -
+        name: searchAfter
+        type:
+            - string
+        optional: true
+    -
+        name: searchBefore
+        type:
+            - string
+        optional: true
+    -
+        name: scoreDetails
+        type:
+            - bool
+        optional: true
+    -
+        name: sort
+        type:
+            - object # SortSpec
+        optional: true
+    -
+        name: returnStoredSource
+        type:
+            - bool
+        optional: true
+    -
+        name: tracking
+        type:
+            - object
+        optional: true
+    -
+        name: operatorOrCollection
+        type:
+            - object
+        variadic: object
+tests:
+    -
+        name: 'Basic Example'
+        link: 'https://www.mongodb.com/docs/atlas/atlas-search/highlighting/#basic-example'
+        pipeline:
+            -
+                $search:
+                    text:
+                        path: 'description'
+                        query:
+                            - 'variety'
+                            - 'bunch'
+                    highlight:
+                        path: 'description'
+            -
+                $project:
+                    description: 1
+                    _id: 0
+                    highlights:
+                        $meta: 'searchHighlights'
+    -
+        name: 'Advanced Example'
+        link: 'https://www.mongodb.com/docs/atlas/atlas-search/highlighting/#advanced-example'
+        pipeline:
+            -
+                $search:
+                    text:
+                        path: 'description'
+                        query:
+                            - 'variety'
+                            - 'bunch'
+                    highlight:
+                        path: 'description'
+                        maxNumPassages: 1
+                        maxCharsToExamine: 40
+            -
+                $project:
+                    description: 1
+                    _id: 0
+                    highlights:
+                        $meta: 'searchHighlights'
+    -
+        name: 'Multi-Field Example'
+        link: 'https://www.mongodb.com/docs/atlas/atlas-search/highlighting/#multi-field-example'
+        pipeline:
+            -
+                $search:
+                    text:
+                        path: 'description'
+                        query: 'varieties'
+                    highlight:
+                        path:
+                            - 'description'
+                            - 'summary'
+            -
+                $project:
+                    description: 1
+                    summary: 1
+                    _id: 0
+                    highlights:
+                        $meta: 'searchHighlights'
+    -
+        name: 'Wildcard Example'
+        link: 'https://www.mongodb.com/docs/atlas/atlas-search/highlighting/#wildcard-example'
+        pipeline:
+            -
+                $search:
+                    text:
+                        path:
+                            wildcard: 'des*'
+                        query:
+                            - 'variety'
+                    highlight:
+                        path:
+                            wildcard: 'des*'
+            -
+                $project:
+                    description: 1
+                    _id: 0
+                    highlights:
+                        $meta: 'searchHighlights'
+    -
+        name: 'Autocomplete Example'
+        link: 'https://www.mongodb.com/docs/atlas/atlas-search/highlighting/#autocomplete-example'
+        pipeline:
+            -
+                $search:
+                    autocomplete:
+                        path: 'description'
+                        query:
+                            - 'var'
+                    highlight:
+                        path: 'description'
+            -
+                $project:
+                    description: 1
+                    _id: 0
+                    highlights:
+                        $meta: 'searchHighlights'
+    -
+        name: 'Compound Example'
+        link: 'https://www.mongodb.com/docs/atlas/atlas-search/highlighting/#compound-example'
+        pipeline:
+            -
+                $search:
+                    compound:
+                        should:
+                            -
+                                text:
+                                    path: 'category'
+                                    query: 'organic'
+                            -
+                                text:
+                                    path: 'description'
+                                    query: 'variety'
+                    highlight:
+                        path: 'description'
+            -
+                $project:
+                    description: 1
+                    category: 1
+                    _id: 0
+                    highlights:
+                        $meta: 'searchHighlights'
