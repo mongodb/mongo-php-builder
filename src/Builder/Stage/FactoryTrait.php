@@ -133,11 +133,19 @@ trait FactoryTrait
      * Returns statistics regarding a collection or view.
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/collStats/
-     * @param Document|Serializable|array|stdClass $config
+     * @param Optional|Document|Serializable|array|stdClass $latencyStats
+     * @param Optional|Document|Serializable|array|stdClass $storageStats
+     * @param Optional|Document|Serializable|array|stdClass $count
+     * @param Optional|Document|Serializable|array|stdClass $queryExecStats
      */
-    public static function collStats(Document|Serializable|stdClass|array $config): CollStatsStage
+    public static function collStats(
+        Optional|Document|Serializable|stdClass|array $latencyStats = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array $storageStats = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array $count = Optional::Undefined,
+        Optional|Document|Serializable|stdClass|array $queryExecStats = Optional::Undefined,
+    ): CollStatsStage
     {
-        return new CollStatsStage($config);
+        return new CollStatsStage($latencyStats, $storageStats, $count, $queryExecStats);
     }
 
     /**

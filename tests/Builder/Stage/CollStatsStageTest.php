@@ -19,9 +19,7 @@ class CollStatsStageTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::collStats(
-                object(
-                    count: object(),
-                ),
+                count: object(),
             ),
         );
 
@@ -32,10 +30,8 @@ class CollStatsStageTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::collStats(
-                object(
-                    latencyStats: object(
-                        histograms: true,
-                    ),
+                latencyStats: object(
+                    histograms: true,
                 ),
             ),
         );
@@ -47,9 +43,7 @@ class CollStatsStageTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::collStats(
-                object(
-                    queryExecStats: object(),
-                ),
+                queryExecStats: object(),
             ),
         );
 
@@ -60,9 +54,7 @@ class CollStatsStageTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::collStats(
-                object(
-                    storageStats: object(),
-                ),
+                storageStats: object(),
             ),
         );
 

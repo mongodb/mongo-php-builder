@@ -3,14 +3,30 @@ name: $collStats
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/collStats/'
 type:
     - stage
-encode: single
+encode: object
 description: |
     Returns statistics regarding a collection or view.
 arguments:
     -
-        name: config
+        name: latencyStats
         type:
             - object
+        optional: true
+    -
+        name: storageStats
+        type:
+            - object
+        optional: true
+    -
+        name: count
+        type:
+            - object # empty object
+        optional: true
+    -
+        name: queryExecStats
+        type:
+            - object # empty object
+        optional: true
 tests:
     -
         name: 'latencyStats Document'
