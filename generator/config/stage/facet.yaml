@@ -21,6 +21,7 @@ tests:
                 $facet:
                     categorizedByTags:
                         -
+                            # The builder uses the verbose form of the $unwind operator
                             # $unwind: '$tags'
                             $unwind:
                                 path: '$tags'

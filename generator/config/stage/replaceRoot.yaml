@@ -31,6 +31,7 @@ tests:
         link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/replaceRoot/#-replaceroot-with-a-document-nested-in-an-array'
         pipeline:
             -
+                # The builder uses the verbose form of the $unwind operator
                 # $unwind: '$grades'
                 $unwind:
                     path: '$grades'
