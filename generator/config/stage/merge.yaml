@@ -139,8 +139,8 @@ tests:
             -
                 $match:
                     date:
-                        $gte: !bson_utcdatetime 1557187200000
-                        $lt: !bson_utcdatetime 1557273600000
+                        $gte: !bson_utcdatetime '2019-05-07'
+                        $lt: !bson_utcdatetime '2019-05-08'
             -
                 $project:
                     _id:
