@@ -35,7 +35,7 @@ tests:
         link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/#unwind-array'
         pipeline:
             -
-                # The aggregation builder always generated the object form
+                # Example uses the short form, the builder always generates the verbose form
                 # $unwind: '$sizes'
                 $unwind:
                     path: '$sizes'
@@ -76,10 +76,12 @@ tests:
         link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/#unwind-embedded-arrays'
         pipeline:
             -
+                # Example uses the short form, the builder always generates the verbose form
                 # $unwind: '$items'
                 $unwind:
                     path: '$items'
             -
+                # Example uses the short form, the builder always generates the verbose form
                 # $unwind: '$items.tags'
                 $unwind:
                     path: '$items.tags'

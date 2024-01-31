@@ -33,7 +33,7 @@ tests:
                     warehouses:
                         $objectToArray: '$instock'
             -
-                # The builder uses the verbose form of the $unwind operator
+                # Example uses the short form, the builder always generates the verbose form
                 # $unwind: '$warehouses'
                 $unwind:
                     path: '$warehouses'

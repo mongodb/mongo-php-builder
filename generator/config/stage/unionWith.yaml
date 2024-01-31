@@ -61,6 +61,7 @@ tests:
         link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/unionWith/#report-2--aggregated-sales-by-items'
         pipeline:
             -
+                # Example uses the short form, the builder always generates the verbose form
                 # $unionWith: 'sales_2018'
                 $unionWith:
                     coll: 'sales_2018'
@@ -80,4 +81,3 @@ tests:
             -
                 $sort:
                     total: -1
-
