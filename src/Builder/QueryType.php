@@ -19,27 +19,25 @@ enum QueryType: string implements OperatorInterface, FieldQueryInterface
 {
     public const ENCODE = Encode::Array;
 
-    case Double = 'double';
-    case String = 'string';
-    case Object = 'object';
     case Array = 'array';
-    case BinaryData = 'binData';
-    case ObjectId = 'objectId';
-    case Boolean = 'bool';
-    case Date = 'date';
-    case Null = 'null';
-    case Regex = 'regex';
-    case JavaScript = 'javascript';
-    case Int = 'int';
-    case Timestamp = 'timestamp';
-    case Long = 'long';
+    case Binary = 'binData';
+    case Bool = 'bool';
+    case Decimal64 = 'double';
     case Decimal128 = 'decimal';
-    case MinKey = 'minKey';
+    case Int32 = 'int';
+    case Int64 = 'long';
+    case Javascript = 'javascript';
+    case Object = 'object';
+    case ObjectId = 'objectId';
     case MaxKey = 'maxKey';
-    /**
-     * Alias for Double, Int, Long, Decimal
-     */
+    case MinKey = 'minKey';
+    case Null = 'null';
+    /** Alias for Int32, Int64, Decimal64, Decimal128 */
     case Number = 'number';
+    case Regex = 'regex';
+    case String = 'string';
+    case Timestamp = 'timestamp';
+    case UTCDateTime = 'date';
 
     public function getOperator(): string
     {

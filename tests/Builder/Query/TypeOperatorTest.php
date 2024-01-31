@@ -39,7 +39,7 @@ class TypeOperatorTest extends PipelineTestCase
                 zipCode: Query::type(1),
             ),
             Stage::match(
-                zipCode: Query::type(QueryType::Double),
+                zipCode: Query::type(QueryType::Decimal64),
             ),
             Stage::match(
                 zipCode: QueryType::Number,
