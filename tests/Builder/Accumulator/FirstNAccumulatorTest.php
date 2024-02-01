@@ -106,9 +106,7 @@ class FirstNAccumulatorTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::sort(
-                object(
-                    score: -1,
-                ),
+                score: -1,
             ),
             Stage::group(
                 _id: Expression::fieldPath('gameId'),

@@ -10,8 +10,6 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
-use function MongoDB\object;
-
 /**
  * Test $unionWith stage
  */
@@ -48,11 +46,9 @@ class UnionWithStageTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                object(
-                    _id: 1,
-                    store: 1,
-                    item: 1,
-                ),
+                _id: 1,
+                store: 1,
+                item: 1,
             ),
         );
 
@@ -72,9 +68,7 @@ class UnionWithStageTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                object(
-                    total: -1,
-                ),
+                total: -1,
             ),
         );
 

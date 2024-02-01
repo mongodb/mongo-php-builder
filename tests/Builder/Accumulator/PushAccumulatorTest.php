@@ -21,10 +21,8 @@ class PushAccumulatorTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::sort(
-                object(
-                    date: 1,
-                    item: 1,
-                ),
+                date: 1,
+                item: 1,
             ),
             Stage::group(
                 _id: object(

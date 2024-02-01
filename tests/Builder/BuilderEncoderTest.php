@@ -98,7 +98,7 @@ class BuilderEncoderTest extends TestCase
     public function testSort(): void
     {
         $pipeline = new Pipeline(
-            Stage::sort(object(age: -1, posts: 1)),
+            Stage::sort(age: -1, posts: 1),
         );
 
         $expected = [

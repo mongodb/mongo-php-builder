@@ -10,8 +10,6 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
-use function MongoDB\object;
-
 /**
  * Test $unwind stage
  */
@@ -31,9 +29,7 @@ class UnwindStageTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                object(
-                    averagePrice: -1,
-                ),
+                averagePrice: -1,
             ),
         );
 

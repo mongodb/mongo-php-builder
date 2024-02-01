@@ -9,8 +9,6 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
-use function MongoDB\object;
-
 /**
  * Test $toDate expression
  */
@@ -25,9 +23,7 @@ class ToDateOperatorTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                object(
-                    convertedDate: 1,
-                ),
+                convertedDate: 1,
             ),
         );
 

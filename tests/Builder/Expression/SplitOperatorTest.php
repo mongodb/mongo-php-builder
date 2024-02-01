@@ -43,9 +43,7 @@ class SplitOperatorTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                object(
-                    total_qty: -1,
-                ),
+                total_qty: -1,
             ),
         );
 

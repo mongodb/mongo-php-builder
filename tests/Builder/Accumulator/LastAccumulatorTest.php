@@ -20,10 +20,10 @@ class LastAccumulatorTest extends PipelineTestCase
     public function testUseInGroupStage(): void
     {
         $pipeline = new Pipeline(
-            Stage::sort(object(
+            Stage::sort(
                 item: 1,
                 date: 1,
-            )),
+            ),
             Stage::group(
                 _id: '$item',
                 lastSalesDate: Accumulator::last(Expression::dateFieldPath('date')),

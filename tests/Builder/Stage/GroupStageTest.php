@@ -13,8 +13,6 @@ use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
-use function MongoDB\object;
-
 /**
  * Test $group stage
  */
@@ -43,9 +41,7 @@ class GroupStageTest extends PipelineTestCase
                 count: Accumulator::sum(1),
             ),
             Stage::sort(
-                object(
-                    totalSaleAmount: -1,
-                ),
+                totalSaleAmount: -1,
             ),
         );
 

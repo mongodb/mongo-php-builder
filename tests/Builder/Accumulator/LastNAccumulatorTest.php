@@ -10,8 +10,6 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
-use function MongoDB\object;
-
 /**
  * Test $lastN accumulator
  */
@@ -81,9 +79,9 @@ class LastNAccumulatorTest extends PipelineTestCase
     public function testUsingSortWithLastN(): void
     {
         $pipeline = new Pipeline(
-            Stage::sort(object(
+            Stage::sort(
                 score: -1,
-            )),
+            ),
             Stage::group(
                 _id: Expression::fieldPath('gameId'),
                 playerId: Accumulator::lastN(
