@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
-interface Dictionnary
+interface DictionaryInterface
 {
     public function getValue(): string|int|array;
 }

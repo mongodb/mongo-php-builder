@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
-enum TimeUnit: string implements Dictionnary
+/**
+ * Values for "unit" property of stages like $derivative and $integral, and operators like $dateAdd and $dateDiff
+ */
+enum TimeUnit: string implements DictionaryInterface
 {
     case Year = 'year';
     case Quarter = 'quarter';

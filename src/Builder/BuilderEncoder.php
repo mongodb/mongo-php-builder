@@ -15,7 +15,7 @@ use MongoDB\Builder\Encoder\QueryEncoder;
 use MongoDB\Builder\Encoder\VariableEncoder;
 use MongoDB\Builder\Expression\Variable;
 use MongoDB\Builder\Type\CombinedFieldQuery;
-use MongoDB\Builder\Type\Dictionnary;
+use MongoDB\Builder\Type\DictionaryInterface;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\FieldPathInterface;
 use MongoDB\Builder\Type\OperatorInterface;
@@ -31,17 +31,17 @@ use stdClass;
 use function array_key_exists;
 use function is_object;
 
-/** @template-implements Encoder<stdClass|array|string, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
+/** @template-implements Encoder<stdClass|array|string|int, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
 class BuilderEncoder implements Encoder
 {
-    /** @template-use EncodeIfSupported<stdClass|array|string, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
+    /** @template-use EncodeIfSupported<stdClass|array|string|int, Pipeline|StageInterface|ExpressionInterface|QueryInterface> */
     use EncodeIfSupported;
 
     /** @var array<class-string, class-string<ExpressionEncoder>> */
     private array $defaultEncoders = [
         Pipeline::class => PipelineEncoder::class,
         Variable::class => VariableEncoder::class,
-        Dictionnary::class => DictionaryEncoder::class,
+        DictionaryInterface::class => DictionaryEncoder::class,
         FieldPathInterface::class => FieldPathEncoder::class,
         CombinedFieldQuery::class => CombinedFieldQueryEncoder::class,
         QueryObject::class => QueryEncoder::class,

@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace MongoDB\Builder\Type;
 
-enum Sort implements Dictionnary
+/**
+ * Sort order can be used with $sort stage and sortBy properties
+ *
+ * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/
+ */
+enum Sort implements DictionaryInterface
 {
     case Asc;
     case Desc;
