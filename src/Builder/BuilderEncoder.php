@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MongoDB\Builder;
 
 use MongoDB\Builder\Encoder\CombinedFieldQueryEncoder;
+use MongoDB\Builder\Encoder\DictionaryEncoder;
 use MongoDB\Builder\Encoder\ExpressionEncoder;
 use MongoDB\Builder\Encoder\FieldPathEncoder;
 use MongoDB\Builder\Encoder\OperatorEncoder;
@@ -14,6 +15,7 @@ use MongoDB\Builder\Encoder\QueryEncoder;
 use MongoDB\Builder\Encoder\VariableEncoder;
 use MongoDB\Builder\Expression\Variable;
 use MongoDB\Builder\Type\CombinedFieldQuery;
+use MongoDB\Builder\Type\Dictionnary;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\FieldPathInterface;
 use MongoDB\Builder\Type\OperatorInterface;
@@ -39,6 +41,7 @@ class BuilderEncoder implements Encoder
     private array $defaultEncoders = [
         Pipeline::class => PipelineEncoder::class,
         Variable::class => VariableEncoder::class,
+        Dictionnary::class => DictionaryEncoder::class,
         FieldPathInterface::class => FieldPathEncoder::class,
         CombinedFieldQuery::class => CombinedFieldQueryEncoder::class,
         QueryObject::class => QueryEncoder::class,

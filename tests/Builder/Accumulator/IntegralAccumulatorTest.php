@@ -8,6 +8,7 @@ use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -29,10 +30,10 @@ class IntegralAccumulatorTest extends PipelineTestCase
                     powerMeterKilowattHours: Accumulator::outputWindow(
                         Accumulator::integral(
                             input: Expression::numberFieldPath('kilowatts'),
-                            unit: 'hour',
+                            unit: TimeUnit::Hour,
                         ),
                         range: ['unbounded', 'current'],
-                        unit: 'hour',
+                        unit: TimeUnit::Hour,
                     ),
                 ),
             ),

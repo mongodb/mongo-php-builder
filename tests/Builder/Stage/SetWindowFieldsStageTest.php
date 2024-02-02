@@ -8,6 +8,7 @@ use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -49,7 +50,7 @@ class SetWindowFieldsStageTest extends PipelineTestCase
                             Expression::dateFieldPath('orderDate'),
                         ),
                         range: ['unbounded', -10],
-                        unit: 'month',
+                        unit: TimeUnit::Month,
                     ),
                 ),
             ),
@@ -70,7 +71,7 @@ class SetWindowFieldsStageTest extends PipelineTestCase
                             Expression::dateFieldPath('orderDate'),
                         ),
                         range: ['unbounded', 10],
-                        unit: 'month',
+                        unit: TimeUnit::Month,
                     ),
                 ),
             ),

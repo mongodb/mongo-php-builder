@@ -9,6 +9,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -30,10 +31,10 @@ class DerivativeAccumulatorTest extends PipelineTestCase
                     truckAverageSpeed: Accumulator::outputWindow(
                         Accumulator::derivative(
                             input: Expression::numberFieldPath('miles'),
-                            unit: 'hour',
+                            unit: TimeUnit::Hour,
                         ),
                         range: [-30, 0],
-                        unit: 'second',
+                        unit: TimeUnit::Second,
                     ),
                 ),
             ),

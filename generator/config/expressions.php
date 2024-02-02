@@ -117,6 +117,10 @@ return $expressions + [
         'returnType' => Type\SwitchBranchInterface::class,
         'acceptedTypes' => [Type\SwitchBranchInterface::class, ...$bsonTypes['object']],
     ],
+    'timeUnit' => [
+        'returnType' => Type\TimeUnit::class,
+        'acceptedTypes' => [Type\TimeUnit::class, ResolvesToString::class, ...$bsonTypes['string']],
+    ],
 
     // @todo add enum values
     'Granularity' => [

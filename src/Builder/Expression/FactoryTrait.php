@@ -22,6 +22,7 @@ use MongoDB\BSON\Type;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\Optional;
+use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Model\BSONArray;
 use stdClass;
 
@@ -439,13 +440,13 @@ trait FactoryTrait
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateAdd/
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The beginning date, in UTC, for the addition operation. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID.
-     * @param ResolvesToString|string $unit The unit used to measure the amount of time added to the startDate.
+     * @param ResolvesToString|TimeUnit|string $unit The unit used to measure the amount of time added to the startDate.
      * @param Int64|ResolvesToInt|ResolvesToLong|int $amount
      * @param Optional|ResolvesToString|string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC.
      */
     public static function dateAdd(
         ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $startDate,
-        ResolvesToString|string $unit,
+        ResolvesToString|TimeUnit|string $unit,
         Int64|ResolvesToInt|ResolvesToLong|int $amount,
         Optional|ResolvesToString|string $timezone = Optional::Undefined,
     ): DateAddOperator
@@ -459,14 +460,14 @@ trait FactoryTrait
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateDiff/
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The start of the time period. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID.
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $endDate The end of the time period. The endDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID.
-     * @param ResolvesToString|string $unit The time measurement unit between the startDate and endDate
+     * @param ResolvesToString|TimeUnit|string $unit The time measurement unit between the startDate and endDate
      * @param Optional|ResolvesToString|string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC.
      * @param Optional|ResolvesToString|string $startOfWeek Used when the unit is equal to week. Defaults to Sunday. The startOfWeek parameter is an expression that resolves to a case insensitive string
      */
     public static function dateDiff(
         ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $startDate,
         ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $endDate,
-        ResolvesToString|string $unit,
+        ResolvesToString|TimeUnit|string $unit,
         Optional|ResolvesToString|string $timezone = Optional::Undefined,
         Optional|ResolvesToString|string $startOfWeek = Optional::Undefined,
     ): DateDiffOperator
@@ -536,13 +537,13 @@ trait FactoryTrait
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateSubtract/
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $startDate The beginning date, in UTC, for the addition operation. The startDate can be any expression that resolves to a Date, a Timestamp, or an ObjectID.
-     * @param ResolvesToString|string $unit The unit used to measure the amount of time added to the startDate.
+     * @param ResolvesToString|TimeUnit|string $unit The unit used to measure the amount of time added to the startDate.
      * @param Int64|ResolvesToInt|ResolvesToLong|int $amount
      * @param Optional|ResolvesToString|string $timezone The timezone to carry out the operation. $timezone must be a valid expression that resolves to a string formatted as either an Olson Timezone Identifier or a UTC Offset. If no timezone is provided, the result is displayed in UTC.
      */
     public static function dateSubtract(
         ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $startDate,
-        ResolvesToString|string $unit,
+        ResolvesToString|TimeUnit|string $unit,
         Int64|ResolvesToInt|ResolvesToLong|int $amount,
         Optional|ResolvesToString|string $timezone = Optional::Undefined,
     ): DateSubtractOperator
@@ -593,7 +594,7 @@ trait FactoryTrait
      *
      * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateTrunc/
      * @param ObjectId|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|Timestamp|UTCDateTime|int $date The date to truncate, specified in UTC. The date can be any expression that resolves to a Date, a Timestamp, or an ObjectID.
-     * @param ResolvesToString|string $unit The unit of time, specified as an expression that must resolve to one of these strings: year, quarter, week, month, day, hour, minute, second.
+     * @param ResolvesToString|TimeUnit|string $unit The unit of time, specified as an expression that must resolve to one of these strings: year, quarter, week, month, day, hour, minute, second.
      * Together, binSize and unit specify the time period used in the $dateTrunc calculation.
      * @param Optional|Decimal128|Int64|ResolvesToNumber|float|int $binSize The numeric time value, specified as an expression that must resolve to a positive non-zero number. Defaults to 1.
      * Together, binSize and unit specify the time period used in the $dateTrunc calculation.
@@ -603,7 +604,7 @@ trait FactoryTrait
      */
     public static function dateTrunc(
         ObjectId|Timestamp|UTCDateTime|ResolvesToDate|ResolvesToObjectId|ResolvesToTimestamp|int $date,
-        ResolvesToString|string $unit,
+        ResolvesToString|TimeUnit|string $unit,
         Optional|Decimal128|Int64|ResolvesToNumber|float|int $binSize = Optional::Undefined,
         Optional|ResolvesToString|string $timezone = Optional::Undefined,
         Optional|string $startOfWeek = Optional::Undefined,
