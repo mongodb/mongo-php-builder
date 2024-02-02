@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder\Stage;
 
-use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -19,8 +19,8 @@ class SortStageTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::sort(
-                age: -1,
-                posts: 1,
+                age: Sort::Desc,
+                posts: Sort::Asc,
             ),
         );
 
@@ -34,8 +34,8 @@ class SortStageTest extends PipelineTestCase
                 Query::text('operating'),
             ),
             Stage::sort(
-                score: Expression::meta('textScore'),
-                posts: -1,
+                score: Sort::TextScore,
+                posts: Sort::Desc,
             ),
         );
 

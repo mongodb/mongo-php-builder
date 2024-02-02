@@ -9,6 +9,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
@@ -25,7 +26,7 @@ class DerivativeAccumulatorTest extends PipelineTestCase
             Stage::setWindowFields(
                 partitionBy: Expression::stringFieldPath('truckID'),
                 sortBy: object(
-                    timeStamp: 1,
+                    timeStamp: Sort::Asc,
                 ),
                 output: object(
                     truckAverageSpeed: Accumulator::outputWindow(

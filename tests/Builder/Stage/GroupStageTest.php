@@ -11,6 +11,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -41,7 +42,7 @@ class GroupStageTest extends PipelineTestCase
                 count: Accumulator::sum(1),
             ),
             Stage::sort(
-                totalSaleAmount: -1,
+                totalSaleAmount: Sort::Desc,
             ),
         );
 

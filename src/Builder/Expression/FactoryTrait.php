@@ -22,6 +22,7 @@ use MongoDB\BSON\Type;
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\Optional;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Model\BSONArray;
 use stdClass;
@@ -1816,11 +1817,11 @@ trait FactoryTrait
      * @param BSONArray|PackedArray|ResolvesToArray|array $input The array to be sorted.
      * The result is null if the expression: is missing, evaluates to null, or evaluates to undefined
      * If the expression evaluates to any other non-array value, the document returns an error.
-     * @param Document|Serializable|array|int|stdClass $sortBy The document specifies a sort ordering.
+     * @param Document|Serializable|Sort|array|int|stdClass $sortBy The document specifies a sort ordering.
      */
     public static function sortArray(
         PackedArray|ResolvesToArray|BSONArray|array $input,
-        Document|Serializable|stdClass|array|int $sortBy,
+        Document|Serializable|Sort|stdClass|array|int $sortBy,
     ): SortArrayOperator
     {
         return new SortArrayOperator($input, $sortBy);

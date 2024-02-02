@@ -67,7 +67,7 @@ class BuilderEncoder implements Encoder
         return (bool) $this->getEncoderFor($value)?->canEncode($value);
     }
 
-    public function encode(mixed $value): stdClass|array|string
+    public function encode(mixed $value): stdClass|array|string|int
     {
         $encoder = $this->getEncoderFor($value);
 

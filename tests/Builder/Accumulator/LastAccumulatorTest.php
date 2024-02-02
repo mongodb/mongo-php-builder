@@ -8,6 +8,7 @@ use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -21,8 +22,8 @@ class LastAccumulatorTest extends PipelineTestCase
     {
         $pipeline = new Pipeline(
             Stage::sort(
-                item: 1,
-                date: 1,
+                item: Sort::Asc,
+                date: Sort::Asc,
             ),
             Stage::group(
                 _id: '$item',
@@ -39,7 +40,7 @@ class LastAccumulatorTest extends PipelineTestCase
             Stage::setWindowFields(
                 partitionBy: Expression::fieldPath('state'),
                 sortBy: object(
-                    orderDate: 1,
+                    orderDate: Sort::Asc,
                 ),
                 output: object(
                     lastOrderTypeForState: Accumulator::outputWindow(

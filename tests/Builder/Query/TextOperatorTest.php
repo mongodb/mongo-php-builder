@@ -8,6 +8,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -109,7 +110,7 @@ class TextOperatorTest extends PipelineTestCase
                 score: Expression::meta('textScore'),
             ),
             Stage::sort(
-                score: Expression::meta('textScore'),
+                score: Sort::TextScore,
             ),
             Stage::limit(5),
         );

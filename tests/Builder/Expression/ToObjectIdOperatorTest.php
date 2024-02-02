@@ -7,6 +7,7 @@ namespace MongoDB\Tests\Builder\Expression;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -23,7 +24,7 @@ class ToObjectIdOperatorTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                convertedId: -1,
+                convertedId: Sort::Desc,
             ),
         );
 

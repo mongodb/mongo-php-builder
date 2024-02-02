@@ -12,6 +12,7 @@ use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\OperatorInterface;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Exception\InvalidArgumentException;
 use stdClass;
@@ -27,13 +28,13 @@ class SortStage implements StageInterface, OperatorInterface
 {
     public const ENCODE = Encode::Single;
 
-    /** @var stdClass<ExpressionInterface|Type|array|bool|float|int|null|stdClass|string> $sort */
+    /** @var stdClass<ExpressionInterface|Sort|Type|array|bool|float|int|null|stdClass|string> $sort */
     public readonly stdClass $sort;
 
     /**
-     * @param ExpressionInterface|Type|array|bool|float|int|null|stdClass|string ...$sort
+     * @param ExpressionInterface|Sort|Type|array|bool|float|int|null|stdClass|string ...$sort
      */
-    public function __construct(Type|ExpressionInterface|stdClass|array|bool|float|int|null|string ...$sort)
+    public function __construct(Type|ExpressionInterface|Sort|stdClass|array|bool|float|int|null|string ...$sort)
     {
         if (\count($sort) < 1) {
             throw new \InvalidArgumentException(\sprintf('Expected at least %d values for $sort, got %d.', 1, \count($sort)));

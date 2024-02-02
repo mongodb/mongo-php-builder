@@ -8,6 +8,7 @@ use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -29,7 +30,7 @@ class UnwindStageTest extends PipelineTestCase
                 ),
             ),
             Stage::sort(
-                averagePrice: -1,
+                averagePrice: Sort::Desc,
             ),
         );
 

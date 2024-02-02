@@ -8,6 +8,7 @@ use MongoDB\Builder\Accumulator;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Sort;
 use MongoDB\Builder\Type\TimeUnit;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
@@ -24,7 +25,7 @@ class IntegralAccumulatorTest extends PipelineTestCase
             Stage::setWindowFields(
                 partitionBy: Expression::stringFieldPath('powerMeterID'),
                 sortBy: object(
-                    timeStamp: 1,
+                    timeStamp: Sort::Asc,
                 ),
                 output: object(
                     powerMeterKilowattHours: Accumulator::outputWindow(
