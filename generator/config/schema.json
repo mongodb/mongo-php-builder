@@ -58,7 +58,7 @@
                     "type": "string",
                     "enum": [
                         "array",
-                        "object",
+                        "flat_object",
                         "dollar_object",
                         "single",
                         "group"
