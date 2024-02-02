@@ -12,6 +12,7 @@ use MongoDB\BSON\Type;
 use MongoDB\Builder\Type\Encode;
 use MongoDB\Builder\Type\ExpressionInterface;
 use MongoDB\Builder\Type\OperatorInterface;
+use MongoDB\Builder\Type\SwitchBranchInterface;
 use stdClass;
 
 /**
@@ -19,7 +20,7 @@ use stdClass;
  *
  * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/switch/
  */
-class CaseOperator implements ResolvesToAny, OperatorInterface
+class CaseOperator implements SwitchBranchInterface, OperatorInterface
 {
     public const ENCODE = Encode::FlatObject;
 

@@ -29,6 +29,7 @@
                             "filter",
                             "window",
                             "geometry",
+                            "switchBranch",
                             "resolvesToAny",
                             "resolvesToNumber",
                             "resolvesToDouble",

@@ -2,7 +2,7 @@
 name: $case
 link: 'https://www.mongodb.com/docs/manual/reference/operator/aggregation/switch/'
 type:
-    - resolvesToAny
+    - switchBranch
 encode: flat_object
 description: |
     Represents a single case in a $switch expression
