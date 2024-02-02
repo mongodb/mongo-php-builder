@@ -7,6 +7,7 @@ namespace MongoDB\Tests\Builder\Stage;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -30,7 +31,7 @@ class ProjectStageTest extends PipelineTestCase
                             '',
                             Expression::stringFieldPath('author.middle'),
                         ),
-                        then: Expression::variable('REMOVE'),
+                        then: Variable::Remove,
                         else: Expression::stringFieldPath('author.middle'),
                     ),
                 ],

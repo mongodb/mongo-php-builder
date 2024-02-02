@@ -8,6 +8,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -148,7 +149,7 @@ class LookupStageTest extends PipelineTestCase
                         Expression::arrayFieldPath('fromItems'),
                         0,
                     ),
-                    Expression::variable('ROOT'),
+                    Variable::Root,
                 ),
             ),
             Stage::project(

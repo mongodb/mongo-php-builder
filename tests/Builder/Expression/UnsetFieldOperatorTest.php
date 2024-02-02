@@ -7,6 +7,7 @@ namespace MongoDB\Tests\Builder\Expression;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -20,7 +21,7 @@ class UnsetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: 'price',
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                     value: Expression::unsetField(
                         field: 'euro',
                         input: Expression::getField('price'),
@@ -38,7 +39,7 @@ class UnsetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::unsetField(
                     field: 'price.usd',
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                 ),
             ),
         );
@@ -52,7 +53,7 @@ class UnsetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::unsetField(
                     field: Expression::literal('$price'),
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                 ),
             ),
         );

@@ -12,8 +12,8 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Redact;
 use MongoDB\Builder\Type\Sort;
-use MongoDB\Builder\Variable;
 use PHPUnit\Framework\TestCase;
 
 use function array_merge;
@@ -314,8 +314,8 @@ class BuilderEncoderTest extends TestCase
             Stage::redact(
                 Expression::cond(
                     if: Expression::eq(Expression::fieldPath('level'), 5),
-                    then: Variable::prune(),
-                    else: Variable::descend(),
+                    then: Redact::Prune,
+                    else: Redact::Descend,
                 ),
             ),
         );

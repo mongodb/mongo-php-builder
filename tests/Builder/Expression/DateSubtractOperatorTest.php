@@ -9,6 +9,7 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
 use MongoDB\Builder\Type\TimeUnit;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -83,7 +84,7 @@ class DateSubtractOperatorTest extends PipelineTestCase
                     Expression::gt(
                         Expression::dateFieldPath('logoutTime'),
                         Expression::dateSubtract(
-                            startDate: Expression::variable('NOW'),
+                            startDate: Variable::Now,
                             unit: TimeUnit::Week,
                             amount: 1,
                         ),

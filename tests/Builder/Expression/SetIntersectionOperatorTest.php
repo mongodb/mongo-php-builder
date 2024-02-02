@@ -8,6 +8,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -41,7 +42,7 @@ class SetIntersectionOperatorTest extends PipelineTestCase
                         Expression::eq(
                             Expression::setIntersection(
                                 Expression::arrayFieldPath('allowedRoles'),
-                                Expression::variable('USER_ROLES.role'),
+                                Variable::UserRoles->dot('role'),
                             ),
                             [],
                         ),

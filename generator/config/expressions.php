@@ -125,6 +125,10 @@ return $expressions + [
         'returnType' => Type\Sort::class,
         'acceptedTypes' => [Type\Sort::class],
     ],
+    'redact' => [
+        'returnType' => Type\Redact::class,
+        'acceptedTypes' => [Type\Redact::class, ResolvesToString::class, ...$bsonTypes['string']],
+    ],
 
     // @todo add enum values
     'Granularity' => [

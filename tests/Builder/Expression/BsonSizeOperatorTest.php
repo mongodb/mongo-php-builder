@@ -9,6 +9,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Builder\Type\Sort;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -23,7 +24,7 @@ class BsonSizeOperatorTest extends PipelineTestCase
                 _id: null,
                 combined_object_size: Accumulator::sum(
                     Expression::bsonSize(
-                        Expression::variable('ROOT'),
+                        Variable::Root,
                     ),
                 ),
             ),
@@ -56,7 +57,7 @@ class BsonSizeOperatorTest extends PipelineTestCase
             Stage::project(
                 name: 1,
                 object_size: Expression::bsonSize(
-                    Expression::variable('ROOT'),
+                    Variable::Root,
                 ),
             ),
         );

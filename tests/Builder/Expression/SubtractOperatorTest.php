@@ -7,6 +7,7 @@ namespace MongoDB\Tests\Builder\Expression;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -53,7 +54,7 @@ class SubtractOperatorTest extends PipelineTestCase
             Stage::project(
                 item: 1,
                 dateDifference: Expression::subtract(
-                    Expression::variable('NOW'),
+                    Variable::Now,
                     Expression::dateFieldPath('date'),
                 ),
             ),

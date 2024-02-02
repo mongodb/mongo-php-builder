@@ -7,6 +7,7 @@ namespace MongoDB\Tests\Builder\Expression;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -20,7 +21,7 @@ class SetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: 'price.usd',
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                     value: Expression::fieldPath('price'),
                 ),
             ),
@@ -36,7 +37,7 @@ class SetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: Expression::literal('$price'),
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                     value: Expression::fieldPath('price'),
                 ),
             ),
@@ -52,8 +53,8 @@ class SetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: 'price.usd',
-                    input: Expression::variable('ROOT'),
-                    value: Expression::variable('REMOVE'),
+                    input: Variable::Root,
+                    value: Variable::Remove,
                 ),
             ),
         );
@@ -67,8 +68,8 @@ class SetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: Expression::literal('$price'),
-                    input: Expression::variable('ROOT'),
-                    value: Expression::variable('REMOVE'),
+                    input: Variable::Root,
+                    value: Variable::Remove,
                 ),
             ),
         );
@@ -85,7 +86,7 @@ class SetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: 'price.usd',
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                     value: 49.99,
                 ),
             ),
@@ -103,7 +104,7 @@ class SetFieldOperatorTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::setField(
                     field: Expression::literal('$price'),
-                    input: Expression::variable('ROOT'),
+                    input: Variable::Root,
                     value: 49.99,
                 ),
             ),

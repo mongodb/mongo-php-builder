@@ -6,9 +6,9 @@ namespace MongoDB\Tests\Builder\Stage;
 
 use DateTime;
 use MongoDB\BSON\UTCDateTime;
-use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -33,7 +33,7 @@ class SearchStageTest extends PipelineTestCase
             Stage::facet(
                 docs: [],
                 meta: new Pipeline(
-                    Stage::replaceWith(Expression::variable('SEARCH_META')),
+                    Stage::replaceWith(Variable::SearchMeta),
                     Stage::limit(1),
                 ),
             ),

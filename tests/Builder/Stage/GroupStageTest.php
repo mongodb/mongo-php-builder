@@ -12,6 +12,7 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
 use MongoDB\Builder\Type\Sort;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -108,7 +109,7 @@ class GroupStageTest extends PipelineTestCase
             Stage::group(
                 _id: Expression::fieldPath('author'),
                 books: Accumulator::push(
-                    Expression::variable('ROOT'),
+                    Variable::Root,
                 ),
             ),
             Stage::addFields(

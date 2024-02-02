@@ -7,6 +7,7 @@ namespace MongoDB\Tests\Builder\Stage;
 use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Redact;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 /**
@@ -31,8 +32,8 @@ class RedactStageTest extends PipelineTestCase
                         ),
                         0,
                     ),
-                    then: Expression::variable('DESCEND'),
-                    else: Expression::variable('PRUNE'),
+                    then: Redact::Descend,
+                    else: Redact::Prune,
                 ),
             ),
         );
@@ -52,8 +53,8 @@ class RedactStageTest extends PipelineTestCase
                         Expression::intFieldPath('level'),
                         5,
                     ),
-                    then: Expression::variable('PRUNE'),
-                    else: Expression::variable('DESCEND'),
+                    then: Redact::Prune,
+                    else: Redact::Descend,
                 ),
             ),
         );

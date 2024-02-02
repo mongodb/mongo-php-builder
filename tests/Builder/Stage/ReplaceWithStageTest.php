@@ -8,6 +8,7 @@ use MongoDB\Builder\Expression;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage;
+use MongoDB\Builder\Type\Variable;
 use MongoDB\Tests\Builder\PipelineTestCase;
 
 use function MongoDB\object;
@@ -36,7 +37,7 @@ class ReplaceWithStageTest extends PipelineTestCase
             Stage::replaceWith(
                 Expression::mergeObjects(
                     object(_id: '', name: '', email: '', cell: '', home: ''),
-                    Expression::variable('ROOT'),
+                    Variable::Root,
                 ),
             ),
         );
@@ -59,7 +60,7 @@ class ReplaceWithStageTest extends PipelineTestCase
                         Expression::numberFieldPath('quantity'),
                     ),
                     status: 'Complete',
-                    asofDate: Expression::variable('NOW'),
+                    asofDate: Variable::Now,
                 ),
             ),
         );
