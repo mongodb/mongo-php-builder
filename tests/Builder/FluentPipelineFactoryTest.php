@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MongoDB\Builder;
+namespace MongoDB\Tests\Builder;
 
+use MongoDB\Builder\Pipeline;
+use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage\FluentFactory;
 use MongoDB\Builder\Type\Sort;
 use PHPUnit\Framework\TestCase;

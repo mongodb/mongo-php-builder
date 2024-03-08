@@ -23,14 +23,17 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\QueryInterface;
 use MongoDB\Builder\Type\Sort;
+use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Model\BSONArray;
 use stdClass;
 
 class FluentFactory
 {
+    /** @var list<StageInterface> */
     public array $pipeline = [];
 
     public function getPipeline(): Pipeline
@@ -46,7 +49,7 @@ class FluentFactory
      * @param QueryInterface|FieldQueryInterface|Type|stdClass|array<array-key,mixed>|bool|float|int|string|null ...$queries The query predicates to match
      */
     public function match(
-        QueryInterface|\MongoDB\Builder\Type\FieldQueryInterface|Type|stdClass|array|string|int|float|bool|null ...$queries,
+        QueryInterface|FieldQueryInterface|Type|stdClass|array|string|int|float|bool|null ...$queries,
     ): static
     {
         $this->pipeline[] = Stage::match(...$queries);

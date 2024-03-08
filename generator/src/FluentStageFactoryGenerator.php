@@ -19,9 +19,11 @@ use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
 use MongoDB\Builder\Type\AccumulatorInterface;
 use MongoDB\Builder\Type\ExpressionInterface;
+use MongoDB\Builder\Type\FieldQueryInterface;
 use MongoDB\Builder\Type\Optional;
 use MongoDB\Builder\Type\QueryInterface;
 use MongoDB\Builder\Type\Sort;
+use MongoDB\Builder\Type\StageInterface;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\Model\BSONArray;
 use Nette\PhpGenerator\ClassType;
@@ -61,6 +63,8 @@ class FluentStageFactoryGenerator extends OperatorGenerator
         $namespace = new PhpNamespace($definition->namespace);
         $class = $namespace->addClass('FluentFactory');
 
+        $namespace->addUse(StageInterface::class);
+        $namespace->addUse(FieldQueryInterface::class);
         $namespace->addUse(Pipeline::class);
         $namespace->addUse(Decimal128::class);
         $namespace->addUse(Document::class);
@@ -84,6 +88,7 @@ class FluentStageFactoryGenerator extends OperatorGenerator
         $namespace->addUse(self::FACTORY_CLASS);
         $class->addProperty('pipeline')
             ->setType('array')
+            ->setComment('@var list<StageInterface>')
             ->setValue([]);
         $class->addMethod('getPipeline')
             ->setReturnType(Pipeline::class)
