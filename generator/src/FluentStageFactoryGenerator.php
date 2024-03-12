@@ -4,39 +4,22 @@ declare(strict_types=1);
 
 namespace MongoDB\CodeGenerator;
 
-use MongoDB\BSON\Decimal128;
-use MongoDB\BSON\Document;
-use MongoDB\BSON\Int64;
-use MongoDB\BSON\PackedArray;
-use MongoDB\BSON\Serializable;
-use MongoDB\BSON\Timestamp;
-use MongoDB\BSON\Type;
-use MongoDB\Builder\Expression\ArrayFieldPath;
-use MongoDB\Builder\Expression\FieldPath;
-use MongoDB\Builder\Expression\ResolvesToArray;
-use MongoDB\Builder\Expression\ResolvesToObject;
 use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Stage;
-use MongoDB\Builder\Type\AccumulatorInterface;
-use MongoDB\Builder\Type\ExpressionInterface;
-use MongoDB\Builder\Type\FieldQueryInterface;
-use MongoDB\Builder\Type\Optional;
-use MongoDB\Builder\Type\QueryInterface;
-use MongoDB\Builder\Type\Sort;
 use MongoDB\Builder\Type\StageInterface;
 use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
-use MongoDB\Model\BSONArray;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\Parameter;
+use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\TraitType;
 use ReflectionClass;
-use stdClass;
 
 use function array_key_last;
 use function array_map;
 use function assert;
+use function file_get_contents;
 use function implode;
 use function sprintf;
 
@@ -59,29 +42,10 @@ class FluentStageFactoryGenerator extends OperatorGenerator
         $namespace = new PhpNamespace($definition->namespace);
         $class = $namespace->addClass('FluentFactory');
 
-        $namespace->addUse(StageInterface::class);
-        $namespace->addUse(FieldQueryInterface::class);
-        $namespace->addUse(Pipeline::class);
-        $namespace->addUse(Decimal128::class);
-        $namespace->addUse(Document::class);
-        $namespace->addUse(Int64::class);
-        $namespace->addUse(PackedArray::class);
-        $namespace->addUse(Serializable::class);
-        $namespace->addUse(Timestamp::class);
-        $namespace->addUse(Type::class);
-        $namespace->addUse(ArrayFieldPath::class);
-        $namespace->addUse(FieldPath::class);
-        $namespace->addUse(ResolvesToArray::class);
-        $namespace->addUse(ResolvesToObject::class);
-        $namespace->addUse(Pipeline::class);
-        $namespace->addUse(AccumulatorInterface::class);
-        $namespace->addUse(ExpressionInterface::class);
-        $namespace->addUse(Optional::class);
-        $namespace->addUse(QueryInterface::class);
-        $namespace->addUse(Sort::class);
-        $namespace->addUse(BSONArray::class);
-        $namespace->addUse(stdClass::class);
         $namespace->addUse(self::FACTORY_CLASS);
+        $namespace->addUse(StageInterface::class);
+        $namespace->addUse(Pipeline::class);
+
         $class->addProperty('pipeline')
             ->setType('array')
             ->setComment('@var list<StageInterface>')
@@ -92,20 +56,18 @@ class FluentStageFactoryGenerator extends OperatorGenerator
                 return new Pipeline(...$this->pipeline);
                 PHP);
 
+        $this->addUsesFrom(self::FACTORY_CLASS, $namespace);
         $staticFactory = ClassType::from(self::FACTORY_CLASS);
         assert($staticFactory instanceof ClassType);
 
         // Import the methods customized in the factory class
         foreach ($staticFactory->getMethods() as $method) {
-            if (! $method->isPublic()) {
-                continue;
-            }
-
             $this->addMethod($method, $class);
         }
 
         // Import the other methods provided by the generated trait
         foreach ($staticFactory->getTraits() as $trait) {
+            $this->addUsesFrom($trait->getName(), $namespace);
             $staticFactory = TraitType::from($trait->getName());
             assert($staticFactory instanceof TraitType);
             foreach ($staticFactory->getMethods() as $method) {
@@ -155,5 +117,16 @@ class FluentStageFactoryGenerator extends OperatorGenerator
             $factoryMethod->getName(),
             implode(', ', $args),
         ));
+    }
+
+    private static function addUsesFrom(string $class, PhpNamespace $namespace): void
+    {
+        $file = PhpFile::fromCode(file_get_contents((new ReflectionClass($class))->getFileName()));
+
+        foreach ($file->getNamespaces() as $ns) {
+            foreach ($ns->getUses() as $use) {
+                $namespace->addUse($use);
+            }
+        }
     }
 }
