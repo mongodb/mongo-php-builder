@@ -28,11 +28,11 @@ use MongoDB\CodeGenerator\Definition\GeneratorDefinition;
 use MongoDB\Model\BSONArray;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
+use Nette\PhpGenerator\Parameter;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\TraitType;
-use RuntimeException;
+use ReflectionClass;
 use stdClass;
-use Throwable;
 
 use function array_key_last;
 use function array_map;
@@ -42,15 +42,11 @@ use function sprintf;
 
 /**
  * Generates a fluent factory class for aggregation pipeline stages.
- * The method definition is based on the manually edited static class
- * that imports the stage factory trait.
+ * The method definition is based on all the public static methods
+ * of the Stage class.
  */
 class FluentStageFactoryGenerator extends OperatorGenerator
 {
-    /**
-     * All public of this class are duplicated as instance methods of the
-     * fluent factory class.
-     */
     private const FACTORY_CLASS = Stage::class;
 
     public function generate(GeneratorDefinition $definition): void
@@ -98,37 +94,37 @@ class FluentStageFactoryGenerator extends OperatorGenerator
 
         $staticFactory = ClassType::from(self::FACTORY_CLASS);
         assert($staticFactory instanceof ClassType);
+
+        // Import the methods customized in the factory class
         foreach ($staticFactory->getMethods() as $method) {
             if (! $method->isPublic()) {
                 continue;
             }
 
-            try {
-                $this->addMethod($method, $namespace, $class);
-            } catch (Throwable $e) {
-                throw new RuntimeException(sprintf('Failed to generate class for operator "%s"', $operator->name), 0, $e);
-            }
+            $this->addMethod($method, $class);
         }
 
-        $staticFactory = TraitType::from(Stage\FactoryTrait::class);
-        assert($staticFactory instanceof TraitType);
-        foreach ($staticFactory->getMethods() as $method) {
-            if (! $method->isPublic()) {
-                continue;
-            }
-
-            try {
-                $this->addMethod($method, $namespace, $class);
-            } catch (Throwable $e) {
-                throw new RuntimeException(sprintf('Failed to generate class for operator "%s"', $operator->name), 0, $e);
+        // Import the other methods provided by the generated trait
+        foreach ($staticFactory->getTraits() as $trait) {
+            $staticFactory = TraitType::from($trait->getName());
+            assert($staticFactory instanceof TraitType);
+            foreach ($staticFactory->getMethods() as $method) {
+                $this->addMethod($method, $class);
             }
         }
 
         return $namespace;
     }
 
-    private function addMethod(Method $factoryMethod, PhpNamespace $namespace, ClassType $class): void
+    private function addMethod(Method $factoryMethod, ClassType $class): void
     {
+        // Non-public methods are not part of the API
+        if (! $factoryMethod->isPublic()) {
+            return;
+        }
+
+        // Some methods can be overridden in the class, so we skip them
+        // when importing the methods provided by the trait.
         if ($class->hasMethod($factoryMethod->getName())) {
             return;
         }
@@ -139,7 +135,7 @@ class FluentStageFactoryGenerator extends OperatorGenerator
         $method->setParameters($factoryMethod->getParameters());
 
         $args = array_map(
-            fn ($param) => '$' . $param->getName(),
+            fn (Parameter $param): string => '$' . $param->getName(),
             $factoryMethod->getParameters(),
         );
 
@@ -155,9 +151,9 @@ class FluentStageFactoryGenerator extends OperatorGenerator
 
             return $this;
             PHP,
-            'Stage',
+            (new ReflectionClass(self::FACTORY_CLASS))->getShortName(),
             $factoryMethod->getName(),
-            implode(',', $args),
+            implode(', ', $args),
         ));
     }
 }

@@ -95,7 +95,7 @@ class FluentFactory
         Optional|Document|Serializable|stdClass|array $output = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::bucket($groupBy,$boundaries,$default,$output);
+        $this->pipeline[] = Stage::bucket($groupBy, $boundaries, $default, $output);
 
         return $this;
     }
@@ -118,7 +118,7 @@ class FluentFactory
         Optional|Document|Serializable|stdClass|array $granularity = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::bucketAuto($groupBy,$buckets,$output,$granularity);
+        $this->pipeline[] = Stage::bucketAuto($groupBy, $buckets, $output, $granularity);
 
         return $this;
     }
@@ -146,7 +146,7 @@ class FluentFactory
         Optional|Timestamp|int $startAtOperationTime = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::changeStream($allChangesForCluster,$fullDocument,$fullDocumentBeforeChange,$resumeAfter,$showExpandedEvents,$startAfter,$startAtOperationTime);
+        $this->pipeline[] = Stage::changeStream($allChangesForCluster, $fullDocument, $fullDocumentBeforeChange, $resumeAfter, $showExpandedEvents, $startAfter, $startAtOperationTime);
 
         return $this;
     }
@@ -180,7 +180,7 @@ class FluentFactory
         Optional|Document|Serializable|stdClass|array $queryExecStats = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::collStats($latencyStats,$storageStats,$count,$queryExecStats);
+        $this->pipeline[] = Stage::collStats($latencyStats, $storageStats, $count, $queryExecStats);
 
         return $this;
     }
@@ -217,7 +217,7 @@ class FluentFactory
         Optional|bool $localOps = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::currentOp($allUsers,$idleConnections,$idleCursors,$idleSessions,$localOps);
+        $this->pipeline[] = Stage::currentOp($allUsers, $idleConnections, $idleCursors, $idleSessions, $localOps);
 
         return $this;
     }
@@ -238,7 +238,7 @@ class FluentFactory
         Optional|PackedArray|BSONArray|array $partitionByFields = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::densify($field,$range,$partitionByFields);
+        $this->pipeline[] = Stage::densify($field, $range, $partitionByFields);
 
         return $this;
     }
@@ -294,7 +294,7 @@ class FluentFactory
         Optional|Document|Serializable|stdClass|array $sortBy = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::fill($output,$partitionBy,$partitionByFields,$sortBy);
+        $this->pipeline[] = Stage::fill($output, $partitionBy, $partitionByFields, $sortBy);
 
         return $this;
     }
@@ -331,7 +331,7 @@ class FluentFactory
         Optional|bool $spherical = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::geoNear($distanceField,$near,$distanceMultiplier,$includeLocs,$key,$maxDistance,$minDistance,$query,$spherical);
+        $this->pipeline[] = Stage::geoNear($distanceField, $near, $distanceMultiplier, $includeLocs, $key, $maxDistance, $minDistance, $query, $spherical);
 
         return $this;
     }
@@ -361,7 +361,7 @@ class FluentFactory
         Optional|QueryInterface|array $restrictSearchWithMatch = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::graphLookup($from,$startWith,$connectFromField,$connectToField,$as,$maxDepth,$depthField,$restrictSearchWithMatch);
+        $this->pipeline[] = Stage::graphLookup($from, $startWith, $connectFromField, $connectToField, $as, $maxDepth, $depthField, $restrictSearchWithMatch);
 
         return $this;
     }
@@ -378,7 +378,7 @@ class FluentFactory
         Document|Serializable|AccumulatorInterface|stdClass|array ...$field,
     ): static
     {
-        $this->pipeline[] = Stage::group($_id,...$field);
+        $this->pipeline[] = Stage::group($_id, ...$field);
 
         return $this;
     }
@@ -420,7 +420,7 @@ class FluentFactory
         Optional|bool $allUsers = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::listLocalSessions($users,$allUsers);
+        $this->pipeline[] = Stage::listLocalSessions($users, $allUsers);
 
         return $this;
     }
@@ -450,7 +450,7 @@ class FluentFactory
         Optional|string $name = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::listSearchIndexes($id,$name);
+        $this->pipeline[] = Stage::listSearchIndexes($id, $name);
 
         return $this;
     }
@@ -467,7 +467,7 @@ class FluentFactory
         Optional|bool $allUsers = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::listSessions($users,$allUsers);
+        $this->pipeline[] = Stage::listSessions($users, $allUsers);
 
         return $this;
     }
@@ -496,7 +496,7 @@ class FluentFactory
         Optional|PackedArray|Pipeline|BSONArray|array $pipeline = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::lookup($as,$from,$localField,$foreignField,$let,$pipeline);
+        $this->pipeline[] = Stage::lookup($as, $from, $localField, $foreignField, $let, $pipeline);
 
         return $this;
     }
@@ -520,7 +520,7 @@ class FluentFactory
         Optional|string $whenNotMatched = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::merge($into,$on,$let,$whenMatched,$whenNotMatched);
+        $this->pipeline[] = Stage::merge($into, $on, $let, $whenMatched, $whenNotMatched);
 
         return $this;
     }
@@ -676,7 +676,7 @@ class FluentFactory
         Optional|Type|ExpressionInterface|stdClass|array|string|int|float|bool|null $partitionBy = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::setWindowFields($sortBy,$output,$partitionBy);
+        $this->pipeline[] = Stage::setWindowFields($sortBy, $output, $partitionBy);
 
         return $this;
     }
@@ -749,7 +749,7 @@ class FluentFactory
         Optional|PackedArray|Pipeline|BSONArray|array $pipeline = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::unionWith($coll,$pipeline);
+        $this->pipeline[] = Stage::unionWith($coll, $pipeline);
 
         return $this;
     }
@@ -785,7 +785,7 @@ class FluentFactory
         Optional|bool $preserveNullAndEmptyArrays = Optional::Undefined,
     ): static
     {
-        $this->pipeline[] = Stage::unwind($path,$includeArrayIndex,$preserveNullAndEmptyArrays);
+        $this->pipeline[] = Stage::unwind($path, $includeArrayIndex, $preserveNullAndEmptyArrays);
 
         return $this;
     }

@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace MongoDB\Tests\Builder;
 
-use MongoDB\Builder\Pipeline;
 use MongoDB\Builder\Query;
 use MongoDB\Builder\Stage\FluentFactory;
 use MongoDB\Builder\Type\Sort;
-use PHPUnit\Framework\TestCase;
 
-class FluentPipelineFactoryTest extends TestCase
+class FluentPipelineFactoryTest extends PipelineTestCase
 {
     public function testFluentPipelineFactory(): void
     {
@@ -20,7 +18,14 @@ class FluentPipelineFactoryTest extends TestCase
             ->sort(x: Sort::Asc)
             ->getPipeline();
 
-        $this->assertInstanceof(Pipeline::class, $pipeline);
-        $this->assertCount(3, $pipeline->getIterator());
+        $expected = <<<'json'
+        [
+            {"$match": {"x": {"$eq": {"$numberInt":  "1"}}}},
+            {"$project": {"_id": false, "x": true}},
+            {"$sort": {"x": {"$numberInt":  "1"}}}
+        ]
+        json;
+
+        $this->assertSamePipeline($expected, $pipeline);
     }
 }
