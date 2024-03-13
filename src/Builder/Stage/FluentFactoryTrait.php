@@ -31,7 +31,7 @@ use MongoDB\Builder\Type\StageInterface;
 use MongoDB\Model\BSONArray;
 use stdClass;
 
-class FluentFactory
+trait FluentFactoryTrait
 {
     /** @var list<StageInterface> */
     public array $pipeline = [];

@@ -24,7 +24,7 @@ use function implode;
 use function sprintf;
 
 /**
- * Generates a fluent factory class for aggregation pipeline stages.
+ * Generates a fluent factory trait for aggregation pipeline stages.
  * The method definition is based on all the public static methods
  * of the Stage class.
  */
@@ -34,23 +34,23 @@ class FluentStageFactoryGenerator extends OperatorGenerator
 
     public function generate(GeneratorDefinition $definition): void
     {
-        $this->writeFile($this->createFluentFactoryClass($definition));
+        $this->writeFile($this->createFluentFactoryTrait($definition));
     }
 
-    private function createFluentFactoryClass(GeneratorDefinition $definition): PhpNamespace
+    private function createFluentFactoryTrait(GeneratorDefinition $definition): PhpNamespace
     {
         $namespace = new PhpNamespace($definition->namespace);
-        $class = $namespace->addClass('FluentFactory');
+        $trait = $namespace->addTrait('FluentFactoryTrait');
 
         $namespace->addUse(self::FACTORY_CLASS);
         $namespace->addUse(StageInterface::class);
         $namespace->addUse(Pipeline::class);
 
-        $class->addProperty('pipeline')
+        $trait->addProperty('pipeline')
             ->setType('array')
             ->setComment('@var list<StageInterface>')
             ->setValue([]);
-        $class->addMethod('getPipeline')
+        $trait->addMethod('getPipeline')
             ->setReturnType(Pipeline::class)
             ->setBody(<<<'PHP'
                 return new Pipeline(...$this->pipeline);
@@ -62,23 +62,23 @@ class FluentStageFactoryGenerator extends OperatorGenerator
 
         // Import the methods customized in the factory class
         foreach ($staticFactory->getMethods() as $method) {
-            $this->addMethod($method, $class);
+            $this->addMethod($method, $trait);
         }
 
         // Import the other methods provided by the generated trait
-        foreach ($staticFactory->getTraits() as $trait) {
-            $this->addUsesFrom($trait->getName(), $namespace);
-            $staticFactory = TraitType::from($trait->getName());
+        foreach ($staticFactory->getTraits() as $usedTrait) {
+            $this->addUsesFrom($usedTrait->getName(), $namespace);
+            $staticFactory = TraitType::from($usedTrait->getName());
             assert($staticFactory instanceof TraitType);
             foreach ($staticFactory->getMethods() as $method) {
-                $this->addMethod($method, $class);
+                $this->addMethod($method, $trait);
             }
         }
 
         return $namespace;
     }
 
-    private function addMethod(Method $factoryMethod, ClassType $class): void
+    private function addMethod(Method $factoryMethod, TraitType $trait): void
     {
         // Non-public methods are not part of the API
         if (! $factoryMethod->isPublic()) {
@@ -87,11 +87,11 @@ class FluentStageFactoryGenerator extends OperatorGenerator
 
         // Some methods can be overridden in the class, so we skip them
         // when importing the methods provided by the trait.
-        if ($class->hasMethod($factoryMethod->getName())) {
+        if ($trait->hasMethod($factoryMethod->getName())) {
             return;
         }
 
-        $method = $class->addMethod($factoryMethod->getName());
+        $method = $trait->addMethod($factoryMethod->getName());
 
         $method->setComment($factoryMethod->getComment());
         $method->setParameters($factoryMethod->getParameters());
@@ -119,9 +119,9 @@ class FluentStageFactoryGenerator extends OperatorGenerator
         ));
     }
 
-    private static function addUsesFrom(string $class, PhpNamespace $namespace): void
+    private static function addUsesFrom(string $classLike, PhpNamespace $namespace): void
     {
-        $file = PhpFile::fromCode(file_get_contents((new ReflectionClass($class))->getFileName()));
+        $file = PhpFile::fromCode(file_get_contents((new ReflectionClass($classLike))->getFileName()));
 
         foreach ($file->getNamespaces() as $ns) {
             foreach ($ns->getUses() as $use) {
