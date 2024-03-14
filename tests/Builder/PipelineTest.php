@@ -17,9 +17,30 @@ class PipelineTest extends TestCase
 {
     public function testEmptyPipeline(): void
     {
-        $pipeline = new Pipeline();
+        $pipeline = new Pipeline([]);
 
         $this->assertSame([], iterator_to_array($pipeline));
+    }
+
+    public function testFromArray(): void
+    {
+        $pipeline = new Pipeline(
+            ['$match' => ['tag' => 'foo']],
+            [
+                ['$sort' => ['_id' => 1]],
+                ['$skip' => 10],
+            ],
+            ['$limit' => 5],
+        );
+
+        $expected = [
+            ['$match' => ['tag' => 'foo']],
+            ['$sort' => ['_id' => 1]],
+            ['$skip' => 10],
+            ['$limit' => 5],
+        ];
+
+        $this->assertSame($expected, iterator_to_array($pipeline));
     }
 
     public function testMergingPipeline(): void
