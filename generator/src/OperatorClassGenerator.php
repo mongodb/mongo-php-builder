@@ -80,7 +80,7 @@ class OperatorClassGenerator extends OperatorGenerator
                 if ($argument->variadicMin > 0) {
                     $constuctor->addBody(<<<PHP
                     if (\count(\${$argument->name}) < {$argument->variadicMin}) {
-                        throw new \InvalidArgumentException(\sprintf('Expected at least %d values for \${$argument->name}, got %d.', {$argument->variadicMin}, \count(\${$argument->name})));
+                        throw new InvalidArgumentException(\sprintf('Expected at least %d values for \${$argument->name}, got %d.', {$argument->variadicMin}, \count(\${$argument->name})));
                     }
 
                     PHP);
